@@ -1,7 +1,7 @@
 # Change baseurl before deploy
-baseurl = "https://demo.stack.jimmycai.com"
+baseurl = "https://www.skstory.online/"
 languageCode = "en-us"
-paginate = 5
+paginate = 10
 title = "SK Story"
 
 # Theme i18n support
