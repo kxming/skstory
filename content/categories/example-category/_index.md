@@ -1,7 +1,8 @@
 ---
 title: Example Category
 description: A description of this category
-image:
+slug: "test"
+image: "hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg"
 
 # Badge style
 style:

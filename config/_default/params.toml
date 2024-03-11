@@ -2,10 +2,10 @@
 mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
-favicon = "/favicon.png"
+favicon = "/favicon.ico"
 
 [footer]
-since = 2020
+since = 2024
 customText = ""
 
 [dateFormat]
@@ -14,12 +14,12 @@ lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
 emoji = "🍥"
-subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+subtitle = "Shawn King's Stories Website"
 
 [sidebar.avatar]
 enabled = true
 local = true
-src = "img/avatar.png"
+src = "img/avatar.jpeg"
 
 [article]
 math = false
@@ -37,7 +37,7 @@ type = "search"
 type = "archives"
 
 [widgets.homepage.params]
-limit = 5
+limit = 10
 
 [[widgets.homepage]]
 type = "categories"
@@ -55,11 +55,11 @@ limit = 10
 type = "toc"
 
 [opengraph.twitter]
-site = ""
+site = "https://twitter.com/ShawnKxming"
 card = "summary_large_image"
 
 [defaultImage.opengraph]
-enabled = false
+enabled = true
 local = false
 src = ""
 
@@ -76,7 +76,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "disqus"
+provider = "giscus"
 
 [comments.disqusjs]
 shortname = ""
@@ -127,11 +127,11 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
+repo = "kxming/skstory"
+repoID = "R_kgDOLehX4A"
+category = "Announcements"
+categoryID = "DIC_kwDOLehX4M4Cd4Vx"
+mapping = "pathname"
 lightTheme = ""
 darkTheme = ""
 reactionsEnabled = 1
