@@ -11,6 +11,7 @@
 identifier = "email"
 name = "Email"
 url = "mailto:kxming0229@gmail.com"
+weight = 1
 
 [social.params]
 icon = "email"
@@ -19,6 +20,7 @@ icon = "email"
 identifier = "facebook"
 name = "Facebook"
 url = "https://www.facebook.com/p/King-Shawn-100092679065959/"
+weight = 2
 
 [social.params]
 icon = "facebook"
@@ -27,6 +29,7 @@ icon = "facebook"
 identifier = "twitter"
 name = "Twitter"
 url = "https://twitter.com/ShawnKxming"
+weight = 3
 
 [social.params]
 icon = "x"
@@ -35,6 +38,7 @@ icon = "x"
 identifier = "telegram"
 name = "Telegram"
 url = "https://t.me/shawnkxming"
+weight = 4
 
 [social.params]
 icon = "telegram"
@@ -43,6 +47,7 @@ icon = "telegram"
 identifier = "medium"
 name = "Medium"
 url = "https://medium.com/@kxming"
+weight = 5
 
 [social.params]
 icon = "medium"
