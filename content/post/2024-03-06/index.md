@@ -3,13 +3,13 @@ title: 'My Girlfriend Is a Rich Heiress'
 date: 2024-03-06T18:44:42+08:00
 draft: false
 author: "Shawn"
-image: banner.jpg
-categories: ["Fiction", "Love"]
-tags: ["Fiction", "Love"]
+image: https://miro.medium.com/v2/resize:fit:1400/format:webp/1*eaeLC9wUTUDHJQzQnLPzxA.jpeg
+categories: ["Fiction", "Emotion"]
+tags: ["Fiction", "Emotion"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "The day we broke up, I discovered my girlfriend was an ultra-rich second-generation."
 ---
 
 The day we broke up, I discovered my girlfriend was an ultra-rich second-generation.

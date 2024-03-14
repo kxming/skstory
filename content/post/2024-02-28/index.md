@@ -3,13 +3,13 @@ title: "Has technology advanced too fast in the past century?"
 date: 2024-02-28T22:55:07+08:00
 draft: false
 author: "Shawn"
-image: "feature.png"
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*bCXxi7RBDZ6YvK0wN74oXA.png"
 categories: ["Fiction","Science"]
 tags: ["Fiction","Science"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "The achievements of human technological development in the past century far exceed those of thousands of years past. Isn’t that terrifying?"
 ---
 
 Scientists would never imagine being drowned in the ocean of knowledge.

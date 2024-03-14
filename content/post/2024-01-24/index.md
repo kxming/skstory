@@ -3,18 +3,19 @@ title: 'How to Develop Logical Thinking in Speaking?'
 date: 2024-01-24T01:56:45+08:00
 draft: false
 author: "Shawn"
-image: "banner.webp"
-categories: ["Fiction","Science"]
-tags: ["Fiction","Science"]
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bZpprxDx3GEMPflw"
+categories: ["Function","Abilities"]
+tags: ["Function","Abilities"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "To improve our logical expression and solve confusion and disorganization in thinking, first, we need to understand a term: Structured Thinking."
 ---
 
 To improve our logical expression and solve confusion and disorganization in thinking, first, we need to understand a term: Structured Thinking.
 
-Benefits of Structured Thinking
+## Benefits of Structured Thinking
+
 Structured thinking is a concept proposed by McKinsey & Company, it discusses an organized and systematic approach. McKinsey has a very famous principle called the Pyramid Principle, which even has an associated book.
 
 What does it mean? Simply put, they believe that anything can be boiled down to a central thesis, which can be supported by three to seven arguments.
@@ -25,7 +26,7 @@ For every layer of the pyramid, there is a particularly stringent requirement ca
 
 The principle of ‘no omission’ ensures accuracy. As McKinsey provides consulting services and helps identify problems in other companies, nothing can be missed. By ‘not overlapping’, unnecessary efforts can be avoided.
 
-Therefore, when they write something, especially when they write consultation reports, they have to write in accordance with the MECE principle.
+**Therefore, when they write something, especially when they write consultation reports, they have to write in accordance with the MECE principle.**
 
 In the process of speaking, when we argue a point, we don’t necessarily need to exhaust it without omission, but this structure is very classic.
 
@@ -49,10 +50,12 @@ If there is enough time and we have to make a detailed report, we may need to cl
 
 Expressing in this way ensures that at least you can clearly state what you mean. Therefore, the pyramid principle is definitely a weapon in our communication, dialogue and writing.
 
-Under this principle, we only need to remember two sentences:
+**Under this principle, we only need to remember two sentences:**
 
-Conclusion first, state the central thesis first.
-The arguments are independent of each other and do not overlap.
+- Conclusion first, state the central thesis first.
+
+- The arguments are independent of each other and do not overlap.
+
 If you remember these two, we can basically speak more structured, layered and clear when expressing.
 
 How important it is to express in a structured way, because speaking is linear, meaning it passes as soon as you finish listening to a word, so if you speak particularly randomly, it is difficult for others to understand.
@@ -72,11 +75,11 @@ Only by expressing in this way can you clear up your thoughts and let others und
 This is actually related to our way of thinking and the process of our own thinking, so you must have structured thinking, and then you can express in a structured manner.
 
 
-2. Three Steps to Train Structured Thinking.
+## Three Steps to Train Structured Thinking.
 
 So, how should we train this kind of thinking? There are three steps.
 
-The first step is called Chunking.
+**The first step is called Chunking.**
 
 First, you need to have the ability to chunk. This ability of chunking is not only related to your expression, but also related to your reading comprehension and your memory ability. In my opinion, all these three abilities need to use chunking.
 
@@ -108,7 +111,7 @@ Do you find that expressing it this way is clearer?
 
 So, the ability to chunk is the basis of our structured thinking.
 
-This is the first one, called the ability to chunk, and the process of chunking can not only help you express more clearly, but also help you make trade-offs. In fact, there are a lot of unimportant details, and you will find that these can’t be included in your chunks.
+**This is the first one, called the ability to chunk, and the process of chunking can not only help you express more clearly, but also help you make trade-offs. In fact, there are a lot of unimportant details, and you will find that these can’t be included in your chunks.**
 
 For example, in our last month, there were three good places and four not-so-good places. But some mediocrities were discarded and not worth mentioning.
 
@@ -116,19 +119,19 @@ But if you say it all at once from beginning to end, you will say it, and others
 
 So, the process of chunking can help you make trade-offs and sideline some not-so-important content, then categorize the important content through chunks.
 
-The second step is to Refine.
+**The second step is to Refine.**
 
 We have broken down the content into chunks. For example, last month’s sales situation can be divided into three stages: the growth stage, the plateau stage, and the decline stage.
 
 The second thing I need to do is summarize a concise sentence or keyword for each chunk, which is what is the main content of this chunk.
 
-Keywords and brief phrases can remind you of what to talk about when you see these keywords and phrases, and they can make clear the topic of this part, so others can know more clearly what the emphasis is in this part.
+**Keywords and brief phrases can remind you of what to talk about when you see these keywords and phrases, and they can make clear the topic of this part, so others can know more clearly what the emphasis is in this part.**
 
 So when you express yourself, whether you need to make a PPT or not, many people think that only when I make a PPT, do I need to give each PPT a title to tell others what this chapter is about.
 
 But actually, in the process of speaking, your brain can figure out the theme sentence and key words of this chunk through your training, slowly and without you having to write it down.
 
-The third step is to order.
+**The third step is to order.**
 
 When you have chunked your content and refined keywords and theme sentences for each chunk, at that point, you need to sort it out in your mind. How should I specifically say it?
 
@@ -148,7 +151,7 @@ Then I want to list all the ideas under my viewpoint.
 
 For example, pigs have fur, rabbits have fur, cats have fur, so they are kept as pets. I think pigs have fur, so pigs should also be kept as pets. Pigs are easy to raise, the cost is low, pigs can also be put in a pen, and they don’t need to be walked every day.
 
-In short, list all your ideas, maybe ten, twenty, a lot. It doesn’t matter, list all you can think of.
+**In short, list all your ideas, maybe ten, twenty, a lot. It doesn’t matter, list all you can think of.**
 
 Draw these thoughts into a mind map, you can use mind mapping tools, or you can use Baidu mind mapping. These are some small pieces of software that are easy to start with.
 
@@ -179,7 +182,7 @@ At the last step, look at your viewpoint and the summarized arguments, and do a 
 This is the process of forming an expression, a speech.
 
 
-3. Logical Thinking Must Be Applied for Concise Expression.
+## Logical Thinking Must Be Applied for Concise Expression.
 
 But have you noticed that these methods I told you can only ensure that you speak clearly, but they cannot guarantee that what you said makes sense.
 
@@ -195,7 +198,7 @@ You can’t say, just because pigs are quite cheap, we should keep them as pets.
 
 There might be another reason that is more convincing, pigs are not aggressive. I believe that a condition that must be met to keep a pet is that the pet can not be attacking. You can’t keep a Northeast tiger at home.
 
-So remember, if you want to achieve concise expression, you must at least ensure that the logic is smooth. Many people speak illogically, for example, the other day, I saw a franchise meeting. It was very grand and glorious, but the words spoken by the people on the stage were illogical.
+**So remember, if you want to achieve concise expression, you must at least ensure that the logic is smooth. Many people speak illogically**, for example, the other day, I saw a franchise meeting. It was very grand and glorious, but the words spoken by the people on the stage were illogical.
 
 He hoped that the people at the scene would take the distribution of this product and join his company, but he kept saying how difficult it was to manage this brand, under the pressure of everyone, and having gone through hardships. Then finally he said to everyone: I hope you can join me.
 
@@ -209,11 +212,11 @@ Appealing to authority is a logical error, but it is persuasive. The audience wi
 
 However, if your logical errors are so serious that others find it absurd after listening, or they doubt you and want to challenge you, then you’re done.
 
-Most Common Logical Errors
+**Most Common Logical Errors**
 
 There are a few serious logical errors that you absolutely should not make.
 
-The first is irrelevance.
+**The first is irrelevance.**
 
 The example of the franchise meeting I just mentioned is the first type, called irrelevance.
 
@@ -223,11 +226,11 @@ This error may sound childish and foolish, but indeed many people are making it.
 
 So among all the logical errors, I think this is the most important one, called irrelevance.
 
-The second is false attribution.
+**The second is false attribution.**
 
 The cause and result are mismatched, which can be broken down as follows:
 
-The first situation is a common error, which is attributing multiple causes to a single one.
+**The first situation is a common error, which is attributing multiple causes to a single one.**
 
 I read a book before, it said that Taiwanese painter Tsai Chih Chung sleeps at five or six o’clock when the sun sets, gets up at one in the morning, and works until two in the afternoon. He only eats one meal a day and is in good health. Then my friend came to a conclusion: See, eating one meal a day is good for health.
 
@@ -237,11 +240,11 @@ For example, he has a good mentality, and where he lives is relatively good. So 
 
 This is the first situation of false attribution, attributing multiple causes to one cause.
 
-The second situation is treating the accidental as necessary.
+**The second situation is treating the accidental as necessary.**
 
 For example, this morning when I went out, I made a wish and hoped to make a fortune. Then in the afternoon, I found 100 yuan on the street. Did I pick up the 100 yuan because of the wish I made? This is treating the accidental as necessary. The connection between them is just a coincidence. If you speak to others in this way, they will feel that your logic is flawed.
 
-The third situation of false attribution is “broken cause.”
+**The third situation of false attribution is “broken cause.”**
 
 For example, you say the reason you’re not happy after you grow up is because your parents didn’t treat you well during your childhood. But in fact, you’ve encountered a lot of other things after your childhood. For example, your marriage failed, and your job search didn’t go well — in short, you’ve been out of luck everywhere.
 
@@ -249,7 +252,7 @@ If you use a cause from many years ago that has been disrupted as a reason to ex
 
 These are the three types of false attribution errors we commonly see: attributing multiple causes to a single one, broken cause, and mistaking the accidental for the necessary.
 
-The fourth is “overgeneralization.”
+**The fourth is “overgeneralization.”**
 
 Sometimes, we really want to persuade others so much that we will use some extreme words.
 
@@ -261,7 +264,7 @@ So be careful with these extreme words, do not overgeneralize.
 
 Because, one bad consequence brought by overgeneralizing is that if there is any counterexample in the mind of the person listening to you, they will think you have a problem with your logic and will not believe what you say.
 
-The fifth is “unclear concept.”
+**The fifth is “unclear concept.”**
 
 For example, I think our company should cultivate more management talents, what is “more”? What is “management talent”?
 
@@ -271,6 +274,6 @@ If you are a boss and you speak so ambiguously, in general, your subordinates wi
 
 These are some of the serious logic mistakes we mentioned. There can be over 20 types of common logical errors, but we can’t go over them one by one today. The most important one is the first one we mentioned today, called irrelevance.
 
-In the process of speaking, we are not able to exhaust all the reasons and evidence, as suggested in McKinsey’s Pyramid Principle.
+**In the process of speaking, we are not able to exhaust all the reasons and evidence, as suggested in McKinsey’s Pyramid Principle.**
 
-However, when we speak, we must ensure that there is a connection between our points and evidence. This is the most basic requirement for us to achieve at the level of logic.
+**However, when we speak, we must ensure that there is a connection between our points and evidence. This is the most basic requirement for us to achieve at the level of logic.**

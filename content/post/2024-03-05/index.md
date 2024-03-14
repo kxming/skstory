@@ -3,13 +3,13 @@ title: 'Beyond Earth’s core'
 date: 2024-03-05T17:04:16+08:00
 draft: false
 author: "Shawn"
-image: "banner.jpg"
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*uaf7Mg2UclegdKD44FInNw.jpeg"
 categories: ["Fiction","Science"]
 tags: ["Fiction","Science"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "A scientific accident has led us to discover the remains of a deity deep underground. ..."
 ---
 
 A scientific accident has led us to discover the remains of a deity deep underground.

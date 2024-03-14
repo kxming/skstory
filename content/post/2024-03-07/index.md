@@ -1,15 +1,15 @@
 ---
 title: 'Virtual Life'
 date: 2024-03-07T18:52:17+08:00
-draft: true
+draft: false
 author: ""
-image: ""
-categories: ["blog"]
-tags: ["foo"]
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*UnijjfZ4pT5tdvnIcL47DQ.jpeg"
+categories: ["Fiction","Science"]
+tags: ["Fiction","Science"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "Mr. Kev, your virtual life experience ends here, you lived 38 years, we look forward to your experience of the next life. ..."
 ---
 
 Kev was driving on the road with his wife and child.

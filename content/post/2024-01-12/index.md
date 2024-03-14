@@ -3,13 +3,13 @@ title: 'This world is not true…'
 date: 2024-01-12T01:51:06+08:00
 draft: false
 author: "Shawn"
-image: "banner.jpeg"
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*QBZD4BUKuJntCWq51iV9jQ.jpeg"
 categories: ["Fiction","Science"]
 tags: ["Fiction","Science"]
 URL: ""
 layout: posts
 is_recommend: true
-description: ""
+description: "A million years ago, humans had just learned to make fire, ending the days of eating raw meat and drinking blood. ..."
 ---
 A million years ago, humans had just learned to make fire, ending the days of eating raw meat and drinking blood. At dusk, a group of ape men returned to the cave with their prey and started a fire.
 
