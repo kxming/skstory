@@ -32,7 +32,7 @@ jobs:
             - run: go version
 
             - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
+              uses: peaceiris/actions-hugo@v2.6.0
               with:
                   hugo-version: "latest"
                   extended: true
@@ -41,9 +41,8 @@ jobs:
               run: hugo --minify --gc
 
             - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@v4.5.0
+              uses: peaceiris/actions-gh-pages@v3.9.3
+              if: github.ref == 'refs/heads/master'
               with:
-                  branch: gh-pages
-                  folder: public
-                  clean: true
-                  single-commit: true
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./public
