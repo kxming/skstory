@@ -1,7 +1,7 @@
 ---
 title: 'Understanding Async Components in Vue3'
 date: 2024-02-22T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"
 categories: ["Javascript","Vue"]

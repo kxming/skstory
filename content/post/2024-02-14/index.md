@@ -1,7 +1,7 @@
 ---
 title: 'Understanding and Practice of the Vue3 Composition API'
 date: 2024-02-14T16:22:33+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SirXXHZL0xDpmuI4y36vSw.jpeg"
 categories: ["Javascript","Vue"]

@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript Design Patterns'
 date: 2024-02-15T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xOAzIinBSTLixy37KkW7ag.jpeg"
 categories: ["Javascript"]

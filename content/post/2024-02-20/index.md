@@ -1,7 +1,7 @@
 ---
 title: 'Understanding watch and watchEffect in Vue3'
 date: 2024-02-20T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"
 categories: ["Javascript","Vue"]

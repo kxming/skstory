@@ -1,7 +1,7 @@
 ---
 title: '10 JavaScript Tricks You Don’t Know'
 date: 2024-02-16T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ESMQv6s2ta9iDO9H3ChVlg.png"
 categories: ["Javascript"]

@@ -1,7 +1,7 @@
 ---
 title: 'What optimizations can be utilized for frontend performance?'
 date: 2024-02-05T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vM6ivAKAsNWxg9akN3MLSA.jpeg"
 categories: ["Javascript"]

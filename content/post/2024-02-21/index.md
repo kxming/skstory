@@ -1,7 +1,7 @@
 ---
 title: 'Understanding v-model in Vue3'
 date: 2024-02-02T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*N1yhl_KuYBBBkB5FsmmdMQ.png"
 categories: ["Javascript","Vue"]

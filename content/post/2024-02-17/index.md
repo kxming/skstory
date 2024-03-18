@@ -1,7 +1,7 @@
 ---
 title: 'How to optimize if…else'
 date: 2024-02-17T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*qGg1oeee8PeRrw6HszxltA.png"
 categories: ["Javascript"]

@@ -1,7 +1,7 @@
 ---
 title: 'Browser multi-process, JS single thread and JS running mechanism.'
 date: 2024-02-10T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*auN6gSNpbv_7dcZ2EXBGFg.jpeg"
 categories: ["Javascript"]

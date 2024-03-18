@@ -1,7 +1,7 @@
 ---
 title: 'What is the principle of tree-shaking?'
 date: 2024-02-06T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1064/format:webp/1*XEPhAkPmVOo57T4HHxIsUA.jpeg"
 categories: ["Javascript"]

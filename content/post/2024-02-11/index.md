@@ -1,7 +1,7 @@
 ---
 title: 'What new features have been added to ES7,8,9,10,11,12?'
 date: 2024-02-11T16:22:38+08:00
-draft: true
+draft: false
 author: ""
 image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Wyu4L8Y0ciJ76ZkoP86gqw.jpeg"
 categories: ["Javascript"]
