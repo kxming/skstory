@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.">
+<title>Understanding v-model in Vue3</title>
+
+<link rel='canonical' href='http://localhost:1313/p/understanding-v-model-in-vue3/'>
+
+<link rel="stylesheet" href="/scss/style.min.d8118f156935b64eca93aca758476adca858d2c47354971654d9bd2933a0e45f.css"><meta property='og:title' content="Understanding v-model in Vue3">
+<meta property='og:description' content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.">
+<meta property='og:url' content='http://localhost:1313/p/understanding-v-model-in-vue3/'>
+<meta property='og:site_name' content='SK Story'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Javascript' /><meta property='article:tag' content='Vue' /><meta property='article:published_time' content='2024-02-02T16:22:38&#43;08:00'/><meta property='article:modified_time' content='2024-02-02T16:22:38&#43;08:00'/><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*N1yhl_KuYBBBkB5FsmmdMQ.png' />
+<meta name="twitter:site" content="@https://twitter.com/ShawnKxming">
+    <meta name="twitter:creator" content="@https://twitter.com/ShawnKxming"><meta name="twitter:title" content="Understanding v-model in Vue3">
+<meta name="twitter:description" content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*N1yhl_KuYBBBkB5FsmmdMQ.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu61f49258472ba116407e56a959fa113d_189154_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">SK Story</a></h1>
+            <h2 class="site-description">Shawn King&#39;s Stories Website</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:kxming0229@gmail.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.facebook.com/p/King-Shawn-100092679065959/'
+                        target="_blank"
+                        title="Facebook"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/ShawnKxming'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/shawnkxming'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://medium.com/@kxming'
+                        target="_blank"
+                        title="Medium"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 9h1l3 3l3 -3h1" /><path d="M8 15l2 0" /><path d="M14 15l2 0" /><path d="M9 9l0 6" /><path d="M15 9l0 6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#bind-a-single-attribute">Bind a Single Attribute</a>
+      <ol>
+        <li><a href="#basic-binding">Basic Binding</a></li>
+      </ol>
+    </li>
+    <li><a href="#use-v-model-to-bind-multiple-attributes">Use v-model to bind multiple attributes</a></li>
+    <li><a href="#binding-an-object">Binding an Object</a></li>
+    <li><a href="#modifiers">Modifiers</a></li>
+    <li><a href="#problem-background">Problem Background:</a>
+      <ol>
+        <li><a href="#method-one-relay-through-watch">Method One: Relay Through watch</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/understanding-v-model-in-vue3/">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*N1yhl_KuYBBBkB5FsmmdMQ.png" loading="lazy" alt="Featured image of post Understanding v-model in Vue3" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" style="background-color: #D1D419; color: #fff;">
+                Javascript
+            </a>
+        
+            <a href="/categories/vue/" style="background-color: #28A243; color: #fff;">
+                Vue
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/understanding-v-model-in-vue3/">Understanding v-model in Vue3</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 02, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    10 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><code>v-model</code> is a very important built-in directive in Vue, which creates two-way bindings on form input elements or components. These elements include:</p>
+<ul>
+<li>
+<p><code>&lt;input&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;select&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;textarea&gt;</code></p>
+</li>
+<li>
+<p><code>components</code></p>
+</li>
+</ul>
+<p><code>v-model</code> is actually a syntax sugar for the value attribute and the input event</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;input type=&#34;text&#34; :value=&#34;iptVal&#34; @input=&#34;$event =&gt; iptVal = $event.target.value&#34; /&gt;
+</span></span><span class="line"><span class="cl">&lt;!-- v-model --&gt;
+</span></span><span class="line"><span class="cl">&lt;input type=&#34;text&#34; v-model=&#34;iptVal&#34; /&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We usually use the <code>v-model</code> directive to complete data binding when developing forms, and this directive can also be used on components.</p>
+<h2 id="bind-a-single-attribute">Bind a Single Attribute</h2>
+<h3 id="basic-binding">Basic Binding</h3>
+<p><strong>Taking the custom component CustomInput as an example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> <span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">CustomInput</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;txt&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>v-model</code> will be expanded into the following form</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;CustomInput
+</span></span><span class="line"><span class="cl">  :modelValue=&#34;txt&#34;
+</span></span><span class="line"><span class="cl">  @update:modelValue=&#34;newValue =&gt; txt = newValue&#34;
+</span></span><span class="line"><span class="cl">/&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>CustomInput</code> component needs to do two things internally:</p>
+<ul>
+<li>
+<p>Bind the value attribute of the internal native <code>&lt;input&gt;</code> element to the <code>modelValue</code> prop</p>
+</li>
+<li>
+<p>When the native input event triggers, trigger an <code>update:modelValue</code> custom event with a new value</p>
+</li>
+</ul>
+<p>Here is the corresponding code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">input</span> <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;modelValue&#34;</span> <span class="err">@</span><span class="n">input</span><span class="o">=</span><span class="s2">&#34;$emit(&#39;update:modelValue&#39;, $event.target.value)&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;modelValue&#39;</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">([</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Some people may find this writing way too cumbersome, and it will make the tag code lengthy.</p>
+<p>Another way to implement <code>v-model</code> in the component is to use a writable computed property with both a getter and a setter.</p>
+<p><strong>Binding with computed</strong></p>
+<p>When using computed properties, the get method should return modelValue prop, and the set method should trigger the corresponding event</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;value&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">value</span> <span class="o">=</span> <span class="n">computed</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">props</span><span class="o">.</span><span class="n">modelValue</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This way of writing can simplify the properties in the tag and make the logic clear</p>
+<p>Binding a single attribute can be easily done with v-model, but what if multiple attributes need to be bound bidirectionally?</p>
+<h2 id="use-v-model-to-bind-multiple-attributes">Use v-model to bind multiple attributes</h2>
+<p>By default, <code>v-model</code> uses <code>modelValue</code> as prop on a component, and <code>update:modelValue</code> as the corresponding event</p>
+<p>But we can change these names by specifying a parameter for <code>v-model</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;template&gt;
+</span></span><span class="line"><span class="cl">    &lt;CustomInput v-model:first-name=&#34;first&#34; v-model:last-name=&#34;last&#34; /&gt;
+</span></span><span class="line"><span class="cl">&lt;/template&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the same way, you can use two ways to bind, but the prop has changed from the original modelValue to the parameter name passed in, and the corresponding event has also changed to <code>update:parameter</code> name.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;firstName&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">input</span><span class="o">=</span><span class="s2">&#34;$emit(&#39;update:firstName&#39;, $event.target.value)&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;lastName&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">input</span><span class="o">=</span><span class="s2">&#34;$emit(&#39;update:lastName&#39;, $event.target.value)&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">firstName</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lastName</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Use</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">computed</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">([</span><span class="s1">&#39;update:firstName&#39;</span><span class="p">,</span> <span class="s1">&#39;update:lastName&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="binding-an-object">Binding an Object</h2>
+<p>In a complex component, if multiple fields need to be bound in two ways. Using the method mentioned above can be a bit cumbersome.</p>
+<p>Here are two ways to bind an object in two ways:</p>
+<p>Define the parent component searchBar as a complex form component:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">searchBar</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;modelValue&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">modelValue</span> <span class="o">=</span> <span class="n">ref</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">keyword</span><span class="p">:</span> <span class="s2">&#34;123&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selectValue</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">options</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">label</span><span class="p">:</span> <span class="s2">&#34;all&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="n">value</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">label</span><span class="p">:</span> <span class="s2">&#34;a1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="n">value</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">label</span><span class="p">:</span> <span class="s2">&#34;a2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="n">value</span><span class="p">:</span> <span class="s2">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then, in the searchBar component, we receive modelValue and define the type as Object:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;modelValue.keyword&#34;</span><span class="o">&gt;</span> <span class="n">can</span> <span class="n">achieve</span> <span class="n">two</span><span class="o">-</span><span class="n">way</span> <span class="n">binding</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> 
+</span></span><span class="line"><span class="cl">      <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;modelValue.keyword&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="err">@</span><span class="n">input</span><span class="o">=</span><span class="s2">&#34;handleKeywordChange&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">select</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;modelValue.selectValue&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">option</span> <span class="n">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="s2">&#34;o in modelValue.options&#34;</span> <span class="p">:</span><span class="n">key</span><span class="o">=</span><span class="s2">&#34;o.value&#34;</span> <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;o.value&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{{</span> <span class="n">o</span><span class="o">.</span><span class="n">label</span> <span class="p">}}</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">modelValue</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="ne">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">([</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="n">with</span> <span class="n">input</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">handleKeywordChange</span><span class="o">=</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">keyword</span><span class="p">:</span><span class="n">val</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">value</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If an object is passed in, as explained in the comments, <code>&lt;input type=&quot;text&quot; v-model=&quot;modelValue.keyword&quot;&gt;</code>. Although this can directly perform bidirectional binding, it will disrupt the one-way data flow.</p>
+<p>It’s the same as the emit trigger event above, but the passed data has become an object.</p>
+<p>Despite emit allowing bidirectional binding, it is too cumbersome. The following describes a more elegant way of writing, which can be said to be a trick — computed + proxy.</p>
+<p>If you use computed binding, you might write this kind of code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;model.keyword&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">model</span> <span class="o">=</span> <span class="n">computed</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">props</span><span class="o">.</span><span class="n">modelValue</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">//</span> <span class="n">Found</span> <span class="n">no</span> <span class="nb">print</span>
+</span></span><span class="line"><span class="cl">     <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">...</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">keyword</span><span class="p">:</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">     <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But when you input, you will find that the setter is not triggered because computed will do a layer of proxy, the proxy object has not changed.</p>
+<p>If you want to trigger the setter, see the following picture:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// It only changes this way
+</span></span><span class="line"><span class="cl"> model.value = {
+</span></span><span class="line"><span class="cl">   keyword:&#34;asdfad&#34;
+</span></span><span class="line"><span class="cl"> }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This method cannot trigger the setter, so it cannot bind in both directions, what should we do?</p>
+<p><strong>Return a proxy object in the getter!</strong></p>
+<p><strong>Return a proxy object in the getter!</strong></p>
+<p><strong>Return a proxy object in the getter!</strong></p>
+<p>Since the properties of the proxy object are consistent with the properties of the proxied object, we use proxy to wrap the original object.</p>
+<p>Then the <code>v-model</code> is bound to the object after the proxy, if the properties of the proxy object change, it will trigger the set method in the proxy object, at which point we can trigger emit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">model</span> <span class="o">=</span> <span class="n">computed</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">Proxy</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">set</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="o">...</span><span class="n">obj</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">[</span><span class="n">name</span><span class="p">]:</span> <span class="n">val</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">true</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">...</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="n">keyword</span><span class="p">:</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="modifiers">Modifiers</h2>
+<p>We know that <code>v-model</code> has some built-in modifiers, such as .trim, .number and .lazy.</p>
+<p>In some scenarios, we may want the <code>v-model</code> of a custom component to support custom modifiers.</p>
+<p>Let’s create a custom modifier capitalize that automatically converts the first letter of the string value bound by <code>v-model</code> to uppercase:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;CustomInput v-model.capitalize=&#34;txt&#34; /&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We added the capitalize modifier, which will be automatically passed into modelModifiers prop:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="p">:</span><span class="n">value</span><span class="o">=</span><span class="s2">&#34;modelValue&#34;</span> <span class="err">@</span><span class="n">input</span><span class="o">=</span><span class="s2">&#34;emitValue&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modelValue</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modelModifiers</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">default</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">emitValue</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">let</span> <span class="n">value</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">use</span> <span class="n">the</span> <span class="n">modifier</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">modelModifiers</span><span class="o">.</span><span class="n">capitalize</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">emit</span><span class="p">(</span><span class="s1">&#39;update:modelValue&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="problem-background">Problem Background:</h2>
+<p>In the basics section, we’ve already explained how to encapsulate a component with a customized <code>v-model</code>. However, in actual development, using <code>@input</code> and <code>:value</code> to bind our values in the subcomponent is somewhat cumbersome. Is there a simpler way?</p>
+<p>We often want to directly bind the <code>v-model</code> to the subcomponent which needs bidirectional binding:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;!-- subcomponent --&gt;
+</span></span><span class="line"><span class="cl">&lt;input type=&#34;text&#34; v-model=&#34;xxx&#34; /&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Given this, in receiving the pass value from the parent component in the subcomponent, what should xxx bind to? Directly bind it to <code>props.modelValue</code>?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;!-- subcomponent --&gt;
+</span></span><span class="line"><span class="cl">&lt;input type=&#34;text&#34; v-model=&#34;props.modelValue&#34;/&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>An error will occur:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">⚠️reactivity.esm-bundler.js:512 Set operation on key &#34;modelValue&#34; failed: target is readonly.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This is because props is a readonly value (<code>isReadonly(props) === true</code>), so we can&rsquo;t use it directly.</p>
+<p>Therefore, we need an intermediate value to bind the <code>v-model</code>.</p>
+<h3 id="method-one-relay-through-watch">Method One: Relay Through watch</h3>
+<p>We can bind the <code>v-model</code> to an internal variable and use watch to monitor it and synchronize the data of <code>props.xxx</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;!--</span> <span class="n">subcomponent</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;proxy&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">modelValue</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">watch</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">proxy</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Sometimes, we may perform bidirectional binding to an object or array. In this case, we can use watch&rsquo;s deep option to deeply monitor and synchronize proxy:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">watch(
+</span></span><span class="line"><span class="cl">  () =&gt; proxy.value,
+</span></span><span class="line"><span class="cl">  (v) =&gt; emit(&#34;update:modelValue&#34;, v),
+</span></span><span class="line"><span class="cl">  {deep: true}
+</span></span><span class="line"><span class="cl">);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As <code>props.modelValue</code> may have a default value passed in, we can add the immediate option so that the proxy is assigned the default value as soon as the component is created;</p>
+<p><strong>Method Two: Get and Set with computed</strong></p>
+<p>You can also use the get and set provided by computed to synchronize data:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">computed</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Ultimate: Encapsulate v-model Hooks</strong></p>
+<p>First, let&rsquo;s encapsulate the watch method as a hook:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;!--</span> <span class="n">subcomponent</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;proxy&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span><span class="p">,</span> <span class="n">computed</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">modelValue</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">watch</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">proxy</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the subcomponent, we bind an internal value proxy to the input via <code>v-model</code> and initialize the proxy variable with the value of <code>props.modelValue</code> (<code>ref(props.modelValue</code>);</p>
+<p>In watch, we monitor the binding value proxy on the input. When the value changes due to input, we dispatch the <code>emit('update:modelValue', v)</code> event to pass the changed value to the external component dynamically.</p>
+<p>After extracting common logic:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">useVmodel1</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">function</span> <span class="n">useVmodel</span><span class="p">(</span><span class="n">props</span><span class="p">,</span> <span class="n">emit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">modelValue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">watch</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">proxy</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">proxy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The simplest hooks are encapsulated.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;proxy&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span><span class="p">,</span> <span class="n">computed</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">useVmodel</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./hooks/useVmodel1&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">modelValue</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">useVmodel</span><span class="p">(</span><span class="n">props</span><span class="p">,</span> <span class="n">emit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Continue the encapsulation</p>
+<p>Considering the following points, continue the encapsulation:</p>
+<ul>
+<li>
+<p>emit can not be passed, for a simpler call syntax.</p>
+</li>
+<li>
+<p>Events such as multiple <code>v-model:test1</code>, <code>emit(&quot;update:xxxx&quot;)</code> need to extract the event name xxxx.</p>
+</li>
+</ul>
+<p>Through the <code>getCurrentInstance</code> method provided by vue3, we can get the current component instance. As modelValue can be overridden, extract it into a variable:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span><span class="n">useVmodel2</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span><span class="p">,</span> <span class="n">getCurrentInstance</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">function</span> <span class="n">useVmodel</span><span class="p">(</span><span class="n">props</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="s2">&#34;modelValue&#34;</span><span class="p">,</span> <span class="n">emit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">vm</span> <span class="o">=</span> <span class="n">getCurrentInstance</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">_emit</span> <span class="o">=</span> <span class="n">emit</span> <span class="o">||</span> <span class="n">vm</span><span class="err">?</span><span class="o">.</span><span class="n">emit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="err">`</span><span class="n">update</span><span class="p">:</span><span class="o">$</span><span class="p">{</span><span class="n">key</span><span class="p">}</span><span class="err">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="n">props</span><span class="p">[</span><span class="n">key</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">watch</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">proxy</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">_emit</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">proxy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Good. Now, we can call our hooks in a simpler way:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;!--</span> <span class="n">subcomponent</span> <span class="n">childModel</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;modelValue&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;test&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">useVmodel</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./hooks/useVmodel2&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">defineEmits</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">modelValue</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">test</span><span class="p">:</span> <span class="ne">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">modelValue</span> <span class="o">=</span> <span class="n">useVmodel</span><span class="p">(</span><span class="n">props</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">test</span> <span class="o">=</span> <span class="n">useVmodel</span><span class="p">(</span><span class="n">props</span><span class="p">,</span> <span class="s2">&#34;test&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;!--</span> <span class="n">parent</span> <span class="n">component</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">Model</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;modelValue&#34;</span> <span class="n">v</span><span class="o">-</span><span class="n">model</span><span class="p">:</span><span class="n">test</span><span class="o">=</span><span class="s2">&#34;test&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span><span class="p">,</span> <span class="n">watch</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">Model</span> <span class="n">from</span> <span class="s2">&#34;./childModel.vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">modelValue</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">test</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">Javascript</a>
+        
+            <a href="/tags/vue/">Vue</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-definemodel-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding defineModel in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-fragment-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Fragment in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-teleport-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Teleport in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-async-components-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Async Components in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-watch-and-watcheffect-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding watch and watchEffect in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="kxming/skstory"
+    data-repo-id="R_kgDOLehX4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLehX4M4Cd4Vx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 SK Story
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="The core principle is actually AST.">
+<title>What is the principle of tree-shaking?</title>
+
+<link rel='canonical' href='http://localhost:1313/p/what-is-the-principle-of-tree-shaking/'>
+
+<link rel="stylesheet" href="/scss/style.min.d8118f156935b64eca93aca758476adca858d2c47354971654d9bd2933a0e45f.css"><meta property='og:title' content="What is the principle of tree-shaking?">
+<meta property='og:description' content="The core principle is actually AST.">
+<meta property='og:url' content='http://localhost:1313/p/what-is-the-principle-of-tree-shaking/'>
+<meta property='og:site_name' content='SK Story'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Javascript' /><meta property='article:published_time' content='2024-02-06T16:22:38&#43;08:00'/><meta property='article:modified_time' content='2024-02-06T16:22:38&#43;08:00'/><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1064/format:webp/1*XEPhAkPmVOo57T4HHxIsUA.jpeg' />
+<meta name="twitter:site" content="@https://twitter.com/ShawnKxming">
+    <meta name="twitter:creator" content="@https://twitter.com/ShawnKxming"><meta name="twitter:title" content="What is the principle of tree-shaking?">
+<meta name="twitter:description" content="The core principle is actually AST."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://miro.medium.com/v2/resize:fit:1064/format:webp/1*XEPhAkPmVOo57T4HHxIsUA.jpeg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu61f49258472ba116407e56a959fa113d_189154_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">SK Story</a></h1>
+            <h2 class="site-description">Shawn King&#39;s Stories Website</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:kxming0229@gmail.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.facebook.com/p/King-Shawn-100092679065959/'
+                        target="_blank"
+                        title="Facebook"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/ShawnKxming'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/shawnkxming'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://medium.com/@kxming'
+                        target="_blank"
+                        title="Medium"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 9h1l3 3l3 -3h1" /><path d="M8 15l2 0" /><path d="M14 15l2 0" /><path d="M9 9l0 6" /><path d="M15 9l0 6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#ast-simple-introduction">AST Simple Introduction</a></li>
+    <li><a href="#role-of-ast">Role of AST</a></li>
+    <li><a href="#tree-shaking">Tree-shaking</a>
+      <ol>
+        <li><a href="#step-1-parse-source-code-to-generate-ast">Step 1: Parse source code to generate AST</a></li>
+        <li><a href="#step-2-traverse-ast-record-relevant-information">Step 2: Traverse AST, record relevant information</a></li>
+        <li><a href="#step-3-generate-new-code-based-on-the-information-obtained-in-step-2">Step 3: Generate new code based on the information obtained in Step 2</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/what-is-the-principle-of-tree-shaking/">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1064/format:webp/1*XEPhAkPmVOo57T4HHxIsUA.jpeg" loading="lazy" alt="Featured image of post What is the principle of tree-shaking?" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" style="background-color: #D1D419; color: #fff;">
+                Javascript
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/what-is-the-principle-of-tree-shaking/">What is the principle of tree-shaking?</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            The core principle is actually AST.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 06, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    13 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>In front end development, front end engineering is always accompanied by the whole development process. In our commonly used project packaging tools, whether it’s webpack or rollup, they all have a very powerful capability — tree-shaking. So, what is the principle of tree-shaking? The core principle is actually AST.</p>
+<p>In fact, there are many applications of AST in front end development, such as webpack, a packing tool we frequently use in front-end projects, Eslint, a code inspection tool, and Babel, a code conversion tool all rely on the syntax analysis and conversion capabilities of AST.</p>
+<h2 id="ast-simple-introduction">AST Simple Introduction</h2>
+<p>AST is the abbreviation of Abstract Syntax Tree, which can be used to describe the syntax structure of our code.</p>
+<p>Here’s an example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// ast.js
+</span></span><span class="line"><span class="cl">let a = 1;
+</span></span><span class="line"><span class="cl">function add() {}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I created a file <code>ast.js</code> here, which can be understood as a File node to store the program body, and inside it are our JavaScript syntax nodes. The root node of our JavaScript syntax nodes is Program, and we have defined two nodes in it. The first node is <code>let a = 1</code>, which is parsed as AST is VariableDeclaration, that is a variable declaration node. The second node is <code>function add() {}</code>, which is parsed as AST is FunctionDeclaration, that is, a function declaration node.</p>
+<p>Here I recommend a platform: AST Explorer, where you can clearly see the result of JavaScript code translated into AST. If you look at the picture below, you’ll understand it at a glance:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/1.webp"
+	width="1280"
+	height="657"
+	srcset="/p/what-is-the-principle-of-tree-shaking/1_hu57714ad9ec6211bf4d3ecdb2a0aaf87d_23532_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/1_hu57714ad9ec6211bf4d3ecdb2a0aaf87d_23532_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="467px"
+	
+></p>
+<h2 id="role-of-ast">Role of AST</h2>
+<p>What can we do with the ast information of the code?</p>
+<ol>
+<li>
+<p>Code analysis and conversion. AST can parse our code into an ast tree, naturally we can process and convert this tree, the most classic application of which has to be babel, which converts our high-level syntax ES6 into ES5, and then transforms the ast tree into code output. In addition, the processing of ES6’s import and export by webpack also depends on the capabilities of ast, as well as the syntax conversion of our jsx, etc.</p>
+</li>
+<li>
+<p>Syntax checking and error hinting. After parsing the syntax into an ast tree, we can naturally check its syntax for correctness according to certain syntactic rules, and if there is an error, we can throw it out and remind the developer to correct it. For example, vscode that we use is using AST to provide real-time syntax checking and error hinting. In front-end projects, the most widely used syntax checking tool is ESLint, which is basically essential for front-end projects.</p>
+</li>
+<li>
+<p>Static type checking. This is a bit like the second point, but the second point is focused on syntax checking, while this is for type checking, for example, our Typescript will use ast for type checking and inference.</p>
+</li>
+<li>
+<p>Code refactoring. Based on the AST tree, we can automatically refactor the code, such as extracting functions, renaming variables, upgrading syntax, moving functions, etc.</p>
+</li>
+</ol>
+<p>In fact, in practical development, we can use it to do a lot of things, such as automatic burying, automatic internationalization, dependency analysis and governance, etc. Interested partners can explore on their own.</p>
+<p>And today I am mainly introducing a major application of AST, which is the powerful Tree-Shaking capability of our webpack.</p>
+<h2 id="tree-shaking">Tree-shaking</h2>
+<p>The translation of Tree-shaking is shaking the tree. This tree can be metaphorically a tree in reality, and can be understood as such, shaking the tree is to shake off the leaves that are yellowing, serving no function and still absorbing nutrients. To move this into the JavaScript program is to remove the unused code (dead-code) in the JavaScript context.</p>
+<p>Without further ado, let’s look at the example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// test.js
+</span></span><span class="line"><span class="cl">function add(a, b) {
+</span></span><span class="line"><span class="cl">    return a + b;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">function multiple(a, b) {
+</span></span><span class="line"><span class="cl">    return a * b;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">let firstNum = 3, secondNum = 4;
+</span></span><span class="line"><span class="cl">add(firstNum, secondNum);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In this code, we define two functions, add and multiple, two variables firstNum and secondNum, and then call the add method and pass firstNum and secondNum as parameters.</p>
+<p>Clearly, the multiple method is not called, and can actually be deleted during packaging to reduce the size of our packaged code.</p>
+<p>So, how to delete multiple? It’s time for our ast to come on stage! To achieve this function, there are three steps.</p>
+<h3 id="step-1-parse-source-code-to-generate-ast">Step 1: Parse source code to generate AST</h3>
+<p>Look at this example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">acorn</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;acorn&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">path</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">readFileSync</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="s1">&#39;test.js&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">body</span> <span class="o">=</span> <span class="n">acorn</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ecmaVersion</span><span class="p">:</span> <span class="s1">&#39;latest&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">body</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We choose acorn to parse our code (babel is actually based on acorn for implementing parsers). Before executing, we need to install acorn by running npm install acorn, then read the file content and pass it into acorn to get AST.</p>
+<p>We can use AST Explorer to view our current AST.</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/2.webp"
+	width="1106"
+	height="1257"
+	srcset="/p/what-is-the-principle-of-tree-shaking/2_hue503808399e8a54be79a956839300102_52326_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/2_hue503808399e8a54be79a956839300102_52326_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="87"
+		data-flex-basis="211px"
+	
+></p>
+<h3 id="step-2-traverse-ast-record-relevant-information">Step 2: Traverse AST, record relevant information</h3>
+<p>What information do we need to record?</p>
+<p>Our main goal is to collect unused code and then delete it. Thus the two pieces of information we would primarily think to collect are:</p>
+<ol>
+<li>
+<p>Collect all function nodes or variable type nodes</p>
+</li>
+<li>
+<p>Collect all used function nodes or variable type nodes</p>
+</li>
+</ol>
+<p>Let’s try:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">acorn</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;acorn&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">path</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">readFileSync</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="s1">&#39;./src/index.js&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">body</span> <span class="o">=</span> <span class="n">acorn</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ecmaVersion</span><span class="p">:</span> <span class="s1">&#39;latest&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">body</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="ne">Reference</span> <span class="n">a</span> <span class="n">Generator</span> <span class="k">class</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">corresponding</span> <span class="n">code</span> <span class="k">for</span> <span class="n">AST</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">Generator</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;./generator&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">Generator</span> <span class="n">instance</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">gen</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Generator</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">variable</span> <span class="s2">&#34;decls&#34;</span> <span class="n">to</span> <span class="n">store</span> <span class="n">all</span> <span class="n">function</span> <span class="ow">or</span> <span class="n">variable</span> <span class="n">type</span> <span class="n">nodes</span> <span class="p">(</span><span class="n">Map</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">decls</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">variable</span> <span class="s2">&#34;calledDecls&#34;</span> <span class="n">to</span> <span class="n">store</span> <span class="n">used</span> <span class="n">function</span> <span class="ow">or</span> <span class="n">variable</span> <span class="n">type</span> <span class="n">nodes</span> <span class="p">(</span><span class="ne">Array</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">calledDecls</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I’ve introduced a Generator here whose function is to transform each AST node into the corresponding code. Let’s look at the implementation of Generator:</p>
+<ol>
+<li>First, define the Generator class and export it.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">generator</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">Generator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">module</span><span class="o">.</span><span class="n">exports</span> <span class="o">=</span> <span class="n">Generator</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Then, define the run method and the visitNode and visitNodes methods.</li>
+</ol>
+<ul>
+<li>
+<p>run: calls the visitNodes method to generate code.</p>
+</li>
+<li>
+<p>visitNode: based on the node type, calls the corresponding method for the corresponding processing.</p>
+</li>
+<li>
+<p>visitNodes: handles array type nodes. Internally, it loops and calls the visitNode method.</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">generator</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">Generator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="n">run</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">let</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitNodes</span><span class="p">(</span><span class="n">body</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visitNodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">let</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">node</span> <span class="n">of</span> <span class="n">nodes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visitNode</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">let</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;VariableDeclaration&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitVariableDeclaration</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;VariableDeclarator&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitVariableDeclarator</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;Literal&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitLiteral</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;Identifier&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitIdentifier</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;BinaryExpression&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitBinaryExpression</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;FunctionDeclaration&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitFunctionDeclaration</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;BlockStatement&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitBlockStatement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;CallExpression&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitCallExpression</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;ReturnStatement&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitReturnStatement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="s1">&#39;ExpressionStatement&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitExpressionStatement</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, we’ll discuss how each method that processes a node type is implemented:</p>
+<p><strong>Implement the visitVariableDeclaration method</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">     ...
+</span></span><span class="line"><span class="cl">    visitVariableDeclaration(node) {
+</span></span><span class="line"><span class="cl">        let str = &#39;&#39;;
+</span></span><span class="line"><span class="cl">        str += node.kind + &#39; &#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNodes(node.declarations);
+</span></span><span class="line"><span class="cl">        return str + &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">     ...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>visitVariableDeclaration</code> processes nodes such as <code>let firstNum = 3</code> in variable declarations. <code>node.kind</code> represents <code>let/const/var</code>. Then, multiple variables can be declared at once, such as <code>let firstNum = 3, secondNum = 4</code>; in our <code>test.js</code>, which gives us two nodes in <code>node.declarations</code>.</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/3.webp"
+	width="514"
+	height="266"
+	srcset="/p/what-is-the-principle-of-tree-shaking/3_hue979edb7561f3323fa2b893e4d950476_7292_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/3_hue979edb7561f3323fa2b893e4d950476_7292_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="193"
+		data-flex-basis="463px"
+	
+></p>
+<p><strong>Implement the visitVariableDeclarator method</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    visitVariableDeclarator(node, kind) {
+</span></span><span class="line"><span class="cl">        let str = kind ? (kind + &#39; &#39;) : &#39;&#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.id);
+</span></span><span class="line"><span class="cl">        str += &#39;=&#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.init);
+</span></span><span class="line"><span class="cl">        return str + &#39;;&#39; + &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>visitVariableDeclarator</code> is a child node of the above <code>VariableDeclaration</code>, which can receive the <code>kind</code> of the parent node. For example, <code>let firstNum = 3</code>, here id is the variable name firstNum, and init is the initial value 3.</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/4.webp"
+	width="629"
+	height="495"
+	srcset="/p/what-is-the-principle-of-tree-shaking/4_hu3ce7e96ed984ae87c30bba2a47fb8588_12034_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/4_hu3ce7e96ed984ae87c30bba2a47fb8588_12034_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="127"
+		data-flex-basis="304px"
+	
+></p>
+<p><strong>Implement the visitLiteral method</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">     visitLiteral(node) {
+</span></span><span class="line"><span class="cl">        return node.raw;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In Literal we have literals, like the 3 in <code>let firstNum = 3</code>, which is a string literal. In addition to this, there are numeric literals, boolean literals, etc., we just need to return its raw attribute.</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/5.webp"
+	width="445"
+	height="188"
+	srcset="/p/what-is-the-principle-of-tree-shaking/5_hu4e6d3bfc7059e75bea0288bf5f32a928_3660_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/5_hu4e6d3bfc7059e75bea0288bf5f32a928_3660_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="236"
+		data-flex-basis="568px"
+	
+></p>
+<p><strong>Implement the visitIdentifier method</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">     visitIdentifier(node) {
+</span></span><span class="line"><span class="cl">        return node.name;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Identifier</code> refers to identifiers, such as variable names, attribute names, parameter names, etc. For example, for <code>let firstNum = 3</code>, the firstNum. We just need to return its name attribute directly.</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/6.webp"
+	width="436"
+	height="165"
+	srcset="/p/what-is-the-principle-of-tree-shaking/6_hu5d7e3242e33ade7b4b80c5e3f16eeb95_4166_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/6_hu5d7e3242e33ade7b4b80c5e3f16eeb95_4166_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<p><strong>Implement the visitBinaryExpression method</strong></p>
+<p>BinaryExpression refers to binary expressions, like addition, subtraction, multiplication, and division operations in our case. For instance, the AST for &ldquo;a + b&rdquo; is like this:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/7.webp"
+	width="481"
+	height="458"
+	srcset="/p/what-is-the-principle-of-tree-shaking/7_hu0e51d14ee0b9d6015b2b7eceb49be3df_10192_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/7_hu0e51d14ee0b9d6015b2b7eceb49be3df_10192_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="105"
+		data-flex-basis="252px"
+	
+></p>
+<p>We need to join its left and right nodes and the middle identifier.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">     visitBinaryExpression(node) {
+</span></span><span class="line"><span class="cl">        let str = &#39;&#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.left);
+</span></span><span class="line"><span class="cl">        str += node.operator;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.right);
+</span></span><span class="line"><span class="cl">        return str + &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Implement the visitFunctionDeclaration method</strong></p>
+<p>FunctionDeclaration refers to function declaration nodes. It&rsquo;s a bit more complex as we need to join a function together.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function add(a, b) {
+</span></span><span class="line"><span class="cl">    return a + b;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>For example, the AST for our add function is:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/8.webp"
+	width="677"
+	height="1064"
+	srcset="/p/what-is-the-principle-of-tree-shaking/8_hu52bbe1ddd33bac7a4634e28efab7a6d7_18300_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/8_hu52bbe1ddd33bac7a4634e28efab7a6d7_18300_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="63"
+		data-flex-basis="152px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">     visitFunctionDeclaration(node) {
+</span></span><span class="line"><span class="cl">        let str = &#39;function &#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.id);
+</span></span><span class="line"><span class="cl">        str += &#39;(&#39;;
+</span></span><span class="line"><span class="cl">        for (let paramIndex = 0; paramIndex &lt; node.params.length; paramIndex++) {
+</span></span><span class="line"><span class="cl">            str += this.visitNode(node.params[paramIndex]);
+</span></span><span class="line"><span class="cl">            str += ((node.params[paramIndex] === undefined) ? &#39;&#39; : &#39;,&#39;)
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        str = str.slice(0, str.length - 1);
+</span></span><span class="line"><span class="cl">        str += &#39;){\n&#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNode(node.body);
+</span></span><span class="line"><span class="cl">        str += &#39;}&#39;;
+</span></span><span class="line"><span class="cl">        return str + &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>First get node.id, which is add. Then, process the arguments (params) of the function. Because there may be multiple params, we need to loop through and join them with commas. Finally, call the visitNode method to join the node.body function body.</p>
+<p><strong>Implement the visitBlockStatement method</strong></p>
+<p>BlockStatement refers to block statements, which is the part enclosed by braces. For example, the AST for the block statement in our add function is:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/9.webp"
+	width="631"
+	height="744"
+	srcset="/p/what-is-the-principle-of-tree-shaking/9_hu5bed3069e2f2389fbb5ce575c35a91e3_15762_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/9_hu5bed3069e2f2389fbb5ce575c35a91e3_15762_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="84"
+		data-flex-basis="203px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">    visitBlockStatement(node) {
+</span></span><span class="line"><span class="cl">        let str = &#39;&#39;;
+</span></span><span class="line"><span class="cl">        str += this.visitNodes(node.body);
+</span></span><span class="line"><span class="cl">        return str;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We just need to use the visitNodes function to join its node.body.</p>
+<p><strong>Implement the visitCallExpression method</strong></p>
+<p>CallExpression refers to function calls, for example, add(firstNum, secondNum). Its important attributes are:</p>
+<ul>
+<li>
+<p>callee: which is add</p>
+</li>
+<li>
+<p>arguments: which are the parameters firstNum and secondNum passed when calling.</p>
+</li>
+</ul>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/10.webp"
+	width="571"
+	height="640"
+	srcset="/p/what-is-the-principle-of-tree-shaking/10_hudbe8fd3e2fb9fc8050e97ab2330d15ea_14140_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/10_hudbe8fd3e2fb9fc8050e97ab2330d15ea_14140_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="89"
+		data-flex-basis="214px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">class</span> <span class="n">Generator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">visitCallExpression</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">let</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitIdentifier</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">callee</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span> <span class="o">+=</span> <span class="s1">&#39;(&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">arg</span> <span class="n">of</span> <span class="n">node</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">str</span> <span class="o">+=</span> <span class="n">this</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span> <span class="o">+=</span> <span class="s1">&#39;);&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We just need to join its callee and the arguments in parentheses ().</p>
+<p><strong>Implement the visitReturnStatement method</strong></p>
+<p>ReturnStatement refers to return statements, like return a + b. Its AST is:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/11.webp"
+	width="566"
+	height="560"
+	srcset="/p/what-is-the-principle-of-tree-shaking/11_hu4a44c902428aa142cb8e9abf5ebb0371_12340_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/11_hu4a44c902428aa142cb8e9abf5ebb0371_12340_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="101"
+		data-flex-basis="242px"
+	
+></p>
+<p>It’s also relatively simple to implement, just joining node.argument directly:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">   visitReturnStatement(node) {
+</span></span><span class="line"><span class="cl">        let str = &#39;&#39;;
+</span></span><span class="line"><span class="cl">        str = str + &#39;  return &#39; + this.visitNode(node.argument);
+</span></span><span class="line"><span class="cl">        return str + &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Implement the visitExpressionStatement method</strong></p>
+<p>ExpressionStatement refers to expression statements, that have return values when executed, such as add(firstNum, secondNum);. This is wrapped around CallExpression with an ExpressionStatement, and returns the result of the function call after execution. The AST is as followed:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/12.webp"
+	width="684"
+	height="775"
+	srcset="/p/what-is-the-principle-of-tree-shaking/12_hud9706e85693c2fe5440f4b3ab6784428_18996_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/12_hud9706e85693c2fe5440f4b3ab6784428_18996_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="88"
+		data-flex-basis="211px"
+	
+></p>
+<p>So the implementation is simple, we just need to process and return its expression.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Generator {
+</span></span><span class="line"><span class="cl">    return this.visitNode(node.expression);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This way, we have fully implemented the Generator. Now we can start traversing the AST.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">tree</span><span class="o">-</span><span class="n">shaking</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">acorn</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;acorn&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">path</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">readFileSync</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="s1">&#39;./src/index.js&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">body</span> <span class="o">=</span> <span class="n">acorn</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ecmaVersion</span><span class="p">:</span> <span class="s1">&#39;latest&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">body</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="ne">Reference</span> <span class="n">a</span> <span class="n">Generator</span> <span class="k">class</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">corresponding</span> <span class="n">code</span> <span class="k">for</span> <span class="n">AST</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">Generator</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;./generator&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">Generator</span> <span class="n">instance</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">gen</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Generator</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">variable</span> <span class="s2">&#34;decls&#34;</span> <span class="n">to</span> <span class="n">store</span> <span class="n">all</span> <span class="n">function</span> <span class="ow">or</span> <span class="n">variable</span> <span class="n">type</span> <span class="n">nodes</span> <span class="p">(</span><span class="n">Map</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">decls</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">variable</span> <span class="s2">&#34;calledDecls&#34;</span> <span class="n">to</span> <span class="n">store</span> <span class="n">used</span> <span class="n">function</span> <span class="ow">or</span> <span class="n">variable</span> <span class="n">type</span> <span class="n">nodes</span> <span class="p">(</span><span class="ne">Array</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">calledDecls</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Start</span> <span class="n">traversing</span> <span class="n">AST</span>
+</span></span><span class="line"><span class="cl"><span class="n">body</span><span class="o">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">node</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;FunctionDeclaration&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">code</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">node</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">decls</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">code</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;VariableDeclaration&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">decl</span> <span class="n">of</span> <span class="n">node</span><span class="o">.</span><span class="n">declarations</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">decls</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">decl</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">gen</span><span class="o">.</span><span class="n">visitVariableDeclarator</span><span class="p">(</span><span class="n">decl</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">kind</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;ExpressionStatement&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;CallExpression&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">callNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">expression</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitIdentifier</span><span class="p">(</span><span class="n">callNode</span><span class="o">.</span><span class="n">callee</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">arg</span> <span class="n">of</span> <span class="n">callNode</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;Identifier&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;Identifier&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;decls&#39;</span><span class="p">,</span> <span class="n">decls</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;calledDecls&#39;</span><span class="p">,</span> <span class="n">decls</span><span class="p">);</span><span class="err">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Run it with node tree-shaking.js, the result is:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/13.webp"
+	width="630"
+	height="178"
+	srcset="/p/what-is-the-principle-of-tree-shaking/13_hu17f39af145b5cf08cda76b6e05be0441_14686_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/13_hu17f39af145b5cf08cda76b6e05be0441_14686_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="353"
+		data-flex-basis="849px"
+	
+></p>
+<p>It’s obvious that we have four nodes, function or variable type nodes in decls, and only three have been called in calledDecls. Notably, the multiple function has not been called and can be tree-shaken. After getting this information, we can now start generating the code after tree-shaking.</p>
+<h3 id="step-3-generate-new-code-based-on-the-information-obtained-in-step-2">Step 3: Generate new code based on the information obtained in Step 2</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">code = calledDecls.map(c =&gt; decls.get(c)).join(&#39;&#39;);
+</span></span><span class="line"><span class="cl">console.log(code);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We directly traverse calledDecls to generate new source code, and the print result is as follows:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/14.webp"
+	width="282"
+	height="162"
+	srcset="/p/what-is-the-principle-of-tree-shaking/14_hu6d6159a2b2b9dd323999c941cac963f9_4472_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/14_hu6d6159a2b2b9dd323999c941cac963f9_4472_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="417px"
+	
+>
+<img src="/p/what-is-the-principle-of-tree-shaking/15.webp"
+	width="432"
+	height="185"
+	srcset="/p/what-is-the-principle-of-tree-shaking/15_hu5141ab137fa7ba9e073351011d056830_6646_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/15_hu5141ab137fa7ba9e073351011d056830_6646_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="560px"
+	
+></p>
+<p>Hmm! When comparing it with our original file, although multiple has been removed, our function call statement add(firstNum, secondNum); is missing. Let&rsquo;s handle this situation simply.</p>
+<p>We declare a code array:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">calledDecls</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Save</span> <span class="n">code</span> <span class="n">information</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">code</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="o">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We store the information that doesn&rsquo;t belong to <code>FunctionDeclaration</code> and <code>VariableDeclaration</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">tree</span><span class="o">-</span><span class="n">shaking</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="n">body</span><span class="o">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">node</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;FunctionDeclaration&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">code</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">node</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">decls</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">code</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;VariableDeclaration&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">decl</span> <span class="n">of</span> <span class="n">node</span><span class="o">.</span><span class="n">declarations</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">decls</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitNode</span><span class="p">(</span><span class="n">decl</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">gen</span><span class="o">.</span><span class="n">visitVariableDeclarator</span><span class="p">(</span><span class="n">decl</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">kind</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;ExpressionStatement&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;CallExpression&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="n">callNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">expression</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">visitIdentifier</span><span class="p">(</span><span class="n">callNode</span><span class="o">.</span><span class="n">callee</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">arg</span> <span class="n">of</span> <span class="n">callNode</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;Identifier&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">type</span> <span class="o">===</span> <span class="s1">&#39;Identifier&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">calledDecls</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Save</span> <span class="n">code</span> <span class="n">information</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">node</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>When printing the output, make sure to include the information from the code array:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// tree-shaking.js
+</span></span><span class="line"><span class="cl">code = calledDecls.map(c =&gt; decls.get(c)).concat(code).join(&#39;&#39;);
+</span></span><span class="line"><span class="cl">console.log(code);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then, we run it and print the result:</p>
+<p><img src="/p/what-is-the-principle-of-tree-shaking/16.webp"
+	width="270"
+	height="152"
+	srcset="/p/what-is-the-principle-of-tree-shaking/16_hu87cf6b8a36dafd27c09bf166866a6aa5_4228_480x0_resize_q75_h2_box_2.webp 480w, /p/what-is-the-principle-of-tree-shaking/16_hu87cf6b8a36dafd27c09bf166866a6aa5_4228_1024x0_resize_q75_h2_box_2.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+></p>
+<p>Now, we have completed a simple version of tree-shaking. Of course, webpack&rsquo;s tree-shaking capability is much stronger. We just wrote the simplest version, and real projects are much more complicated.</p>
+<ul>
+<li>
+<p>Processes file dependencies (import/export)</p>
+</li>
+<li>
+<p>Handles scopes</p>
+</li>
+<li>
+<p>Recursive tree-shaking. As it’s possible that removing some code will produce new unused code, it needs to be handled recursively.</p>
+</li>
+<li>
+<p>And much more…</p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">Javascript</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-definemodel-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding defineModel in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-fragment-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Fragment in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-teleport-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Teleport in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-async-components-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Async Components in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-watch-and-watcheffect-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding watch and watchEffect in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="kxming/skstory"
+    data-repo-id="R_kgDOLehX4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLehX4M4Cd4Vx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 SK Story
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

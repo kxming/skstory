@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.">
+<title>Interpretation of HTTP1/HTTP2/HTTP3</title>
+
+<link rel='canonical' href='http://localhost:1313/p/interpretation-of-http1/http2/http3/'>
+
+<link rel="stylesheet" href="/scss/style.min.d8118f156935b64eca93aca758476adca858d2c47354971654d9bd2933a0e45f.css"><meta property='og:title' content="Interpretation of HTTP1/HTTP2/HTTP3">
+<meta property='og:description' content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.">
+<meta property='og:url' content='http://localhost:1313/p/interpretation-of-http1/http2/http3/'>
+<meta property='og:site_name' content='SK Story'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Javascript' /><meta property='article:published_time' content='2024-02-18T16:22:38&#43;08:00'/><meta property='article:modified_time' content='2024-02-18T16:22:38&#43;08:00'/><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YSRCwdfogxl6U71MLyLa1g.png' />
+<meta name="twitter:site" content="@https://twitter.com/ShawnKxming">
+    <meta name="twitter:creator" content="@https://twitter.com/ShawnKxming"><meta name="twitter:title" content="Interpretation of HTTP1/HTTP2/HTTP3">
+<meta name="twitter:description" content="In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YSRCwdfogxl6U71MLyLa1g.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu61f49258472ba116407e56a959fa113d_189154_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">SK Story</a></h1>
+            <h2 class="site-description">Shawn King&#39;s Stories Website</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:kxming0229@gmail.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.facebook.com/p/King-Shawn-100092679065959/'
+                        target="_blank"
+                        title="Facebook"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/ShawnKxming'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/shawnkxming'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://medium.com/@kxming'
+                        target="_blank"
+                        title="Medium"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 9h1l3 3l3 -3h1" /><path d="M8 15l2 0" /><path d="M14 15l2 0" /><path d="M9 9l0 6" /><path d="M15 9l0 6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#defects-of-http11">Defects of HTTP1.1</a>
+      <ol>
+        <li><a href="#high-latency--reduces-page-loading-speed">High latency — reduces page loading speed</a></li>
+        <li><a href="#stateless-feature--huge-http-headers">Stateless feature — huge HTTP headers</a></li>
+        <li><a href="#plaintext-transmission--insecurity">Plaintext transmission — insecurity</a></li>
+        <li><a href="#not-support-server-push-messages">Not support server push messages</a></li>
+      </ol>
+    </li>
+    <li><a href="#introduction-to-spdy-and-http2">Introduction to SPDY and HTTP/2</a>
+      <ol>
+        <li><a href="#spdy-protocol">SPDY protocol</a></li>
+        <li><a href="#introduction-to-http2">Introduction to HTTP/2</a></li>
+        <li><a href="#new-features-of-http2">New Features of HTTP/2</a></li>
+        <li><a href="#drawbacks-of-http2">Drawbacks of HTTP/2</a></li>
+        <li><a href="#http3-new-features">HTTP/3 New Features</a></li>
+      </ol>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/interpretation-of-http1/http2/http3/">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YSRCwdfogxl6U71MLyLa1g.png" loading="lazy" alt="Featured image of post Interpretation of HTTP1/HTTP2/HTTP3" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" style="background-color: #D1D419; color: #fff;">
+                Javascript
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/interpretation-of-http1/http2/http3/">Interpretation of HTTP1/HTTP2/HTTP3</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            In Vue3, there are many functions related to responsiveness, such as toRef, toRefs, isRef, unref, etc.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 18, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    15 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Compared with HTTP/1.1, HTTP/2 significantly improves the performance of web pages. Just upgrading to this protocol can reduce a lot of previously required performance optimization work. Nevertheless, HTTP/2 is not perfect, HTTP/3 was introduced to solve some of the problems that exist in HTTP/2.</p>
+<h2 id="defects-of-http11">Defects of HTTP1.1</h2>
+<ul>
+<li>
+<p>High latency — Head-Of-Line Blocking</p>
+</li>
+<li>
+<p>Stateless feature — impediment to interaction</p>
+</li>
+<li>
+<p>Plain text transmission — insecurity</p>
+</li>
+<li>
+<p>Does not support server push</p>
+</li>
+</ul>
+<h3 id="high-latency--reduces-page-loading-speed">High latency — reduces page loading speed</h3>
+<p>In recent years, although network bandwidth has grown very fast, we have not seen a corresponding reduction in network latency. The main problem of network latency is due to Head-Of-Line Blocking, which results in bandwidth not being fully utilized.</p>
+<p>Head-Of-Line Blocking refers to when a request in a sequentially sent request sequence is blocked for some reason, all requests lined up behind it are also blocked, leading to the client receiving data late. To solve the problem of Head-Of-Line Blocking, people have tried the following methods:</p>
+<ul>
+<li>
+<p>Distribute resources of the same page to different domain names to increase the connection limit. Chrome has a mechanism that allows six persistent TCP connections to be established simultaneously for the same domain name by default. When using persistent connections, although a TCP pipeline can be shared, only one request can be processed at the same time in one pipeline. Other requests can only be blocked until the current request is finished. Moreover, if there are 10 requests happening simultaneously under the same domain name, then four of the requests will be queued waiting until the ongoing requests are completed.</p>
+</li>
+<li>
+<p>Merge small files to reduce the number of resources. Sprite merges multiple small images into a large image, and then “cuts” the small images out again using JavaScript or CSS.</p>
+</li>
+<li>
+<p>Inlining resources is another trick to prevent sending many small image requests, embedding the original data of the image in the URL inside the CSS file, reducing the number of network requests.</p>
+</li>
+<li>
+<p>Reduce the number of requests. Concatenation combines multiple small JavaScripts into one larger JavaScript file using tools like webpack. But if one file changes, it will cause a large amount of data to be re-downloaded multiple files.</p>
+</li>
+</ul>
+<h3 id="stateless-feature--huge-http-headers">Stateless feature — huge HTTP headers</h3>
+<p>Stateless means that the protocol has no memory capacity for the connection status. Pure HTTP does not have mechanisms such as cookies. Every connection is a new connection.</p>
+<p>Header often carries many fixed header fields such as “User Agent”, “Cookie”, “Accept”, “Server”, etc. (as shown below), up to hundreds or even thousands of bytes. However, Body often only has a few dozen bytes (such as GET requests, 204/301/304 responses), becoming a genuine “big head”. The content carried in the Header is too big, which increases the cost of transmission to some extent. More fatally, many field values in the response message are repeated, which is a waste.</p>
+<h3 id="plaintext-transmission--insecurity">Plaintext transmission — insecurity</h3>
+<p>When HTTP/1.1 transmits data, all transmitted content is plaintext, and neither the client nor the server can verify each other’s identity, which can’t ensure data security to some extent.</p>
+<h3 id="not-support-server-push-messages">Not support server push messages</h3>
+<h2 id="introduction-to-spdy-and-http2">Introduction to SPDY and HTTP/2</h2>
+<h3 id="spdy-protocol">SPDY protocol</h3>
+<p>As we mentioned above, due to the defects of HTTP/1.x, we will introduce sprite images, inline small images, use multiple domain names, etc., to improve performance. However, these optimizations bypass the protocol. Until 2009, Google announced the SPDY protocol it developed to mainly resolve the inefficiency of HTTP/1.1. Google released SPDY, which can be considered as officially restructuring the HTTP protocol itself. Lower latency, compress headers, etc., the practice of SPDY has proved the effect of these optimizations, and finally led to the birth of HTTP/2.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:800/format:webp/1*a3K9jsoI2pKXBGYhWzlDbQ.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>HTTP/1.1 has two main drawbacks: insecurity and low performance. Because it bears the huge historical burden of HTTP/1.x, compatibility is the primary goal when modifying the protocol, otherwise it will damage countless existing assets on the internet. As shown above, SPDY is located below HTTP and above TCP and SSL, which means it can easily be compatible with older versions of the HTTP protocol (encapsulating the content of HTTP1.x into a new frame format) and can use existing SSL functions.</p>
+<p>After the SPDY protocol was proven feasible on the Chrome browser, it was used as the basis for HTTP/2, and its main features were inherited in HTTP/2.</p>
+<h3 id="introduction-to-http2">Introduction to HTTP/2</h3>
+<p>In 2015, HTTP/2 was released. HTTP/2 is a substitute for the existing HTTP protocol (HTTP/1.x), but it is not a rewrite, HTTP methods/status codes/semantics are the same as HTTP/1.x. HTTP/2 is based on SPDY, focusing on performance, with the main goal of using only one connection between the user and the website. From the current situation, some top-ranking sites at home and abroad have basically implemented the deployment of HTTP/2, and using HTTP/2 can bring an efficiency improvement of 20% to 60%.</p>
+<p>HTTP/2 consists of two specifications:</p>
+<ul>
+<li>
+<p>Hypertext Transfer Protocol version 2 — RFC7540</p>
+</li>
+<li>
+<p>HPACK — Header Compression for HTTP/2 — RFC7541</p>
+</li>
+</ul>
+<h3 id="new-features-of-http2">New Features of HTTP/2</h3>
+<p><strong>Binary Transmission</strong></p>
+<p>The great reduction in data transmission of HTTP/2 is mainly due to two reasons: binary transmission and Header compression. Here we first introduce binary transmission, HTTP/2 transmits data in binary format, rather than the text-based messages in HTTP/1.x, making binary protocol parsing more efficient. HTTP/2 splits request and response data into smaller frames, and they are encoded in binary.</p>
+<p>It moves part of the TCP protocol feature to the application layer, and “breaks up” the original “Header+Body” message into several small binary “frames”, using the “HEADERS” frame to store header data and the “DATA” frame to store entity data. After HTP/2 data is frame-split, the message structure of “Header+Body” completely disappeared, and the protocol only sees one “fragment” after another.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*9NJ_ZuSwcKLfbeTD_EFQOQ.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>In HTTP/2, all communications under the same domain name are completed on a single connection, which can carry an arbitrary number of bidirectional data streams. Each data stream is sent in the form of messages, and messages are composed of one or more frames. Multiple frames can be sent out of order, and can be reassembled based on the stream identifier in the frame header.</p>
+<p><strong>Header Compression</strong></p>
+<p>HTTP/2 did not use traditional compression algorithms, but developed a dedicated “HPACK” algorithm. It establishes a “dictionary” at both the client and server ends, uses index numbers to represent repetitive strings, and uses Huffman coding to compress integers and strings, which can reach a high compression rate of 50%~90%.</p>
+<p>In detail:</p>
+<ul>
+<li>
+<p>The client and server use a “header table” to track and store previously sent key-value pairs. For the same data, it no longer is sent with each request and response;</p>
+</li>
+<li>
+<p>The header table always exists during the survivability of the HTTP/2 connection and is gradually updated by the client and server together;</p>
+</li>
+<li>
+<p>Each new header key-value pair is either appended to the end of the current table or replaces the value previously in the table.</p>
+</li>
+<li>
+<p>For example, in the two requests in the following image, Request 1 sends all header fields, and the second request only needs to send difference data. In this way, redundant data is reduced and overhead is lowered.</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:1172/format:webp/1*V3uDsjov2mc80_ulvNrHHw.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><strong>Multiplexing</strong></p>
+<p>Multiplexing technology was introduced in HTTP/2. Multiplexing effectively solves the problem of browsers limiting the number of requests under the same domain name, and it is also easier to achieve full-speed transmission, because opening a new TCP connection requires gradually increasing the transmission speed.</p>
+<p>In HTTP/2, after binary framing, HTTP/2 no longer relies on TCP connections to implement multi-stream parallelism. In HTTP/2:</p>
+<ul>
+<li>
+<p>All communications under the same domain name are completed on a single connection.</p>
+</li>
+<li>
+<p>A single connection can carry an arbitrary number of bidirectional data streams.</p>
+</li>
+<li>
+<p>Data streams are sent in the form of messages, and messages are composed of one or more frames. Multiple frames can be sent out of order, as they can be reassembled based on the stream identifier in the frame header.</p>
+</li>
+</ul>
+<p>This feature greatly improves performance:</p>
+<ul>
+<li>
+<p>A single domain name only needs to occupy one TCP connection, use one connection to send multiple requests and responses in parallel. In this way, the download process of the entire page resource only needs one slow start, and at the same time, it avoids the problems caused by multiple TCP connections competing for bandwidth.</p>
+</li>
+<li>
+<p>Multiple requests/responses are sent in parallel overlap, and they do not affect each other.</p>
+</li>
+<li>
+<p>In HTTP/2, each request can carry a 31-bit priority value, 0 indicates the highest priority, and the larger the value, the lower the priority. With this priority value, clients and servers can adopt different strategies when processing different streams, to send streams, messages, and frames in the most optimal way.</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*iRBfW5mzu3r6YDuKH5mljg.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>As shown above, the technology of multiplexing can transmit all request data through just one TCP connection.</p>
+<p><strong>Server Push</strong></p>
+<p>HTTP2 has to some extent changed the traditional “request-response” working mode. The server is no longer completely passively responding to requests, but can also actively send messages to the client by creating new “streams”. For instance, when the browser just requests HTML, the server may proactively send JS and CSS files that might be used to the client, reducing waiting latency. This is known as “server push” (also called Cache push).</p>
+<p>For example, as shown in the figure below, the server actively pushes JS and CSS files to the client, without the need for the client to send these requests when parsing HTML.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*wsanFomvimYTEXtUKhDAzw.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Furthermore, it should be noted that while the server can actively push, the client has the right to choose whether to accept it or not. If the resources pushed by the server have already been cached by the browser, the browser can refuse to accept them by sending an RST_STREAM frame. Active pushing also complies with the same-origin policy, in other words, the server cannot arbitrarily push third-party resources to the client, but must be confirmed by both parties.</p>
+<p><strong>Enhanced Security</strong></p>
+<p>For the consideration of compatibility, HTTP/2 continues the “plaintext” feature of HTTP/1 and can use plaintext to transmit data as before. It doesn’t force the use of encrypted communication; however, the format is still binary, just no decryption is required.</p>
+<p>But since HTTPS has become the trend, and mainstream browsers such as Chrome and Firefox have publicly announced that they only support the encrypted HTTP/2, so the “de facto” HTTP/2 is encrypted. That is to say, the HTTP/2 that can usually be seen on the Internet all uses the “https” protocol name and runs on TLS. The HTTP/2 protocol defines two string identifiers: “h2” represents encrypted HTTP/2, and “h2c” represents plaintext HTTP/2.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*qeuLvSDM8lDwrSMYNanzpg.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="drawbacks-of-http2">Drawbacks of HTTP/2</h3>
+<p>Although HTTP/2 solves many problems of the previous versions, it still has a huge problem, mainly caused by the underlying TCP protocol that it relies on. The main drawbacks of HTTP/2 are as follows:</p>
+<ul>
+<li>
+<p>Delay in establishing TCP and TCP+TLS connections</p>
+</li>
+<li>
+<p>Head-of-line blocking in TCP not completely solved</p>
+</li>
+<li>
+<p>Server load increase due to multiplexing</p>
+</li>
+<li>
+<p>Multiplexing more prone to timeout</p>
+</li>
+</ul>
+<p><strong>Connection establishment delay</strong></p>
+<p>HTTP/2 uses the TCP protocol for transmission, and if HTTPS is used, the TLS protocol is required for secure transmission. And using TLS also requires a handshake process, which means there are two handshake delay processes:</p>
+<p>① When establishing a TCP connection, a three-way handshake with the server is needed to confirm the connection is successful, that is, only after 1.5 RTTs can data transmission proceed.</p>
+<p>② When establishing a TLS connection, there are two versions of TLS — TLS1.2 and TLS1.3, each with different connection establishment times, roughly requiring 1~2 RTTs.</p>
+<p>In summary, before transmitting data, we have to spend 3~4 RTTs.</p>
+<p>RTT (Round-Trip Time):</p>
+<p>The round-trip time. This is the total delay from the time the sender starts sending data until the sender receives confirmation from the receiver (the receiver immediately sends confirmation after receiving the data).</p>
+<p>TCP Head-of-line blocking not completely solved</p>
+<p>As we mentioned earlier, multiple requests in HTTP/2 are within one TCP pipe. However, when packet loss occurs, HTTP/2’s performance is actually worse than HTTP/1. Because TCP has a special “packet loss retransmission” mechanism to ensure reliable transmission, the lost packet has to wait for retransmission confirmation. When HTTP/2 experiences packet loss, the entire TCP has to start waiting for retransmission, which will block all requests in that TCP connection (as shown in the figure below). For HTTP/1.1, multiple TCP connections can be opened, so such a situation would only affect one of the connections, and the remaining TCP connections can still transmit data normally.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3MN44SOWjjEgaGBjf6qu1g.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*AHKNPond2QissQtwxYerXA.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>RTO: The full English name is Retransmission TimeOut, which is the retransmission timeout time. RTO is a dynamic value and will change with the network. RTO is calculated based on the round-trip time RTT of a given connection. The ack returned by the receiver is the sequence number of the next group of packets the receiver hopes to receive.</p>
+<p>Some might wonder why not directly modify the TCP protocol? In fact, this has become an impossible task. The existence time of TCP is too long, it is already prevalent in various devices, and this protocol is implemented by the operating system, making it unrealistic to update.</p>
+<p><strong>Server Stress Increase due to Multiplexing</strong></p>
+<p>Multiplexing does not limit the number of simultaneous requests. The average number of requests is the same as usual, but there will be many brief bursts of requests, leading to a sudden surge in instantaneous QPS (queries per second).</p>
+<p><strong>Multiplexing more prone to Timeout</strong></p>
+<p>A large number of requests are sent at the same time. Since there are multiple parallel streams within the HTTP2 connection, and the network bandwidth and server resources are limited, the resources of each stream will be diluted. Although their start times are closer, they may all timeout.</p>
+<p>Even using a load balancer like Nginx, it might be tricky to correctly do throttling. Secondly, even if you introduce or adjust the queuing mechanism to the application, the number of connections that can be handled at once is still limited. If requests are queued, you also need to pay attention to discarding requests after the response times out, to avoid wasting unnecessary resources. Reference</p>
+<h3 id="http3-new-features">HTTP/3 New Features</h3>
+<p><strong>Introduction to HTTP/3</strong></p>
+<p>Google realized these problems when promoting SPDY, so they started up a new oven and created a “QUIC” protocol based on the UDP protocol, allowing HTTP to run on QUIC instead of TCP. This “HTTP over QUIC” is the next major version of the HTTP protocol, HTTP/3. It has achieved a qualitative leap based on HTTP/2 and truly “perfectly” solved the “head-of-line blocking” problem.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1148/format:webp/1*G0Us_Ix7TNYisU8TfBN17g.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Although QUIC is based on UDP, a number of functionalities have been added on top of the original foundation. We will focus on several new QUIC features next. However, HTTP/3 is still at a draft stage at the moment, there may be changes before its official release, so this article will avoid unstable details as much as possible.</p>
+<p><strong>New Features of QUIC</strong></p>
+<p>As mentioned earlier, QUIC is based on UDP, which is “connectionless” and doesn’t need “handshakes” and “waves”, making it faster than TCP. In addition, QUIC implements reliable transmission, ensuring that data can indeed reach its destination. It also introduced “streams” and “multiplexing” similar to HTTP/2. A single “stream” is ordered and may block due to packet loss, but other “streams” will not be affected. To be more specific, the QUIC protocol has the following features:</p>
+<ul>
+<li>
+<p>Achieved similar features to TCP such as flow control and transmission reliability</p>
+<p>Although UDP does not provide reliable transmission, QUIC adds a layer on top of UDP to ensure reliable data transmission. It offers packet retransmission, congestion control, and other features found in TCP.</p>
+<p>Where does the QUIC protocol improve? Mainly in the following aspects:</p>
+<ul>
+<li>
+<p>Pluggable: Different congestion control algorithms can be implemented at the application level.</p>
+</li>
+<li>
+<p>Monotonically increasing Packet Number: Packet Number is used instead of TCP’s seq.</p>
+</li>
+<li>
+<p>No Reneging: As long as a Packet is Acked, it is assumed that it has been received correctly.</p>
+</li>
+<li>
+<p>Forward Error Correction (FEC).</p>
+</li>
+<li>
+<p>More Ack blocks and increased Ack Delay time.</p>
+</li>
+<li>
+<p>Traffic control at the stream and connection level.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Implemented Quick Handshake Feature</p>
+<p>Since QUIC is based on UDP, QUIC offers the use of 0-RTT or 1-RTT to establish a connection, which means QUIC can transmit and receive data at the fastest speed, greatly improving the speed of opening a webpage for the first time. It can be said that 0RTT connection setup is the biggest performance advantage of QUIC compared to HTTP2.</p>
+</li>
+<li>
+<p>Integrated TLS encryption feature</p>
+<p>Currently, QUIC uses TLS1.3, which offers more advantages compared to its predecessors, the most important of which is reducing the number of RTTs spent on handshakes.</p>
+<p>In a complete handshake, 1-RTT is required to establish a connection. TLS 1.3 session recovery can directly send encrypted application data, not requiring extra TLS handshake, that is, 0-RTT.</p>
+<p>However, TLS1.3 is not perfect. TLS 1.3’s 0-RTT cannot guarantee Forward Secrecy. Simply put, if an attacker somehow obtains the Session Ticket Key, they can decrypt the previous encrypted data.</p>
+<p>To alleviate this problem, we can set the DH static parameters corresponding to Session Ticket Key to expire in a short time (usually a few hours).</p>
+</li>
+<li>
+<p>Multiplexing, completely solving the problem of head-of-line blocking in TCP</p>
+<p>Unlike TCP, QUIC achieves multiple independent logical data streams on the same physical connection (as shown below). By realizing independent data stream transmission, the head-of-line blocking problem in TCP is solved.</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*DNNT6mUo3Wz-BNh37i34Mw.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>
+<p>Connection migration</p>
+<p>TCP uses 4 factors (client IP, port, server IP, port) to affirm a connection. But QUIC lets the client generate a Connection ID (64 bits) to distinguish different connections. As long as the Connection ID remains the same, the connection does not need to be reestablished, even if the client’s network changes. As the migrating client continues to use the same session key to encrypt and decrypt packets, QUIC also provides automatic encryption verification for migrating clients.</p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>
+<p>HTTP/1.1 has two major drawbacks: lack of security and poor performance.</p>
+</li>
+<li>
+<p>HTTP/2 is completely compatible with HTTP/1 and provides a “more secure HTTP and faster HTTPS”, binary transmission, header compression, multiplexing, server push, etc. These technologies fully utilize the bandwidth and reduce latency, greatly improving the online experience;</p>
+</li>
+<li>
+<p>QUIC is implemented based on UDP and forms the underlying support protocol in HTTP/3, This protocol is based on UDP, and also benefits significantly from TCP, resulting in a fast and reliable protocol.</p>
+</li>
+</ul>
+<p>Interview question: The difference between http2 and http1.1, do you know about http3, please elaborate;</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">Javascript</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-definemodel-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding defineModel in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-fragment-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Fragment in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-teleport-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Teleport in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-async-components-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Async Components in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-watch-and-watcheffect-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding watch and watchEffect in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="kxming/skstory"
+    data-repo-id="R_kgDOLehX4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLehX4M4Cd4Vx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 SK Story
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

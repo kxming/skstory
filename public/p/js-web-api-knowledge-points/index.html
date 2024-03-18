@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="In addition to the ES basics, the web front-end often uses some browser-related APIs. Let’s sort them out together....">
+<title>JS-Web-API Knowledge Points</title>
+
+<link rel='canonical' href='http://localhost:1313/p/js-web-api-knowledge-points/'>
+
+<link rel="stylesheet" href="/scss/style.min.d8118f156935b64eca93aca758476adca858d2c47354971654d9bd2933a0e45f.css"><meta property='og:title' content="JS-Web-API Knowledge Points">
+<meta property='og:description' content="In addition to the ES basics, the web front-end often uses some browser-related APIs. Let’s sort them out together....">
+<meta property='og:url' content='http://localhost:1313/p/js-web-api-knowledge-points/'>
+<meta property='og:site_name' content='SK Story'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Javascript' /><meta property='article:published_time' content='2024-01-27T16:22:38&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T16:22:38&#43;08:00'/><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv' />
+<meta name="twitter:site" content="@https://twitter.com/ShawnKxming">
+    <meta name="twitter:creator" content="@https://twitter.com/ShawnKxming"><meta name="twitter:title" content="JS-Web-API Knowledge Points">
+<meta name="twitter:description" content="In addition to the ES basics, the web front-end often uses some browser-related APIs. Let’s sort them out together...."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu61f49258472ba116407e56a959fa113d_189154_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">SK Story</a></h1>
+            <h2 class="site-description">Shawn King&#39;s Stories Website</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:kxming0229@gmail.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.facebook.com/p/King-Shawn-100092679065959/'
+                        target="_blank"
+                        title="Facebook"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/ShawnKxming'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/shawnkxming'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://medium.com/@kxming'
+                        target="_blank"
+                        title="Medium"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 9h1l3 3l3 -3h1" /><path d="M8 15l2 0" /><path d="M14 15l2 0" /><path d="M9 9l0 6" /><path d="M15 9l0 6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#bom">BOM</a></li>
+    <li><a href="#dom">DOM</a>
+      <ol>
+        <li><a href="#what-is-dom">What is DOM</a></li>
+        <li><a href="#obtain-dom-nodes">Obtain DOM Nodes</a></li>
+        <li><a href="#property">Property</a></li>
+        <li><a href="#attribute">Attribute</a></li>
+        <li><a href="#dom-tree-manipulations">DOM Tree Manipulations</a></li>
+      </ol>
+    </li>
+    <li><a href="#events">Events</a>
+      <ol>
+        <li><a href="#event-binding">Event Binding</a></li>
+        <li><a href="#event-bubbling">Event Bubbling</a></li>
+        <li><a href="#event-delegation">Event Delegation</a></li>
+      </ol>
+    </li>
+    <li><a href="#ajax">Ajax</a>
+      <ol>
+        <li><a href="#xmlhttprequest">XMLHttpRequest</a></li>
+        <li><a href="#explanation-of-status-codes">Explanation of Status Codes</a></li>
+        <li><a href="#fetch-api">Fetch API</a></li>
+        <li><a href="#cross-domain">Cross-domain</a></li>
+        <li><a href="#resolve-cross-domain--jsonp">Resolve Cross-domain — JSONP</a></li>
+        <li><a href="#resolve-cross-domain--server-side-setting-of-http-header">Resolve Cross-domain — Server Side Setting of HTTP Header</a></li>
+      </ol>
+    </li>
+    <li><a href="#storage">Storage</a>
+      <ol>
+        <li><a href="#cookies">Cookies</a></li>
+        <li><a href="#localstorage-and-sessionstorage">LocalStorage and sessionStorage</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/js-web-api-knowledge-points/">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv" loading="lazy" alt="Featured image of post JS-Web-API Knowledge Points" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" style="background-color: #D1D419; color: #fff;">
+                Javascript
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/js-web-api-knowledge-points/">JS-Web-API Knowledge Points</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            In addition to the ES basics, the web front-end often uses some browser-related APIs. Let’s sort them out together....
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    15 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="knowledge-points">Knowledge Points</h1>
+<ul>
+<li>
+<p>BOM operations</p>
+</li>
+<li>
+<p>DOM operations</p>
+</li>
+<li>
+<p>Event binding</p>
+</li>
+<li>
+<p>Ajax</p>
+</li>
+<li>
+<p>Storage</p>
+</li>
+</ul>
+<hr>
+<h2 id="bom">BOM</h2>
+<p>BOM (Browser Object Model) is the setting and obtaining of some information of the browser itself, such as acquiring the browser’s width and height, and setting where the browser should navigate to.</p>
+<ul>
+<li>
+<p>navigator</p>
+</li>
+<li>
+<p>screen</p>
+</li>
+<li>
+<p>location</p>
+</li>
+<li>
+<p>history</p>
+</li>
+</ul>
+<p>These objects are just a bunch of simple and blunt API, which have no technical content and are not interesting to talk about. Everyone can understand them by looking them up on websites like MDN or W3school. During interviews, interviewers generally won’t ask too many questions about this, because as long as you have a good grasp of the basic knowledge, you can understand these APIs even if you can’t remember them, by just looking them up online. Below are some examples of commonly used functions.</p>
+<p>Obtain browser features (also known as UA) and then recognize the client, for example, to determine whether it is a Chrome browser</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">ua</span> <span class="o">=</span> <span class="n">navigator</span><span class="o">.</span><span class="n">userAgent</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">isChrome</span> <span class="o">=</span> <span class="n">ua</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="s1">&#39;Chrome&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">isChrome</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Obtain the width and height of the screen</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">console.log(screen.width)
+</span></span><span class="line"><span class="cl">console.log(screen.height)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Get url, protocol, path, parameters, hash etc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// For example, the current url is https://juejin.im/timeline/frontend?a=10&amp;b=10#some
+</span></span><span class="line"><span class="cl">console.log(location.href)  // https://juejin.im/timeline/frontend?a=10&amp;b=10#some
+</span></span><span class="line"><span class="cl">console.log(location.protocol) // https:
+</span></span><span class="line"><span class="cl">console.log(location.pathname) // /timeline/frontend
+</span></span><span class="line"><span class="cl">console.log(location.search) // ?a=10&amp;b=10
+</span></span><span class="line"><span class="cl">console.log(location.hash) // #some
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In addition, there are also functions to invoke the browser’s forward and backward functions, etc.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">history.back()
+</span></span><span class="line"><span class="cl">history.forward()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dom">DOM</h2>
+<blockquote>
+<p>Topic: What is the difference and connection between DOM and HTML?</p>
+</blockquote>
+<h3 id="what-is-dom">What is DOM</h3>
+<p>When talking about DOM, let’s first start with HTML, and when talking about HTML, let’s start with XML. XML is an extensible markup language. Being ‘extensible’ means that it can describe any kind of structured data. It is a tree!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+</span></span><span class="line"><span class="cl">&lt;note&gt;
+</span></span><span class="line"><span class="cl">  &lt;to&gt;Tove&lt;/to&gt;
+</span></span><span class="line"><span class="cl">  &lt;from&gt;Jani&lt;/from&gt;
+</span></span><span class="line"><span class="cl">  &lt;heading&gt;Reminder&lt;/heading&gt;
+</span></span><span class="line"><span class="cl">  &lt;body&gt;Don&#39;t forget me this weekend!&lt;/body&gt;
+</span></span><span class="line"><span class="cl">  &lt;other&gt;
+</span></span><span class="line"><span class="cl">    &lt;a&gt;&lt;/a&gt;
+</span></span><span class="line"><span class="cl">    &lt;b&gt;&lt;/b&gt;
+</span></span><span class="line"><span class="cl">  &lt;/other&gt;
+</span></span><span class="line"><span class="cl">&lt;/note&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>HTML is an XML format with a predefined set of tags. The names, hierarchical relationships, and properties of the tags have been standardized (otherwise, they cannot be parsed by the browser). Similarly, it is also a tree.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;!DOCTYPE html&gt;
+</span></span><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">&lt;head&gt;
+</span></span><span class="line"><span class="cl">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;title&gt;Document&lt;/title&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">    &lt;div&gt;
+</span></span><span class="line"><span class="cl">        &lt;p&gt;this is p&lt;/p&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">&lt;/html&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The HTML code that we have developed is saved to a document (usually ending with .html or .htm). The document is stored on the server, and when the browser requests the server, this document is returned. Therefore, what the browser ultimately gets is just a document whose content is HTML-formatted code.</p>
+<p>However, the browser needs to render the HTML in this document into a page according to the standard. At this point, the browser needs to process this bunch of code into something it can understand, and it also needs to process the code into something JS can understand, because it also allows JS to modify the page content.</p>
+<p>Based upon these requirements, the browser needs to transform HTML into DOM. HTML is a tree, and DOM is also a tree. To understand DOM, you can temporarily set aside the internal factors of the browser and start with JS. In other words, you can regard DOM as the HTML structure that JS can recognize, a regular JS object or array.</p>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*c_LfDgOZIWEIaktrBcdTLQ.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="obtain-dom-nodes">Obtain DOM Nodes</h3>
+<p>The most commonly used DOM API is to obtain nodes, and the common methods of getting them are as shown in the code example below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Get</span> <span class="n">by</span> <span class="n">id</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="n">element</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Get</span> <span class="n">by</span> <span class="n">tagname</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">divList</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span>  <span class="o">//</span> <span class="n">collection</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">divList</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">divList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Get</span> <span class="n">by</span> <span class="k">class</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">containerList</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;container&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="n">collection</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Get</span> <span class="n">by</span> <span class="n">CSS</span> <span class="n">selector</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">pList</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="n">collection</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Topic: What is the difference between properties and attributes?</p>
+</blockquote>
+<h3 id="property">Property</h3>
+<p>A DOM node is a JS object, which complies with the characteristics of the object we mentioned before — extendable properties, because a DOM node is essentially a JS object. Therefore, as shown in the following code, p can have a style property, and it also has className, nodeName, nodeType properties. Note, these are all properties from the JS context, and they comply with the JS syntax standard.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">pList</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">p</span> <span class="o">=</span> <span class="n">pList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>  <span class="o">//</span> <span class="n">Get</span> <span class="n">style</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;100px&#39;</span>  <span class="o">//</span> <span class="n">Modify</span> <span class="n">style</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">className</span><span class="p">)</span>  <span class="o">//</span> <span class="n">Get</span> <span class="k">class</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">className</span> <span class="o">=</span> <span class="s1">&#39;p1&#39;</span>  <span class="o">//</span> <span class="n">Modify</span> <span class="k">class</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Get</span> <span class="n">nodeName</span> <span class="ow">and</span> <span class="n">nodeType</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nodeName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nodeType</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="attribute">Attribute</h3>
+<p>The process of getting and modifying properties is changing the JS object directly, whereas the attribute is changing the HTML attribute directly, the two are quite different. The attribute is the get and set of HTML attributes, which has no relation to the property of the JS context of the DOM node.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">pList</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">p</span> <span class="o">=</span> <span class="n">pList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s1">&#39;data-name&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-name&#39;</span><span class="p">,</span> <span class="s1">&#39;juejin&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;font-size:30px;&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Moreover, when you get and set attributes, it will trigger the query, reflow or repaint of the DOM. Frequent operations may affect page performance.</p>
+<blockquote>
+<p>Topic: What are the basic APIs for DOM operations?</p>
+</blockquote>
+<h3 id="dom-tree-manipulations">DOM Tree Manipulations</h3>
+<p>Adding Nodes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Add</span> <span class="n">new</span> <span class="n">nodes</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p1</span><span class="o">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;this is p1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">div1</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="o">//</span> <span class="n">Add</span> <span class="n">the</span> <span class="n">newly</span> <span class="n">created</span> <span class="n">element</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Move</span> <span class="n">existing</span> <span class="n">nodes</span><span class="o">.</span> <span class="n">Note</span> <span class="n">that</span> <span class="n">this</span> <span class="n">is</span> <span class="s2">&#34;moving&#34;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s2">&#34;copying&#34;</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">div1</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Accessing Parent Element</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">div1</span><span class="o">.</span><span class="n">parentElement</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Accessing Child Elements</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">child</span> <span class="o">=</span> <span class="n">div1</span><span class="o">.</span><span class="n">childNodes</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Deleting Nodes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">child</span> <span class="o">=</span> <span class="n">div1</span><span class="o">.</span><span class="n">childNodes</span>
+</span></span><span class="line"><span class="cl"><span class="n">div1</span><span class="o">.</span><span class="n">removeChild</span><span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There are also APIs for other operations, such as accessing the previous node, accessing the next node, etc., but what is often asked in interviews are the above few.</p>
+<h2 id="events">Events</h2>
+<h3 id="event-binding">Event Binding</h3>
+<p>The traditional way of event binding is as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;btn1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">btn</span><span class="o">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">event</span><span class="o">.</span><span class="n">preventDefault</span><span class="p">()</span> <span class="o">//</span> <span class="n">Prevent</span> <span class="n">default</span> <span class="n">behavior</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">event</span><span class="o">.</span><span class="n">stopPropagation</span><span class="p">()</span> <span class="o">//</span> <span class="n">Prevent</span> <span class="n">bubbling</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;clicked&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In order to simplify event binding, you can create a universal event binding function. Although it’s simple, it will be improved and enriched as we go on.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Universal</span> <span class="n">event</span> <span class="n">binding</span> <span class="n">function</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">bindEvent</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elem</span><span class="o">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">a</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;link1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">It</span><span class="s1">&#39;s simpler to write</span>
+</span></span><span class="line"><span class="cl"><span class="n">bindEvent</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="o">.</span><span class="n">preventDefault</span><span class="p">()</span> <span class="o">//</span> <span class="n">Prevent</span> <span class="n">default</span> <span class="n">behavior</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alert</span><span class="p">(</span><span class="s1">&#39;clicked&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Lastly, if asked about IE lower version compatibility in an interview, I advise you to give up the job opportunity decisively. Nowadays, all internet traffic is on Apps, and the proportion of IE is getting less and less. It’s not worth to waste your youth for IE anymore. Try to pursue App-related work if possible.</p>
+<blockquote>
+<p>Topic: What is event bubbling?</p>
+</blockquote>
+<h3 id="event-bubbling">Event Bubbling</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">    &lt;div id=&#34;div1&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p1&#34;&gt;Activate&lt;/p&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p2&#34;&gt;Cancel&lt;/p&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p3&#34;&gt;Cancel&lt;/p&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p4&#34;&gt;Cancel&lt;/p&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">    &lt;div id=&#34;div2&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p5&#34;&gt;Cancel&lt;/p&gt;
+</span></span><span class="line"><span class="cl">        &lt;p id=&#34;p6&#34;&gt;Cancel&lt;/p&gt;
+</span></span><span class="line"><span class="cl">    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Given the above HTML code structure, when p1 is clicked, it should be in the activated state. Clicking on any other <code>&lt;p&gt;</code> should cancel the activated state. How can we achieve this? The code is as follows, pay attention to the comments:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">body</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">body</span>
+</span></span><span class="line"><span class="cl"><span class="n">bindEvent</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">All</span> <span class="n">p</span> <span class="n">clicks</span> <span class="n">will</span> <span class="n">bubble</span> <span class="n">up</span> <span class="n">to</span> <span class="n">the</span> <span class="n">body</span><span class="p">,</span> <span class="n">because</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">DOM</span> <span class="n">structure</span><span class="p">,</span> <span class="n">the</span> <span class="n">body</span> <span class="n">is</span> <span class="n">an</span> <span class="n">upper</span><span class="o">-</span><span class="n">level</span> <span class="n">node</span> <span class="n">of</span> <span class="n">p</span><span class="p">,</span> <span class="ow">and</span> <span class="n">events</span> <span class="n">will</span> <span class="n">bubble</span> <span class="n">up</span> <span class="n">along</span> <span class="n">the</span> <span class="n">DOM</span> <span class="n">tree</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alert</span><span class="p">(</span><span class="s1">&#39;Cancel&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bindEvent</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="o">.</span><span class="n">stopPropagation</span><span class="p">()</span> <span class="o">//</span> <span class="n">Prevent</span> <span class="n">bubbling</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alert</span><span class="p">(</span><span class="s1">&#39;Activate&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If we bind events to p1 div1 body, they will bubble according to the DOM structure, executing one by one from bottom to top. But we can prevent bubbling by using e.stopPropagation().</p>
+<blockquote>
+<p>Topic: How do you use event delegation? What are the advantages?</p>
+</blockquote>
+<h3 id="event-delegation">Event Delegation</h3>
+<p>Let’s set a scene where we have a <code>&lt;div&gt;</code> containing a number of <code>&lt;a&gt;</code> elements, and they can continue to increase. So how do we quickly and conveniently bind events to all the <code>&lt;a&gt;</code> elements?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;div id=&#34;div1&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;a href=&#34;#&#34;&gt;a1&lt;/a&gt;
+</span></span><span class="line"><span class="cl">    &lt;a href=&#34;#&#34;&gt;a2&lt;/a&gt;
+</span></span><span class="line"><span class="cl">    &lt;a href=&#34;#&#34;&gt;a3&lt;/a&gt;
+</span></span><span class="line"><span class="cl">    &lt;a href=&#34;#&#34;&gt;a4&lt;/a&gt;
+</span></span><span class="line"><span class="cl">&lt;/div&gt;
+</span></span><span class="line"><span class="cl">&lt;button&gt;Click to add an a tag&lt;/button&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This is where event delegation comes in. We want to listen for <code>&lt;a&gt;</code> events, but we want to bind the specific events to the <code>&lt;div&gt;</code>, and then see if the event trigger point is an <code>&lt;a&gt;</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">div1</span><span class="o">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">e</span><span class="o">.</span><span class="n">target</span> <span class="n">can</span> <span class="n">listen</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span> <span class="n">which</span> <span class="n">element</span> <span class="n">triggered</span> <span class="n">the</span> <span class="n">click</span> <span class="n">event</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="n">target</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">target</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">===</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="n">The</span> <span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">element</span> <span class="n">was</span> <span class="n">clicked</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alert</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">innerHTML</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let’s now improve the universal event binding function we wrote before and add event delegation.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">bindEvent</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">With</span> <span class="n">this</span> <span class="n">process</span><span class="p">,</span> <span class="n">we</span> <span class="n">can</span> <span class="n">accept</span> <span class="n">two</span> <span class="n">ways</span> <span class="n">of</span> <span class="n">calling</span><span class="p">:</span> <span class="n">bindEvent</span><span class="p">(</span><span class="n">div1</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">})</span> <span class="ow">and</span> <span class="n">bindEvent</span><span class="p">(</span><span class="n">div1</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">fn</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fn</span> <span class="o">=</span> <span class="n">selector</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selector</span> <span class="o">=</span> <span class="n">null</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Bind</span> <span class="n">event</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elem</span><span class="o">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">target</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">selector</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">If</span> <span class="n">we</span> <span class="n">have</span> <span class="n">a</span> <span class="n">selector</span><span class="p">,</span> <span class="n">event</span> <span class="n">delegation</span> <span class="n">is</span> <span class="n">needed</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">element</span> <span class="n">that</span> <span class="n">triggered</span> <span class="n">the</span> <span class="n">event</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">e</span><span class="o">.</span><span class="n">target</span>
+</span></span><span class="line"><span class="cl">            <span class="n">target</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">target</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">it</span> <span class="n">matches</span> <span class="n">the</span> <span class="n">selector</span> <span class="n">condition</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">selector</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fn</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">If</span> <span class="n">there</span><span class="s1">&#39;s no selector, event delegation is not needed</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fn</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then you can use it like this, which is much simpler.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Use</span> <span class="n">delegation</span><span class="p">,</span> <span class="n">bindEvent</span> <span class="n">gets</span> <span class="n">an</span> <span class="n">extra</span> <span class="s1">&#39;a&#39;</span> <span class="n">argument</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">div1</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bindEvent</span><span class="p">(</span><span class="n">div1</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">innerHTML</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Not</span> <span class="n">using</span> <span class="n">delegation</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">a</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;a1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bindEvent</span><span class="p">(</span><span class="n">div1</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">innerHTML</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Lastly, the benefits of using delegation are as follows:</p>
+<ul>
+<li>
+<p>It simplifies the code</p>
+</li>
+<li>
+<p>It reduces memory consumption by the browser</p>
+</li>
+</ul>
+<h2 id="ajax">Ajax</h2>
+<h3 id="xmlhttprequest">XMLHttpRequest</h3>
+<blockquote>
+<p>Topic: Hand-written XMLHttpRequest without the help of any libraries</p>
+</blockquote>
+<p>This is a common tool used by quirky and unique interviewers. There’s a lot of debate about this kind of test, but you can’t say it’s completely wrong as it tests your understanding of basic knowledge.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">xhr</span> <span class="o">=</span> <span class="n">new</span> <span class="n">XMLHttpRequest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">xhr</span><span class="o">.</span><span class="n">onreadystatechange</span> <span class="o">=</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">The</span> <span class="n">function</span> <span class="n">here</span> <span class="n">executes</span> <span class="n">asynchronously</span><span class="p">,</span> <span class="n">refer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">asynchronous</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">JS</span> <span class="n">basics</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">xhr</span><span class="o">.</span><span class="n">readyState</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">xhr</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">alert</span><span class="p">(</span><span class="n">xhr</span><span class="o">.</span><span class="n">responseText</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">xhr</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;/api&#34;</span><span class="p">,</span> <span class="bp">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">xhr</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">null</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Of course, it’s much simpler to write with libraries like jQuery, Zepto, or Fetch, so I won’t elaborate on that.</p>
+<h3 id="explanation-of-status-codes">Explanation of Status Codes</h3>
+<p>There are two places where status codes need to be explained in the above code. xhr.readyState is used by the browser to judge the different stages of the request process, and xhr.status are the status codes for different results stipulated in the HTTP protocol.</p>
+<p>Explanation of xhr.readyState status codes:</p>
+<p>0 — Proxy created but open() method has not been called.</p>
+<p>1 — open() method has been called.</p>
+<p>2 — send() method has been called, and headers and status can be obtained.</p>
+<p>3 — Downloading, responseText property already contains partial data.</p>
+<p>4 — Download operation is complete</p>
+<blockquote>
+<p>Topic: In the HTTP protocol, what are the common status codes for a response?</p>
+</blockquote>
+<p>xhr.status is the HTTP status code, there are 2xx, 3xx, 4xx, 5xx, the commonly used ones include:</p>
+<ul>
+<li>
+<p>200 Normal</p>
+</li>
+<li>
+<p>301 Permanent redirect. For example, the GET request <a class="link" href="http://xxx.com"  target="_blank" rel="noopener"
+    >http://xxx.com</a> (no / at the end) will be 301 redirected to <a class="link" href="http://xxx.com/"  target="_blank" rel="noopener"
+    >http://xxx.com/</a> (with a / at the end).</p>
+</li>
+<li>
+<p>302 Temporary redirect. It&rsquo;s temporary, not permanent.</p>
+</li>
+<li>
+<p>304 Resource found but not meeting the request condition, will not return any body. For instance, when sending a GET request, if the head contains If-Modified-Since: xxx (requesting the return of resources updated after xxx time), and the server-side resource has not been updated, it will return 304, which means it doesn&rsquo;t meet the request requirements.</p>
+</li>
+<li>
+<p>404 Resource not found</p>
+</li>
+<li>
+<p>5xx Server side error</p>
+</li>
+</ul>
+<p>At the end, you should understand why the code above requires both xhr.readyState == 4 and xhr.status == 200 to be satisfied.</p>
+<h3 id="fetch-api">Fetch API</h3>
+<p>Currently, there is a more convenient API for obtaining HTTP requests: Fetch. The fetch() global function provided by Fetch can easily initiate asynchronous requests and supports callback of Promise. However, the Fetch API is relatively new, and you would need to check caniuse for browser compatibility.</p>
+<p>Here’s a simple example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;some/api/data.json&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">method</span><span class="p">:</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="o">//</span> <span class="n">Request</span> <span class="n">type</span> <span class="n">GET</span><span class="p">,</span> <span class="n">POST</span>
+</span></span><span class="line"><span class="cl">  <span class="n">headers</span><span class="p">:{},</span> <span class="o">//</span> <span class="n">Request</span> <span class="n">headers</span><span class="p">,</span> <span class="n">presented</span> <span class="n">as</span> <span class="n">Headers</span> <span class="n">object</span> <span class="ow">or</span> <span class="n">ByteString</span>
+</span></span><span class="line"><span class="cl">  <span class="n">body</span><span class="p">:{},</span> <span class="o">//</span> <span class="n">Request</span> <span class="n">data</span> <span class="n">blob</span><span class="p">,</span> <span class="n">BufferSource</span><span class="p">,</span> <span class="n">FormData</span><span class="p">,</span> <span class="n">URLSearchParams</span> <span class="p">(</span><span class="n">cannot</span> <span class="n">include</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">GET</span> <span class="ow">or</span> <span class="n">HEAD</span> <span class="n">methods</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mode</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">//</span> <span class="n">Request</span> <span class="n">mode</span><span class="p">,</span> <span class="k">if</span> <span class="n">it</span> <span class="n">involves</span> <span class="n">cross</span><span class="o">-</span><span class="n">domain</span><span class="p">,</span> <span class="n">like</span> <span class="n">cors</span><span class="p">,</span> <span class="n">no</span><span class="o">-</span><span class="n">cors</span> <span class="ow">or</span> <span class="n">same</span><span class="o">-</span><span class="n">origin</span>
+</span></span><span class="line"><span class="cl">  <span class="n">credentials</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">//</span> <span class="n">Cross</span><span class="o">-</span><span class="n">domain</span> <span class="n">policy</span> <span class="k">for</span> <span class="n">cookies</span><span class="p">,</span> <span class="n">like</span> <span class="n">omit</span><span class="p">,</span> <span class="n">same</span><span class="o">-</span><span class="n">origin</span> <span class="ow">or</span> <span class="n">include</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cache</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">//</span> <span class="n">Request</span><span class="s1">&#39;s cache mode: default, no-store, reload, no-cache, force-cache or only-if-cached</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Fetch supports headers definition, through customized headers, we can conveniently implement various request methods (PUT, GET, POST, etc.), headers (including cross-domain) and cache strategies, etc. In addition, it also supports various types of response (return data), like binary files, strings, and formData, etc.</p>
+<h3 id="cross-domain">Cross-domain</h3>
+<blockquote>
+<p>Topic: How to implement cross-domain?</p>
+</blockquote>
+<p>There is a same-origin policy in the browser, that is, a page under a domain cannot use Ajax to get the interface of another domain. For example, there is an interface <a class="link" href="http://m.juejin.com/course/ajaxcourserecom?cid=459"  target="_blank" rel="noopener"
+    >http://m.juejin.com/course/ajaxcourserecom?cid=459</a>. Your own page <a class="link" href="http://www.yourname.com/page1.html"  target="_blank" rel="noopener"
+    >http://www.yourname.com/page1.html</a> cannot access this interface via Ajax. This is due to the &ldquo;same-origin policy&rdquo;. If the browser ignores the same-origin policy somewhere, then it is a security loophole of the browser, which needs to be urgently fixed.</p>
+<p>Where does a URL differ to be considered as cross-domain?</p>
+<ul>
+<li>
+<p>Protocol</p>
+</li>
+<li>
+<p>Domain name</p>
+</li>
+<li>
+<p>Port</p>
+</li>
+</ul>
+<p>However, a few HTML tags can evade the same-origin policy — — <code>&lt;script src=&quot;xxx&quot;&gt;</code>, <code>&lt;img src=&quot;xxxx&quot;/&gt;</code>, <code>&lt;link href=&quot;xxxx&quot;&gt;</code>. The src/href of these three tags can load resources from other domains, and are not restricted by the same-origin policy.</p>
+<p>Therefore, these three tags can do some special things.</p>
+<ul>
+<li>
+<p><code>&lt;img&gt;</code> can be used for point statistics, because the statistical party does not necessarily come from the same domain. We have provided a code example when talking about the asynchronous JS basics. Besides its ability to cross-domain, <code>&lt;img&gt;</code> almost has no browser compatibility issue, because it is a very old tag.</p>
+</li>
+<li>
+<p><code>&lt;script&gt;</code> and <code>&lt;link&gt;</code> can utilize CDN, and CDN links are generally from other domains.</p>
+</li>
+<li>
+<p>In addition, <code>&lt;script&gt;</code> can also implement JSONP, which can get the information from other domain interfaces. We will explain it right away.</p>
+</li>
+</ul>
+<p>But please note that for all cross-domain request methods, ultimately, the information provider needs to provide corresponding support and modifications, which means, only with the consent of the information provider can the receiver get their information. The browser will not allow otherwise.</p>
+<h3 id="resolve-cross-domain--jsonp">Resolve Cross-domain — JSONP</h3>
+<p>Firstly, you should understand the concept. For example, when visiting <a class="link" href="http://coding.m.juejin.com/classindex.html"  target="_blank" rel="noopener"
+    >http://coding.m.juejin.com/classindex.html</a>, does the server definitely have a classindex.html file? —— Not necessarily, the server can receive this request, dynamically generate a file, and then return it.
+Similarly, <code>&lt;script src=&quot;http://coding.m.juejin.com/api.js&quot;&gt;</code> does not necessarily load a static file from the server, the server can also dynamically generate files and return them. OK, let&rsquo;s officially start.</p>
+<p>For example, our website and Juejin’s site are definitely not the same domain. We need Juejin to provide an interface for us to get. Firstly, we define on our own pages like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script&gt;
+</span></span><span class="line"><span class="cl">window.callback = function (data) {
+</span></span><span class="line"><span class="cl">    // This is the information we get cross-domain
+</span></span><span class="line"><span class="cl">    console.log(data)
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">&lt;/script&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, Juejin provided me an <a class="link" href="http://coding.m.juejin.com/api.js"  target="_blank" rel="noopener"
+    >http://coding.m.juejin.com/api.js</a>, the content is as follows (as mentioned before, the server can dynamically generate content)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">callback({x:100, y:200})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Lastly, we add <code>&lt;script src=&quot;http://coding.m.juejin.com/api.js&quot;&gt;&lt;/script&gt;</code> on our page, and when this js is loaded, it will execute its content, and we will get the content.</p>
+<h3 id="resolve-cross-domain--server-side-setting-of-http-header">Resolve Cross-domain — Server Side Setting of HTTP Header</h3>
+<p>This needs to be set on the server side, as a front-end engineer, we don’t need to master the details, but we should know there is such a solution. Moreover, the now recommended cross-domain solution is this one, which is much simpler than JSONP.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">response.setHeader(&#34;Access-Control-Allow-Origin&#34;, &#34;http://m.juejin.com/&#34;);  // Fill in the domain name that allows cross-domain in the second parameter, it is not recommended to write &#34;*&#34;
+</span></span><span class="line"><span class="cl">response.setHeader(&#34;Access-Control-Allow-Headers&#34;, &#34;X-Requested-With&#34;);
+</span></span><span class="line"><span class="cl">response.setHeader(&#34;Access-Control-Allow-Methods&#34;, &#34;PUT,POST,GET,DELETE,OPTIONS&#34;);
+</span></span><span class="line"><span class="cl">// Accepting cookie cross-domain
+</span></span><span class="line"><span class="cl">response.setHeader(&#34;Access-Control-Allow-Credentials&#34;, &#34;true&#34;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="storage">Storage</h2>
+<blockquote>
+<p>Topic: What is the difference between cookies and localStorage?</p>
+</blockquote>
+<h3 id="cookies">Cookies</h3>
+<p>Cookies are not originally designed for server-side storage (there are many examples of such “cats chasing dogs” in the computer world, such as float in CSS). They are designed to convey information between servers and clients, so all our HTTP requests carry cookies. However, cookies also have the capability of browser-side storage (such as remembering usernames and passwords), so they have been used by developers.</p>
+<p>They are very simple to use, just document.cookie = &hellip;..</p>
+<p>But cookies have their fatal disadvantages:</p>
+<ul>
+<li>
+<p>The storage capacity is too small, only 4KB</p>
+</li>
+<li>
+<p>All HTTP requests carry them, affecting the efficiency of resource acquisition</p>
+</li>
+<li>
+<p>The API is simple and needs to be encapsulated to be used</p>
+</li>
+</ul>
+<h3 id="localstorage-and-sessionstorage">LocalStorage and sessionStorage</h3>
+<p>Later, HTML5 brought sessionStorage and localStorage. Let&rsquo;s talk about localStorage first. It was specifically designed for browser-side caching. Its advantages include:</p>
+<ul>
+<li>
+<p>Its storage capacity is increased to 5MB</p>
+</li>
+<li>
+<p>It is not included in HTTP requests</p>
+</li>
+<li>
+<p>The API is suitable for data storage, which include localStorage.setItem(key, value), localStorage.getItem(key)</p>
+</li>
+</ul>
+<p>The difference for sessionStorage is that it is based on the session expiration time, while localStorage is permanently valid, so they are used in different scenarios. For example, some important information that needs to be invalidated in time is put into sessionStorage, and some unimportant but infrequently set information is put into localStorage.</p>
+<p>Another tip for you, when using localStorage.setItem, you should try to add it into try-catch, as some browsers disable this API, so be attentive.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">Javascript</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-definemodel-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding defineModel in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-fragment-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Fragment in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-teleport-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Teleport in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-async-components-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Async Components in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-watch-and-watcheffect-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding watch and watchEffect in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="kxming/skstory"
+    data-repo-id="R_kgDOLehX4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLehX4M4Cd4Vx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 SK Story
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

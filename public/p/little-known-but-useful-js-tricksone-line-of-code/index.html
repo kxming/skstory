@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Array Generating an array When you need to generate an array from 0 to 99\noption 1\n1 2 const createArr = (n) =&gt; Array.from(new Array(n), (v, i) =&gt; i) const arr = createArr(100) option 2\n1 2 const createArr = (n) =&gt; new Array(n).fill(0).map((v, i) =&gt; i) createArr(100) Shuffling an array When you have an array that you need to randomize\n1 2 const randomSort = list =&gt; list.sort(() =&gt; Math.">
+<title>Little-known but useful js tricks【one line of code】</title>
+
+<link rel='canonical' href='http://localhost:1313/p/little-known-but-useful-js-tricksone-line-of-code/'>
+
+<link rel="stylesheet" href="/scss/style.min.d8118f156935b64eca93aca758476adca858d2c47354971654d9bd2933a0e45f.css"><meta property='og:title' content="Little-known but useful js tricks【one line of code】">
+<meta property='og:description' content="Array Generating an array When you need to generate an array from 0 to 99\noption 1\n1 2 const createArr = (n) =&gt; Array.from(new Array(n), (v, i) =&gt; i) const arr = createArr(100) option 2\n1 2 const createArr = (n) =&gt; new Array(n).fill(0).map((v, i) =&gt; i) createArr(100) Shuffling an array When you have an array that you need to randomize\n1 2 const randomSort = list =&gt; list.sort(() =&gt; Math.">
+<meta property='og:url' content='http://localhost:1313/p/little-known-but-useful-js-tricksone-line-of-code/'>
+<meta property='og:site_name' content='SK Story'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Javascript' /><meta property='article:tag' content='Function' /><meta property='article:published_time' content='2024-02-01T16:22:38&#43;08:00'/><meta property='article:modified_time' content='2024-02-01T16:22:38&#43;08:00'/><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*dpgmDdOfYm727sko' />
+<meta name="twitter:site" content="@https://twitter.com/ShawnKxming">
+    <meta name="twitter:creator" content="@https://twitter.com/ShawnKxming"><meta name="twitter:title" content="Little-known but useful js tricks【one line of code】">
+<meta name="twitter:description" content="Array Generating an array When you need to generate an array from 0 to 99\noption 1\n1 2 const createArr = (n) =&gt; Array.from(new Array(n), (v, i) =&gt; i) const arr = createArr(100) option 2\n1 2 const createArr = (n) =&gt; new Array(n).fill(0).map((v, i) =&gt; i) createArr(100) Shuffling an array When you have an array that you need to randomize\n1 2 const randomSort = list =&gt; list.sort(() =&gt; Math."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*dpgmDdOfYm727sko' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu61f49258472ba116407e56a959fa113d_189154_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">SK Story</a></h1>
+            <h2 class="site-description">Shawn King&#39;s Stories Website</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:kxming0229@gmail.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.facebook.com/p/King-Shawn-100092679065959/'
+                        target="_blank"
+                        title="Facebook"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/ShawnKxming'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://t.me/shawnkxming'
+                        target="_blank"
+                        title="Telegram"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://medium.com/@kxming'
+                        target="_blank"
+                        title="Medium"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 9h1l3 3l3 -3h1" /><path d="M8 15l2 0" /><path d="M14 15l2 0" /><path d="M9 9l0 6" /><path d="M15 9l0 6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#array">Array</a>
+      <ol>
+        <li><a href="#generating-an-array">Generating an array</a></li>
+        <li><a href="#shuffling-an-array">Shuffling an array</a></li>
+        <li><a href="#array-simple-data-deduplication">Array simple data deduplication</a></li>
+        <li><a href="#array-unique-value-data-deduplication">Array unique value data deduplication</a></li>
+        <li><a href="#finding-array-intersection">Finding array intersection</a></li>
+        <li><a href="#finding-the-index-of-the-maximum-value">Finding the index of the maximum value</a></li>
+        <li><a href="#finding-the-index-of-the-minimum-value">Finding the index of the minimum value</a></li>
+        <li><a href="#finding-the-nearest-value">Finding the nearest value</a></li>
+        <li><a href="#compressing-multiple-arrays">Compressing multiple arrays</a></li>
+        <li><a href="#matrix-row-and-column-exchange">Matrix row and column exchange</a></li>
+        <li><a href="#sort-the-array-by-a-specific-attribute">Sort the array by a specific attribute</a></li>
+        <li><a href="#check-if-a-variable-is-an-array">Check if a variable is an array</a></li>
+        <li><a href="#retrieve-the-last-item-in-an-array">Retrieve the last item in an array</a></li>
+        <li><a href="#capitalize-the-first-letter-of-a-string">Capitalize the first letter of a string</a></li>
+      </ol>
+    </li>
+    <li><a href="#number-conversion">Number conversion</a>
+      <ol>
+        <li><a href="#radic-conversion">Radic conversion</a></li>
+        <li><a href="#regular-expression">Regular Expression</a>
+          <ol>
+            <li><a href="#phone-number-formatting">Phone number formatting</a></li>
+            <li><a href="#remove-excess-spaces">Remove excess spaces</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#web">Web</a>
+      <ol>
+        <li><a href="#reload-the-current-page">Reload the current page</a></li>
+        <li><a href="#scroll-to-the-top-of-the-page">Scroll to the top of the page</a></li>
+        <li><a href="#element-scrolling">Element scrolling</a></li>
+        <li><a href="#check-if-the-current-browser-is-ie">Check if the current browser is IE</a></li>
+        <li><a href="#stripping-html-from-given-text">Stripping HTML from given text</a></li>
+        <li><a href="#redirect">Redirect</a></li>
+        <li><a href="#text-pasting">Text pasting</a></li>
+        <li><a href="#copy-content-to-clipboard">Copy content to clipboard</a></li>
+        <li><a href="#clear-all-cookies">Clear all cookies</a></li>
+        <li><a href="#get-the-selected-text">Get the selected text</a></li>
+        <li><a href="#detect-if-its-dark-mode">Detect if it’s dark mode</a></li>
+        <li><a href="#determine-if-the-current-tab-is-active">Determine if the current tab is active</a></li>
+        <li><a href="#determine-if-it-is-currently-an-apple-device">Determine if it is currently an Apple device</a></li>
+        <li><a href="#open-the-browser-print-dialog">Open the browser print dialog</a></li>
+        <li><a href="#check-if-an-element-is-in-the-viewport">Check if an element is in the viewport</a></li>
+        <li><a href="#get-device-type">Get device type</a></li>
+      </ol>
+    </li>
+    <li><a href="#date">Date</a>
+      <ol>
+        <li><a href="#check-if-a-date-is-today">Check if a date is today</a></li>
+        <li><a href="#date-conversion">Date conversion</a></li>
+        <li><a href="#time-conversion">Time conversion</a></li>
+        <li><a href="#get-the-first-day-of-a-month-in-a-particular-year">Get the first day of a month in a particular year</a></li>
+        <li><a href="#get-the-last-day-of-a-month-in-a-particular-year">Get the last day of a month in a particular year</a></li>
+        <li><a href="#get-the-total-number-of-days-in-a-month-in-a-particular-year">Get the total number of days in a month in a particular year</a></li>
+        <li><a href="#check-if-a-date-is-valid">Check if a date is valid</a></li>
+        <li><a href="#calculate-the-interval-between-two-dates">Calculate the interval between two dates</a></li>
+        <li><a href="#find-out-which-day-of-the-year-a-date-falls-on">Find out which day of the year a date falls on</a></li>
+        <li><a href="#obtain-the-timezone">Obtain the timezone</a></li>
+      </ol>
+    </li>
+    <li><a href="#function">Function</a>
+      <ol>
+        <li><a href="#asynchronous-function-judgment">Asynchronous function judgment</a></li>
+      </ol>
+    </li>
+    <li><a href="#number">Number</a>
+      <ol>
+        <li><a href="#truncate-number">Truncate number</a></li>
+        <li><a href="#rounding">Rounding</a></li>
+        <li><a href="#zero-padding">Zero-padding</a></li>
+      </ol>
+    </li>
+    <li><a href="#object">Object</a>
+      <ol>
+        <li><a href="#remove-invalid-properties">Remove invalid properties</a></li>
+        <li><a href="#reverse-object-key-value-pairs">Reverse object key-value pairs</a></li>
+        <li><a href="#check-if-an-object-is-empty">Check if an object is empty</a></li>
+        <li><a href="#string-to-object">String to object</a></li>
+      </ol>
+    </li>
+    <li><a href="#other">Other</a>
+      <ol>
+        <li><a href="#compare-two-objects">Compare two objects</a></li>
+        <li><a href="#generate-random-color">Generate random color</a></li>
+        <li><a href="#color-format-conversion">Color format conversion</a></li>
+        <li><a href="#generate-random-ip-address">Generate random IP address</a></li>
+        <li><a href="#uuid-generation">UUID generation</a></li>
+        <li><a href="#get-cookie">Get cookie</a></li>
+        <li><a href="#force-waiting">Force waiting</a></li>
+        <li><a href="#conversion-between-fahrenheit-and-celsius">Conversion between Fahrenheit and Celsius</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/little-known-but-useful-js-tricksone-line-of-code/">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*dpgmDdOfYm727sko" loading="lazy" alt="Featured image of post Little-known but useful js tricks【one line of code】" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" style="background-color: #D1D419; color: #fff;">
+                Javascript
+            </a>
+        
+            <a href="/categories/function/" style="background-color: #779D2A; color: #fff;">
+                Function
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/little-known-but-useful-js-tricksone-line-of-code/">Little-known but useful js tricks【one line of code】</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 01, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="array">Array</h2>
+<h3 id="generating-an-array">Generating an array</h3>
+<p>When you need to generate an array from 0 to 99</p>
+<p>option 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">createArr</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Array</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="n">new</span> <span class="ne">Array</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">createArr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>option 2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">createArr</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="ne">Array</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">createArr</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="shuffling-an-array">Shuffling an array</h3>
+<p>When you have an array that you need to randomize</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">randomSort</span> <span class="o">=</span> <span class="n">list</span> <span class="o">=&gt;</span> <span class="n">list</span><span class="o">.</span><span class="n">sort</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomSort</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="array-simple-data-deduplication">Array simple data deduplication</h3>
+<p>When you need to remove all duplicate elements in an array, leaving only one</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">removeDuplicates</span> <span class="o">=</span> <span class="n">list</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="n">new</span> <span class="n">Set</span><span class="p">(</span><span class="n">list</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">removeDuplicates</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="array-unique-value-data-deduplication">Array unique value data deduplication</h3>
+<p>When you need to remove duplicate elements in an array based on a unique value</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">duplicateById</span> <span class="o">=</span> <span class="n">list</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="n">list</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">prev</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">prev</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">cur</span><span class="p">),</span> <span class="n">new</span> <span class="n">Map</span><span class="p">())</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl"><span class="n">duplicateById</span><span class="p">([{</span><span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;rose&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">}])</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="p">[{</span><span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;rose&#39;</span><span class="p">}]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="finding-array-intersection">Finding array intersection</h3>
+<p>When you need to find the intersection of multiple arrays</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">intersection</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="n">arr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="n">new</span> <span class="n">Set</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span><span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">every</span><span class="p">((</span><span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">intersection</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="finding-the-index-of-the-maximum-value">Finding the index of the maximum value</h3>
+<p>When you need to find the index of the maximum value in an array</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">indexOfMax</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">prev</span><span class="p">,</span> <span class="n">curr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">curr</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="err">?</span> <span class="n">i</span> <span class="p">:</span> <span class="n">prev</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">indexOfMax</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">]);</span> <span class="o">//</span> <span class="mi">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="finding-the-index-of-the-minimum-value">Finding the index of the minimum value</h3>
+<p>When you need to find the index of the minimum value in an array</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">indexOfMin</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">prev</span><span class="p">,</span> <span class="n">curr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">curr</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="err">?</span> <span class="n">i</span> <span class="p">:</span> <span class="n">prev</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">indexOfMin</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span> <span class="o">//</span> <span class="mi">5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="finding-the-nearest-value">Finding the nearest value</h3>
+<p>When you need to find the nearest value in an array</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">closest</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">prev</span><span class="p">,</span> <span class="n">curr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">curr</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">prev</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="err">?</span> <span class="n">curr</span> <span class="p">:</span> <span class="n">prev</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">closest</span><span class="p">([</span><span class="mi">29</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span> <span class="mi">50</span><span class="p">)</span> <span class="o">//</span> <span class="mi">33</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="compressing-multiple-arrays">Compressing multiple arrays</h3>
+<p>When you need to compress multiple arrays into one</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">zip</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="n">arr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Array</span><span class="o">.</span><span class="n">from</span><span class="p">({</span> <span class="n">length</span><span class="p">:</span> <span class="n">Math</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">...</span><span class="n">arr</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">length</span><span class="p">))</span> <span class="p">},</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl"><span class="n">zip</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="matrix-row-and-column-exchange">Matrix row and column exchange</h3>
+<p>When you need to swap the rows and columns of a matrix</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">transpose</span> <span class="o">=</span> <span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">col</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">matrix</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">row</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl"><span class="n">transpose</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span>              <span class="o">//</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="o">//</span>      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="o">//</span>      <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="o">//</span>      <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">     <span class="p">]</span>             <span class="o">//</span>  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="sort-the-array-by-a-specific-attribute">Sort the array by a specific attribute</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="ne">Input</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">[{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span><span class="mi">25</span><span class="p">},</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span><span class="mi">22</span><span class="p">}]</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">sortBy</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="err">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Output</span><span class="p">:</span> <span class="p">[{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span><span class="mi">22</span><span class="p">},</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span><span class="mi">25</span><span class="p">}]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-if-a-variable-is-an-array">Check if a variable is an array</h3>
+<p>The Array.isArray() method checks if a given variable is an array.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isArray</span> <span class="o">=</span> <span class="n">variable</span> <span class="o">=&gt;</span> <span class="ne">Array</span><span class="o">.</span><span class="n">isArray</span><span class="p">(</span><span class="n">variable</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="retrieve-the-last-item-in-an-array">Retrieve the last item in an array</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">lastItem</span> <span class="o">=</span> <span class="n">array</span> <span class="o">=&gt;</span> <span class="n">array</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="capitalize-the-first-letter-of-a-string">Capitalize the first letter of a string</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">capitalize</span> <span class="o">=</span> <span class="n">string</span> <span class="o">=&gt;</span> <span class="n">string</span><span class="o">.</span><span class="n">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="number-conversion">Number conversion</h2>
+<h3 id="radic-conversion">Radic conversion</h3>
+<p>To convert decimal to n-base, you can use toString(n)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">toDecimal</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">num</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">The</span> <span class="n">decimal</span> <span class="n">number</span> <span class="mi">10</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">into</span> <span class="n">binary</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">toDecimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="s1">&#39;1010&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To convert n-base to decimal, you can use parseInt(num, n)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">toDecimalism</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">toDecimalism</span><span class="p">(</span><span class="mi">1010</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="regular-expression">Regular Expression</h3>
+<h4 id="phone-number-formatting">Phone number formatting</h4>
+<p>When you need to format a phone number in the form of xxx-xxxx-xxxx</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">formatPhone</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">sign</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/</span><span class="p">(</span>\<span class="n">W</span><span class="o">|</span>\<span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="o">/^</span><span class="p">(</span>\<span class="n">d</span><span class="p">{</span><span class="mi">3</span><span class="p">})(</span>\<span class="n">d</span><span class="p">{</span><span class="mi">4</span><span class="p">})(</span>\<span class="n">d</span><span class="p">{</span><span class="mi">4</span><span class="p">})</span><span class="o">$/</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">item</span> <span class="o">=&gt;</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sign</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">formatPhone</span><span class="p">(</span><span class="s1">&#39;13123456789&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="s1">&#39;131-2345-6789&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">formatPhone</span><span class="p">(</span><span class="s1">&#39;13 1234 56 789&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="o">//</span> <span class="s1">&#39;131 2345 6789&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="remove-excess-spaces">Remove excess spaces</h4>
+<p>When you need to merge multiple spaces in a text into a single space</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">setTrimOut</span> <span class="o">=</span> <span class="nb">str</span> <span class="o">=&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/</span>\<span class="n">s</span>\<span class="n">s</span><span class="o">+/</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">setTrimOut</span><span class="p">(</span><span class="s1">&#39;hello,   jack&#39;</span><span class="p">)</span> <span class="o">//</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="web">Web</h2>
+<h3 id="reload-the-current-page">Reload the current page</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">reload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">reload</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">reload</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="scroll-to-the-top-of-the-page">Scroll to the top of the page</h3>
+<p>If you need to scroll the page to the top</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">goToTop</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">window</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">goToTop</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="element-scrolling">Element scrolling</h3>
+<p>If you want to smoothly scroll an element to the start of the viewport</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">scrollToTop</span> <span class="o">=</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">element</span><span class="o">.</span><span class="n">scrollIntoView</span><span class="p">({</span> <span class="n">behavior</span><span class="p">:</span> <span class="s2">&#34;smooth&#34;</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="s2">&#34;start&#34;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">scrollToTop</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you want to smoothly scroll an element to the end of the viewport</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">scrollToBottom</span> <span class="o">=</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">element</span><span class="o">.</span><span class="n">scrollIntoView</span><span class="p">({</span> <span class="n">behavior</span><span class="p">:</span> <span class="s2">&#34;smooth&#34;</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="s2">&#34;end&#34;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="n">scrollToBottom</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-if-the-current-browser-is-ie">Check if the current browser is IE</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isIE</span> <span class="o">=</span> <span class="o">!!</span><span class="n">document</span><span class="o">.</span><span class="n">documentMode</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="stripping-html-from-given-text">Stripping HTML from given text</h3>
+<p>When you need to filter out all the tags in a piece of text</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">stripHtml</span> <span class="o">=</span> <span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">DOMParser</span><span class="p">()</span><span class="o">.</span><span class="n">parseFromString</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">textContent</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">stripHtml</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;test&lt;/div&gt;&#39;</span><span class="p">)</span> <span class="o">//</span> <span class="s1">&#39;test&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="redirect">Redirect</h3>
+<p>When you need to jump to another page</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">goTo</span> <span class="o">=</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">href</span> <span class="o">=</span> <span class="n">url</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="text-pasting">Text pasting</h3>
+<p>When you need to copy text to the clipboard</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">copy</span> <span class="o">=</span> <span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">navigator</span><span class="o">.</span><span class="n">clipboard</span><span class="err">?</span><span class="o">.</span><span class="n">writeText</span> <span class="o">&amp;&amp;</span> <span class="n">navigator</span><span class="o">.</span><span class="n">clipboard</span><span class="o">.</span><span class="n">writeText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">copy</span><span class="p">(</span><span class="s1">&#39;copy text&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="copy-content-to-clipboard">Copy content to clipboard</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">copyToClipboard</span> <span class="o">=</span> <span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">navigator</span><span class="o">.</span><span class="n">clipboard</span><span class="o">.</span><span class="n">writeText</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">copyToClipboard</span><span class="p">(</span><span class="s2">&#34;Hello World&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="clear-all-cookies">Clear all cookies</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">clearCookies</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">cookie</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">cookie</span> <span class="o">=&gt;</span> <span class="n">document</span><span class="o">.</span><span class="n">cookie</span> <span class="o">=</span> <span class="n">cookie</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/^</span> <span class="o">+/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/=.*/</span><span class="p">,</span> <span class="err">`</span><span class="o">=</span><span class="p">;</span><span class="n">expires</span><span class="o">=$</span><span class="p">{</span><span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">toUTCString</span><span class="p">()};</span><span class="n">path</span><span class="o">=/</span><span class="err">`</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-the-selected-text">Get the selected text</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getSelectedText</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">window</span><span class="o">.</span><span class="n">getSelection</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">getSelectedText</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="detect-if-its-dark-mode">Detect if it’s dark mode</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isDarkMode</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">matchMedia</span> <span class="o">&amp;&amp;</span> <span class="n">window</span><span class="o">.</span><span class="n">matchMedia</span><span class="p">(</span><span class="s1">&#39;(prefers-color-scheme: dark)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">isDarkMode</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="determine-if-the-current-tab-is-active">Determine if the current tab is active</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isTabInView</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="n">document</span><span class="o">.</span><span class="n">hidden</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="determine-if-it-is-currently-an-apple-device">Determine if it is currently an Apple device</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isAppleDevice</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">Mac</span><span class="o">|</span><span class="n">iPod</span><span class="o">|</span><span class="n">iPhone</span><span class="o">|</span><span class="n">iPad</span><span class="o">/.</span><span class="n">test</span><span class="p">(</span><span class="n">navigator</span><span class="o">.</span><span class="n">platform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">isAppleDevice</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="open-the-browser-print-dialog">Open the browser print dialog</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">showPrintDialog</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">window</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-if-an-element-is-in-the-viewport">Check if an element is in the viewport</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">elementInViewport</span> <span class="o">=</span> <span class="n">el</span> <span class="o">=&gt;</span> <span class="n">el</span><span class="o">.</span><span class="n">getBoundingClientRect</span><span class="p">()</span><span class="o">.</span><span class="n">top</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">el</span><span class="o">.</span><span class="n">getBoundingClientRect</span><span class="p">()</span><span class="o">.</span><span class="n">bottom</span> <span class="o">&lt;=</span> <span class="n">window</span><span class="o">.</span><span class="n">innerHeight</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-device-type">Get device type</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getDeviceType</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">Android</span><span class="o">|</span><span class="n">webOS</span><span class="o">|</span><span class="n">iPhone</span><span class="o">|</span><span class="n">iPad</span><span class="o">|</span><span class="n">iPod</span><span class="o">|</span><span class="n">BlackBerry</span><span class="o">|</span><span class="n">IEMobile</span><span class="o">|</span><span class="n">Opera</span> <span class="n">Mini</span><span class="o">/</span><span class="n">i</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">navigator</span><span class="o">.</span><span class="n">userAgent</span><span class="p">)</span> <span class="err">?</span> <span class="s1">&#39;Mobile&#39;</span> <span class="p">:</span> <span class="s1">&#39;Desktop&#39;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="date">Date</h2>
+<h3 id="check-if-a-date-is-today">Check if a date is today</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isToday</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">date</span><span class="o">.</span><span class="n">toISOString</span><span class="p">()</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">===</span> <span class="n">new</span> <span class="n">Date</span><span class="p">()</span><span class="o">.</span><span class="n">toISOString</span><span class="p">()</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="date-conversion">Date conversion</h3>
+<p>When you need to convert a date into YYYY-MM-DD format</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">formatYmd</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">date</span><span class="o">.</span><span class="n">toISOString</span><span class="p">()</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">formatYmd</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="time-conversion">Time conversion</h3>
+<p>When you need to convert seconds into hh:mm:ss format</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">formatSeconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">toISOString</span><span class="p">()</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">formatSeconds</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">//</span> <span class="mi">00</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">20</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-the-first-day-of-a-month-in-a-particular-year">Get the first day of a month in a particular year</h3>
+<p>When you need to get the first day of a month in a specific year</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getFirstDate</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Date</span><span class="p">())</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">getFullYear</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">getMonth</span><span class="p">(),</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">getFirstDate</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s1">&#39;2022-04&#39;</span><span class="p">))</span> <span class="o">//</span> <span class="n">Fri</span> <span class="n">Apr</span> <span class="mi">01</span> <span class="mi">2022</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">GMT</span><span class="o">+</span><span class="mi">0800</span> <span class="p">(</span><span class="err">中国标准时间</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-the-last-day-of-a-month-in-a-particular-year">Get the last day of a month in a particular year</h3>
+<p>When you need to get the last day of a month in a specific year</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getLastDate</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Date</span><span class="p">())</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">getFullYear</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">getLastDate</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s1">&#39;2023-03-04&#39;</span><span class="p">))</span> <span class="o">//</span> <span class="n">Fri</span> <span class="n">Mar</span> <span class="mi">31</span> <span class="mi">2023</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">GMT</span><span class="o">+</span><span class="mi">0800</span> <span class="p">(</span><span class="err">中国标准时间</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-the-total-number-of-days-in-a-month-in-a-particular-year">Get the total number of days in a month in a particular year</h3>
+<p>When you need to get the total number of days in a specific month of a certain year</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getDaysNum</span> <span class="o">=</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">getDate</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">day</span> <span class="o">=</span> <span class="n">getDaysNum</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">29</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-if-a-date-is-valid">Check if a date is valid</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isDateValid</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="n">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="n">Number</span><span class="o">.</span><span class="n">isNaN</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="o">...</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">valueOf</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">isDateValid</span><span class="p">(</span><span class="s2">&#34;December 17, 1995 03:24:00&#34;</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="calculate-the-interval-between-two-dates">Calculate the interval between two dates</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">dayDif</span> <span class="o">=</span> <span class="p">(</span><span class="n">date1</span><span class="p">,</span> <span class="n">date2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">date1</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="n">date2</span><span class="o">.</span><span class="n">getTime</span><span class="p">())</span> <span class="o">/</span> <span class="mi">86400000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">dayDif</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&#34;2021-11-3&#34;</span><span class="p">),</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&#34;2022-2-1&#34;</span><span class="p">))</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="find-out-which-day-of-the-year-a-date-falls-on">Find out which day of the year a date falls on</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">dayOfYear</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">date</span> <span class="o">-</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">getFullYear</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">24</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">dayOfYear</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="obtain-the-timezone">Obtain the timezone</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Intl.DateTimeFormat().resolvedOptions().timeZone;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="function">Function</h2>
+<h3 id="asynchronous-function-judgment">Asynchronous function judgment</h3>
+<p>Determine whether a function is an asynchronous function</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isAsyncFunction</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">toString</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object AsyncFunction]&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">isAsyncFunction</span><span class="p">(</span><span class="n">async</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{});</span> <span class="o">//</span> <span class="bp">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="number">Number</h2>
+<h3 id="truncate-number">Truncate number</h3>
+<p>When you need to truncate some digits after the decimal point without rounding</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">toFixed</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">fixed</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="err">`</span><span class="o">$</span><span class="p">{</span><span class="n">n</span><span class="p">}</span><span class="err">`</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">new</span> <span class="n">RegExp</span><span class="p">(</span><span class="err">`</span><span class="o">^-</span><span class="err">?</span>\<span class="n">d</span><span class="o">+</span><span class="p">(</span><span class="err">?</span><span class="p">:</span><span class="o">.</span>\<span class="n">d</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="o">$</span><span class="p">{</span><span class="n">fixed</span><span class="p">}})</span><span class="err">?`</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">toFixed</span><span class="p">(</span><span class="mf">10.255</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mf">10.25</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="rounding">Rounding</h3>
+<p>When you need to truncate some digits after the decimal point and round</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="nb">round</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">decimals</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Number</span><span class="p">(</span><span class="err">`</span><span class="o">$</span><span class="p">{</span><span class="n">Math</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="err">`</span><span class="o">$</span><span class="p">{</span><span class="n">n</span><span class="p">}</span><span class="n">e</span><span class="o">$</span><span class="p">{</span><span class="nb">decimals</span><span class="p">}</span><span class="err">`</span><span class="p">)}</span><span class="n">e</span><span class="o">-$</span><span class="p">{</span><span class="nb">decimals</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">round</span><span class="p">(</span><span class="mf">10.255</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mf">10.26</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="zero-padding">Zero-padding</h3>
+<p>When you need to pad zeros in front of a number num that lacks len digits</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">replenishZero</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">num</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span><span class="o">.</span><span class="n">padStart</span><span class="p">(</span><span class="n">len</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">replenishZero</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">08</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="object">Object</h2>
+<h3 id="remove-invalid-properties">Remove invalid properties</h3>
+<p>When you need to remove all properties in an object with a property value of null or undefined</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">removeNullUndefined</span> <span class="o">=</span> <span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">entries</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">null</span> <span class="err">?</span> <span class="n">a</span> <span class="p">:</span> <span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">),</span> <span class="n">a</span><span class="p">)),</span> <span class="p">{});</span>
+</span></span><span class="line"><span class="cl"><span class="n">removeNullUndefined</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="n">undefined</span><span class="p">,</span> <span class="n">sex</span><span class="p">:</span> <span class="n">null</span><span class="p">})</span> <span class="o">//</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;&#39;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="reverse-object-key-value-pairs">Reverse object key-value pairs</h3>
+<p>When you need to exchange the key-value pairs of an object</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">invert</span> <span class="o">=</span> <span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">res</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">{</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="n">k</span><span class="p">]]:</span> <span class="n">k</span> <span class="p">}),</span> <span class="p">{})</span>
+</span></span><span class="line"><span class="cl"><span class="n">invert</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">})</span> <span class="o">//</span> <span class="p">{</span><span class="n">jack</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-if-an-object-is-empty">Check if an object is empty</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isEmpty</span> <span class="o">=</span> <span class="n">obj</span> <span class="o">=&gt;</span> <span class="n">Reflect</span><span class="o">.</span><span class="n">ownKeys</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">obj</span><span class="o">.</span><span class="n">constructor</span> <span class="o">===</span> <span class="ne">Object</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="string-to-object">String to object</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">strParse</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/</span><span class="p">(</span>\<span class="n">w</span><span class="o">+</span><span class="p">)</span>\<span class="n">s</span><span class="o">*</span><span class="p">:</span><span class="o">/</span><span class="n">g</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="err">`</span><span class="s2">&#34;${p1}&#34;</span><span class="p">:</span><span class="err">`</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/</span>\<span class="s1">&#39;/g, &#34;</span><span class="se">\&#34;</span><span class="s1">&#34;))</span>
+</span></span><span class="line"><span class="cl"><span class="n">strParse</span><span class="p">(</span><span class="s1">&#39;{name: &#34;jack&#34;}&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="other">Other</h2>
+<h3 id="compare-two-objects">Compare two objects</h3>
+<p>When you need to compare two objects. JavaScript’s equality operator can only determine if the addresses of two objects are the same, and cannot determine if the key-value pairs of two objects are consistent when the addresses are different.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">isEqual</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="n">objects</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">objects</span><span class="o">.</span><span class="n">every</span><span class="p">(</span><span class="n">obj</span> <span class="o">=&gt;</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">===</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl"><span class="n">isEqual</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">})</span> <span class="o">//</span> <span class="bp">true</span>
+</span></span><span class="line"><span class="cl"><span class="n">isEqual</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">})</span> <span class="o">//</span> <span class="bp">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="generate-random-color">Generate random color</h3>
+<p>When you need to generate a random color</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getRandomColor</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">`</span><span class="c1">#${Math.floor(Math.random() * 0xffffff).toString(16)}`</span>
+</span></span><span class="line"><span class="cl"><span class="n">getRandomColor</span><span class="p">()</span> <span class="o">//</span> <span class="s1">&#39;#4c2fd7&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="color-format-conversion">Color format conversion</h3>
+<p>When you need to convert hexadecimal color to rgb</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">hexToRgb</span> <span class="o">=</span> <span class="n">hex</span> <span class="o">=&gt;</span> <span class="n">hex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/^</span><span class="c1">#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) =&gt; `#${r}${r}${g}${g}${b}${b}`).substring(1).match(/.{2}/g).map((x) =&gt; parseInt(x, 16));</span>
+</span></span><span class="line"><span class="cl"><span class="n">hexToRgb</span><span class="p">(</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">);</span> <span class="o">//</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">hexToRgb</span><span class="p">(</span><span class="s1">&#39;#0ff&#39;</span><span class="p">);</span> <span class="o">//</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="generate-random-ip-address">Generate random IP address</h3>
+<p>When you need to generate an IP address</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">randomIp</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">Array</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">_</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">===</span> <span class="mi">0</span> <span class="err">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="uuid-generation">UUID generation</h3>
+<p>When you need to generate an id</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">uuid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="err">?</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="p">((</span><span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)))</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="p">:</span> <span class="p">([</span><span class="mf">1e7</span><span class="p">]</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1e3</span> <span class="o">+</span> <span class="o">-</span><span class="mf">4e3</span> <span class="o">+</span> <span class="o">-</span><span class="mf">8e3</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1e11</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">/</span><span class="p">[</span><span class="mi">018</span><span class="p">]</span><span class="o">/</span><span class="n">g</span><span class="p">,</span> <span class="n">uuid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">uuid</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-cookie">Get cookie</h3>
+<p>When you need to convert cookie into an object</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getCookie</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">document</span><span class="o">.</span><span class="n">cookie</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">acc</span><span class="p">,</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">acc</span><span class="p">,</span> <span class="p">{})</span>
+</span></span><span class="line"><span class="cl"><span class="n">getCookie</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="force-waiting">Force waiting</h3>
+<p>When you need to wait for a period of time, but you don’t want to write it in the setTimeout function, causing callback hell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">sleep</span> <span class="o">=</span> <span class="n">async</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">new</span> <span class="n">Promise</span><span class="p">((</span><span class="n">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">setTimeout</span><span class="p">(</span><span class="n">resolve</span><span class="p">,</span> <span class="n">t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="conversion-between-fahrenheit-and-celsius">Conversion between Fahrenheit and Celsius</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">celsiusToFahrenheit</span> <span class="o">=</span> <span class="p">(</span><span class="n">celsius</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">fahrenheitToCelsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahrenheit</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">Javascript</a>
+        
+            <a href="/tags/function/">Function</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-definemodel-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding defineModel in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-fragment-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YMMs8s-H6fct1k8DJ1vLRw.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Fragment in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-teleport-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*GgMh0JyvKDIrI7ahnm8uiQ.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Teleport in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-async-components-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*SoXuFiQrG7Mex4MN6hmO3g.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding Async Components in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/understanding-watch-and-watcheffect-in-vue3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png" loading="lazy" data-key="" data-hash="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*v6hSD9YqWXc8J6oR-4kQsQ.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Understanding watch and watchEffect in Vue3</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="kxming/skstory"
+    data-repo-id="R_kgDOLehX4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLehX4M4Cd4Vx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 SK Story
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
