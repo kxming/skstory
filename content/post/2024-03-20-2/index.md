@@ -56,4 +56,4 @@ The Vue3 API primarily includes the following six parts:
 
 ---
 
-Mind Map URL: [https://github.com/kxming/skstory/tree/master/content/post/2024-03-20-2/vue3-API-Overview.xmind](https://github.com/kxming/skstory/tree/master/content/post/2024-03-20-2/vue3-API-Overview.xmind)
+Mind Map URL: [https://github.com/kxming/skstory/blob/master/content/post/2024-03-20-2/vue3%20API%20Overview.xmind](https://github.com/kxming/skstory/blob/master/content/post/2024-03-20-2/vue3%20API%20Overview.xmind)
