@@ -3,7 +3,7 @@ title: 'Recommended Vue3 libraries for 2024 — UI libraries!'
 date: 2024-03-17T17:22:38+08:00
 draft: false
 author: ""
-image: "https://miro.medium.com/v2/resize:fit:1274/format:webp/1*XNUMO2PM_SwVgmdGARQtCQ.png"
+image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*DYdGMu4svwz6UJ6Izma43g.png"
 categories: ["Javascript","Vue"]
 tags: ["Javascript","Vue"]
 URL: ""
