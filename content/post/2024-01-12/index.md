@@ -11,6 +11,8 @@ layout: posts
 is_recommend: true
 description: "A million years ago, humans had just learned to make fire, ending the days of eating raw meat and drinking blood. ..."
 ---
+Impact-Site-Verification: f08c56bf-dec7-432e-a822-58839ff4bf6c
+
 A million years ago, humans had just learned to make fire, ending the days of eating raw meat and drinking blood. At dusk, a group of ape men returned to the cave with their prey and started a fire.
 
 At this moment, another person walked in from outside the cave, his face hidden in the darkness, unclear to others.
