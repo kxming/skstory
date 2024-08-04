@@ -1,5 +1,5 @@
 ---
-title: 'How to Modify an NPM Package When It Doesn't Meet Your Needs'
+title: "How to Modify an NPM Package When It Doesn't Meet Your Needs"
 date: 2024-07-30T16:02:05+08:00
 draft: false
 author: ""
@@ -12,15 +12,19 @@ is_recommend: true
 description: ""
 ---
 
-During the development process, if you find that an NPM package does not fully meet your needs or has bugs, here is how you can handle it:
+During the development process, if you find that the functionality of an NPM package does not fully meet the requirements, or there are bugs, how to deal with it?
 
-Firstly, the best option is to submit an issue to the original author, fork the repository, make modifications, and submit a pull request. However, this method can take time and effort. If the author is inactive or strict, the timeline might be extended significantly, which can be detrimental to your project schedule.
+There are scenarios where you might find a bug in an NPM package during development. Here's how you can handle such situations:
 
-Additionally, if your modifications only apply to specific business scenarios and are not universal, your pull request might be rejected.
+1. Submit an Issue or Pull Request: The first step is to submit an issue to the original author or fork the repository, make the necessary changes, and create a pull request. However, this approach has a significant downside - it can be time-consuming. If the author is strict or inactive, it might take a long time for your changes to be merged, which your project might not be able to afford.
 
-In summary, modifying the source code of an NPM package is an ideal solution, but if it is not feasible, you need to find temporary or alternative solutions.
+2. Temporary or Alternative Solutions: In cases where modifying the source package is not feasible, you need a temporary or alternative solution. Here are two common scenarios:
 
-In the following content, we will discuss several recommended methods to handle such situations.
+- **Small Code Changes**: If the required modifications are minimal, consider using a patch.
+
+- **Large Code Changes or Obfuscated Code**: If the changes are extensive or the package code is minified/obfuscated, making direct modifications might not be practical. In this case, you can modify the source code, change the package name, and republish it. Then, update your project to use this new package.
+
+Directly modifying the code in node_modules is possible but not recommended, as these changes will be lost the next time you run npm install or update the package. Below are some recommended methods to handle this situation effectively:
 
 ## Using Fork
 
