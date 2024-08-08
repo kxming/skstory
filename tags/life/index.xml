@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Life on SK Story</title><link>https://www.skstory.online/tags/life/</link><description>Recent content in Life on SK Story</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 05 Aug 2024 16:02:05 +0800</lastBuildDate><atom:link href="https://www.skstory.online/tags/life/index.xml" rel="self" type="application/rss+xml"/><item><title>Modern Code Review Practices in Frontend Development</title><link>https://www.skstory.online/p/modern-code-review-practices-in-frontend-development/</link><pubDate>Mon, 05 Aug 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/modern-code-review-practices-in-frontend-development/</guid><description>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*nqoZqpUXp7E0N6ByU52waQ.png" alt="Featured image of post Modern Code Review Practices in Frontend Development" />&lt;h2 id="what-is-code-review">What is Code Review？
+&lt;/h2>&lt;p>Code review is an essential practice in modern software development. It involves systematically examining code written by one developer and reviewed by others. This process not only helps in identifying bugs and issues early but also promotes knowledge sharing and maintains code quality. In this blog post, we&amp;rsquo;ll explore the benefits of code review, best practices, and how to conduct an effective code review process.&lt;/p>
+&lt;h2 id="benefits-of-code-review">Benefits of Code Review
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Improved Code Quality&lt;/strong>: By having multiple eyes on the code, potential issues such as bugs, security vulnerabilities, and performance bottlenecks can be identified and addressed early.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Knowledge Sharing&lt;/strong>: Code reviews are an excellent opportunity for team members to learn from each other. Junior developers can gain insights from more experienced colleagues, and even seasoned developers can pick up new techniques and perspectives.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Consistency&lt;/strong>: Ensuring that the code adheres to the project&amp;rsquo;s coding standards and conventions is crucial. Code reviews help maintain consistency across the codebase, making it easier to read, understand, and maintain.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reduced Bugs&lt;/strong>: Catching bugs early in the development process is far more cost-effective than fixing them later. Code reviews help identify and fix issues before they make it to production.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Enhanced Collaboration&lt;/strong>: Regular code reviews foster a culture of collaboration and open communication within the team. It encourages developers to discuss and debate different approaches, leading to better solutions.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="practice">Practice
+&lt;/h2>&lt;p>Traditional Code Review practices typically involve reviewing Pull Requests (PRs) and providing feedback or optimization suggestions for any unreasonable parts. To improve team code quality and knowledge sharing, it is valuable to have regular short Code Review meetings with team members to summarize issues encountered during the review process. Of course, you should not directly point out who wrote problematic code, as the goal is to facilitate learning and exchange.&lt;/p>
+&lt;p>However, manual Code Reviews consume a lot of time, effort, and mental energy. With the advancement of AI technology, we can leverage AI tools to assist with Code Reviews. Next, let&amp;rsquo;s see how to use AI tools for Code Reviews in VSCode.&lt;/p>
+&lt;h2 id="plugin">Plugin
+&lt;/h2>&lt;p>First, install the VSCode plugin &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=Blackboxapp.blackbox" target="_blank" rel="noopener"
+>BLACKBOX AI&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*4ndvW_4JG6zGZA0KFLYvsg.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Create a &lt;code>test.js&lt;/code> file with the following content:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function checkStatus() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (isLogin()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (isVip()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (isDoubleCheck()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> done();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } else {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;Don&amp;#39;t click twice&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } else {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;Not VIP&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } else {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;UnLogin&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This function contains nested conditional logic. How can we optimize it? Select the code you want to optimize, right-click, and choose &amp;ldquo;Improve Code.&amp;rdquo;&lt;/p>
+&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*Hql--ELGmN0bVApXnt3xGg.gif"
+loading="lazy"
+>&lt;/p>
+&lt;p>Let&amp;rsquo;s see the suggestion provided by AI:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function checkStatus() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!isLogin()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;UnLogin&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!isVip()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;Not VIP&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (isDoubleCheck()) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw new Error(&amp;#34;Don&amp;#39;t click twice&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> done();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The AI&amp;rsquo;s suggestion is quite good. We can further optimize the suggestions by providing more prompts, but we won&amp;rsquo;t go into that here. Typically, the basic optimization idea for this type of code is to place validation logic first and the main logic afterward.&lt;/p>
+&lt;p>So, do we still need to perform Code Reviews ourselves if we have AI tools? The answer is yes. AI tools can help reduce the effort needed to read large amounts of code, improve efficiency, and shorten Code Review time. However, we still need to refine and summarize the AI&amp;rsquo;s suggestions. This helps broaden our knowledge and enables us to write better-quality code.&lt;/p>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>Code review is a powerful practice that, when done right, can significantly improve the quality of your codebase and the overall development process. By following best practices and fostering a culture of constructive feedback and collaboration, teams can leverage code reviews to build better software, reduce bugs, and promote continuous learning.&lt;/p>
+&lt;p>Whether you&amp;rsquo;re a seasoned developer or new to the practice, embracing code reviews can lead to more robust, maintainable, and high-quality code. So, make code reviews an integral part of your development workflow and watch your team and codebase thrive.&lt;/p>
+&lt;p>AI tools significantly enhance the Code Review process by automating repetitive tasks, providing intelligent suggestions, and ensuring code quality. However, human oversight remains crucial to validate AI-generated feedback and maintain the contextual integrity of the code. Combining AI with human expertise leads to more efficient and effective Code Reviews.&lt;/p></description></item><item><title>Using Tailwind CSS in Vue3</title><link>https://www.skstory.online/p/using-tailwind-css-in-vue3/</link><pubDate>Thu, 01 Aug 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/using-tailwind-css-in-vue3/</guid><description>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*3LVaHw2SN2wh5JhwDZHHyA.png" alt="Featured image of post Using Tailwind CSS in Vue3" />&lt;p>When it comes to frontend development frameworks, &lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Ftailwindlabs%2Ftailwindcss" target="_blank" rel="noopener"
+>Tailwind CSS&lt;/a> is a highly prominent choice. It is a powerful and flexible CSS framework that provides a plethora of utility classes to help developers rapidly build modern user interfaces. Tailwind CSS is a popular modern CSS framework that offers a set of atomic classes to construct web interfaces. Unlike traditional CSS frameworks like Bootstrap or Foundation, Tailwind CSS emphasizes a utility-first approach to styling, allowing developers to flexibly combine and customize styles without writing custom CSS.&lt;/p>
+&lt;p>Here are some key features and concepts of Tailwind CSS:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Atomic Classes&lt;/strong>: The core concept of Tailwind CSS is atomic classes, which provide a large number of class names, each corresponding to a specific style property. By combining these atomic classes, developers can quickly create the desired styles, such as &lt;code>bg-red-500&lt;/code> for setting the background color to red, and &lt;code>text-xl&lt;/code> for setting the text size to extra-large.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Utility Classes&lt;/strong>: In addition to common style properties, Tailwind CSS offers a wealth of utility classes for layout, spacing, borders, and more. These utility classes help developers quickly achieve responsive design and layouts.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Customization&lt;/strong>: Tailwind CSS provides extensive configuration options, allowing developers to customize styles according to project requirements, including colors, fonts, spacing, etc. This makes the styles of each project highly customizable.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Responsive Design&lt;/strong>: Tailwind CSS has built-in utility classes for responsive design, making it easy for developers to write styles that adapt to different screen sizes.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Plugin System&lt;/strong>: Tailwind CSS features a powerful plugin system that allows developers to write custom plugins to extend the framework&amp;rsquo;s functionality, such as adding new style classes or utility classes.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Overall, Tailwind CSS offers a very flexible way to build web interfaces. It differs significantly from traditional CSS frameworks in its approach, emphasizing atomic style combinations and customization. Many developers find that using Tailwind CSS can significantly increase development efficiency and make styles more maintainable and predictable.&lt;/p>
+&lt;h2 id="installation-and-configuration">Installation and Configuration
+&lt;/h2>&lt;p>To start using Tailwind CSS, you first need to install it via npm or yarn. Since Tailwind is a PostCSS plugin, it can also be used with Sass, Less, Stylus, or other preprocessors. Note that you don’t need to use a preprocessor with Tailwind—in any case, you usually write very little CSS in a Tailwind project, so using a preprocessor is not as necessary as it is when writing a lot of custom CSS.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -D tailwindcss postcss autoprefixer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yarn add -D tailwindcss postcss autoprefixer
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After installation, generate the default configuration files and stylesheet by running:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx tailwindcss init -p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The generated default configuration files are named &lt;code>tailwind.config.js&lt;/code> and &lt;code>postcss.config.js&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">/**&lt;/span> &lt;span class="n">tailwind&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">/**&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">type&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;tailwindcss&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Config&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Manually&lt;/span> &lt;span class="n">add&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">project&lt;/span> &lt;span class="n">directories&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;./index.html&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;./src/**/*.{vue,js,ts,jsx,tsx}&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">theme&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extend&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plugins&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can customize properties such as colors, fonts, and spacing in these configuration files. Next, create a CSS file and import Tailwind CSS styles:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/* Import Tailwind CSS */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@import &amp;#39;tailwindcss/base&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@import &amp;#39;tailwindcss/components&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@import &amp;#39;tailwindcss/utilities&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="import-tailwindcss-in-mainjs">Import tailwind.css in main.js
+&lt;/h2>&lt;p>After configuring, import &lt;code>tailwind.css&lt;/code> by modifying the &lt;code>src/main.js&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="s1">&amp;#39;./assets/main.css&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="s1">&amp;#39;./assets/tailwind.css&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">createApp&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">createPinia&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;pinia&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">App&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./App.vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./router&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">App&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">createPinia&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#app&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="using-utility-classes">Using Utility Classes
+&lt;/h2>&lt;p>Tailwind CSS provides a rich set of utility classes covering various style properties. Let&amp;rsquo;s demonstrate how to use these utility classes with a simple example. Suppose we want to create a button with a blue background and centered text; we can write:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;bg-blue-500 text-white font-bold py-2 px-4 rounded&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Click me
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>In this example, we use the &lt;code>bg-blue-500&lt;/code> class to set the button&amp;rsquo;s background color to blue, the &lt;code>text-white&lt;/code> class to set the text color to white, the &lt;code>font-bold&lt;/code> class to set the text to bold, &lt;code>py-2&lt;/code> and &lt;code>px-4&lt;/code> classes to set vertical and horizontal padding, and the &lt;code>rounded&lt;/code> class to set rounded borders.&lt;/p>
+&lt;h2 id="installing-the-vscode-plugin">Installing the VSCode Plugin
+&lt;/h2>&lt;p>If you decide to use Tailwind CSS, install the &lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dbradlc.vscode-tailwindcss" target="_blank" rel="noopener"
+>Tailwind CSS IntelliSense&lt;/a> plugin provided by the official team. This plugin offers features like autocompletion and real-time preview of actual styles.&lt;/p>
+&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*cEY-uQaMRsBh9MXtyRWaLg.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="common-plugins">Common Plugins
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Fpostcss%2Fautoprefixer" target="_blank" rel="noopener"
+>autoprefixer&lt;/a>: Automatically adds vendor prefixes to CSS properties that need them.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Fpostcss%2Fpostcss-import" target="_blank" rel="noopener"
+>postcss-import&lt;/a>: Allows us to use the @import syntax to import CSS files into other files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fpostcss-preset-env" target="_blank" rel="noopener"
+>postcss-preset-env&lt;/a>: Transforms modern CSS (like nesting and custom media queries) into CSS that browsers can understand.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>postcss-nested: Provides support for writing nested styles in CSS. It is directly included within the Tailwind CSS package itself. By default, it uses the postcss-nested plugin. If you prefer to use postcss-nesting, you can enable it by adding &lt;code>'tailwindcss/nesting': 'postcss-nesting'&lt;/code> in your configuration file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fcssnano.github.io%2Fcssnano" target="_blank" rel="noopener"
+>cssnano&lt;/a>: For CSS code compression.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">postcss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">js&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">module&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plugins&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;postcss-import&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;tailwindcss/nesting&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tailwindcss&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">autoprefixer&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">...&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">process&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">env&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NODE_ENV&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;production&amp;#39;&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">cssnano&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{}&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="p">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="configuration">Configuration
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">/**&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">type&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;tailwindcss&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Config&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">content&lt;/span> &lt;span class="n">section&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">where&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">configure&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">paths&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">all&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">HTML&lt;/span> &lt;span class="n">templates&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">JS&lt;/span> &lt;span class="n">components&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">any&lt;/span> &lt;span class="n">other&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">contain&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">names&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">theme&lt;/span> &lt;span class="n">section&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">where&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">define&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">color&lt;/span> &lt;span class="n">palette&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">fonts&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">font&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">border&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">breakpoints&lt;/span>&lt;span class="err">—&lt;/span>&lt;span class="n">anything&lt;/span> &lt;span class="n">related&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">visual&lt;/span> &lt;span class="n">design&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">site&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">theme&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extend&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">plugins&lt;/span> &lt;span class="n">section&lt;/span> &lt;span class="n">allows&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">register&lt;/span> &lt;span class="n">plugins&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">can&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">used&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">generate&lt;/span> &lt;span class="n">extra&lt;/span> &lt;span class="n">utilities&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">components&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">base&lt;/span> &lt;span class="n">styles&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">custom&lt;/span> &lt;span class="n">variants&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plugins&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">presets&lt;/span> &lt;span class="n">section&lt;/span> &lt;span class="n">allows&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">specify&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">own&lt;/span> &lt;span class="n">custom&lt;/span> &lt;span class="n">base&lt;/span> &lt;span class="n">configuration&lt;/span> &lt;span class="n">instead&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">using&lt;/span> &lt;span class="n">Tailwind&lt;/span>&lt;span class="err">’&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">base&lt;/span> &lt;span class="n">configuration&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">presets&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;@acmecorp/base-tailwind-config&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">prefix&lt;/span> &lt;span class="n">option&lt;/span> &lt;span class="n">allows&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">add&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">custom&lt;/span> &lt;span class="n">prefix&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">all&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">Tailwind&lt;/span>&lt;span class="err">’&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="n">generated&lt;/span> &lt;span class="n">utility&lt;/span> &lt;span class="n">classes&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">This&lt;/span> &lt;span class="n">can&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">really&lt;/span> &lt;span class="n">useful&lt;/span> &lt;span class="n">when&lt;/span> &lt;span class="n">layering&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">top&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">existing&lt;/span> &lt;span class="n">CSS&lt;/span> &lt;span class="n">where&lt;/span> &lt;span class="n">there&lt;/span> &lt;span class="n">might&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">naming&lt;/span> &lt;span class="n">conflicts&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">prefix&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;tw-&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">important&lt;/span> &lt;span class="n">option&lt;/span> &lt;span class="n">lets&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">control&lt;/span> &lt;span class="n">whether&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">Tailwind&lt;/span>&lt;span class="err">’&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="n">utilities&lt;/span> &lt;span class="n">should&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">marked&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="n">important&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">This&lt;/span> &lt;span class="n">can&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">really&lt;/span> &lt;span class="n">useful&lt;/span> &lt;span class="n">when&lt;/span> &lt;span class="n">using&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">existing&lt;/span> &lt;span class="n">CSS&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">has&lt;/span> &lt;span class="n">high&lt;/span> &lt;span class="n">specificity&lt;/span> &lt;span class="n">selectors&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">important&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">separator&lt;/span> &lt;span class="n">option&lt;/span> &lt;span class="n">lets&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">customize&lt;/span> &lt;span class="n">which&lt;/span> &lt;span class="n">character&lt;/span> &lt;span class="n">should&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">used&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">separate&lt;/span> &lt;span class="n">modifiers&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">screen&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">hover&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">focus&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">etc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="n">utility&lt;/span> &lt;span class="n">names&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">center&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">items&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">etc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">separator&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;_&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">corePlugins&lt;/span> &lt;span class="n">section&lt;/span> &lt;span class="n">lets&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">completely&lt;/span> &lt;span class="n">disable&lt;/span> &lt;span class="n">classes&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">Tailwind&lt;/span> &lt;span class="n">would&lt;/span> &lt;span class="n">normally&lt;/span> &lt;span class="n">generate&lt;/span> &lt;span class="n">by&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">don&lt;/span>&lt;span class="err">’&lt;/span>&lt;span class="n">t&lt;/span> &lt;span class="n">need&lt;/span> &lt;span class="n">them&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">project&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">corePlugins&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">float&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">objectFit&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">objectPosition&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="limitation">Limitation
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>The granularity of Tailwind CSS can make the HTML structure overly complex, or require too many class names to achieve a particular effect, making it less readable.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For developers unfamiliar with Tailwind CSS, the learning curve can be somewhat steep.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://medium.com/r/?url=https%3A%2F%2Fdaisyui.com%2F" target="_blank" rel="noopener"
+>daisyUI&lt;/a> is a customizable component library for Tailwind CSS. Unlike commonly used libraries like ElementUI or AntDesign, it provides some class names similar to Bootstrap. For ready-to-use components, you need to wrap them yourself. It comes with 47 components and 29 themes, which can be used directly in developed websites. It also supports customization, greatly simplifying the development process.&lt;/p>
+&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*QIRjHE_yIU_YkNjc1h-Nhg.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>How to Modify an NPM Package When It Doesn't Meet Your Needs</title><link>https://www.skstory.online/p/how-to-modify-an-npm-package-when-it-doesnt-meet-your-needs/</link><pubDate>Tue, 30 Jul 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/how-to-modify-an-npm-package-when-it-doesnt-meet-your-needs/</guid><description>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*ZS3iplWNdqvLSRzbbh8MzA.png" alt="Featured image of post How to Modify an NPM Package When It Doesn't Meet Your Needs" />&lt;p>During the development process, if you find that the functionality of an NPM package does not fully meet the requirements, or there are bugs, how to deal with it?&lt;/p>
+&lt;p>There are scenarios where you might find a bug in an NPM package during development. Here&amp;rsquo;s how you can handle such situations:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Submit an Issue or Pull Request: The first step is to submit an issue to the original author or fork the repository, make the necessary changes, and create a pull request. However, this approach has a significant downside - it can be time-consuming. If the author is strict or inactive, it might take a long time for your changes to be merged, which your project might not be able to afford.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Temporary or Alternative Solutions: In cases where modifying the source package is not feasible, you need a temporary or alternative solution. Here are two common scenarios:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Small Code Changes&lt;/strong>: If the required modifications are minimal, consider using a patch.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Large Code Changes or Obfuscated Code&lt;/strong>: If the changes are extensive or the package code is minified/obfuscated, making direct modifications might not be practical. In this case, you can modify the source code, change the package name, and republish it. Then, update your project to use this new package.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Directly modifying the code in node_modules is possible but not recommended, as these changes will be lost the next time you run npm install or update the package. Below are some recommended methods to handle this situation effectively:&lt;/p>
+&lt;h2 id="using-fork">Using Fork
+&lt;/h2>&lt;p>The most common method is to fork the source code. You can fork the repository of the third-party package on GitHub or other hosting platforms. After making modifications to the source code, publish the modified package to npm. If you do not want it to be public, you can set up a private npm package. Switch the package in your project to the one you published.&lt;/p>
+&lt;h2 id="submitting-pr">Submitting PR
+&lt;/h2>&lt;p>If you believe your modification could benefit other users, you can submit a pull request (PR) to the original package&amp;rsquo;s maintainer. If the PR is accepted and merged, you can directly use the future versions of the official package without maintaining a fork.&lt;/p>
+&lt;h2 id="external-code-modification">External Code Modification
+&lt;/h2>&lt;p>This method involves not directly modifying the source code in &lt;code>node_modules&lt;/code>, but using JavaScript features to modify the internal properties of the package during execution.&lt;/p>
+&lt;p>In simple terms, it involves using &lt;code>defineProperty&lt;/code>, &lt;code>prototype&lt;/code>, and other features to modify classes within the package. For example, in Vue 2.0, &lt;code>defineProperty&lt;/code> is used to intercept and proxy data on component instances. In Vue projects, we often mount global properties and methods on the Vue root instance &lt;code>Vue.prototype.xxx = xxxx&lt;/code> in &lt;code>main.js&lt;/code>.&lt;/p>
+&lt;h2 id="pnpm-patch">pnpm patch
+&lt;/h2>&lt;p>&lt;code>pnpm&lt;/code>&amp;rsquo;s patch command is inspired by a similar command in yarn.&lt;/p>
+&lt;p>First, execute &lt;code>pnpm patch &amp;lt;pkg name&amp;gt;@&amp;lt;version&amp;gt;&lt;/code>. This command extracts the specified package to a temporary directory where you can freely edit it.
+After making modifications, run &lt;code>pnpm patch-commit &amp;lt;path&amp;gt; &lt;/code>(the path is the temporary directory created earlier, which can be long and hard to remember, but don&amp;rsquo;t worry, the CLI will provide complete prompts) to generate a patch file and register it in your project using the &lt;code>patchedDependencies&lt;/code> field.&lt;/p>
+&lt;h2 id="aliases">Aliases
+&lt;/h2>&lt;p>pnpm provides an aliasing capability.&lt;/p>
+&lt;p>Suppose you published a new package called awesome-lodash and use lodash as an alias to install it:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pnpm add lodash@npm:awesome-lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Let&amp;rsquo;s assume you use lodash all over your project. There is a bug in lodash that breaks your project. You have a fix but lodash won&amp;rsquo;t merge it. Normally you would either install lodash from your fork directly (as a git-hosted dependency) or publish it with a different name. If you use the second solution you have to replace all the requires in your project with the new dependency name (&lt;code>require('lodash') =&amp;gt; require('awesome-lodash')&lt;/code>). With aliases, you have a third option.&lt;/p>
+&lt;p>Publish a new package called &lt;code>awesome-lodash&lt;/code> and install it using lodash as its alias:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pnpm add lodash@npm:awesome-lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>No changes in code are needed. All the requires of lodash will now resolve to awesome-lodash.&lt;/p>
+&lt;p>Sometimes you&amp;rsquo;ll want to use two different versions of a package in your project. Easy:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pnpm add lodash1@npm:lodash@1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pnpm add lodash2@npm:lodash@2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now you can require the first version of lodash via require(&amp;rsquo;lodash1&amp;rsquo;) and the second via require(&amp;rsquo;lodash2&amp;rsquo;).&lt;/p>
+&lt;p>This gets even more powerful when combined with hooks. Maybe you want to replace lodash with awesome-lodash in all the packages in node_modules. You can easily achieve that with the following &lt;code>.pnpmfile.cjs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">readPackage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pkg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">pkg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dependencies&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">pkg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dependencies&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lodash&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dependencies&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lodash&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;npm:awesome-lodash@^1.0.0&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">pkg&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">module&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">hooks&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">readPackage&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="patch-package">patch-package
+&lt;/h2>&lt;p>&lt;a class="link" href="https://www.npmjs.com/package/patch-package#why-use-postinstall-postinstall-with-yarn" target="_blank" rel="noopener"
+>patch-package&lt;/a>is a tool for fixing third-party dependencies, and it is very easy to use.&lt;/p>
+&lt;p>&lt;strong>Installation&lt;/strong>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="err">$&lt;/span> &lt;span class="nx">npm&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="nx">patch&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="kn">package&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">or&lt;/span> &lt;span class="nx">with&lt;/span> &lt;span class="nx">yarn&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">$&lt;/span> &lt;span class="nx">yarn&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="nx">patch&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="kn">package&lt;/span> &lt;span class="nx">postinstall&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">postinstall&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>Note&lt;/strong>: Most times when you do a yarn, yarn add, yarn remove, or yarn install (which is the same as just yarn) Yarn will completely replace the contents of your node_modules with freshly unpackaged modules. patch-package uses the postinstall hook to modify these fresh modules, so that they behave well according to your will.&lt;/p>
+&lt;p>Yarn only runs the postinstall hook after yarn and yarn add, but not after yarn remove. The postinstall-postinstall package is used to make sure your postinstall hook gets executed even after a yarn remove.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Usage:&lt;/strong>&lt;/p>
+&lt;p>First make changes to the files of a particular package in your node_modules folder, then run&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">npx&lt;/span> &lt;span class="nx">patch&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="kn">package&lt;/span> &lt;span class="kn">package&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">name&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="nx">or&lt;/span> &lt;span class="nx">with&lt;/span> &lt;span class="nx">yarn&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">yarn&lt;/span> &lt;span class="nx">patch&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="kn">package&lt;/span> &lt;span class="kn">package&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">name&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This will create a &lt;code>patches&lt;/code> file in the root directory of your project that contains all the changes made to the files of the specified package in node_modules. Inside will be a file called package-name+0.44.0.patch or something, which is a diff between normal old package-name and your fixed version. You can then commit this &lt;code>patches&lt;/code> file along with your other changes. When you install dependencies again, patch-package will apply these patches automatically.&lt;/p>
+&lt;p>After completing the above steps, add the following to the &lt;code>scripts&lt;/code> section in &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;postinstall&amp;#34;: &amp;#34;patch-package&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This way, when other team members pull the code and run &lt;code>npm install&lt;/code> or &lt;code>yarn install&lt;/code>, the patches will be automatically applied to the dependencies.&lt;/p>
+&lt;p>In simple terms, this solution records the code and location of the patch and uses npm&amp;rsquo;s hook (the &lt;code>postinstall&lt;/code> hook is triggered after &lt;code>npm install&lt;/code>) to trigger the corresponding script after installing dependencies, overwriting the patches to the corresponding package in &lt;code>node_modules&lt;/code>.&lt;/p>
+&lt;p>Of course, patches are version-specific, so you need to lock the version number. The downside is that if you need to upgrade, you have to repeat the process, but unless there are bugs or performance issues, you usually do not need to chase new versions.&lt;/p>
+&lt;h2 id="advantages-of-patch-package">Advantages of patch-package
+&lt;/h2>&lt;p>Although the above methods can solve specific scenarios through some tricks, they cannot avoid the problems caused by version upgrades. If the npm package is upgraded, it may cause errors in the previous modifications. Therefore, if you want to use the above methods, it is best to lock the version number. However, patch-package has the following features:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Version Mismatch&lt;/strong>&lt;/p>
+&lt;p>If the version of the package you installed does not match the version recorded in your previous patch, npx patch-package will directly report an ERROR: Failed to apply patch for package xxxx at path. The prompt helps you locate the problem more easily.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Space Saving&lt;/strong>&lt;/p>
+&lt;p>Using git diff to record patches is more space-saving than rewriting a source code, making it both safe and convenient.&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>Vue 3 Knowledge You Might Not Know</title><link>https://www.skstory.online/p/vue-3-knowledge-you-might-not-know/</link><pubDate>Fri, 12 Jul 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/vue-3-knowledge-you-might-not-know/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5IsjkNAC17Fx8y68ITbHRA.jpeg" alt="Featured image of post Vue 3 Knowledge You Might Not Know" />&lt;h2 id="dynamically-binding-multiple-values-in-templates">Dynamically Binding Multiple Values in Templates
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">bind&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;objectOfAttrs&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">objectOfAttrs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;container&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">class&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;wrapper&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">style&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;background-color:green&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dynamic-parameters">Dynamic Parameters
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;!--&lt;/span> &lt;span class="n">Dynamic&lt;/span> &lt;span class="n">event&lt;/span> &lt;span class="n">binding&lt;/span> &lt;span class="o">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">eventName&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;handle&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Dynamic&lt;/span> &lt;span class="n">Event&lt;/span> &lt;span class="n">Binding&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;!--&lt;/span> &lt;span class="n">Dynamic&lt;/span> &lt;span class="n">attribute&lt;/span> &lt;span class="n">binding&lt;/span> &lt;span class="o">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">HelloWorld&lt;/span> &lt;span class="p">:[&lt;/span>&lt;span class="n">attributeName&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;HelloWorld&amp;#34;&lt;/span>&lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ref&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">attributeName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;msg&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">eventName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">handle&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Dynamic event triggered&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="iterating-over-objects-withv-for">Iterating Over Objects with v-for
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;(value, key, index) in myObject&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{{&lt;/span> &lt;span class="n">index&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="n">key&lt;/span> &lt;span class="p">}}:&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="n">value&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">reactive&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">myObject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">reactive&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">title&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;How to do lists in Vue&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">author&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Jane Doe&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">publishedAt&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;2016-04-10&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="using-a-range-withv-for">Using a Range with v-for
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;template&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;li v-for=&amp;#34;n in 10&amp;#34;&amp;gt;{{ n }}&amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/template&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Output:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 9
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="watching-multiple-datasources">Watching Multiple Data Sources
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">watch&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ref&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">watch&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">([&lt;/span>&lt;span class="n">newX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">newY&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">newX&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">newY&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="watch-cant-directly-observe-reactive-object-properties">Watch Can&amp;rsquo;t Directly Observe Reactive Object Properties
+&lt;/h2>&lt;p>When using watch, the first parameter should be a reactive object or a function that returns a reactive object. This restriction ensures Vue&amp;rsquo;s reactivity system can properly track changes using Proxy getters.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">obj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">reactive&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">This&lt;/span> &lt;span class="n">won&lt;/span>&lt;span class="s1">&amp;#39;t work because we are passing a number to watch()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">watch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Count&lt;/span> &lt;span class="n">is&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Instead&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">use&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">getter&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">watch&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">obj&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Count&lt;/span> &lt;span class="n">is&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="accessing-updated-dom-inwatch">Accessing Updated DOM in watch
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">watch(source, callback, {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> flush: &amp;#39;post&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">watchEffect(callback, {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> flush: &amp;#39;post&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">watchPostEffect(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /* executed after Vue updates */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">})
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="stopping-awatcher">Stopping a Watcher
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">unwatch&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">watchEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">later&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">when&lt;/span> &lt;span class="n">no&lt;/span> &lt;span class="n">longer&lt;/span> &lt;span class="n">needed&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">unwatch&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>For more details on watch, you can refer to this blog.&lt;/p>
+&lt;h2 id="function-template-references">Function Template References
+&lt;/h2>&lt;p>The ref attribute can bind to a function, which is called whenever the bound component updates. This method provides more flexibility in obtaining element references. The function receives the element reference as the first argument:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;text&amp;#34;&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="n">ref&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;getRef&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">cpn&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="n">ref&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;getRef&amp;#34;&lt;/span>&lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getRef&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">el&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">el&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Direct&lt;/span> &lt;span class="n">DOM&lt;/span> &lt;span class="n">element&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">it&lt;/span>&lt;span class="s1">&amp;#39;s an element&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">el&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">el&lt;/span>&lt;span class="o">.$&lt;/span>&lt;span class="n">el&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="n">instance&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">it&lt;/span>&lt;span class="s1">&amp;#39;s a component&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Note&lt;/strong>: The argument will be null after the element is removed.&lt;/p>
+&lt;h2 id="using-ref-withv-for">Using ref with v-for
+&lt;/h2>&lt;p>The ref attribute can also be used with v-for to bind multiple elements/component instances generated by v-for. The value of the corresponding ref object will be an array.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;item in list&amp;#34;&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;itemRefs&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{{&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">onMounted&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/*&lt;/span> &lt;span class="o">...&lt;/span> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">itemRefs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">([])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">onMounted&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">itemRefs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Note&lt;/strong>: The order of elements in the array is not guaranteed to match the iteration order.&lt;/p>
+&lt;h2 id="component-instance-references">Component Instance References
+&lt;/h2>&lt;p>You can also use template references to get a child component&amp;rsquo;s instance. However, this depends on whether the child component uses the Options API or &lt;code>&amp;lt;script setup&amp;gt;&lt;/code>.&lt;/p>
+&lt;p>If a child component uses the Options API or does not use &lt;code>&amp;lt;script setup&amp;gt;&lt;/code>, the parent component has full access to all the child component&amp;rsquo;s properties and methods.&lt;/p>
+&lt;p>If a child component uses &lt;code>&amp;lt;script setup&amp;gt;&lt;/code>, it is private by default: the parent component cannot access anything within the child component.&lt;/p>
+&lt;p>For the second case, the child component must explicitly expose properties or methods using the defineExpose macro.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ref&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ref&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Compiler&lt;/span> &lt;span class="n">macros&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">such&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">defineExpose&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">don&lt;/span>&lt;span class="s1">&amp;#39;t need to be imported&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">defineExpose&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">b&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="withdefaults-helperfunction">withDefaults Helper Function
+&lt;/h2>&lt;p>The withDefaults helper function is a utility that helps set default values for component props when defining them. This ensures that props have a preset default value if no value is passed. This can simplify the code, avoiding the need to manually set default values for each prop.&lt;/p>
+&lt;p>Moreover, since withDefaults can help define the types and default values of props, TypeScript can correctly infer and check the usage of the component&amp;rsquo;s props.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">props&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">withDefaults&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">defineProps&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="ne">String&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="ow">or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">props&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">withDefaults&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">defineProps&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;hello&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Can sessionStorage Share Data Across Multiple Tabs?</title><link>https://www.skstory.online/p/can-sessionstorage-share-data-across-multiple-tabs/</link><pubDate>Wed, 03 Jul 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/can-sessionstorage-share-data-across-multiple-tabs/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*dEcEJcGtium2C7FJaWrSuA.png" alt="Featured image of post Can sessionStorage Share Data Across Multiple Tabs?" />&lt;p>&lt;code>localStorage&lt;/code> and &lt;code>sessionStorage&lt;/code> are often discussed together, but what are the differences between them?&lt;/p>
+&lt;blockquote>
+&lt;p>The localStorage read-only property of the window interface allows you to access a Storage object for the Document’s origin; the stored data is saved across browser sessions.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>localStorage is similar to sessionStorage, except that while localStorage data has no expiration time, sessionStorage data gets cleared when the page session ends — that is, when the page is closed. (localStorage data for a document loaded in a “private browsing” or “incognito” session is cleared when the last “private” tab is closed.) — &lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener"
+>MDN&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>localStorage&lt;/code> can share data across different tabs under the same website. Here&amp;rsquo;s an example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">// You can store data in the first tab
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">localStorage.setItem(&amp;#39;name&amp;#39;, &amp;#39;fatfish&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// And read this data in another tab
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">localStorage.getItem(&amp;#39;name&amp;#39;); // fatfish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="what-about-sessionstorage">What about sessionStorage?
+&lt;/h2>&lt;p>&lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage" target="_blank" rel="noopener"
+>MDN&lt;/a> explain:&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Whenever a document is loaded in a particular tab in the browser, a unique page session gets created and assigned to that particular tab. That page session is valid only for that particular tab.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;ul>
+&lt;li>A page session lasts as long as the tab or the browser is open, and survives over page reloads and restores.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Opening a page in a new tab or window creates a new session with the value of the top-level browsing context, which differs from how session cookies work.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Opening multiple tabs/windows with the same URL creates sessionStorage for each tab/window.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Duplicating a tab copies the tab’s sessionStorage into the new tab.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Closing a tab/window ends the session and clears objects in sessionStorage.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>Based on the second point, you might think that data can be shared across new pages opened from the current page. Try executing the following code in the console of the current page:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sessionStorage.setItem(&amp;#39;name&amp;#39;, &amp;#39;fatfish&amp;#39;);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then, open another page of the same site in a new tab. You won’t be able to read the data:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sessionStorage.getItem(&amp;#39;name&amp;#39;); // null
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So, the conclusion is that sessionStorage cannot share data across multiple tabs or windows. Does this mean the explanation on MDN is incorrect?&lt;/p>
+&lt;h2 id="the-correct-explanation">The Correct Explanation
+&lt;/h2>&lt;p>sessionStorage indeed cannot share data between multiple windows or tabs. However, when you open a new page via window.open or a link (not a new window), the new page will copy the sessionStorage of the original page.&lt;/p>
+&lt;p>Here’s an example to illustrate this:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sessionStorage.setItem(&amp;#39;name&amp;#39;, &amp;#39;fatfish&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">window.open(&amp;#39;your-page-url.html&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// or
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;a href=&amp;#34;https://...&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Thus, while sessionStorage does not share data between different windows or tabs, it does copy the data when opening a new page through certain methods.&lt;/p></description></item><item><title>How can ordinary people break through information barriers?</title><link>https://www.skstory.online/p/how-can-ordinary-people-break-through-information-barriers/</link><pubDate>Wed, 03 Jul 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/how-can-ordinary-people-break-through-information-barriers/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*xekwS8XV1oUz4559" alt="Featured image of post How can ordinary people break through information barriers?" />&lt;p>In an era of information explosion, breaking information barriers is crucial for personal development. Here are three concrete paths to help ordinary people bridge the information gap and enhance their vision and potential.&lt;/p>
+&lt;h2 id="1-move-to-high-income-areas-to-earn-more-save-more-and-expand-your-network">1. Move to High-Income Areas to Earn More, Save More, and Expand Your Network
+&lt;/h2>&lt;p>Firstly, geographical location has a significant impact on personal development. High-income areas usually mean more job opportunities and higher income levels, especially in first- and second-tier cities. Here are the specific steps:&lt;/p>
+&lt;p>Choose the Right City: First- and second-tier cities typically offer more job opportunities and higher income levels. Choosing a city that suits your field of development is very important.&lt;/p>
+&lt;p>Accumulate Initial Assets: Start accumulating assets as early as possible; young people have a higher risk tolerance and a longer time for investment returns.&lt;/p>
+&lt;p>Expand Your Social Circle: You will meet more talented individuals and opportunities in high-income areas. Expanding your network helps you gain more information and resources.&lt;/p>
+&lt;h2 id="2-enhance-vision-by-reading-high-density-information">2. Enhance Vision by Reading High-Density Information
+&lt;/h2>&lt;p>Information density is key to determining a person’s vision. Long-term absorption of high-density information can help individuals break boundaries faster and overcome information disparities. Here are some suggestions:&lt;/p>
+&lt;p>Prioritize Reading Text Information: Reading for an hour provides far more information than watching videos for the same duration. Text brings deep thinking and logic, enhancing rationality and scientific literacy.&lt;/p>
+&lt;p>Avoid Fragmented Information from Short Videos: Although short videos are very efficient as entertainment, their information density could be higher and prone to fragmentation, disorder, and inefficiency. Therefore, reduce the use of short videos and read more books and long articles.&lt;/p>
+&lt;p>Utilize Books and Online Self-Learning: Compared to attending classes, reading books and online self-learning are more efficient. Classes are suitable for those who need structured learning or have poor self-discipline while reading and self-learning are suitable for those who want to quickly and efficiently acquire information.&lt;/p>
+&lt;h2 id="3-break-information-echo-chambers-search-more-push-less">3. Break Information Echo Chambers: Search More, Push Less
+&lt;/h2>&lt;p>In the digital age, algorithm-driven information pushes make us increasingly passive, exacerbating the information echo chamber effect. Here are some coping strategies:&lt;/p>
+&lt;p>Actively Search for Information: Conduct more active searches and rely less on algorithm-pushed information. This ensures that the information you get is more comprehensive and objective.&lt;/p>
+&lt;p>Build Your Information Flow: Avoid passive information reception by establishing your reliable sources and channels, such as subscribing to high-quality news websites, blogs, and academic journals.&lt;/p>
+&lt;p>Improve Information Literacy: Learn to identify the authenticity and reliability of information to avoid being misled by false information and noise.&lt;/p>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>Breaking information barriers is not just about acquiring more information but also about enhancing personal thinking and decision-making abilities. These three paths — choosing the right geographical location, optimizing information acquisition methods, and actively searching for information — are effective methods to help ordinary people bridge the information gap. I hope these suggestions can help you better control your future in the information age.&lt;/p></description></item><item><title>If You Could Be Reborn…</title><link>https://www.skstory.online/p/if-you-could-be-reborn/</link><pubDate>Mon, 01 Jul 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/if-you-could-be-reborn/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*MrRcX9ak6pIshcc8" alt="Featured image of post If You Could Be Reborn…" />&lt;h2 id="1">1
+&lt;/h2>&lt;p>In August 2038, you were born into an ordinary family. Due to some fantastical reason, you were reborn as a baby.&lt;/p>
+&lt;p>Everything seemed no different from your previous life, except that your root had become slightly smaller. Well, this didn’t matter much; in your heart, you were determined to become extraordinary in this life.&lt;/p>
+&lt;p>Then, not long after, you experienced the first slap of your life.&lt;/p>
+&lt;p>When you curiously looked around with wide eyes, your new father was anxiously staring at you because you weren’t crying at all, not making a sound.&lt;/p>
+&lt;p>Worried you might have aspirated amniotic fluid, your father gave you a hard slap on the buttocks.&lt;/p>
+&lt;p>This time, you really cried.&lt;/p>
+&lt;p>Because it was excruciatingly painful.&lt;/p>
+&lt;h2 id="2">2
+&lt;/h2>&lt;p>Back home, you entered the most painful period of your life: breastfeeding.&lt;/p>
+&lt;p>Because you retained all your memories from your previous life, you had no emotional connection with your new parents, and you had to accept a harsh reality.&lt;/p>
+&lt;p>As an adult male with intact memories, you found yourself doing something psychologically uncomfortable.&lt;/p>
+&lt;p>And you couldn’t refuse.&lt;/p>
+&lt;p>In your tiny brain, your chaotic thoughts clashed fiercely with your infant body.&lt;/p>
+&lt;p>Sex, fear, psychological turmoil, and breakdowns repeatedly played out in your mind.&lt;/p>
+&lt;p>You had many ambitions, but you had no choice. You could only console yourself during the quiet nights, telling yourself it was okay, just like being in prison.&lt;/p>
+&lt;p>But this prison lasted a very long time.&lt;/p>
+&lt;h2 id="3">3
+&lt;/h2>&lt;p>Fortunately, you didn’t die from anxiety and managed to get through that period.&lt;/p>
+&lt;p>Now, you’ve started school, and your exceptional performance convinced your family to enroll you in the best elementary school.&lt;/p>
+&lt;p>Hearing this made you feel a bit suppressed because it meant a significant financial burden for your ordinary family. You tried to persuade your parents that you didn’t need to go to such a place.&lt;/p>
+&lt;p>But that was impossible. Your parents lovingly patted your head, telling you that as a child, you wouldn’t understand, and that they wouldn’t let hardship or poverty hinder your future.&lt;/p>
+&lt;p>Without any decision-making power, you watched as your family slid further into financial strain.&lt;/p>
+&lt;p>You thought it was okay, relying on your past life’s memories; elementary school would be a breeze.&lt;/p>
+&lt;p>And it was. In the best elementary school, you continued to excel, showing a maturity far beyond your age.&lt;/p>
+&lt;p>You felt everything was going as you had planned, that life was unfolding as you envisioned.&lt;/p>
+&lt;h2 id="4">4
+&lt;/h2>&lt;p>But fate’s blows came quickly, giving you little time to adjust.&lt;/p>
+&lt;p>Entering middle school with a dazzling reputation, you suddenly realized you couldn’t control everything.&lt;/p>
+&lt;p>You tried to recall your previous life, only to find that you’d forgotten all the knowledge from middle and high school. You could have studied hard in elementary school, but if you had such a resilient academic spirit, it’s hard to imagine how you were just an ordinary man in your previous life.&lt;/p>
+&lt;p>You comforted yourself, thinking it was okay; even if you had to start over, you’d still have an advantage over others.&lt;/p>
+&lt;p>However, you soon discovered that academics required talent.&lt;/p>
+&lt;p>You still couldn’t grasp the dry and tedious math. Your only advantage was a slight improvement in English and social sciences compared to your previous life.&lt;/p>
+&lt;p>These grades kept you at the top of your class but no longer at the pinnacle.&lt;/p>
+&lt;p>People around you started to feel disappointed, and this disappointment peaked in high school.&lt;/p>
+&lt;p>It was the same for you.&lt;/p>
+&lt;p>In the intense pressure and isolation of high school, you couldn’t fathom why you had to endure another three years like this. You tried desperately to study and maintain your grades, but your lack of talent in certain subjects was evident.&lt;/p>
+&lt;p>More painfully, you had no familiar advantages left. You had long forgotten high school knowledge, and you had planned to start studying in middle school, but maintaining your current grades took all your energy.&lt;/p>
+&lt;p>So, suddenly, you were back at the same starting line.&lt;/p>
+&lt;p>This disparity and pain made it even harder for you to focus. Your only luck was that you managed to date the girl you liked in high school, even though being with her always filled you with a sense of guilt.&lt;/p>
+&lt;p>She was too young and too innocent.&lt;/p>
+&lt;p>Amidst the pain, you realized your original plan was a complete failure. Just keeping up with your studies consumed most of your time, and your family had no extra money to support any early planning.&lt;/p>
+&lt;p>And you were just an ordinary person. In your previous life, you were a financial novice for twenty years and never succeeded in business. You didn’t know what other avenues were available for achieving a class leap.&lt;/p>
+&lt;p>You resigned yourself to fate.&lt;/p>
+&lt;h2 id="5">5
+&lt;/h2>&lt;p>You got into a slightly better college than in your previous life. This might be your advantage, but the sense of disparity still surrounded you and your family.&lt;/p>
+&lt;p>You felt a bit ashamed, but at least the college was far from home, so you didn’t have to hear any gossip.&lt;/p>
+&lt;p>Living on your family’s allowance, you continued dating your girlfriend in college, which seemed to be your only talent — approaching relationships with enough maturity.&lt;/p>
+&lt;p>In college, you lived frugally, saving money while constantly reflecting on the path you took in your previous life.&lt;/p>
+&lt;p>You had worked in many companies, going back and forth, and apart from that, you seemed to have no additional income. So, you thought, why not try investing? Maybe accumulating experience from now on would be beneficial for your future.&lt;/p>
+&lt;p>But the money you saved by living frugally had to support certain activities with your girlfriend, yet you still chose to invest it.&lt;/p>
+&lt;p>One day, while accompanying your girlfriend back to her hometown, you were dozing off in the car when you suddenly realized that her hometown was the same place as your hometown from your previous life.&lt;/p>
+&lt;p>Through the window, you saw the dilapidated graves of your previous life’s parents, but you just turned your head, and no one knew what you were thinking.&lt;/p>
+&lt;p>Time continued to fly by, and soon you graduated.&lt;/p>
+&lt;h2 id="6">6
+&lt;/h2>&lt;p>In the vast job market, you felt lost, just like everyone else. You didn’t know what to do because at this moment, you were really too ordinary.&lt;/p>
+&lt;p>Your academic qualifications were mediocre, your resume was average, but fortunately, you had genuine emotions, which earned you what you believed to be love.&lt;/p>
+&lt;p>But you were truly unwilling to accept this fate.&lt;/p>
+&lt;p>So, in an instant, you found the answer. You decided to take the civil service exam for entry-level positions.&lt;/p>
+&lt;p>Relying on your interpersonal skills from your previous life, you believed that at least in handling social relationships, you would be far better than your peers.&lt;/p>
+&lt;p>This time, it seemed you made the right bet.&lt;/p>
+&lt;p>You passed the exam, and by being cautious, obedient like a loyal dog, and handling tasks proficiently, you gained the appreciation of many people.&lt;/p>
+&lt;p>You thought perhaps the real opportunity was here.&lt;/p>
+&lt;h2 id="7">7
+&lt;/h2>&lt;p>Time still did not stop turning, and troublesome matters followed one after another. Due to being separated from your girlfriend, the conflicts between both families intensified.&lt;/p>
+&lt;p>You needed a house, money to take care of your parents, whose bodies were gradually deteriorating due to hard work.&lt;/p>
+&lt;p>The enormous pressure fell on your shoulders, and sometimes when you woke up from a dream, a sense of unwillingness would surge, but the pain remained with you.&lt;/p>
+&lt;p>You became silent because there were too many things you couldn’t share with others.&lt;/p>
+&lt;p>You continued to work, but suddenly realized that perhaps getting a promotion was a distant dream.&lt;/p>
+&lt;p>But you were still lucky, as you walked into the hall of marriage with your first love, which was actually the most extraordinary thing in your life.&lt;/p>
+&lt;p>However, you vomited on your wedding day.&lt;/p>
+&lt;p>Perhaps it was during the vows, you suddenly thought of your previous life.&lt;/p>
+&lt;p>Many, many years ago, you had done the same thing — holding a woman’s hand in front of guests and smilingly saying to her, “I will love you forever.”&lt;/p>
+&lt;p>Suddenly, you didn’t know how long “forever” was.&lt;/p>
+&lt;p>You also suddenly didn’t know what love really was in your heart.&lt;/p>
+&lt;h2 id="8">8
+&lt;/h2>&lt;p>The hands of time continued to turn, and everything came so quickly.&lt;/p>
+&lt;p>Your wife’s pregnancy, the birth of your child, the aging and death of your parents. You began to shuttle back and forth between the hospital and the government office outside of work.&lt;/p>
+&lt;p>You mechanically did the things you had done in your previous life, with the only fluctuation being the day your child was born.&lt;/p>
+&lt;p>You rushed into the delivery room like a madman, trying to kill the newborn child.&lt;/p>
+&lt;p>Many people held you down, but you just shouted, “He is just like me.”&lt;/p>
+&lt;p>You knew that you might just be overly sensitive, but many people began to think you were crazy.&lt;/p>
+&lt;p>Then came your aging, and your wife’s aging. You spent a lifetime but didn’t reach the so-called official position, yet you and your wife managed to gather the funds for your child’s education and living expenses.&lt;/p>
+&lt;p>You supported this family, worrying about everything for your child, then slowly.&lt;/p>
+&lt;p>Your child grew up, and you grew old.&lt;/p>
+&lt;p>And then.&lt;/p>
+&lt;p>Your parents, your in-laws, and your wife all died. The friends and elders you knew in this life also began to pass away.&lt;/p>
+&lt;p>The day your wife died, she held your hand, seemingly returning to the time when she first met you, with curious light in her eyes, just like when she was sixteen.&lt;/p>
+&lt;p>She gently told you that she felt she had never really understood you all her life, and she thought you were very, very tired.&lt;/p>
+&lt;p>But she also smiled and told you that she felt it was enough to have loved you in this life.&lt;/p>
+&lt;p>You just held her hand and watched the light in her eyes suddenly go out.&lt;/p>
+&lt;p>But at that moment, you didn’t cry; you just fell into a daze.&lt;/p>
+&lt;p>You thought of many, many years ago when you had also held another woman’s hand like this, and she had long been dead.&lt;/p>
+&lt;h2 id="9">9
+&lt;/h2>&lt;p>After your wife died, you called your son. He was already established and looked very tired.&lt;/p>
+&lt;p>You scrutinized this son, and it seemed you had never really understood him. You used to have your defenses, but at this moment, you suddenly felt relieved.&lt;/p>
+&lt;p>You hugged him tightly and then told him you were leaving and that he shouldn’t come looking for you.&lt;/p>
+&lt;p>Your son was somewhat surprised, but in the end, he nodded.&lt;/p>
+&lt;p>After leaving home, you went to many places.&lt;/p>
+&lt;p>You went to a certain mountain you remembered from your previous life. Amidst the weeds were two graves: one was yours, and the other was your wife from that time.&lt;/p>
+&lt;p>You suddenly collapsed in front of the graves and then fell into a deep sleep.&lt;/p>
+&lt;p>In your dream, you saw many people, all waiting for you. You wanted to cry, but as soon as you made a sound, you woke up from the stupor.&lt;/p>
+&lt;p>You struggled to stand up and took a car to a distant temple.&lt;/p>
+&lt;p>You remembered that in your previous life, there had been a young monk in the temple when you were old. But when you stepped into the temple this time, there was only an old monk.&lt;/p>
+&lt;h2 id="10">10
+&lt;/h2>&lt;p>The old monk was not surprised by your arrival; he just led you to the statue of the Bodhisattva and asked if you felt any regrets.&lt;/p>
+&lt;p>You looked up at the solemn and dignified Bodhisattva statue and, with a faint smile, told the old monk that you had once tried your utmost to achieve a class leap and become an extraordinary person.&lt;/p>
+&lt;p>You once thought your greatest failure was still becoming an ordinary person.&lt;/p>
+&lt;p>But now, you seemed to understand that what you truly regretted was never cherishing the life of an ordinary person.&lt;/p>
+&lt;p>You told the old monk that you had wasted a lot of time and a lot of love. You had many questions that you never figured out in the end, such as who you really were, who you truly loved, and where it all began and ended.&lt;/p>
+&lt;p>The old monk also smiled and told you that life has no do-overs.&lt;/p>
+&lt;p>You shook your head and said, “Life shouldn’t have do-overs.”&lt;/p>
+&lt;p>The old monk pointed to a large bell in the courtyard and told you that he had been ringing the bell all his life. Whenever he couldn’t figure out how to become enlightened, he would do this.&lt;/p>
+&lt;p>The old monk urged you to give it a try, so you did.&lt;/p>
+&lt;p>You grabbed the rope tightly and then swung it with all your might. A clear bell sound suddenly rang out, echoing through the surroundings, resounding through the sky like a crane’s call.&lt;/p>
+&lt;p>The sound passed through the temple walls, through the vines on the mountain, over the broken bridge on the small river, and across the vast yet desolate plain.&lt;/p>
+&lt;p>The bell sound swept through the mountain wind, carrying your love and hate, your confusion, your rights and wrongs, traversing your two lifetimes, and finally spiraled down, landing on your grave.&lt;/p>
+&lt;p>You suddenly realized something. This might be the last bit of enlightenment for an ordinary person like you, at the end of your life.&lt;/p>
+&lt;p>The old monk walked over to you. He watched as your breathing became calmer and fainter.&lt;/p>
+&lt;p>You looked at the old monk and told him you had figured out the answer to his long-standing question: how a person should become enlightened.&lt;/p>
+&lt;p>The old monk leaned down.&lt;/p>
+&lt;p>With your last bit of strength, you uttered three words:&lt;/p>
+&lt;p>“Don’t look back.”&lt;/p>
+&lt;p>Finally, you truly passed away.&lt;/p></description></item><item><title>Why could Europe break through the cycle of over-competition?</title><link>https://www.skstory.online/p/why-could-europe-break-through-the-cycle-of-over-competition/</link><pubDate>Mon, 24 Jun 2024 16:02:05 +0800</pubDate><guid>https://www.skstory.online/p/why-could-europe-break-through-the-cycle-of-over-competition/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*IVlgu89_wN7ypu_O" alt="Featured image of post Why could Europe break through the cycle of over-competition?" />&lt;p>I often ponder, why does Europe seem to be able to break through the cycle of over-competition, generally adhere to labor laws, and enjoy comprehensive social welfare benefits? Where does all this social wealth come from? With this question in mind, I started to study history.&lt;/p>
+&lt;h2 id="first-layer-of-thought">First Layer of Thought:
+&lt;/h2>&lt;p>Europeans generally adhere to labor laws and have comprehensive social welfare protections. Everything looks very promising, but I couldn’t help but wonder: where does all this social wealth actually come from? So, I decided to delve deeper into history.&lt;/p>
+&lt;h2 id="second-layer-of-thought">Second Layer of Thought:
+&lt;/h2>&lt;p>In the process of studying history, I found that Europe had accumulated a vast amount of wealth through colonization and plundering. Hence, I concluded: Europeans’ ancestors accumulated a large amount of social wealth through colonization and plundering, and their descendants are merely living off this legacy. However, as my research deepened, I began to question this viewpoint. The total wealth plundered by ancestors, calculated by purchasing power, seems unable to support such a long period. So, is there another source of Europe’s wealth?&lt;/p>
+&lt;h2 id="third-layer-of-thought">Third Layer of Thought:
+&lt;/h2>&lt;p>To find the answer, I studied contemporary economics and learned about Germany’s dumping of products onto the EU, France’s economic control over Africa, Britain’s offshore balancing and its role as a European financial center, the global penetration of Italian luxury culture, the dark side of Swiss banking, and so on. This realization led me to understand that colonialism has not ended, and the European powers are still economically draining the world in various covert ways.&lt;/p>
+&lt;h2 id="fourth-layer-of-thought">Fourth Layer of Thought:
+&lt;/h2>&lt;p>However, why can historical plundering and today’s economic draining benefit the ordinary people? I started to study recent political history and learned about the huge impact of the communist movement in the Soviet Union on Europe, the rise and fall of European leftist forces over decades, and the wave of workers’ struggles represented by France. Thus, I came to a new conclusion: the European public, after a long struggle, has won the right to a laid-back lifestyle today, which is admirable.&lt;/p>
+&lt;h2 id="fifth-layer-of-thought">Fifth Layer of Thought:
+&lt;/h2>&lt;p>But, when I further studied economics and politics, I found that Europe’s political influence is diminishing, and economic indicators are stagnant or even regressing. I started to wonder, is this high-welfare, laid-back lifestyle of European people too shortsighted? So, I began to study human social systems and development rules, learning about the Matthew effect of social wealth and human chronic issues of social stratification.&lt;/p>
+&lt;h2 id="sixth-layer-of-thought">Sixth Layer of Thought:
+&lt;/h2>&lt;p>I started to believe that the struggle and laid-back attitude of European people are inevitable trends in human social development, unavoidable under the chronic issues of wealth distribution and class stratification. However, I also studied China’s large-scale wealth transfer and poverty alleviation policies, which led me to a new question: are there other paths to choose?&lt;/p>
+&lt;h2 id="seventh-layer-of-thought">Seventh Layer of Thought:
+&lt;/h2>&lt;p>I decided to expand my horizons, studying the history of human civilizations for thousands of years, trying to find the root cause of societal over-competition and pursue a win-win solution. I discovered that what I could see and think of had already been explored by predecessors. Many philosophers, historians, sociologists, and politicians have different theories, such as Rousseau’s social contract theory and Marx’s Capital. Their depth of thought is far beyond what I could grasp in school.&lt;/p>
+&lt;h2 id="final-thought">Final Thought:
+&lt;/h2>&lt;p>Ultimately, I began to seriously ponder a philosophical question: In life, are we living in the moment, or sacrificing ourselves to create a better future for our descendants? In other words, what is the meaning of life? This is not only an individual’s question but also a societal one. We are all searching for answers, but perhaps, the answers are not singular.&lt;/p></description></item><item><title>How to make life better?</title><link>https://www.skstory.online/p/how-to-make-life-better/</link><pubDate>Tue, 19 Mar 2024 16:22:38 +0800</pubDate><guid>https://www.skstory.online/p/how-to-make-life-better/</guid><description>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*Qwoddd3GhvkgV3BLasvq9Q.jpeg" alt="Featured image of post How to make life better?" />&lt;p>There are many ways to rise above in life. Conventionally understood promotions and salary increases, as well as gaining official ranks and wealth, are essentially socioeconomic advancements and are undoubtedly &amp;ldquo;ascending&amp;rdquo;; also very worldly, but with a warmer sense of living, such as physical and mental health, the well-being of friends and relatives, and family harmony, which we commonly refer to as &amp;ldquo;a happy life,&amp;rdquo; naturally also represents moving upwards.
+If I must give my personal opinion on such a proposition with no standard answer, it would roughly be:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Never stop learning&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The fullness of the spiritual world is fundamental&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The body is the capital of everything&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Career advancement requires discernment and choice&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="never-stoplearning">Never stop learning
+&lt;/h2>&lt;p>When I graduated from college and entered the workforce as a project manager, my understanding of learning was still from a student&amp;rsquo;s perspective - &amp;ldquo;take more exams, get more certifications.&amp;rdquo; I asked a white-haired old man who mentored me, a project manager with decades of experience, &amp;ldquo;Is getting a project management certification useful?&amp;rdquo;&lt;/p>
+&lt;p>His exact words were, &amp;ldquo;At your age, it&amp;rsquo;s useful, but look at me, I&amp;rsquo;ve been in projects for decades and never got certified. You go get one, but if you have time, you could also learn a musical instrument.&amp;rdquo; This white-haired man, almost completely gray by then, traveled through many countries working on different projects in his youth, always enjoyed music, was part of a band in Singapore with some Thai people at the time, performing in bars playing the electric bass, and was also learning skateboarding as a hobby. His state and mindset were much younger than mine.&lt;/p>
+&lt;p>As I gradually moved away from student thinking, I realized that not only studying textbooks, attending classes, and obtaining certifications counted as learning. Learning life skills in the kitchen with parents, such as chopping vegetables and making soup is learning; identifying various flowers, trees, insects, and birds in the wild is learning; observing and understanding other people&amp;rsquo;s lifestyles in unfamiliar cities is learning; and practicing introspection and awareness when no one else is watching is also learning.&lt;/p>
+&lt;p>Utilitarian learning, such as obtaining a certificate or an academic degree, can bring immediate rewards. Still, non-utilitarian learning, such as learning some DIY skills to be self-reliant, mastering some popular AI tools to make life and work easier, or even learning a magic trick to make oneself and others laugh, is also learning. Moreover, this altruistic learning can bring longer-lasting positive feedback and is easier to stick with.&lt;/p>
+&lt;p>Perhaps no one has spoken better on this topic than Steve Jobs, who in his &amp;ldquo;connecting the dots&amp;rdquo; speech mentioned attending calligraphy classes after dropping out of college, a seemingly non-utilitarian pursuit that laid the foundation for the printed fonts when designing the Mac computer ten years later. The impact of learning may not need to be immediately apparent, but looking back many years later can bring clarity and enlightenment.&lt;/p>
+&lt;p>And ten years after the white-haired man said those words to me, I&amp;rsquo;ve also traveled to many countries and worked on many projects. I still haven&amp;rsquo;t acquired a project management certificate, but I truly started learning to play the bass.&lt;/p>
+&lt;p>&lt;img src="https://images.unsplash.com/photo-1599010369632-ea06974fd37e?utm_medium=medium&amp;amp;w=700&amp;amp;q=50&amp;amp;auto=format"
+loading="lazy"
+>&lt;/p>
+&lt;hr>
+&lt;h2 id="the-fullness-of-the-spiritual-world-is-foundational">The fullness of the spiritual world is foundational
+&lt;/h2>&lt;p>From personal experience and observations of those around me, it&amp;rsquo;s easy for adults to fall into nihilism and escapism in life.&lt;/p>
+&lt;p>On one hand, the things of human society usually can&amp;rsquo;t withstand serious deconstruction. Anything that seems meaningful can become meaningless after repeatedly asking, &amp;ldquo;What is its significance?&amp;rdquo; After all, any individual is too insignificant to mention in the grand scheme of society, like an ephemeral mayfly in the vastness of the universe. And all the history of human society, all those empires that came and went, and all those once-imposing heroes are nothing more than the &amp;ldquo;pale blue dot&amp;rdquo; as Carl Sagan put it.&lt;/p>
+&lt;p>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*TYgMEqb0ZAbFgeOAMuKhvA.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>On the other hand, the pressures of life are always so overwhelming that they make one want to escape, and escaping does seem useful on the surface. With life already so hard, why not take up fishing by a remote riverside, not to catch fish, but to have those four or five hours solely focused on fishing instead of mundane concerns? Another common escape from life is indulging in vices and material pleasures. I deeply understand the helplessness of this need to escape, but I also know that these ways of escaping life only serve to continuously raise one&amp;rsquo;s threshold for happiness, leading to an increasingly difficult cycle of dissatisfaction.&lt;/p>
+&lt;p>If one cannot emerge from this nihilism and escapism, any effort to &amp;ldquo;move upwards&amp;rdquo; will be futile; if there is no genuine desire for change, no real change will occur. That&amp;rsquo;s why the fullness of the spiritual world is said to be the foundation. Moreover, a rich spiritual world has a positive effect on mental health. With years of economic development and an improved standard of living, the widespread presence of mental illness has gradually come to everyone&amp;rsquo;s attention. Research data from the CDC indicates a growing global prevalence of depression.&lt;/p>
+&lt;p>Mental health is also significantly related to personal quality of life and harmonious relationships with others, all of which inevitably affect the pursuit of &amp;ldquo;moving upwards.&amp;rdquo;&lt;/p>
+&lt;p>Unfortunately, there is no cure-all solution for creating spiritual fullness. I can only share a few methods that have worked effectively for me and others around me:&lt;/p>
+&lt;p>Meditation: There are many different schools and methods, but as a way to restore mental energy, it is effective regardless of whether you&amp;rsquo;re aiming for external awareness or inner self-awareness. Finding what works for you and sticking with it will yield results.&lt;/p>
+&lt;p>Quality Time Alone: Spending time alone reading, watching movies, daydreaming under the sun and blue sky, or petting cats and dogs, is not only a way for many introverts to recharge energy but also applicable to extroverts.&lt;/p>
+&lt;p>Charitable Activities: Altruistic behavior ultimately benefits oneself. Don&amp;rsquo;t overemphasize the nobility of charity or selflessness; focusing on the joy you get from volunteering can reveal its healing effect on the inner spirit.&lt;/p>
+&lt;hr>
+&lt;h2 id="the-body-is-the-capital-of-everything">The body is the capital of everything
+&lt;/h2>&lt;p>With a rich spiritual world as the foundation, it&amp;rsquo;s time to take action, and the body is the capital for all action. By body, I mean two aspects: basic health and enhanced external image.&lt;/p>
+&lt;p>On the basic side, adult men will inevitably face various physical changes. Men generally start to gain weight after 30, a trend that usually continues until around 55. As the secretion of male hormones decreases, muscle mass will gradually reduce, and after 45 years old, the rate of muscle loss accelerates. In other respects, the function and disease risks of organs such as the heart and prostate also increase with age; and skin aging is not just a female issue, but it can be worse for men who pay less attention to skincare.&lt;/p>
+&lt;p>Passively accepting the decline in bodily functions is futile; active maintenance is the only way to go. Fortunately, when first reaching middle age and when the decline in bodily functions just begins, the reduction in exercise performance isn&amp;rsquo;t so pronounced. Maintaining a good exercise regime, especially with at least twice-weekly strength training, can increase muscle mass effectively slow down aging, and even improve physical functions.&lt;/p>
+&lt;p>In recent years, I&amp;rsquo;ve significantly increased the proportion of strength training in my routine, and I indeed feel an improvement in various aspects of my fitness. In addition to this, a clean and rich diet and intake of various nutritional supplements are also important parts. As the saying goes, &amp;ldquo;Exercise accounts for three parts, diet for seven&amp;rdquo;; of course, nutrition is a complex topic, so I won&amp;rsquo;t delve into it here. There&amp;rsquo;s plenty of professional sharing on Zhihu that you can check out.&lt;/p>
+&lt;p>Furthermore, a better basic physical condition isn&amp;rsquo;t just about basic effects like improved exercise ability but also improves the external image. A good appearance can make life easier, which becomes especially important in times when gender equality is increasingly recognized. Imagine, if you&amp;rsquo;re part of a company&amp;rsquo;s management and all other conditions being equal, would you prefer to promote someone who exercises regularly and maintains a good figure, or someone whose appearance isn&amp;rsquo;t as remarkable? Likewise, all other things being equal, wouldn&amp;rsquo;t you want the people close to you - family, friends, lovers - to look better rather than worse?&lt;/p>
+&lt;p>Even dismissing these worldly and external considerations, simply from a self-pleasing perspective, as an adult man, if given the choice, wouldn&amp;rsquo;t you prefer to be strong, well-proportioned, energetic, and polished rather than less remarkable in appearance?&lt;/p>
+&lt;p>Not just exercise, diet, and nutrition that can improve external appearance, men&amp;rsquo;s daily grooming has also become an integral part of many men&amp;rsquo;s lives, and men can indeed be more exquisite in this aspect.&lt;/p>
+&lt;p>I started trying and have kept up with daily skincare routines a few months ago, including cleansing, moisturizing, sun protection, etc., and have seen small successes.&lt;/p>
+&lt;hr>
+&lt;h2 id="career-advancement-requires-discernment-andchoice">Career advancement requires discernment and choice
+&lt;/h2>&lt;p>With the habit of continuous learning, a full spiritual world, a healthy body, and a good appearance, one has the opportunity to make choices about moving upwards.&lt;/p>
+&lt;p>Those middle-aged among us must have realized that effort doesn&amp;rsquo;t always lead to immediate rewards, and hard work doesn&amp;rsquo;t always yield instant results. But with the enhancement from self-care mentioned above, if you choose to continue advancing socioeconomically, you&amp;rsquo;ll have many ways to actively show colleagues and the market your ambition. The next step is to seize opportunities when they arise.&lt;/p>
+&lt;p>And if you choose to continue advancing in terms of life happiness, with these good foundations of body and mind, you&amp;rsquo;ll be able to put yourself in a better mental state to interact with those around you. More importantly, you&amp;rsquo;ll be able to get along better with yourself.&lt;/p>
+&lt;p>People often ask how to succeed in both career and family, to which I say that achieving success in both requires great luck and effort and being good at one is already commendable. It&amp;rsquo;s impossible to have it all like a protagonist in a wish-fulfilling story. The flip side of &amp;ldquo;moving upwards&amp;rdquo; is making choices, judging, and firmly choosing what&amp;rsquo;s more important to you, be it career advancement, harmonious relationships with friends and relatives, or inner peace. All these are part of moving upwards.&lt;/p></description></item></channel></rss>
