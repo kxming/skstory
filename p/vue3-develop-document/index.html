@@ -1,0 +1,693 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Get this In Vue2, this in each component points to the current component instance, and this also contains globally mounted things, routes, state management, etc.\nHowever, there is no this in the Composition API of Vue3. If you want a similar usage, there are two, one is to access the current component instance, and the other is to access the global instance. You can print it out by yourself and take a look.\n"><title>Vue3 develop document</title>
+<link rel=canonical href=https://www.skstory.online/p/vue3-develop-document/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Vue3 develop document"><meta property='og:description' content="Get this In Vue2, this in each component points to the current component instance, and this also contains globally mounted things, routes, state management, etc.\nHowever, there is no this in the Composition API of Vue3. If you want a similar usage, there are two, one is to access the current component instance, and the other is to access the global instance. You can print it out by yourself and take a look.\n"><meta property='og:url' content='https://www.skstory.online/p/vue3-develop-document/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Javascript'><meta property='article:tag' content='Vue'><meta property='article:published_time' content='2024-01-21T16:22:38+08:00'><meta property='article:modified_time' content='2024-01-21T16:22:38+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*WzmFm3IVFVQLnzcA'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Vue3 develop document"><meta name=twitter:description content="Get this In Vue2, this in each component points to the current component instance, and this also contains globally mounted things, routes, state management, etc.\nHowever, there is no this in the Composition API of Vue3. If you want a similar usage, there are two, one is to access the current component instance, and the other is to access the global instance. You can print it out by yourself and take a look.\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*WzmFm3IVFVQLnzcA'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#get-this>Get this</a></li><li><a href=#global-registrationpropertyfunction>Global Registration(Property/Function)</a></li><li><a href=#template>Template</a></li><li><a href=#get-dom>Get DOM</a></li><li><a href=#initialization>Initialization</a></li><li><a href=#unbinding>Unbinding</a></li><li><a href=#ref-and-reactive>Ref and Reactive</a></li><li><a href=#toref-and-torefs>toRef and toRefs</a></li><li><a href=#watch>watch</a></li><li><a href=#watcheffect>watchEffect</a></li><li><a href=#computed>computed</a></li><li><a href=#nexttick>nextTick</a></li><li><a href=#mixins-and-hooks>mixins and hooks</a></li><li><a href=#component-communication>Component communication</a></li><li><a href=#multiple-v-model>multiple v-model</a></li><li><a href=#state-management>State Management</a></li><li><a href=#router>router</a></li><li><a href=#css-style-penetration>CSS Style Penetration</a></li><li><a href=#binding-js-variables-with-css>Binding JS Variables with CSS</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/vue3-develop-document/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*WzmFm3IVFVQLnzcA loading=lazy alt="Featured image of post Vue3 develop document"></a></div><div class=article-details><header class=article-category><a href=/categories/javascript/ style=background-color:#d1d419;color:#fff>Javascript
+</a><a href=/categories/vue/ style=background-color:#28a243;color:#fff>Vue</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/vue3-develop-document/>Vue3 develop document</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 21, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>15 minute read</time></div></footer></div></header><section class=article-content><h2 id=get-this>Get this</h2><p>In Vue2, <code>this</code> in each component points to the current component instance, and <code>this</code> also contains globally mounted things, routes, state management, etc.</p><p>However, there is no <code>this</code> in the Composition API of Vue3. If you want a similar usage, there are two, one is to access the current component instance, and the other is to access the global instance. You can print it out by yourself and take a look.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>getCurrentInstance</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Proxy</span> <span class=n>is</span> <span class=n>the</span> <span class=n>current</span> <span class=n>component</span> <span class=n>instance</span><span class=p>,</span> <span class=n>which</span> <span class=n>can</span> <span class=n>be</span> <span class=n>understood</span> <span class=n>as</span> <span class=n>this</span> <span class=n>at</span> <span class=n>the</span> <span class=n>component</span> <span class=n>level</span><span class=p>,</span> <span class=n>without</span> <span class=n>the</span> <span class=n>global</span> <span class=n>instance</span><span class=p>,</span> <span class=n>route</span><span class=p>,</span> <span class=n>state</span> <span class=n>management</span><span class=p>,</span> <span class=n>etc</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=n>proxy</span><span class=p>,</span> <span class=n>appContext</span> <span class=p>}</span> <span class=o>=</span> <span class=n>getCurrentInstance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>This</span> <span class=n>global</span> <span class=n>is</span> <span class=n>the</span> <span class=n>global</span> <span class=n>instance</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>global</span> <span class=o>=</span> <span class=n>appContext</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>globalProperties</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=global-registrationpropertyfunction>Global Registration(Property/Function)</h2><p>In Vue2, if we want to mount something globally, we usually do it as follows, and then we can get it through <code>this.xxx</code> in all components.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Vue.prototype.xxx = xxx
+</span></span></code></pre></td></tr></table></div></div><p>But in Vue3 you can’t write like this. Instead, it changes to a global object that can be accessed by all components, which is the object of the global instance mentioned above. For example, make global registration in main.js.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>main</span><span class=o>.</span><span class=n>js</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createApp</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>App</span> <span class=n>from</span> <span class=s1>&#39;./App.vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>app</span> <span class=o>=</span> <span class=n>createApp</span><span class=p>(</span><span class=n>App</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>add</span> <span class=n>global</span> <span class=n>property</span>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>globalProperties</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=s1>&#39;xxx&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Call it in other components.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>getCurrentInstance</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=n>appContext</span> <span class=p>}</span> <span class=o>=</span> <span class=n>getCurrentInstance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>global</span> <span class=o>=</span> <span class=n>appContext</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>globalProperties</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>global</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=template>Template</h2><p>In Vue2, there can only be one root node, while Vue3 supports multiple root nodes, which everyone knows.</p><p>In essence, each component in Vue3 is still a root node, because the DOM tree can only be a tree structure. It’s just that Vue3 added a judgment during the compilation stage. If the current component has more than one root element, it will add a <code>fragment</code> component to package this multi-root component, which means this component still only has one root node. And the <code>fragment</code>, like <code>keep-alive</code>, is an built-in component that will not be rendered.</p><h2 id=get-dom>Get DOM</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>el</span><span class=o>-</span><span class=n>form</span> <span class=n>ref</span><span class=o>=</span><span class=s2>&#34;formRef&#34;</span><span class=o>&gt;&lt;/</span><span class=n>el</span><span class=o>-</span><span class=n>form</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>child</span><span class=o>-</span><span class=n>component</span> <span class=o>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;ts&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>ChildComponent</span> <span class=n>from</span> <span class=s1>&#39;./child.vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>getCurrentInstance</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ElForm</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;element-plus&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Method</span> <span class=n>one</span><span class=p>,</span> <span class=n>the</span> <span class=n>variable</span> <span class=n>name</span> <span class=n>must</span> <span class=n>be</span> <span class=n>the</span> <span class=n>same</span> <span class=n>as</span> <span class=n>the</span> <span class=n>ref</span> <span class=n>attribute</span> <span class=n>on</span> <span class=n>the</span> <span class=n>DOM</span><span class=p>,</span> <span class=n>which</span> <span class=n>can</span> <span class=n>automatically</span> <span class=n>form</span> <span class=n>a</span> <span class=n>binding</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>formRef</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=n>null</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>formRef</span><span class=o>.</span><span class=n>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Method</span> <span class=n>two</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=n>proxy</span> <span class=p>}</span> <span class=o>=</span> <span class=n>getCurrentInstance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>proxy</span><span class=o>.$</span><span class=n>refs</span><span class=o>.</span><span class=n>formRef</span><span class=o>.</span><span class=n>validate</span><span class=p>((</span><span class=n>valid</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Method</span> <span class=n>three</span><span class=err>，</span><span class=n>For</span> <span class=n>example</span><span class=p>,</span> <span class=ow>in</span> <span class=n>ts</span><span class=p>,</span> <span class=n>you</span> <span class=n>can</span> <span class=n>directly</span> <span class=n>get</span> <span class=n>the</span> <span class=n>component</span> <span class=n>type</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>You</span> <span class=n>can</span> <span class=n>get</span> <span class=n>sub</span><span class=o>-</span><span class=n>components</span> <span class=n>like</span> <span class=n>this</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>formRef</span> <span class=o>=</span> <span class=n>ref</span><span class=o>&lt;</span><span class=n>InstanceType</span><span class=o>&lt;</span><span class=nb>typeof</span> <span class=n>ChildComponent</span><span class=o>&gt;&gt;</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>You</span> <span class=n>can</span> <span class=n>also</span> <span class=n>get</span> <span class=n>the</span> <span class=n>component</span> <span class=n>type</span> <span class=n>of</span> <span class=n>element</span> <span class=n>ui</span> <span class=n>like</span> <span class=n>this</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>formRef</span> <span class=o>=</span> <span class=n>ref</span><span class=o>&lt;</span><span class=n>InstanceType</span><span class=o>&lt;</span><span class=nb>typeof</span> <span class=n>ElForm</span><span class=o>&gt;&gt;</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>formRef</span><span class=o>.</span><span class=n>value</span><span class=err>?</span><span class=o>.</span><span class=n>validate</span><span class=p>((</span><span class=n>valid</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=initialization>Initialization</h2><p>In Vue2, when you enter the page and then request the interface, or some other initial operations, they are generally placed in <code>created</code> or <code>mounted</code>, while in Vue3 <code>beforeCreated</code> and <code>created</code> are not used, because <code>setup</code> is executed before these two, and having these two would be superfluous.</p><p>So the content that was used in the <code>beforeCreated / created / beforeMount / mounted</code> hooks can be directly placed in the setup in Vue3, or in <code>onMounted/onBeforeMount</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>onMounted</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Request</span> <span class=n>function</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>getData</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>xxxApi</span><span class=o>.</span><span class=n>then</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>onMounted</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>getData</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=unbinding>Unbinding</h2><p>In Vue2, there are generally two methods for operations such as clearing timers, listeners, etc:</p><p>One is to use <code>$once</code> in conjunction with hook: <code>BeforeDestroy</code>, which is not supported by Vue3.
+The other is to use the <code>beforeDestroy</code> / <code>deactivated</code> hooks. In Vue3, the hook functions are just renamed.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>onBeforeUnmount</span><span class=p>,</span> <span class=n>onDeactivated</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Before</span> <span class=n>the</span> <span class=n>component</span> <span class=n>is</span> <span class=n>unloaded</span><span class=p>,</span> <span class=n>it</span> <span class=n>corresponds</span> <span class=n>to</span> <span class=n>beforeDestroy</span> <span class=ow>in</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>onBeforeUnmount</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>clearTimeout</span><span class=p>(</span><span class=n>timer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>window</span><span class=o>.</span><span class=n>removeAddEventListener</span><span class=p>(</span><span class=s1>&#39;...&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Exit</span> <span class=n>cache</span> <span class=n>component</span><span class=p>,</span> <span class=n>corresponds</span> <span class=n>to</span> <span class=n>deactivated</span> <span class=ow>in</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>onDeactivated</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>clearTimeout</span><span class=p>(</span><span class=n>timer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>window</span><span class=o>.</span><span class=n>removeAddEventListener</span><span class=p>(</span><span class=s1>&#39;...&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ref-and-reactive>Ref and Reactive</h2><p>Both are used to create responsive objects, <code>ref</code> is commonly used to create basic types, <code>reactive</code> is typically used to create responsiveness, this is advocated by official, yet not necessarily in reality. Some people use <code>ref</code> to define arrays, some people define only one <code>reactive</code> in a component and put all data in it, just like Vue2’s data, and some people use both.</p><p>There are two points to note:</p><p>If <code>ref</code> is passed in an referenced type, the internal source code also calls reactive to implement it.</p><p>The property returned by ref is used directly in the template, but in JS it needs to be obtained through <code>.value</code>, as shown below. Because the ref returns a wrapped object.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>div</span><span class=o>&gt;</span><span class=p>{{</span> <span class=n>count</span> <span class=p>}}</span><span class=o>&lt;/</span><span class=n>div</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span><span class=p>,</span> <span class=n>reactive</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>count</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>arr</span> <span class=o>=</span> <span class=n>ref</span><span class=p>([])</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>arr</span><span class=o>.</span><span class=n>value</span><span class=p>)</span> <span class=o>//</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>data</span> <span class=o>=</span> <span class=n>reactive</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;xxx&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=mi>18</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>data</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Why does <code>ref</code> have to return a wrapped object? It’s well known that data in Vue2 all return an object.</p><p>Because object reference types can be used for proxies or hijacking, if only the basic type is returned, it is stored in the stack, and once execution in the execution stack is completed, it is recovered, with no possibility of adding a proxy or hijacking. Naturally it’s impossible to track subsequent changes, so it has to return an object, so that it can be responsive.</p><h2 id=toref-and-torefs>toRef and toRefs</h2><p>The common point of these two methods is to create responsive references, mainly used to take the properties out of the responsive objects, or destructure the responsive objects, and the destructured property values are still responsive. If you destructure them directly without these two methods, you will lose the responsive effect.</p><p>The main advantage is that we can use the direct variable xxx without needing <code>data.xxx</code>. And when we modify xxx, we are also directly modifying the underlying object’s properties.</p><p>The difference between these two: The one with “s” and without “s”, are singular and plural. The meaning is to take one or to take many.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>reactive</span><span class=p>,</span> <span class=n>toRef</span><span class=p>,</span> <span class=n>toRefs</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>data</span> <span class=o>=</span> <span class=n>reactive</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;xxx&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=mi>18</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Although</span> <span class=n>you</span> <span class=n>can</span> <span class=n>get</span> <span class=n>name</span><span class=o>/</span><span class=n>age</span> <span class=n>this</span> <span class=n>way</span><span class=p>,</span> <span class=n>they</span> <span class=n>become</span> <span class=n>ordinary</span> <span class=n>variables</span> <span class=ow>and</span> <span class=n>lose</span> <span class=n>reactive</span> <span class=n>effect</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=n>name</span><span class=p>,</span> <span class=n>age</span> <span class=p>}</span> <span class=o>=</span> <span class=n>data</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>A</span> <span class=n>responsive</span> <span class=n>property</span> <span class=n>is</span> <span class=n>taken</span> <span class=n>out</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>name</span> <span class=o>=</span> <span class=n>toRef</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=s1>&#39;name&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>The</span> <span class=n>properties</span> <span class=n>that</span> <span class=n>are</span> <span class=n>destructured</span> <span class=ow>in</span> <span class=n>this</span> <span class=n>way</span> <span class=n>all</span> <span class=n>have</span> <span class=n>responsive</span> <span class=n>effects</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=n>name</span><span class=p>,</span> <span class=n>age</span> <span class=p>}</span> <span class=o>=</span> <span class=n>toRefs</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Whether</span> <span class=n>it</span><span class=s1>&#39;s toRef or toRefs, modifying in this way will change the name in data.</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>That</span> <span class=n>means</span> <span class=n>changing</span> <span class=n>the</span> <span class=n>properties</span> <span class=n>of</span> <span class=n>the</span> <span class=n>source</span> <span class=n>object</span><span class=p>,</span> <span class=n>which</span> <span class=n>is</span> <span class=n>the</span> <span class=n>typical</span> <span class=n>behavior</span> <span class=n>of</span> <span class=n>reactive</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>name</span><span class=o>.</span><span class=n>value</span> <span class=o>=</span> <span class=s1>&#39;xxx&#39;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=watch>watch</h2><p><code>watch</code> is used to monitor an existing property, and to do certain operations when changes occur. The following three ways of writing are commonly used in Vue2.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>watch: {
+</span></span><span class=line><span class=cl>    userId: &#39;getData&#39;,
+</span></span><span class=line><span class=cl>    userName (newName, oldName) {
+</span></span><span class=line><span class=cl>        this.getData()
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    userInfo: {
+</span></span><span class=line><span class=cl>        handler (newVal, newVal) { this.getData() },
+</span></span><span class=line><span class=cl>        immediate: true,
+</span></span><span class=line><span class=cl>        deep: true
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>In Vue3, the listening syntax is much more enriched.</p><p>Vue3’s <code>watch</code> is a function that can receive three parameters, the first parameter is the property to be monitored, the second one is the callback function to receive the new and old values, and the third one is the configuration item.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>watch</span><span class=p>,</span> <span class=n>ref</span><span class=p>,</span> <span class=n>reactive</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>name</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=s1>&#39;xxx&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>data</span> <span class=o>=</span> <span class=n>reactive</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=mi>18</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>money</span><span class=p>:</span> <span class=mi>100000000000000000000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>children</span><span class=p>:</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Listening</span> <span class=n>ref</span> <span class=n>attribute</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=p>(</span><span class=n>newName</span><span class=p>,</span> <span class=n>oldName</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>This</span> <span class=n>is</span> <span class=n>how</span> <span class=n>you</span> <span class=n>listen</span> <span class=k>for</span> <span class=n>other</span> <span class=n>properties</span><span class=p>,</span> <span class=n>routes</span><span class=p>,</span> <span class=ow>or</span> <span class=n>state</span> <span class=n>management</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>data</span><span class=o>.</span><span class=n>age</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=n>newAge</span><span class=p>,</span> <span class=n>oldAge</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>To</span> <span class=n>listen</span> <span class=n>to</span> <span class=n>multiple</span> <span class=n>properties</span><span class=p>,</span> <span class=n>put</span> <span class=n>multiple</span> <span class=n>values</span> <span class=err>​​</span><span class=ow>in</span> <span class=n>the</span> <span class=n>array</span><span class=p>,</span> <span class=ow>and</span> <span class=n>the</span> <span class=n>returned</span> <span class=n>new</span> <span class=ow>and</span> <span class=n>old</span> <span class=n>values</span> <span class=err>​​</span><span class=n>are</span> <span class=n>also</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>form</span> <span class=n>of</span> <span class=n>an</span> <span class=n>array</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>([</span><span class=n>data</span><span class=o>.</span><span class=n>age</span><span class=p>,</span> <span class=n>data</span><span class=o>.</span><span class=n>money</span><span class=p>],</span> <span class=p>([</span><span class=n>newAge</span><span class=p>,</span> <span class=n>newMoney</span><span class=p>],</span> <span class=p>[</span><span class=n>oldAge</span><span class=p>,</span> <span class=n>oldMoney</span><span class=p>])</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>The</span> <span class=n>third</span> <span class=n>parameter</span> <span class=n>is</span> <span class=n>an</span> <span class=n>object</span><span class=p>,</span> <span class=n>which</span> <span class=n>is</span> <span class=n>a</span> <span class=n>configurable</span> <span class=n>item</span> <span class=n>with</span> <span class=n>five</span> <span class=n>configurable</span> <span class=n>properties</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>(</span><span class=n>data</span><span class=o>.</span><span class=n>children</span><span class=p>,</span> <span class=p>(</span><span class=n>newList</span><span class=p>,</span> <span class=n>oldList</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span> <span class=o>...</span> <span class=p>},</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=n>Similar</span> <span class=n>to</span> <span class=n>Vue2</span>
+</span></span><span class=line><span class=cl>    <span class=n>immediate</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>deep</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=n>The</span> <span class=n>execution</span> <span class=n>timing</span> <span class=n>of</span> <span class=n>the</span> <span class=n>callback</span> <span class=n>function</span><span class=p>,</span> <span class=n>which</span> <span class=n>is</span> <span class=n>called</span> <span class=n>by</span> <span class=n>default</span> <span class=n>before</span> <span class=n>the</span> <span class=n>component</span> <span class=n>is</span> <span class=n>updated</span><span class=o>.</span> <span class=n>If</span> <span class=n>it</span><span class=s1>&#39;s called after the update, change it to &#39;</span><span class=n>post</span><span class=s1>&#39;.</span>
+</span></span><span class=line><span class=cl>    <span class=n>flush</span><span class=p>:</span> <span class=s1>&#39;pre&#39;</span><span class=p>,</span> <span class=o>//</span> <span class=n>The</span> <span class=n>default</span> <span class=n>value</span> <span class=n>is</span> <span class=s1>&#39;pre&#39;</span><span class=p>,</span> <span class=n>you</span> <span class=n>can</span> <span class=n>change</span> <span class=n>it</span> <span class=n>to</span> <span class=s1>&#39;post&#39;</span> <span class=ow>or</span> <span class=s1>&#39;sync&#39;</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=n>use</span> <span class=n>debug</span>
+</span></span><span class=line><span class=cl>    <span class=n>onTrack</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span> <span class=n>debugger</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>onTrigger</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span> <span class=n>debugger</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Inside the watch callback function, you can accept the third parameter onInvalidate, <code>which</code> is a function that clears side effects. For the first time, the callback function of the listening (handler) is not going to trigger <code>onInvalidate</code>, and subsequently, will trigger <code>onInvalidate</code> by default each time.</p><p>In other words, it’s default operation mechanism called before updating, for example, in the following code, when the key triggers an update, it will print 222 first and then print xxx. If you need to call after updating, you can add flush: post in the third configuration of watch.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// The callback function receives a parameter, which is a function used to clear side effects.
+</span></span><span class=line><span class=cl>watch(key, (newKey, oldKey, onInvalidate) =&gt; {
+</span></span><span class=line><span class=cl>    console.log(&#39;xxx&#39;)
+</span></span><span class=line><span class=cl>    // By default, the DOM obtained is the DOM before the update. If it is flush: post, you can get the DOM after the update.
+</span></span><span class=line><span class=cl>    console.log(&#39;DOM：&#39;, dom.innterHTML)
+</span></span><span class=line><span class=cl>    onInvalidate(() =&gt; {
+</span></span><span class=line><span class=cl>        console.log(2222)
+</span></span><span class=line><span class=cl>    })
+</span></span><span class=line><span class=cl>})
+</span></span></code></pre></td></tr></table></div></div><p>The use scenario of <code>onInvalidate</code> is such as: for example, there are some asynchronous operations in the callback function (handler) of listening, and when triggering <code>watch</code> again, it can be used to cancel/ignore/reset/initialize some operations of the previous unfinished asynchronous tasks, such as canceling the unfinished request when triggering <code>watch</code> last time.</p><h2 id=watcheffect>watchEffect</h2><p>In Vue3, in addition to <code>watch</code>, there is also a <code>watchEffect</code>. The differences are:</p><p><code>watch</code> is to listen to one or more values passed in, and it will return new and old values when triggered, and by default it will not execute for the first time.</p><p><code>watchEffect</code> is a function that is executed immediately, so it will be executed by default for the first time, and there is no need to pass in listening content. It will automatically collect the data sources in the function as dependencies, and it will re-execute the function when the dependencies change. (a bit like computed), and it will not return new and old values.</p><p>The timing of side effect clearance and refreshment of side effects are the same, the difference is that in <code>watch</code>, it will be passed as the third argument of the callback, in <code>watchEffect</code> it is the first argument of the callback function.</p><p>Normally, both will stop listening automatically after the component is <code>destroyed/unmounted</code>, but there are exceptions, such as asynchronous methods, listeners created in setTimeout need to manually stop listening, and the stop method is as follows.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Assigning</span> <span class=n>a</span> <span class=n>listening</span> <span class=n>method</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>unwatch</span> <span class=o>=</span> <span class=n>watch</span><span class=p>(</span><span class=s1>&#39;key&#39;</span><span class=p>,</span> <span class=n>callback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>unwatchEffect</span> <span class=o>=</span> <span class=n>watchEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{})</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>When</span> <span class=n>you</span> <span class=n>need</span> <span class=n>to</span> <span class=n>stop</span> <span class=n>listening</span><span class=p>,</span> <span class=n>manually</span> <span class=n>call</span> <span class=n>to</span> <span class=n>stop</span> <span class=n>listening</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>unwatch</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>unwatchEffect</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>Use of <code>watchEffect</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;script setup&gt;
+</span></span><span class=line><span class=cl>import { watchEffect } from &#39;vue&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Normal use.
+</span></span><span class=line><span class=cl>watchEffect(() =&gt; {
+</span></span><span class=line><span class=cl>    // It will automatically collect the properties used by this function as dependencies for monitoring.
+</span></span><span class=line><span class=cl>    // It monitors the userInfo.name property, and will not monitor userInfo.
+</span></span><span class=line><span class=cl>    console.log(userInfo.name)
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// There are two parameters. The first one is to trigger the monitoring callback function, and the second one is optional configuration items.
+</span></span><span class=line><span class=cl>watchEffect(() =&gt; {...}, {
+</span></span><span class=line><span class=cl>    // This is where the configuration items are. The meaning is the same as watch, but there are only three available configuration items.
+</span></span><span class=line><span class=cl>    flush: &#39;pre&#39;,
+</span></span><span class=line><span class=cl>    onTrack (e) { debugger }
+</span></span><span class=line><span class=cl>    onTrigger (e) { debugger }
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// The callback function receives one parameter, which is the function to clear side effects, similar to the one in watch.
+</span></span><span class=line><span class=cl>watchEffect(onInvalidate =&gt; {
+</span></span><span class=line><span class=cl>    console.log(&#39;xxx&#39;)
+</span></span><span class=line><span class=cl>    onInvalidate(() =&gt; {
+</span></span><span class=line><span class=cl>        console.log(2222)
+</span></span><span class=line><span class=cl>    })
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>&lt;/script&gt;
+</span></span></code></pre></td></tr></table></div></div><p>If you need to change the configuration item flush to post or sync in <code>watchEffect</code>, you can directly use the alias, as follows.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>watchEffect(() =&gt; {...}, {
+</span></span><span class=line><span class=cl>    flush: &#39;post&#39;,
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>//  it&#39;s the same as the one below
+</span></span><span class=line><span class=cl>watchPostEffect(() =&gt; {})
+</span></span><span class=line><span class=cl>-----------------------------
+</span></span><span class=line><span class=cl>watchEffect(() =&gt; {...}, {
+</span></span><span class=line><span class=cl>    flush: &#39;sync&#39;,
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>//  it&#39;s the same as the one below
+</span></span><span class=line><span class=cl>watchSyncEffect(() =&gt; {})
+</span></span></code></pre></td></tr></table></div></div><h2 id=computed>computed</h2><p>In Vue2, the most common use cases for computed are: <code>mapGetters/mapState</code> for fetching property from state management, getting property from a URL, conditional judgments, type conversions, etc., and it supports both function and object writing methods.</p><p>In Vue3, <code>computed</code> is no longer an object, but a function. The usage is somewhat similar in general, the first argument of the function is the listener source, used to return the <code>computed</code> new value. It also supports object writing methods, and the second argument can be used for debugging.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>computed</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>props</span> <span class=o>=</span> <span class=n>defineProps</span><span class=p>([</span><span class=s1>&#39;visible&#39;</span><span class=p>,</span> <span class=s1>&#39;type&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>emit</span> <span class=o>=</span> <span class=n>defineEmits</span><span class=p>([</span><span class=s2>&#34;myClick&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Function</span> <span class=n>method</span><span class=p>,</span> <span class=n>computed</span> <span class=n>type</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>isFirst</span> <span class=o>=</span> <span class=n>computed</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>props</span><span class=o>.</span><span class=n>type</span> <span class=o>===</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=ne>Object</span> <span class=n>method</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>status</span> <span class=o>=</span> <span class=n>computed</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=n>get</span> <span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=n>props</span><span class=o>.</span><span class=n>visible</span> <span class=p>},</span> <span class=o>//</span> <span class=n>It</span> <span class=n>is</span> <span class=n>equivalent</span> <span class=n>to</span> <span class=n>this</span><span class=o>.</span><span class=n>visible</span> <span class=ow>in</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>    <span class=n>set</span> <span class=p>(</span><span class=n>val</span><span class=p>)</span> <span class=p>{</span> <span class=n>emit</span><span class=p>(</span><span class=s1>&#39;myClick&#39;</span><span class=p>,</span> <span class=n>val</span><span class=p>)</span> <span class=p>}</span> <span class=o>//</span> <span class=n>It</span> <span class=n>is</span> <span class=n>equivalent</span> <span class=n>tothis</span><span class=o>.$</span><span class=n>emit</span><span class=p>(</span><span class=s1>&#39;input&#39;</span><span class=p>,</span> <span class=n>val</span><span class=p>)</span><span class=ow>in</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>The</span> <span class=n>second</span> <span class=n>argument</span> <span class=n>of</span> <span class=n>computed</span> <span class=n>is</span> <span class=n>also</span> <span class=n>an</span> <span class=n>object</span><span class=p>,</span> <span class=n>used</span> <span class=k>for</span> <span class=n>debugging</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>hehe</span> <span class=o>=</span> <span class=n>computed</span><span class=p>(</span><span class=n>Parameter</span> <span class=n>one</span> <span class=n>either</span> <span class=n>of</span> <span class=n>the</span> <span class=n>above</span> <span class=n>can</span> <span class=n>be</span> <span class=n>used</span><span class=err>，</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>onTrack</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span> <span class=n>debugger</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>onTrigger</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span> <span class=n>debugger</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=nexttick>nextTick</h2><p>The usage method of <code>nextTick</code>, excluding the use of this, everything else is exactly the same as Vue2, and there are still three ways.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>nextTick</span><span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>one</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>handleClick</span> <span class=o>=</span> <span class=n>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>await</span> <span class=n>nextTick</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;xxx&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>two</span>
+</span></span><span class=line><span class=cl><span class=n>nextTick</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;xxx&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>three</span>
+</span></span><span class=line><span class=cl><span class=n>nextTick</span><span class=p>()</span><span class=o>.</span><span class=n>then</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;xxx&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=mixins-and-hooks>mixins and hooks</h2><p>In Vue2, logic extraction and reuse generally use <code>mixins</code>, but there are three disadvantages:</p><ul><li><p>There is no independent namespace, <code>mixins</code> will cause naming conflicts with the internals of the component</p></li><li><p>If you don’t go through the code, you won’t know what’s in the imported <code>mixins</code></p></li><li><p>When multiple <code>mixins</code> are introduced, you don’t know which one the mixin you are using comes from</p></li></ul><p>The hooks syntax for logic extraction and reuse in Vue3 is actually just a function that can accept arguments and use the returned values. Or, it can be understood this way: how to write commonly used methods that need to be encapsulated? You can do it just like that in Vue3.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>xxx</span><span class=o>.</span><span class=n>js</span>
+</span></span><span class=line><span class=cl><span class=n>expport</span> <span class=k>const</span> <span class=n>getData</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>function</span> <span class=n>unInstance</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span><span class=o>...</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>xxx</span><span class=o>.</span><span class=n>vue</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>unInstance</span><span class=p>,</span> <span class=p>{</span> <span class=n>getData</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;xx.js&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=p>{</span> <span class=o>...</span> <span class=p>}</span> <span class=o>=</span> <span class=n>unInstance</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>onMounted</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>getData</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>Regarding how to write more elegant code with hooks, one needs to write more and practice more. It’s not something that can be mastered with a few sentences and lines of code.</p><h2 id=component-communication>Component communication</h2><p>There are several ways to communicate between components in Vue3:</p><ul><li><p>props + defineProps</p></li><li><p>defineEmits</p></li><li><p>defineExpose / ref</p></li><li><p>useAttrs</p></li><li><p>v-model (supports multiple)</p></li><li><p>provide / inject</p></li><li><p>Vuex / Pinia</p></li></ul><h2 id=multiple-v-model>multiple v-model</h2><p>In Vue2, only one <code>v-model</code> can be written on each component. If the child component does not write a model, it can be received by props by default, and modifications are made through the <code>this.$emit(‘input’)</code> event.</p><p>In Vue3, each component supports writing multiple <code>v-model</code>, eliminating the need for <code>.sync</code> and model renaming operations. When writing <code>v-model</code>, you need to include the name, as follows:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>parent</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>child</span> <span class=n>v</span><span class=o>-</span><span class=n>model</span><span class=p>:</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;name&#34;</span> <span class=n>v</span><span class=o>-</span><span class=n>model</span><span class=p>:</span><span class=n>age</span><span class=o>=</span><span class=s2>&#34;age&#34;</span> <span class=o>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span> <span class=p>}</span> <span class=n>from</span> <span class=s2>&#34;vue&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>name</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=s1>&#39;xxx&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>age</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=mi>18</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>child</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>emit</span> <span class=o>=</span> <span class=n>defineEmits</span><span class=p>([</span><span class=s1>&#39;update:name&#39;</span><span class=p>,</span> <span class=s1>&#39;update:age&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>handleClick</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;clicked&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>emit</span><span class=p>(</span><span class=s1>&#39;update:name&#39;</span><span class=p>,</span> <span class=s1>&#39;yyy&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=state-management>State Management</h2><p>The usage of Vuex is basically the same as Vue2. If you are starting from scratch, it’s recommended to use Pinia directly.</p><h2 id=router>router</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>main</span><span class=o>.</span><span class=n>js</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createApp</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>App</span> <span class=n>from</span> <span class=s1>&#39;./App.vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>Router</span> <span class=n>from</span> <span class=s1>&#39;./router&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>app</span> <span class=o>=</span> <span class=n>createApp</span><span class=p>(</span><span class=n>App</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>use</span><span class=p>(</span><span class=n>Router</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>router</span><span class=o>/</span><span class=n>index</span><span class=o>.</span><span class=n>js</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createRouter</span><span class=p>,</span> <span class=n>createWebHistory</span><span class=p>,</span> <span class=n>RouteRecordRaw</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue-router&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>routes</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span> <span class=n>path</span><span class=p>:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span> <span class=n>redirect</span><span class=p>:</span> <span class=p>{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;login&#39;</span> <span class=p>}</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>router</span> <span class=o>=</span> <span class=n>createRouter</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>history</span><span class=p>:</span> <span class=n>createWebHistory</span><span class=p>(</span><span class=n>process</span><span class=o>.</span><span class=n>env</span><span class=o>.</span><span class=n>BASE_URL</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>routes</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>router</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>.</span><span class=n>vue</span> <span class=n>file</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>useRoute</span><span class=p>,</span> <span class=n>useRouter</span> <span class=p>}</span> <span class=n>from</span> <span class=s2>&#34;vue-router&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=s1>&#39;route&#39;</span> <span class=n>corresponds</span> <span class=n>to</span> <span class=n>this</span><span class=o>.$</span><span class=n>route</span> <span class=ow>in</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>route</span> <span class=o>=</span> <span class=n>useRoute</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>router</span> <span class=n>corresponds</span> <span class=n>to</span> <span class=n>this</span><span class=o>.$</span><span class=n>routerin</span> <span class=n>Vue2</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>router</span> <span class=o>=</span> <span class=n>useRouter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=css-style-penetration>CSS Style Penetration</h2><p>In Vue2, when it’s not possible to modify the style of sub-components or components within a library in <code>scoped</code>, you can use CSS style penetration. Regardless of whether it’s Less or SASS, you use <code>/deep/ .class {}</code> for style penetration. However, Vue3 does not support the <code>/deep/</code> syntax, it has been replaced with <code>:deep(.class)</code> for style penetration.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;style lang=&#34;scss&#34; scoped&gt;
+</span></span><span class=line><span class=cl>// If this doesn&#39;t work
+</span></span><span class=line><span class=cl>.el-form {
+</span></span><span class=line><span class=cl>    .el-form-item { ... }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>// Vue2
+</span></span><span class=line><span class=cl>/deep/ .el-form {
+</span></span><span class=line><span class=cl>    .el-form-item { ... }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>// Vue3
+</span></span><span class=line><span class=cl>:deep(.el-form) {
+</span></span><span class=line><span class=cl>    .el-form-item { ... }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>&lt;/style&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=binding-js-variables-with-css>Binding JS Variables with CSS</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>div</span> <span class=k>class</span><span class=o>=</span><span class=s2>&#34;name&#34;</span><span class=o>&gt;</span><span class=n>xxx</span><span class=o>&lt;/</span><span class=n>div</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span> <span class=p>}</span> <span class=n>from</span> <span class=s2>&#34;vue&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=s1>&#39;#f00&#39;</span><span class=p>)</span> <span class=o>//</span> <span class=n>red</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>style</span> <span class=n>scoped</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;scss&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>.</span><span class=n>name</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>background</span><span class=o>-</span><span class=n>color</span><span class=p>:</span> <span class=n>v</span><span class=o>-</span><span class=n>bind</span><span class=p>(</span><span class=nb>str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>style</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/javascript/>Javascript</a>
+<a href=/tags/vue/>Vue</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/understanding-keepalive-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*SNKB1Duz47DDtnG1.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*SNKB1Duz47DDtnG1.png></div><div class=article-details><h2 class=article-title>Understanding KeepAlive in Vue3</h2></div></a></article><article class=has-image><a href=/p/understanding-v-memo-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*mHgmXlGtuB6aLKdr.jpg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*mHgmXlGtuB6aLKdr.jpg></div><div class=article-details><h2 class=article-title>Understanding v-memo in Vue3</h2></div></a></article><article class=has-image><a href=/p/understanding-suspense-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*J3V7D8PQIiGwlztx.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*J3V7D8PQIiGwlztx.jpeg></div><div class=article-details><h2 class=article-title>Understanding Suspense in Vue3</h2></div></a></article><article class=has-image><a href=/p/understanding-reactive-isreactive-and-shallowreactive-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Lf_gf2uitG3fuTvg.jpg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Lf_gf2uitG3fuTvg.jpg></div><div class=article-details><h2 class=article-title>Understanding reactive, isReactive and shallowReactive in Vue3</h2></div></a></article><article class=has-image><a href=/p/vue3-api-overview/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jiE6x4r2qIl3C2PBHdDsug.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*jiE6x4r2qIl3C2PBHdDsug.png></div><div class=article-details><h2 class=article-title>vue3 API Overview</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
