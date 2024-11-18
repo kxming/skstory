@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Low-Code on SK Story</title><link>https://www.skstory.online/categories/low-code/</link><description>Recent content in Low-Code on SK Story</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 May 2024 16:22:38 +0800</lastBuildDate><atom:link href="https://www.skstory.online/categories/low-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Why does WebSocket require frontend heartbeat detection, and is there a native detection mechanism?</title><link>https://www.skstory.online/p/why-does-websocket-require-frontend-heartbeat-detection-and-is-there-a-native-detection-mechanism/</link><pubDate>Mon, 20 May 2024 16:22:38 +0800</pubDate><guid>https://www.skstory.online/p/why-does-websocket-require-frontend-heartbeat-detection-and-is-there-a-native-detection-mechanism/</guid><description>&lt;img src="https://cdn-images-1.medium.com/max/1600/1*K6zrMqjRYIpYEB6reDP_yA.jpeg" alt="Featured image of post Why does WebSocket require frontend heartbeat detection, and is there a native detection mechanism?" />&lt;p>In web applications, WebSocket is a very common technology. A WebSocket connection can be established simply by using the WebSocket constructor in the browser. However, when it&amp;rsquo;s applied to specific projects, heartbeat detection is almost always implemented.&lt;/p>
+&lt;p>The purpose of setting up heartbeat detection is twofold: first, to confirm that both parties in the communication are still active, and second, to allow the browser side to promptly check the availability of the current network connection, ensuring the timeliness of message delivery.&lt;/p>
+&lt;p>You might think, is WebSocket so basic that it can&amp;rsquo;t determine its connection status? Before understanding this further, let&amp;rsquo;s first review some computer network knowledge.&lt;/p>
+&lt;h2 id="related-network-knowledge">Related Network Knowledge
+&lt;/h2>&lt;p>The four-layer structure of the TCP/IP protocol suite:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Application Layer: Determines the activities of communication when providing application services to users. Protocols like HTTP, FTP, and WebSocket operate on this layer.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>(Transport Control Protocol) TCP layer: Controls the data transmission between two hosts in the network by segmenting application layer data (for example, segmenting a complete HTTP message) and sending it to the application program at a specific port on the target host. It tags each data segment with a source port, target port, and sequence number after segmentation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>(Internet Protocol) IP layer: Maps IP addresses to MAC addresses of target hosts, then adds information like source IP, and target IP to the TCP packets (data fragmentation if necessary) and sends them over the network through the link layer to find the target host.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Link Layer: Sends and receives datagrams for the IP network layer, converting binary data packets to and from network electrical signals transmitted over Ethernet cables.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>TCP is a reliable connection-oriented protocol. After establishing a handshake connection, the sender expects a confirmation message from the receiver for each TCP message sent (multiple TCP messages may be formed after application layer message segmentation) within a specified time. If there is no response, it will resend, ensuring all TCP messages reach the receiver and are reassembled in order by the receiver into the complete message needed at the application layer.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>The WebSocket protocol supports introducing a TLS layer on top of TCP to establish encrypted communication.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>The differences and similarities between WebSocket and HTTP:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Like HTTP, WebSocket is an application layer protocol that uses TCP at the transport layer and is a reliable connection. When establishing a WebSocket connection, it can use an existing HTTP GET request to handshake: the client sends information such as the WebSocket protocol version in the request headers to the server, and if the server agrees, it will respond with a status code of 101. In other words, a single HTTP request and response can smoothly switch the protocol to WebSocket.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>WebSocket allows for bidirectional requests. When there is a new message, the server can actively notify the client without the client having to inquire actively. Clients can also send messages to the backend. In HTTP, requests can only be initiated by the client.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>WebSocket is part of HTML5, while HTTP is the Hypertext Transfer Protocol, which predates the birth of HTML5.
+At the application layer, each WebSocket message (called a data frame in WebSocket) is lighter than an HTTP message (which must include a request line, headers, and data).&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>WebSocket data frames contain only fixed, lightweight header information without cookies or custom headers. After establishing communication, it is a one-to-one interaction and does not require the transmission of authentication information. However, the handshake HTTP request will automatically carry cookies.
+WebSocket at the application layer will split large data into multiple frames, while HTTP does not split each message.&lt;/p>
+&lt;p>&lt;strong>The differences and similarities between WebSocket and WebRTC:&lt;/strong>&lt;/p>
+&lt;p>WebRTC is a communication technology initiated by Google and implemented by a wide range of browsers. It is used to establish communication between browsers, such as video calls. Whereas WebSocket is a protocol abstraction that can be implemented as a communication technology to establish communication between browsers and servers.&lt;/p>
+&lt;h2 id="mechanism-of-heartbeat-detection-in-protocols">Mechanism of Heartbeat Detection in Protocols
+&lt;/h2>&lt;p>From the answers found online, there are approximately two ways from the perspective of protocols for WebSocket to detect if the other party is alive:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>WebSocket is merely a specification for an application layer protocol, with its transport layer being TCP, which provides a KeepAlive mechanism for long connections. This mechanism allows for the periodic sending of heartbeat messages to confirm the survival of the other party, but it&amp;rsquo;s generally used by the server side. Since it&amp;rsquo;s a mechanism of the TCP transport control layer, its specific implementation depends on the operating system. In other words, the connection status received at the application layer is notified by the operating system. Different operating systems schedule resources differently, such as when to send probe messages (TCP messages without valid data) to detect the survival of the other party, and how frequently, with the frequency varying under different system configurations. It might be once every two hours, or possibly shorter. Only when no response packets are received consecutively will the application layer be notified of the disconnect. This introduces uncertainty. It also means that other application layer protocols relying on this mechanism will be affected. That is to say, to utilize this process for detection, the client side will have to modify the TCP configuration of the operating system, which doesn&amp;rsquo;t work in a browser environment.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The WebSocket protocol also has its keep-alive mechanism, but it requires implementation by both communicating parties. Data frames in WebSocket communication have a 4-bit OPCODE that marks the type of the current data frame, for example, 0x8 for the close frame, 0x9 for the ping frame, 0xA for the pong frame, 0x1 for the ordinary text data frame, &lt;a class="link" href="https://etc.www.rfc-editor.org/" target="_blank" rel="noopener"
+>etc.www.rfc-editor.org&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>
+&lt;p>Close data frame: When either party wants to close the channel, it sends a data frame to the other party with the OPCODE for connection closing. For example, when the WebSocket instance in the browser calls close, it sends a data frame with the OPCODE indicating a connection close to the server side, which after receiving also needs to return a closing data frame, then close the underlying TCP connection.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ping data frame: Serves for the sender to inquire if the other party is still alive, i.e., a heartbeat check package. Currently, only the backend can control the sending of ping data frames. However, there are no corresponding APIs available on the browser side&amp;rsquo;s WebSocket instances.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ping data frame: When one party in the WebSocket communication receives a ping data frame sent by the other, it needs to promptly reply with a data frame of consistent content and marked as pong in the OPCODE, to tell the other party it&amp;rsquo;s still present. However, replying to pong is an automatic behavior of the browser, meaning it varies across different browsers. Moreover, there are no APIs available in JS to control this.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>To sum up, the methods of detecting the survival of the other party are all initiated by the server performing the heartbeat detection. The browser does not provide such capabilities. To be able to detect the survival of the backend in real-time on the browser end, or in other words, to ensure the connection remains available, one must implement the heartbeat detection themselves.&lt;/p>
+&lt;h2 id="the-necessity-of-heartbeat-detection-on-the-browserside">The Necessity of Heartbeat Detection on the Browser Side
+&lt;/h2>&lt;p>First, let&amp;rsquo;s understand the circumstances under which a browser-side WebSocket will automatically close and trigger the close event:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The WebSocket address is not available during the handshake.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Other unknown errors.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Under a normal connection, receiving a close frame from the server side will trigger the close callback.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>This means that after establishing a normal connection, if the browser side loses the network connection, or if the server closes the connection without sending a close frame - in short, when the connection can no longer be used and the browser has not received a close frame - it will maintain the connection status for a long time. In such a case, if the business code does not actively probe, it will not be able to detect this issue.
+Furthermore, both parties maintaining a connection means that resources must be occupied for an extended period. For the server side, resources are extremely precious. Connections that have been inactive for a long time may be &amp;ldquo;optimized&amp;rdquo; and released by the server-side application layer framework.&lt;/p>
+&lt;h2 id="frontend-implementation-of-heartbeat-detection">Frontend Implementation of Heartbeat Detection
+&lt;/h2>&lt;p>Instantiate a WebSocket:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">connectWS&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">WS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">WebSocket&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;ws://127.0.0.1:7070/ws/?name=greaclar&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Events&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">WebSocket&lt;/span> &lt;span class="n">instance&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">When&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">connection&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">successfully&lt;/span> &lt;span class="n">opened&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;open&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;WebSocket connection successful&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Listen&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">messages&lt;/span> &lt;span class="n">pushed&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">backend&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">event&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;WebSocket received a message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">event&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Listen&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">close&lt;/span> &lt;span class="n">messages&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">backend&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">this&lt;/span> &lt;span class="n">will&lt;/span> &lt;span class="n">also&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">triggered&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="k">case&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">unexpected&lt;/span> &lt;span class="n">errors&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;close&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;WebSocket connection closed&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Listen&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">unexpected&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="n">messages&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">WebSocket&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;error&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;WebSocket error&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">error&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">WS&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">WS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">connectWS&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This code snippet demonstrates the basic setup for establishing a WebSocket connection in a front-end environment. The WebSocket is instantiated using the new WebSocket constructor with a specified address, and event listeners are added to handle the connection&amp;rsquo;s open, message, close, and error events.&lt;/p>
+&lt;p>&lt;strong>Instance methods needed for heartbeat detection:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Send a message, used for sending a heartbeat package
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">WS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="nx">hello&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Close the connection, when the heartbeat package gets no response and a reconnection is needed, it&amp;#39;s best to close it first
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">WS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nb">close&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>These code lines are crucial for implementing a heartbeat mechanism in a WebSocket connection. By using WS.send(&amp;lsquo;hello&amp;rsquo;);, a simple message or heartbeat package is sent to check the connectivity. If there&amp;rsquo;s no response, indicating potential issues with the connection, WS.close(); is used to properly close the connection before attempting a reconnection.&lt;/p>
+&lt;h2 id="defining-the-logic-for-sending-heartbeat-packages">Defining the Logic for Sending Heartbeat Packages:
+&lt;/h2>&lt;p>&lt;strong>Preparation&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Declare a variable heartbeatStatus to track the current heartbeat check status, with three states: waiting, response received, and timeout.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listen to the message event of the WS instance. Change heartbeatStatus to the response received upon detection.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listen to the open event of the WS instance. Start heartbeat detection after opening.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>Detection&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Initiate a Timer A.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon Timer A’s execution, do the following: a. Change the current state heartbeatStatus to waiting; b. Send the heartbeat package; c. Start another Timer B.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After sending the heartbeat package, the backend should immediately push a heartbeat response package with the same content to the frontend, triggering the message event of the frontend WS instance, thereby changing heartbeatStatus to the response received.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>When Timer B executes, check the current heartbeatStatus state:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>
+&lt;p>If its response is received, it means the server can respond to data promptly after Timer A’s execution. Continue by restarting Timer A, and then loop continuously.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If it’s waiting, it indicates there are issues with the connection. Proceed to close or go through the detection process.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">WS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">connectWS&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;waiting&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;open&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Start&lt;/span> &lt;span class="n">heartbeat&lt;/span> &lt;span class="n">detection&lt;/span> &lt;span class="n">after&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">connection&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">successfully&lt;/span> &lt;span class="n">established&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">startHeartbeat&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">event&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">event&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Received heartbeat response, status should now be set to received&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;&amp;#34;heartbeat&amp;#34;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;received&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">startHeartbeat&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Set&lt;/span> &lt;span class="n">status&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="s1">&amp;#39;waiting&amp;#39;&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">send&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">heartbeat&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;waiting&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;heartbeat&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Start&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">timer&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">check&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">server&lt;/span> &lt;span class="n">has&lt;/span> &lt;span class="n">responded&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">waitHeartbeat&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1500&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">waitHeartbeat&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Checking if the server has responded to the heartbeat, current status:&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">heartbeatStatus&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;waiting&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Heartbeat&lt;/span> &lt;span class="n">response&lt;/span> &lt;span class="n">has&lt;/span> &lt;span class="n">timed&lt;/span> &lt;span class="n">out&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Initiate&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">next&lt;/span> &lt;span class="nb">round&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">heartbeat&lt;/span> &lt;span class="n">detection&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">startHeartbeat&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1500&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="optimizing-heartbeat-detection">Optimizing Heartbeat Detection
+&lt;/h3>&lt;p>When the heartbeat detection fails and the close event is not triggered, there is likely a poor network connection between both parties. Immediately attempting to reconnect could consume more network resources, increasing the chances of a failed reconnection and possibly blocking other user actions.&lt;/p>
+&lt;p>However, it cannot be ruled out that there is indeed a problem with the connection, such as a server crash, an accidental restart, and the browser not being informed that the old connection needs to be closed.&lt;/p>
+&lt;p>Therefore, when a heartbeat goes unanswered, I recommend delaying for a while and then informing users that a network issue is being fixed, to prepare them psychologically. Subsequently, send one or two more heartbeat packets; if there is still no response, inform the user of disconnection and ask whether to reconnect. If normality resumes in the meantime, there is no need to reconnect, which would provide a better user experience and put less pressure on the server.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Modifications&lt;/span> &lt;span class="n">needed&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">code&lt;/span> &lt;span class="n">above&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Add&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">record&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">consecutive&lt;/span> &lt;span class="n">no&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">responses&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">retryCount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">event&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">event&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Received heartbeat response, changing status to received&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;&amp;#34;heartbeat&amp;#34;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Reset&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">count&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">consecutive&lt;/span> &lt;span class="n">no&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">responses&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">retryCount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;received&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Add&lt;/span> &lt;span class="n">retry&lt;/span> &lt;span class="n">logic&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">waiting&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">responses&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">waitHeartbeat&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">If&lt;/span> &lt;span class="n">heartbeat&lt;/span> &lt;span class="n">response&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">normal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">start&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">next&lt;/span> &lt;span class="nb">round&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">heartbeat&lt;/span> &lt;span class="n">detection&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">heartbeatStatus&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;received&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">startHeartbeat&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Update&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">timeout&lt;/span> &lt;span class="n">count&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">retryCount&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">If&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">heartbeat&lt;/span> &lt;span class="n">response&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="n">out&lt;/span> &lt;span class="n">but&lt;/span> &lt;span class="n">doesn&lt;/span>&lt;span class="s1">&amp;#39;t consecutively exceed three times&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">retryCount&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;WS connection is abnormal, checking in progress.&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">startHeartbeat&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">If&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">timeout&lt;/span> &lt;span class="n">count&lt;/span> &lt;span class="n">exceeds&lt;/span> &lt;span class="n">three&lt;/span> &lt;span class="n">times&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">WS&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1500&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Why do many programmers dislike low-code?</title><link>https://www.skstory.online/p/why-do-many-programmers-dislike-low-code/</link><pubDate>Fri, 26 Apr 2024 16:22:38 +0800</pubDate><guid>https://www.skstory.online/p/why-do-many-programmers-dislike-low-code/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ZwSWhTBdlE8TkdJ5G9Djpw.jpeg" alt="Featured image of post Why do many programmers dislike low-code?" />&lt;p>In the software industry, there is a famous book called “The Mythical Man-Month,” which includes a discussion that there is “no silver bullet.” Those who understand this concept should no longer be fixated on things like low-code development.&lt;/p>
+&lt;p>In simple terms, a silver bullet refers to a method that could increase software development efficiency tenfold. The author does not believe that any such technology will emerge within ten years (and it’s been about 50 years since then).&lt;/p>
+&lt;p>The reason is that software development has two kinds of complexity: inherent complexity and incidental complexity. Inherent complexity is the natural complexity of things and is unrelated to the tools or methods used. Incidental complexity is the additional complexity that arises from the methods and tools used to solve problems. Incidental complexity does not account for 9/10 of the overall complexity; therefore, even the best tools and methods cannot reduce complexity to 1/10. Throughout the years, from assembly language to C, to object-oriented programming, to various frameworks and methodologies, there have been substantial efforts to reduce incidental complexity, and they have been effective, but none have been a silver bullet.&lt;/p>
+&lt;p>The inherent complexity in software development reflects the complexities of the real world, not difficulties arising from learning and using programming languages. In fact, programming languages are designed as tools to address these complexities. We can constantly optimize our tools, or use different tools without understanding the problem, but clearly, the majority of our efforts need to be devoted to tackling the complexities of the real world.&lt;/p></description></item></channel></rss>

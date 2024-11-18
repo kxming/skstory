@@ -1,0 +1,558 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='Array Related 1. Declare and Initialize Arrays You can initialize an array with a specific size using default values like "", null, or 0. This is common for one-dimensional arrays, but how about initializing a two-dimensional array/matrix?\n1 2 3 4 5 6 7 8 9 10 11 const array = Array(5).fill(&#39;&#39;); // Output: ["", "", "", "", ""] const matrix = Array(5).fill(0).map(() => Array(5).fill(0)); // Output: [Array(5), Array(5), Array(5), Array(5), Array(5)] // 0: (5) [0, 0, 0, 0, 0] // 1: (5) [0, 0, 0, 0, 0] // 2: (5) [0, 0, 0, 0, 0] // 3: (5) [0, 0, 0, 0, 0] // 4: (5) [0, 0, 0, 0, 0] // length: 5 Filter Out Falsy Values from an Array Falsy values like 0，undefined，null，false，""，&#39;&#39; can be easily omitted using:\n'><title>Excellent JS Tips and Methods</title>
+<link rel=canonical href=https://www.skstory.online/p/excellent-js-tips-and-methods/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Excellent JS Tips and Methods"><meta property='og:description' content='Array Related 1. Declare and Initialize Arrays You can initialize an array with a specific size using default values like "", null, or 0. This is common for one-dimensional arrays, but how about initializing a two-dimensional array/matrix?\n1 2 3 4 5 6 7 8 9 10 11 const array = Array(5).fill(&#39;&#39;); // Output: ["", "", "", "", ""] const matrix = Array(5).fill(0).map(() => Array(5).fill(0)); // Output: [Array(5), Array(5), Array(5), Array(5), Array(5)] // 0: (5) [0, 0, 0, 0, 0] // 1: (5) [0, 0, 0, 0, 0] // 2: (5) [0, 0, 0, 0, 0] // 3: (5) [0, 0, 0, 0, 0] // 4: (5) [0, 0, 0, 0, 0] // length: 5 Filter Out Falsy Values from an Array Falsy values like 0，undefined，null，false，""，&#39;&#39; can be easily omitted using:\n'><meta property='og:url' content='https://www.skstory.online/p/excellent-js-tips-and-methods/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Story'><meta property='article:tag' content='Fiction'><meta property='article:tag' content='Life'><meta property='article:published_time' content='2024-08-12T16:02:05+08:00'><meta property='article:modified_time' content='2024-08-12T16:02:05+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*06Q7HHp3ppGAdrIFwNVDVg.jpeg'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Excellent JS Tips and Methods"><meta name=twitter:description content='Array Related 1. Declare and Initialize Arrays You can initialize an array with a specific size using default values like "", null, or 0. This is common for one-dimensional arrays, but how about initializing a two-dimensional array/matrix?\n1 2 3 4 5 6 7 8 9 10 11 const array = Array(5).fill(&#39;&#39;); // Output: ["", "", "", "", ""] const matrix = Array(5).fill(0).map(() => Array(5).fill(0)); // Output: [Array(5), Array(5), Array(5), Array(5), Array(5)] // 0: (5) [0, 0, 0, 0, 0] // 1: (5) [0, 0, 0, 0, 0] // 2: (5) [0, 0, 0, 0, 0] // 3: (5) [0, 0, 0, 0, 0] // 4: (5) [0, 0, 0, 0, 0] // length: 5 Filter Out Falsy Values from an Array Falsy values like 0，undefined，null，false，""，&#39;&#39; can be easily omitted using:\n'><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*06Q7HHp3ppGAdrIFwNVDVg.jpeg'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#array-related>Array Related</a><ol><li><a href=#1-declare-and-initialize-arrays>1. Declare and Initialize Arrays</a></li><li><a href=#filter-out-falsy-values-from-an-array>Filter Out Falsy Values from an Array</a></li><li><a href=#array-lookup>Array Lookup</a></li><li><a href=#shuffle-an-array>Shuffle an Array</a></li><li><a href=#check-for-a-safe-array>Check for a Safe Array</a></li><li><a href=#数组清空>数组清空</a></li><li><a href=#union-intersection-and-difference>Union, Intersection, and Difference</a></li><li><a href=#map-loop>Map Loop</a></li></ol></li><li><a href=#logical-operations>Logical Operations</a><ol><li><a href=#use-logical-operators-for-conditions>Use Logical Operators for Conditions</a></li><li><a href=#optional-chaining>Optional Chaining</a></li><li><a href=#nullish-coalescing-operator>Nullish Coalescing Operator</a></li><li><a href=#and><code>||=</code>and<code>??=</code></a></li></ol></li><li><a href=#number-related>Number Related</a><ol><li><a href=#convert-decimal-to-binary-or-hexadecimal>Convert Decimal to Binary or Hexadecimal</a></li><li><a href=#get-a-random-integer-between-two-values>Get a Random Integer Between Two Values</a></li><li><a href=#convert-a-string-to-a-number>Convert a String to a Number</a></li><li><a href=#scientific-notation>Scientific Notation</a></li><li><a href=#exponentiation>Exponentiation</a></li><li><a href=#convert-to-boolean>Convert to Boolean</a></li></ol></li><li><a href=#object-related>Object Related</a><ol><li><a href=#check-if-an-object-is-empty>Check if an Object is Empty</a></li><li><a href=#dynamic-property-names>Dynamic Property Names</a></li><li><a href=#check-for-a-safe-object>Check for a Safe Object</a></li></ol></li><li><a href=#string-related>String Related</a></li><li><a href=#capitalize-first-letter>Capitalize First Letter</a><ol><li><a href=#reverse-a-string>Reverse a String</a></li><li><a href=#filter-special-characters>Filter Special Characters</a></li></ol></li><li><a href=#browser-related>Browser Related</a><ol><li><a href=#copy-content-to-clipboard>Copy Content to Clipboard</a></li><li><a href=#clear-all-cookies>Clear All Cookies</a></li><li><a href=#get-selected-text>Get Selected Text</a></li><li><a href=#scroll-to-the-top-of-the-page>Scroll to the Top of the Page</a></li><li><a href=#check-if-scrolled-to-the-bottom>Check if Scrolled to the Bottom</a></li><li><a href=#check-if-tab-is-active>Check if Tab is Active</a></li><li><a href=#redirect-to-a-url>Redirect to a URL</a></li><li><a href=#open-print-dialog>Open Print Dialog</a></li><li><a href=#check-if-element-is-focused>Check if Element is Focused</a></li></ol></li><li><a href=#url-related>URL Related</a><ol><li><a href=#get-parameters-from-url-and-convert-to-object>Get Parameters from URL and Convert to Object</a></li></ol></li><li><a href=#miscellaneous>Miscellaneous</a><ol><li><a href=#check-if-a-function>Check if a Function</a></li><li><a href=#debouncethrottle>Debounce/Throttle</a></li><li><a href=#common-regex-validations>Common Regex Validations</a></li></ol></li><li><a href=#good-coding-habits>Good Coding Habits</a><ol><li><a href=#use-destructuring>Use Destructuring</a></li><li><a href=#clever-use-of-js-implicit-type-conversion>Clever Use of JS Implicit Type Conversion</a></li><li><a href=#use-return-instead-of-ifelse>Use Return Instead of If…Else</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/excellent-js-tips-and-methods/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*06Q7HHp3ppGAdrIFwNVDVg.jpeg loading=lazy alt="Featured image of post Excellent JS Tips and Methods"></a></div><div class=article-details><header class=article-category><a href=/categories/story/>Story
+</a><a href=/categories/fiction/ style=background-color:#2a849d;color:#fff>Fiction
+</a><a href=/categories/life/>Life</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/excellent-js-tips-and-methods/>Excellent JS Tips and Methods</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 12, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>9 minute read</time></div></footer></div></header><section class=article-content><h2 id=array-related>Array Related</h2><h3 id=1-declare-and-initialize-arrays>1. Declare and Initialize Arrays</h3><p>You can initialize an array with a specific size using default values like <code>""</code>, <code>null</code>, or <code>0</code>. This is common for one-dimensional arrays, but how about initializing a two-dimensional array/matrix?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>array</span> <span class=o>=</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span><span class=o>.</span><span class=n>fill</span><span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>matrix</span> <span class=o>=</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span><span class=o>.</span><span class=n>fill</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span><span class=o>.</span><span class=n>map</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span><span class=o>.</span><span class=n>fill</span><span class=p>(</span><span class=mi>0</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=p>[</span><span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>),</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>),</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>),</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>),</span> <span class=ne>Array</span><span class=p>(</span><span class=mi>5</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>0</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span><span class=p>)</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>1</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span><span class=p>)</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>2</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span><span class=p>)</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>3</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span><span class=p>)</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>4</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span><span class=p>)</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>length</span><span class=p>:</span> <span class=mi>5</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=filter-out-falsy-values-from-an-array>Filter Out Falsy Values from an Array</h3><p>Falsy values like <code>0</code>，<code>undefined</code>，<code>null</code>，<code>false</code>，<code>""</code>，<code>''</code> can be easily omitted using:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>array</span> <span class=o>=</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=bp>false</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=n>array</span><span class=o>.</span><span class=n>filter</span><span class=p>(</span><span class=n>Boolean</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=array-lookup>Array Lookup</h3><p>Use <code>indexOf()</code> to find the position of an item in an array. If not found, it returns <code>-1</code>. This can be simplified using bitwise NOT (<code>~</code>):</p><p>Traditional:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if(arr.indexOf(item) &gt; -1) {
+</span></span><span class=line><span class=cl>  ...
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>​
+</span></span><span class=line><span class=cl>if(arr.indexOf(item) === -1) {
+</span></span><span class=line><span class=cl>  ...
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>Simplified:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if(~arr.indexOf(item)) {
+</span></span><span class=line><span class=cl>  ...
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>​
+</span></span><span class=line><span class=cl>if(!~arr.indexOf(item)) {
+</span></span><span class=line><span class=cl>  ...
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>Alternatively, use <code>includes()</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if(arr.includes(item)) {
+</span></span><span class=line><span class=cl>  ...
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=shuffle-an-array>Shuffle an Array</h3><p>利用内置<code>Math.random()</code>方法。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>list</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=n>list</span><span class=o>.</span><span class=n>sort</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Math</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>-</span> <span class=mf>0.5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=mi>9</span><span class=p>)</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>7</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Call</span> <span class=n>it</span> <span class=n>again</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=mi>9</span><span class=p>)</span> <span class=p>[</span><span class=mi>4</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>6</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=check-for-a-safe-array>Check for a Safe Array</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>safeArray</span> <span class=o>=</span> <span class=p>(</span><span class=n>array</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=ne>Array</span><span class=o>.</span><span class=n>isArray</span><span class=p>(</span><span class=n>array</span><span class=p>)</span> <span class=err>?</span> <span class=n>array</span> <span class=p>:</span> <span class=p>[];</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=数组清空>数组清空</h3><p>Compare <code>arr.length = 0;</code> vs <code>arr = [];</code>:</p><p>The main use of <code>arr.length = 0</code> is to completely clear the actual array that the literal points to.</p><p>In JavaScript, we know that reference types store addresses in the stack memory, pointing to real data in the heap memory. Suppose we have a non-empty array <code>arr</code>.</p><p>When we use <code>arr = []</code>, we are actually reassigning <code>arr</code> to a new empty array <code>[]</code>.</p><p>At this point, the original array that <code>arr</code> was pointing to still exists in memory (which might lead to memory leaks).</p><p>Using <code>arr.length = 0</code>: This command acts on the real array, effectively clearing the original array directly.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Clear the original array:
+</span></span><span class=line><span class=cl>arr.length = 0;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Reassign to a new empty array:
+</span></span><span class=line><span class=cl>arr = [];
+</span></span></code></pre></td></tr></table></div></div><h3 id=union-intersection-and-difference>Union, Intersection, and Difference</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>let a = new Set([1, 2, 3]); 
+</span></span><span class=line><span class=cl>let b = new Set([4, 3, 2]); 
+</span></span><span class=line><span class=cl>// Union 
+</span></span><span class=line><span class=cl>let union = new Set([...a, ...b]); // Set {1, 2, 3, 4} 
+</span></span><span class=line><span class=cl>// Intersection 
+</span></span><span class=line><span class=cl>let intersect = new Set([...a].filter(x =&gt; b.has(x))); // set {2, 3} 
+</span></span><span class=line><span class=cl>// Difference 
+</span></span><span class=line><span class=cl>let difference = new Set([...a].filter(x =&gt; !b.has(x))); // Set {1}
+</span></span></code></pre></td></tr></table></div></div><h3 id=map-loop>Map Loop</h3><p>The <code>map</code> method can change the original array if dealing with objects:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>cities</span> <span class=o>=</span> <span class=p>[{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;NewYork&#39;</span> <span class=p>},</span> <span class=p>{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;DC&#39;</span> <span class=p>}];</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>newCities</span> <span class=o>=</span> <span class=n>cities</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=n>item</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>item</span><span class=o>.</span><span class=n>country</span> <span class=o>=</span> <span class=s1>&#39;America&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>item</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;cities&#39;</span><span class=p>,</span> <span class=n>cities</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>output</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=p>[{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;NewYork&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>:</span> <span class=s1>&#39;America&#39;</span> <span class=p>},{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;DC&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>:</span> <span class=s1>&#39;America&#39;</span> <span class=p>}]</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;newCities&#39;</span><span class=p>,</span> <span class=n>newCities</span><span class=p>);</span><span class=o>//</span> <span class=n>output</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=p>[{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;NewYork&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>:</span> <span class=s1>&#39;America&#39;</span> <span class=p>},{</span> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;DC&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>:</span> <span class=s1>&#39;America&#39;</span> <span class=p>}]</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=logical-operations>Logical Operations</h2><h3 id=use-logical-operators-for-conditions>Use Logical Operators for Conditions</h3><p>Reduce nested <code>if...else</code> or <code>switch</code> with basic logical operators:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>function doSomething(arg1) {
+</span></span><span class=line><span class=cl>  arg1 = arg1 || 10;
+</span></span><span class=line><span class=cl>  // Set arg1 to 10 if not already set
+</span></span><span class=line><span class=cl>  return arg1;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>let foo = 10;
+</span></span><span class=line><span class=cl>foo === 10 &amp;&amp; doSomething();
+</span></span><span class=line><span class=cl>// Output: 10
+</span></span><span class=line><span class=cl>foo === 5 || doSomething();
+</span></span><span class=line><span class=cl>// Output: 10
+</span></span></code></pre></td></tr></table></div></div><h3 id=optional-chaining>Optional Chaining</h3><p>Optional chaining <code>?.</code> stops evaluation if the value before <code>?</code> is undefined or null.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>user</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>employee</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=s2>&#34;Kapil&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span><span class=o>.</span><span class=n>employee</span><span class=err>?</span><span class=o>.</span><span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=s2>&#34;Kapil&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>user</span><span class=o>.</span><span class=n>employ</span><span class=err>?</span><span class=o>.</span><span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=n>undefined</span>
+</span></span></code></pre></td></tr></table></div></div><p>For dynamic properties:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>object?.[index]
+</span></span></code></pre></td></tr></table></div></div><p>For method calls:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>object.runsOnlyIfMethodExists?.()
+</span></span></code></pre></td></tr></table></div></div><h3 id=nullish-coalescing-operator>Nullish Coalescing Operator</h3><p>The <code>??</code> operator returns the right operand when the left is null or undefined.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>foo</span> <span class=o>=</span> <span class=n>null</span> <span class=err>??</span> <span class=s1>&#39;my school&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=s2>&#34;my school&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>baz</span> <span class=o>=</span> <span class=mi>0</span> <span class=err>??</span> <span class=mi>42</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=mi>0</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=and><code>||=</code>and<code>??=</code></h3><p><code>||=</code> assigns a value only if the left side is falsy, whereas <code>??=</code> assigns only if the left side is <code>null</code> or <code>undefined</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>let x = null;
+</span></span><span class=line><span class=cl>x ||= 5;
+</span></span><span class=line><span class=cl>console.log(x);  // Output: 5
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>let y = 10;
+</span></span><span class=line><span class=cl>y ||= 7;
+</span></span><span class=line><span class=cl>console.log(y);  // Output: 10
+</span></span><span class=line><span class=cl>let a = null;
+</span></span><span class=line><span class=cl>a ??= 5;
+</span></span><span class=line><span class=cl>console.log(a);  // Output: 5
+</span></span><span class=line><span class=cl>let b = 10;
+</span></span><span class=line><span class=cl>b ??= 7;
+</span></span><span class=line><span class=cl>console.log(b);  // Output: 10
+</span></span></code></pre></td></tr></table></div></div><h2 id=number-related>Number Related</h2><h3 id=convert-decimal-to-binary-or-hexadecimal>Convert Decimal to Binary or Hexadecimal</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>num</span> <span class=o>=</span> <span class=mi>10</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>num</span><span class=o>.</span><span class=n>toString</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=s2>&#34;1010&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>num</span><span class=o>.</span><span class=n>toString</span><span class=p>(</span><span class=mi>16</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=s2>&#34;a&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>num</span><span class=o>.</span><span class=n>toString</span><span class=p>(</span><span class=mi>8</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=s2>&#34;12&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-a-random-integer-between-two-values>Get a Random Integer Between Two Values</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>random</span> <span class=o>=</span> <span class=p>(</span><span class=nb>min</span><span class=p>,</span> <span class=nb>max</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Math</span><span class=o>.</span><span class=n>floor</span><span class=p>(</span><span class=n>Math</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>*</span> <span class=p>(</span><span class=nb>max</span> <span class=o>-</span> <span class=nb>min</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=o>+</span> <span class=nb>min</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>random</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>50</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=convert-a-string-to-a-number>Convert a String to a Number</h3><p>Conventional:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>let str = &#39;2&#39;
+</span></span><span class=line><span class=cl>console.log(Number(str))   //2
+</span></span></code></pre></td></tr></table></div></div><p>Optimized:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>let str = &#39;2&#39;
+</span></span><span class=line><span class=cl>console.log(~~str)    //2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>console.log(+str)    //2
+</span></span></code></pre></td></tr></table></div></div><h3 id=scientific-notation>Scientific Notation</h3><p>Use scientific notation to represent numbers:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>for (let i = 0; i &lt; 1e7; i++) {}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// All these comparisons return true
+</span></span><span class=line><span class=cl>1e0 === 1;
+</span></span><span class=line><span class=cl>1e1 === 10;
+</span></span><span class=line><span class=cl>1e2 === 100;
+</span></span><span class=line><span class=cl>1e3 === 1000;
+</span></span><span class=line><span class=cl>1e4 === 10000;
+</span></span><span class=line><span class=cl>1e5 === 100000;
+</span></span></code></pre></td></tr></table></div></div><h3 id=exponentiation>Exponentiation</h3><p>Use <code>**</code> for exponentiation:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>2**3; // 8
+</span></span><span class=line><span class=cl>2**4; // 16
+</span></span><span class=line><span class=cl>4**3; // 64
+</span></span></code></pre></td></tr></table></div></div><h3 id=convert-to-boolean>Convert to Boolean</h3><p>Use double logical NOT to convert to Boolean:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>!!23 // TRUE
+</span></span><span class=line><span class=cl>!!&#34;&#34; // FALSE
+</span></span><span class=line><span class=cl>!!0 // FALSE
+</span></span><span class=line><span class=cl>!!{} // TRUE
+</span></span></code></pre></td></tr></table></div></div><h2 id=object-related>Object Related</h2><h3 id=check-if-an-object-is-empty>Check if an Object is Empty</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>isEmpty</span> <span class=o>=</span> <span class=n>obj</span> <span class=o>=&gt;</span> <span class=n>Reflect</span><span class=o>.</span><span class=n>ownKeys</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span><span class=o>.</span><span class=n>length</span> <span class=o>===</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=n>obj</span><span class=o>.</span><span class=n>constructor</span> <span class=o>===</span> <span class=ne>Object</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>isEmpty</span><span class=p>({})</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>isEmpty</span><span class=p>({</span><span class=n>a</span><span class=p>:</span><span class=s2>&#34;not empty&#34;</span><span class=p>})</span> <span class=o>//</span><span class=bp>false</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=dynamic-property-names>Dynamic Property Names</h3><p>Use brackets for dynamic properties:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>key</span> <span class=o>=</span> <span class=s1>&#39;name&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>person</span> <span class=o>=</span> <span class=p>{</span> <span class=p>[</span><span class=n>key</span><span class=p>]:</span> <span class=s1>&#39;Alice&#39;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>person</span><span class=o>.</span><span class=n>name</span><span class=p>);</span> <span class=o>//</span> <span class=n>Output</span><span class=p>:</span> <span class=n>Alice</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=check-for-a-safe-object>Check for a Safe Object</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>isValidObject</span> <span class=o>=</span> <span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nb>typeof</span> <span class=n>obj</span> <span class=o>===</span> <span class=s1>&#39;object&#39;</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=ne>Array</span><span class=o>.</span><span class=n>isArray</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>&amp;&amp;</span> <span class=ne>Object</span><span class=o>.</span><span class=n>keys</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span><span class=o>.</span><span class=n>length</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>safeObject</span> <span class=o>=</span> <span class=n>obj</span> <span class=o>=&gt;</span> <span class=n>isValidObject</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=err>?</span> <span class=n>obj</span> <span class=p>:</span> <span class=p>{};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=string-related>String Related</h2><h2 id=capitalize-first-letter>Capitalize First Letter</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>capitalize</span> <span class=o>=</span> <span class=nb>str</span> <span class=o>=&gt;</span> <span class=nb>str</span><span class=o>.</span><span class=n>charAt</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span><span class=o>.</span><span class=n>toUpperCase</span><span class=p>()</span> <span class=o>+</span> <span class=nb>str</span><span class=o>.</span><span class=n>slice</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>capitalize</span><span class=p>(</span><span class=s2>&#34;hello world&#34;</span><span class=p>);</span>  <span class=o>//</span> <span class=s2>&#34;Hello world&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=reverse-a-string>Reverse a String</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>reverse</span> <span class=o>=</span> <span class=nb>str</span> <span class=o>=&gt;</span> <span class=nb>str</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>reverse</span><span class=p>()</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>reverse</span><span class=p>(</span><span class=s1>&#39;hello world&#39;</span><span class=p>);</span>   <span class=o>//</span> <span class=s1>&#39;dlrow olleh&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=filter-special-characters>Filter Special Characters</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>function filterCharacter(str) {
+</span></span><span class=line><span class=cl>  let pattern = new RegExp(&#34;[`~!@#$^&amp;*()=：”“&#39;。，、？|{}&#39;:;&#39;%,\\[\\].&lt;&gt;/?~！@#￥……&amp;*（）&amp;;—|{ }【】‘；]&#34;);
+</span></span><span class=line><span class=cl>  let resultStr = &#34;&#34;;
+</span></span><span class=line><span class=cl>  for (let i = 0; i &lt; str.length; i++) {
+</span></span><span class=line><span class=cl>    resultStr = resultStr + str.substr(i, 1).replace(pattern, &#39;&#39;);
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>  return resultStr;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Example
+</span></span><span class=line><span class=cl>filterCharacter(&#39;gyaskjdhy12316789#$%^&amp;!@#1=123,./[&#39;); // Result: gyaskjdhy123167891123
+</span></span></code></pre></td></tr></table></div></div><h2 id=browser-related>Browser Related</h2><h3 id=copy-content-to-clipboard>Copy Content to Clipboard</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>copyToClipboard</span> <span class=o>=</span> <span class=p>(</span><span class=n>text</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>navigator</span><span class=o>.</span><span class=n>clipboard</span><span class=o>.</span><span class=n>writeText</span><span class=p>(</span><span class=n>text</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>copyToClipboard</span><span class=p>(</span><span class=s2>&#34;Hello World&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>Compatibility:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>copyText</span> <span class=o>=</span> <span class=n>async</span> <span class=p>(</span><span class=n>val</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>navigator</span><span class=o>.</span><span class=n>clipboard</span> <span class=o>&amp;&amp;</span> <span class=n>navigator</span><span class=o>.</span><span class=n>permissions</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>await</span> <span class=n>navigator</span><span class=o>.</span><span class=n>clipboard</span><span class=o>.</span><span class=n>writeText</span><span class=p>(</span><span class=n>val</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>const</span> <span class=n>textArea</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>createElement</span><span class=p>(</span><span class=s1>&#39;textArea&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>value</span> <span class=o>=</span> <span class=n>val</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>style</span><span class=o>.</span><span class=n>width</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>style</span><span class=o>.</span><span class=n>position</span> <span class=o>=</span> <span class=s1>&#39;fixed&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>style</span><span class=o>.</span><span class=n>left</span> <span class=o>=</span> <span class=s1>&#39;-999px&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>style</span><span class=o>.</span><span class=n>top</span> <span class=o>=</span> <span class=s1>&#39;10px&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>setAttribute</span><span class=p>(</span><span class=s1>&#39;readonly&#39;</span><span class=p>,</span> <span class=s1>&#39;readonly&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>document</span><span class=o>.</span><span class=n>body</span><span class=o>.</span><span class=n>appendChild</span><span class=p>(</span><span class=n>textArea</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>textArea</span><span class=o>.</span><span class=n>select</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>const</span> <span class=n>success</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>execCommand</span><span class=p>(</span><span class=s1>&#39;copy&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>throw</span> <span class=n>new</span> <span class=n>Error</span><span class=p>(</span><span class=s1>&#39;Unable to copy text&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>document</span><span class=o>.</span><span class=n>body</span><span class=o>.</span><span class=n>removeChild</span><span class=p>(</span><span class=n>textArea</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=n>catch</span> <span class=p>(</span><span class=n>err</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=s1>&#39;Copy failed:&#39;</span><span class=p>,</span> <span class=n>err</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=clear-all-cookies>Clear All Cookies</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>clearCookies</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>cookie</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>forEach</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>cookie</span> <span class=o>=&gt;</span> <span class=n>document</span><span class=o>.</span><span class=n>cookie</span> <span class=o>=</span> <span class=n>cookie</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=o>/^</span> <span class=o>+/</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=o>/=.*/</span><span class=p>,</span> <span class=err>`</span><span class=o>=</span><span class=p>;</span><span class=n>expires</span><span class=o>=$</span><span class=p>{</span><span class=n>new</span> <span class=n>Date</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span><span class=o>.</span><span class=n>toUTCString</span><span class=p>()};</span><span class=n>path</span><span class=o>=/</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-selected-text>Get Selected Text</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>getSelectedText</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>window</span><span class=o>.</span><span class=n>getSelection</span><span class=p>()</span><span class=o>.</span><span class=n>toString</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=scroll-to-the-top-of-the-page>Scroll to the Top of the Page</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>goToTop</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>window</span><span class=o>.</span><span class=n>scrollTo</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=check-if-scrolled-to-the-bottom>Check if Scrolled to the Bottom</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>scrolledToBottom</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>document</span><span class=o>.</span><span class=n>documentElement</span><span class=o>.</span><span class=n>clientHeight</span> <span class=o>+</span> <span class=n>window</span><span class=o>.</span><span class=n>scrollY</span>
+</span></span><span class=line><span class=cl>                                        <span class=o>&gt;=</span> <span class=n>document</span><span class=o>.</span><span class=n>documentElement</span><span class=o>.</span><span class=n>scrollHeight</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=check-if-tab-is-active>Check if Tab is Active</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>isTabInView</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=o>!</span><span class=n>document</span><span class=o>.</span><span class=n>hidden</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=redirect-to-a-url>Redirect to a URL</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>redirect</span> <span class=o>=</span> <span class=n>url</span> <span class=o>=&gt;</span> <span class=n>location</span><span class=o>.</span><span class=n>href</span> <span class=o>=</span> <span class=n>url</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>redirect</span><span class=p>(</span><span class=s2>&#34;https://www.google.com/&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=open-print-dialog>Open Print Dialog</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>showPrintDialog</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>window</span><span class=o>.</span><span class=n>print</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=check-if-element-is-focused>Check if Element is Focused</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>elementIsInFocus</span> <span class=o>=</span> <span class=p>(</span><span class=n>el</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>el</span> <span class=o>===</span> <span class=n>document</span><span class=o>.</span><span class=n>activeElement</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=url-related>URL Related</h2><h3 id=get-parameters-from-url-and-convert-to-object>Get Parameters from URL and Convert to Object</h3><p>网页路径经常是：www.google.com?search=js&amp;xxx=kkk这种形式的，我们是经常需要取参数的，可以使用第三方的qs包实现，如果你只是要实现去参数，这一句代码就可以实现，不用再引入qs了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>getParameters</span> <span class=o>=</span> <span class=n>URL</span> <span class=o>=&gt;</span> <span class=n>JSON</span><span class=o>.</span><span class=n>parse</span><span class=p>(</span><span class=err>`</span><span class=p>{</span><span class=s2>&#34;${decodeURI(URL.split(&#34;</span><span class=err>?</span><span class=s2>&#34;)[1]).replace(/&#34;</span><span class=o>/</span><span class=n>g</span><span class=p>,</span> <span class=s1>&#39;</span><span class=se>\&#34;</span><span class=s1>&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=o>/&amp;/</span><span class=n>g</span><span class=p>,</span> <span class=s1>&#39;&#34;,&#34;&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=o>/=/</span><span class=n>g</span><span class=p>,</span> <span class=s1>&#39;&#34;:&#34;&#39;</span><span class=p>)}</span><span class=s2>&#34;}`);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>getParameters</span><span class=p>(</span><span class=s2>&#34;https://www.google.com.hk/search?q=js+md&amp;newwindow=1&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=p>{</span><span class=n>q</span><span class=p>:</span> <span class=s1>&#39;js+md&#39;</span><span class=p>,</span> <span class=n>newwindow</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=miscellaneous>Miscellaneous</h2><h3 id=check-if-a-function>Check if a Function</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>isFunction</span> <span class=o>=</span> <span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nb>typeof</span> <span class=n>obj</span> <span class=o>===</span> <span class=s2>&#34;function&#34;</span> <span class=o>&amp;&amp;</span> <span class=nb>typeof</span> <span class=n>obj</span><span class=o>.</span><span class=n>nodeType</span> <span class=o>!==</span> <span class=s2>&#34;number&#34;</span> <span class=o>&amp;&amp;</span> <span class=nb>typeof</span> <span class=n>obj</span><span class=o>.</span><span class=n>item</span> <span class=o>!==</span> <span class=s2>&#34;function&#34;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=debouncethrottle>Debounce/Throttle</h3><p><strong>Debounce</strong>: Triggers after a specified time only if no further events are received.</p><p><strong>Throttle</strong>: Triggers once within a specified time frame despite multiple events.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Debounce
+</span></span><span class=line><span class=cl>function debounce(fn, delay) {
+</span></span><span class=line><span class=cl>  let timer = null;
+</span></span><span class=line><span class=cl>  return function () {
+</span></span><span class=line><span class=cl>    if (timer) {
+</span></span><span class=line><span class=cl>      clearTimeout(timer);
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    timer = setTimeout(() =&gt; {
+</span></span><span class=line><span class=cl>      fn.apply(this);
+</span></span><span class=line><span class=cl>    }, delay);
+</span></span><span class=line><span class=cl>  };
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Throttle
+</span></span><span class=line><span class=cl>function throttle(fn) {
+</span></span><span class=line><span class=cl>  let timer = null;
+</span></span><span class=line><span class=cl>  return function () {
+</span></span><span class=line><span class=cl>    if (timer) return;
+</span></span><span class=line><span class=cl>    timer = setTimeout(() =&gt; {
+</span></span><span class=line><span class=cl>      fn.apply(this, arguments);
+</span></span><span class=line><span class=cl>      timer = null;
+</span></span><span class=line><span class=cl>    }, 1000);
+</span></span><span class=line><span class=cl>  };
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=common-regex-validations>Common Regex Validations</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Validate</span> <span class=mi>2</span><span class=o>-</span><span class=mi>9</span> <span class=n>Chinese</span> <span class=n>characters</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>validateName</span> <span class=o>=</span> <span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=o>/^</span><span class=p>[</span>\<span class=n>u4e00</span><span class=o>-</span>\<span class=n>u9fa5</span><span class=p>]{</span><span class=mi>2</span><span class=p>,</span><span class=mi>9</span><span class=p>}</span><span class=o>$/.</span><span class=n>test</span><span class=p>(</span><span class=n>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Validate</span> <span class=n>phone</span> <span class=n>number</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>validatePhoneNum</span> <span class=o>=</span> <span class=p>(</span><span class=n>mobile</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=o>/^</span><span class=mi>1</span><span class=p>[</span><span class=mi>3</span><span class=o>-</span><span class=mi>9</span><span class=p>]</span>\<span class=n>d</span><span class=p>{</span><span class=mi>9</span><span class=p>}</span><span class=o>$/.</span><span class=n>test</span><span class=p>(</span><span class=n>mobile</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Validate</span> <span class=n>password</span> <span class=p>(</span><span class=mi>6</span><span class=o>-</span><span class=mi>18</span> <span class=n>characters</span><span class=p>:</span> <span class=n>letters</span><span class=p>,</span> <span class=n>numbers</span><span class=p>,</span> <span class=n>underscores</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>validatePassword</span> <span class=o>=</span> <span class=p>(</span><span class=n>password</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=o>/^</span><span class=p>[</span><span class=n>a</span><span class=o>-</span><span class=n>zA</span><span class=o>-</span><span class=n>Z0</span><span class=o>-</span><span class=mi>9</span><span class=n>_</span><span class=p>]{</span><span class=mi>6</span><span class=p>,</span><span class=mi>18</span><span class=p>}</span><span class=o>$/.</span><span class=n>test</span><span class=p>(</span><span class=n>password</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=good-coding-habits>Good Coding Habits</h2><h3 id=use-destructuring>Use Destructuring</h3><p>Replace <code>console.log('name', name)</code> with <code>console.log({name})</code>.</p><h3 id=clever-use-of-js-implicit-type-conversion>Clever Use of JS Implicit Type Conversion</h3><p>Quickly convert to <code>Number</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>price</span> <span class=o>=</span> <span class=o>+</span><span class=s1>&#39;32&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>timeStamp</span> <span class=o>=</span> <span class=o>+</span><span class=n>new</span> <span class=n>Date</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>Quickly convert to <code>Boolean</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>isTrue</span> <span class=o>=</span> <span class=o>!!</span><span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Quickly convert to <code>String</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=nb>str</span> <span class=o>=</span> <span class=mi>1</span> <span class=o>+</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=use-return-instead-of-ifelse>Use Return Instead of If…Else</h3><p>Replace:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if (condition1) {
+</span></span><span class=line><span class=cl>  // do condition1 
+</span></span><span class=line><span class=cl>} else if (condition2) {
+</span></span><span class=line><span class=cl>  // do condition2
+</span></span><span class=line><span class=cl>} else if(condition3) {
+</span></span><span class=line><span class=cl>  // do condition3
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>With:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if (condition1) {
+</span></span><span class=line><span class=cl>  // do condition1 
+</span></span><span class=line><span class=cl>  return;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>if (condition2) {
+</span></span><span class=line><span class=cl>  // do condition2
+</span></span><span class=line><span class=cl>  return;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>if (condition3) {
+</span></span><span class=line><span class=cl>  // do condition3  
+</span></span><span class=line><span class=cl>  return;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>This simplifies code and makes it easier to read and edit.</p></section><footer class=article-footer><section class=article-tags><a href=/tags/story/>Story</a>
+<a href=/tags/fiction/>Fiction</a>
+<a href=/tags/life/>Life</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/recording-my-current-mac-applications/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg></div><div class=article-details><h2 class=article-title>Recording My Current Mac Applications</h2></div></a></article><article class=has-image><a href=/p/jumping-out-of-nested-loops-in-javascript/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg></div><div class=article-details><h2 class=article-title>Jumping Out of Nested Loops in JavaScript</h2></div></a></article><article class=has-image><a href=/p/exploring-the-difference-between-width-100-and-width-auto/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png></div><div class=article-details><h2 class=article-title>Exploring the Difference Between width: 100% and width: auto</h2></div></a></article><article class=has-image><a href=/p/understanding-useid-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png></div><div class=article-details><h2 class=article-title>Understanding useId in Vue3</h2></div></a></article><article class=has-image><a href=/p/12-vue-3-backend-management-templates-to-bookmark-and-learn/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*u483g0dL7NmbtDvGH817bg.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*u483g0dL7NmbtDvGH817bg.png></div><div class=article-details><h2 class=article-title>12 Vue 3 Backend Management Templates to Bookmark and Learn</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

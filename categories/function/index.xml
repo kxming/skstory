@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Function on SK Story</title><link>https://www.skstory.online/categories/function/</link><description>Recent content in Function on SK Story</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Feb 2024 16:22:38 +0800</lastBuildDate><atom:link href="https://www.skstory.online/categories/function/index.xml" rel="self" type="application/rss+xml"/><item><title>Little-known but useful js tricks【one line of code】</title><link>https://www.skstory.online/p/little-known-but-useful-js-tricksone-line-of-code/</link><pubDate>Thu, 01 Feb 2024 16:22:38 +0800</pubDate><guid>https://www.skstory.online/p/little-known-but-useful-js-tricksone-line-of-code/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*dpgmDdOfYm727sko" alt="Featured image of post Little-known but useful js tricks【one line of code】" />&lt;h2 id="array">Array
+&lt;/h2>&lt;h3 id="generating-an-array">Generating an array
+&lt;/h3>&lt;p>When you need to generate an array from 0 to 99&lt;/p>
+&lt;p>option 1&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">createArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="ne">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createArr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>option 2&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">createArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="ne">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">fill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">createArr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="shuffling-an-array">Shuffling an array
+&lt;/h3>&lt;p>When you have an array that you need to randomize&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">randomSort&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">list&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">randomSort&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="array-simple-data-deduplication">Array simple data deduplication
+&lt;/h3>&lt;p>When you need to remove all duplicate elements in an array, leaving only one&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">removeDuplicates&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">list&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">removeDuplicates&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="array-unique-value-data-deduplication">Array unique value data deduplication
+&lt;/h3>&lt;p>When you need to remove duplicate elements in an array based on a unique value&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">duplicateById&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">list&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">prev&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Map&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">values&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">duplicateById&lt;/span>&lt;span class="p">([{&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;rose&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">}])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="p">[{&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;rose&amp;#39;&lt;/span>&lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="finding-array-intersection">Finding array intersection
+&lt;/h3>&lt;p>When you need to find the intersection of multiple arrays&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">intersection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">filter&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">every&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">includes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">intersection&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="finding-the-index-of-the-maximum-value">Finding the index of the maximum value
+&lt;/h3>&lt;p>When you need to find the index of the maximum value in an array&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">indexOfMax&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">curr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">curr&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">prev&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">indexOfMax&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">]);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="finding-the-index-of-the-minimum-value">Finding the index of the minimum value
+&lt;/h3>&lt;p>When you need to find the index of the minimum value in an array&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">indexOfMin&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">curr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">curr&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">prev&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">indexOfMin&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="finding-the-nearest-value">Finding the nearest value
+&lt;/h3>&lt;p>When you need to find the nearest value in an array&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">closest&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">curr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">curr&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">prev&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="n">curr&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">prev&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">closest&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">29&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">87&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">78&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">97&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">75&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">33&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">24&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">17&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">33&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="compressing-multiple-arrays">Compressing multiple arrays
+&lt;/h3>&lt;p>When you need to compress multiple arrays into one&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">zip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">from&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">length&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">max&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">zip&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;A&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;B&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;C&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;D&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="p">[[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;A&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;B&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;C&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;D&amp;#39;&lt;/span>&lt;span class="p">]]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="matrix-row-and-column-exchange">Matrix row and column exchange
+&lt;/h3>&lt;p>When you need to swap the rows and columns of a matrix&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">transpose&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">matrix&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">matrix&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">matrix&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">row&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">transpose&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="sort-the-array-by-a-specific-attribute">Sort the array by a specific attribute
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="ne">Input&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s1">&amp;#39;Bob&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">age&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s1">&amp;#39;Alice&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">age&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">22&lt;/span>&lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">sortBy&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Output&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s1">&amp;#39;Alice&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">age&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">22&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s1">&amp;#39;Bob&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">age&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="check-if-a-variable-is-an-array">Check if a variable is an array
+&lt;/h3>&lt;p>The Array.isArray() method checks if a given variable is an array.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isArray&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">variable&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="retrieve-the-last-item-in-an-array">Retrieve the last item in an array
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">lastItem&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">array&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="capitalize-the-first-letter-of-a-string">Capitalize the first letter of a string
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">capitalize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">charAt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toUpperCase&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="number-conversion">Number conversion
+&lt;/h2>&lt;h3 id="radic-conversion">Radic conversion
+&lt;/h3>&lt;p>To convert decimal to n-base, you can use toString(n)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">toDecimal&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">The&lt;/span> &lt;span class="n">decimal&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="mi">10&lt;/span> &lt;span class="n">needs&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">converted&lt;/span> &lt;span class="n">into&lt;/span> &lt;span class="n">binary&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">toDecimal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s1">&amp;#39;1010&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To convert n-base to decimal, you can use parseInt(num, n)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">toDecimalism&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">parseInt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">toDecimalism&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1010&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="regular-expression">Regular Expression
+&lt;/h3>&lt;h4 id="phone-number-formatting">Phone number formatting
+&lt;/h4>&lt;p>When you need to format a phone number in the form of xxx-xxxx-xxxx&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">formatPhone&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">sign&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;-&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">(&lt;/span>\&lt;span class="n">W&lt;/span>&lt;span class="o">|&lt;/span>\&lt;span class="n">s&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">g&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/^&lt;/span>&lt;span class="p">(&lt;/span>\&lt;span class="n">d&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">})(&lt;/span>\&lt;span class="n">d&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">})(&lt;/span>\&lt;span class="n">d&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">})&lt;/span>&lt;span class="o">$/&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">item&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">item&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">sign&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">formatPhone&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;13123456789&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s1">&amp;#39;131-2345-6789&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">formatPhone&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;13 1234 56 789&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s1">&amp;#39;131 2345 6789&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="remove-excess-spaces">Remove excess spaces
+&lt;/h4>&lt;p>When you need to merge multiple spaces in a text into a single space&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">setTrimOut&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">str&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/&lt;/span>\&lt;span class="n">s&lt;/span>\&lt;span class="n">s&lt;/span>&lt;span class="o">+/&lt;/span>&lt;span class="n">g&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="nb">str&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">setTrimOut&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hello, jack&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="web">Web
+&lt;/h2>&lt;h3 id="reload-the-current-page">Reload the current page
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">reload&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">location&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reload&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">reload&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="scroll-to-the-top-of-the-page">Scroll to the top of the page
+&lt;/h3>&lt;p>If you need to scroll the page to the top&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">goToTop&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scrollTo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">goToTop&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="element-scrolling">Element scrolling
+&lt;/h3>&lt;p>If you want to smoothly scroll an element to the start of the viewport&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">scrollToTop&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">element&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">element&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scrollIntoView&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">behavior&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;smooth&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">block&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;start&amp;#34;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">scrollToTop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you want to smoothly scroll an element to the end of the viewport&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">scrollToBottom&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">element&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">element&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scrollIntoView&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">behavior&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;smooth&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">block&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;end&amp;#34;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">scrollToBottom&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="check-if-the-current-browser-is-ie">Check if the current browser is IE
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isIE&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">!!&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">documentMode&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="stripping-html-from-given-text">Stripping HTML from given text
+&lt;/h3>&lt;p>When you need to filter out all the tags in a piece of text&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">stripHtml&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">DOMParser&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parseFromString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;text/html&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">textContent&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">stripHtml&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;div&amp;gt;test&amp;lt;/div&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s1">&amp;#39;test&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="redirect">Redirect
+&lt;/h3>&lt;p>When you need to jump to another page&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">goTo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">location&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">href&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">url&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="text-pasting">Text pasting
+&lt;/h3>&lt;p>When you need to copy text to the clipboard&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">copy&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">navigator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clipboard&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeText&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">navigator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clipboard&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">copy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy text&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="copy-content-to-clipboard">Copy content to clipboard
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">copyToClipboard&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">navigator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clipboard&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">copyToClipboard&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hello World&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="clear-all-cookies">Clear all cookies
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">clearCookies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cookie&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cookie&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cookie&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cookie&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/^&lt;/span> &lt;span class="o">+/&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/=.*/&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">expires&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toUTCString&lt;/span>&lt;span class="p">()};&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-the-selected-text">Get the selected text
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getSelectedText&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getSelection&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getSelectedText&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="detect-if-its-dark-mode">Detect if it’s dark mode
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isDarkMode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matchMedia&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(prefers-color-scheme: dark)&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matches&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">isDarkMode&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="determine-if-the-current-tab-is-active">Determine if the current tab is active
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isTabInView&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hidden&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="determine-if-it-is-currently-an-apple-device">Determine if it is currently an Apple device
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isAppleDevice&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">Mac&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPod&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPhone&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPad&lt;/span>&lt;span class="o">/.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">navigator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">platform&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">isAppleDevice&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="open-the-browser-print-dialog">Open the browser print dialog
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">showPrintDialog&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">print&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="check-if-an-element-is-in-the-viewport">Check if an element is in the viewport
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">elementInViewport&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">el&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getBoundingClientRect&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">top&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">el&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getBoundingClientRect&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bottom&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">innerHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-device-type">Get device type
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getDeviceType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">Android&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">webOS&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPhone&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPad&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">iPod&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">BlackBerry&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">IEMobile&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">Opera&lt;/span> &lt;span class="n">Mini&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">navigator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">userAgent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="s1">&amp;#39;Mobile&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Desktop&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="date">Date
+&lt;/h2>&lt;h3 id="check-if-a-date-is-today">Check if a date is today
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isToday&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">date&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">date&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toISOString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toISOString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="date-conversion">Date conversion
+&lt;/h3>&lt;p>When you need to convert a date into YYYY-MM-DD format&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">formatYmd&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">date&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">date&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toISOString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">formatYmd&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="time-conversion">Time conversion
+&lt;/h3>&lt;p>When you need to convert seconds into hh:mm:ss format&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">formatSeconds&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toISOString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">substr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">formatSeconds&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">00&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">03&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">20&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-the-first-day-of-a-month-in-a-particular-year">Get the first day of a month in a particular year
+&lt;/h3>&lt;p>When you need to get the first day of a month in a specific year&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getFirstDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getFullYear&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getMonth&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getFirstDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;2022-04&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Fri&lt;/span> &lt;span class="n">Apr&lt;/span> &lt;span class="mi">01&lt;/span> &lt;span class="mi">2022&lt;/span> &lt;span class="mi">00&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">00&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">00&lt;/span> &lt;span class="n">GMT&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">0800&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="err">中国标准时间&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-the-last-day-of-a-month-in-a-particular-year">Get the last day of a month in a particular year
+&lt;/h3>&lt;p>When you need to get the last day of a month in a specific year&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getLastDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getFullYear&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getMonth&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getLastDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;2023-03-04&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Fri&lt;/span> &lt;span class="n">Mar&lt;/span> &lt;span class="mi">31&lt;/span> &lt;span class="mi">2023&lt;/span> &lt;span class="mi">00&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">00&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">00&lt;/span> &lt;span class="n">GMT&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">0800&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="err">中国标准时间&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-the-total-number-of-days-in-a-month-in-a-particular-year">Get the total number of days in a month in a particular year
+&lt;/h3>&lt;p>When you need to get the total number of days in a specific month of a certain year&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getDaysNum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">year&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">month&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">year&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">month&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getDate&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">day&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getDaysNum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2024&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">29&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="check-if-a-date-is-valid">Check if a date is valid
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isDateValid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">val&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="n">Number&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">isNaN&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">val&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">valueOf&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">isDateValid&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;December 17, 1995 03:24:00&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="calculate-the-interval-between-two-dates">Calculate the interval between two dates
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">dayDif&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">date1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">date2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ceil&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">date1&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getTime&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">date2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getTime&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">86400000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dayDif&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;2021-11-3&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;2022-2-1&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="find-out-which-day-of-the-year-a-date-falls-on">Find out which day of the year a date falls on
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">dayOfYear&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">date&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">floor&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">date&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">date&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getFullYear&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">1000&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">60&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">60&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">24&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dayOfYear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="obtain-the-timezone">Obtain the timezone
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Intl.DateTimeFormat().resolvedOptions().timeZone;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="function">Function
+&lt;/h2>&lt;h3 id="asynchronous-function-judgment">Asynchronous function judgment
+&lt;/h3>&lt;p>Determine whether a function is an asynchronous function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isAsyncFunction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">prototype&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">call&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;[object AsyncFunction]&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">isAsyncFunction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{});&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="number">Number
+&lt;/h2>&lt;h3 id="truncate-number">Truncate number
+&lt;/h3>&lt;p>When you need to truncate some digits after the decimal point without rounding&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">toFixed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">fixed&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">RegExp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="o">^-&lt;/span>&lt;span class="err">?&lt;/span>\&lt;span class="n">d&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">.&lt;/span>\&lt;span class="n">d&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">fixed&lt;/span>&lt;span class="p">}})&lt;/span>&lt;span class="err">?`&lt;/span>&lt;span class="p">))[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">toFixed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">10.255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mf">10.25&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="rounding">Rounding
+&lt;/h3>&lt;p>When you need to truncate some digits after the decimal point and round&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="nb">round&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">decimals&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">round&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nb">decimals&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="o">-$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nb">decimals&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">round&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">10.255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mf">10.26&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="zero-padding">Zero-padding
+&lt;/h3>&lt;p>When you need to pad zeros in front of a number num that lacks len digits&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">replenishZero&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">zero&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">padStart&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">len&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">zero&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">replenishZero&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">08&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="object">Object
+&lt;/h2>&lt;h3 id="remove-invalid-properties">Remove invalid properties
+&lt;/h3>&lt;p>When you need to remove all properties in an object with a property value of null or undefined&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">removeNullUndefined&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">entries&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">v&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">null&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">)),&lt;/span> &lt;span class="p">{});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">removeNullUndefined&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">age&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">undefined&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sex&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">null&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="reverse-object-key-value-pairs">Reverse object key-value pairs
+&lt;/h3>&lt;p>When you need to exchange the key-value pairs of an object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">invert&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">keys&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">assign&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">]]:&lt;/span> &lt;span class="n">k&lt;/span> &lt;span class="p">}),&lt;/span> &lt;span class="p">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">invert&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">jack&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="check-if-an-object-is-empty">Check if an object is empty
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isEmpty&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">obj&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Reflect&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ownKeys&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">obj&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="string-to-object">String to object
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">strParse&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">(&lt;/span>\&lt;span class="n">w&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="p">)&lt;/span>\&lt;span class="n">s&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">g&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">p1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="s2">&amp;#34;${p1}&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/&lt;/span>\&lt;span class="s1">&amp;#39;/g, &amp;#34;&lt;/span>&lt;span class="se">\&amp;#34;&lt;/span>&lt;span class="s1">&amp;#34;))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">strParse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;{name: &amp;#34;jack&amp;#34;}&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="other">Other
+&lt;/h2>&lt;h3 id="compare-two-objects">Compare two objects
+&lt;/h3>&lt;p>When you need to compare two objects. JavaScript’s equality operator can only determine if the addresses of two objects are the same, and cannot determine if the key-value pairs of two objects are consistent when the addresses are different.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">isEqual&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">objects&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">objects&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">every&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">objects&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">isEqual&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">isEqual&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack1&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jack&amp;#39;&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="bp">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="generate-random-color">Generate random color
+&lt;/h3>&lt;p>When you need to generate a random color&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getRandomColor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="c1">#${Math.floor(Math.random() * 0xffffff).toString(16)}`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getRandomColor&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s1">&amp;#39;#4c2fd7&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="color-format-conversion">Color format conversion
+&lt;/h3>&lt;p>When you need to convert hexadecimal color to rgb&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">hexToRgb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">hex&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">hex&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/^&lt;/span>&lt;span class="c1">#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) =&amp;gt; `#${r}${r}${g}${g}${b}${b}`).substring(1).match(/.{2}/g).map((x) =&amp;gt; parseInt(x, 16));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">hexToRgb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#00ffff&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">hexToRgb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#0ff&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="generate-random-ip-address">Generate random IP address
+&lt;/h3>&lt;p>When you need to generate an IP address&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">randomIp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">fill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">floor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="uuid-generation">UUID generation
+&lt;/h3>&lt;p>When you need to generate an id&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">uuid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">16&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">)))&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="p">([&lt;/span>&lt;span class="mf">1e7&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mf">1e3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mf">4e3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mf">8e3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mf">1e11&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">018&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">g&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">uuid&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uuid&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="get-cookie">Get cookie
+&lt;/h3>&lt;p>When you need to convert cookie into an object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">getCookie&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cookie&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;;&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">item&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;=&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">acc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">acc&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">trim&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#34;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">)]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">acc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getCookie&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="force-waiting">Force waiting
+&lt;/h3>&lt;p>When you need to wait for a period of time, but you don’t want to write it in the setTimeout function, causing callback hell.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">sleep&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">resolve&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">setTimeout&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">resolve&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">t&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2000&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">then&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;time&amp;#39;&lt;/span>&lt;span class="p">)});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="conversion-between-fahrenheit-and-celsius">Conversion between Fahrenheit and Celsius
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">celsiusToFahrenheit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">celsius&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">celsius&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">5&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">fahrenheitToCelsius&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">fahrenheit&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">fahrenheit&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>How to Develop Logical Thinking in Speaking?</title><link>https://www.skstory.online/p/how-to-develop-logical-thinking-in-speaking/</link><pubDate>Wed, 24 Jan 2024 01:56:45 +0800</pubDate><guid>https://www.skstory.online/p/how-to-develop-logical-thinking-in-speaking/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bZpprxDx3GEMPflw" alt="Featured image of post How to Develop Logical Thinking in Speaking?" />&lt;p>To improve our logical expression and solve confusion and disorganization in thinking, first, we need to understand a term: Structured Thinking.&lt;/p>
+&lt;h2 id="benefits-of-structured-thinking">Benefits of Structured Thinking
+&lt;/h2>&lt;p>Structured thinking is a concept proposed by McKinsey &amp;amp; Company, it discusses an organized and systematic approach. McKinsey has a very famous principle called the Pyramid Principle, which even has an associated book.&lt;/p>
+&lt;p>What does it mean? Simply put, they believe that anything can be boiled down to a central thesis, which can be supported by three to seven arguments.&lt;/p>
+&lt;p>These primary arguments themselves can also be a thesis, then supported by second-level arguments branching out into shapes like a pyramid, hence the name “Pyramid Principle”.&lt;/p>
+&lt;p>For every layer of the pyramid, there is a particularly stringent requirement called ‘MECE’, which stands for mutually exclusive, collectively exhaustive. In other words, these arguments must be independent of each other, not overlapping, but when put together, they are completely exhaustive and leave no room for omission.&lt;/p>
+&lt;p>The principle of ‘no omission’ ensures accuracy. As McKinsey provides consulting services and helps identify problems in other companies, nothing can be missed. By ‘not overlapping’, unnecessary efforts can be avoided.&lt;/p>
+&lt;p>&lt;strong>Therefore, when they write something, especially when they write consultation reports, they have to write in accordance with the MECE principle.&lt;/strong>&lt;/p>
+&lt;p>In the process of speaking, when we argue a point, we don’t necessarily need to exhaust it without omission, but this structure is very classic.&lt;/p>
+&lt;p>For instance, if my colleague is familiar with the pyramid structure, he would use another method when reporting to me.&lt;/p>
+&lt;p>He might say: ‘Look, this is our sales situation last month. Whether it is good or bad.’ As a boss, what I am worried about is the performance last month, overall, is it good or bad, give me the point first.&lt;/p>
+&lt;p>Then you can provide the evidence. The reason for the poor performance is that we had fewer promotional activities last month and only had three, shown as the three rises in this graph.&lt;/p>
+&lt;p>And we also had a big drop, which is the second argument, and then tell me why.&lt;/p>
+&lt;p>Expressing it in the structure of the pyramid enables me to patiently listen and feel that he has shared the key points I want to know in a timely manner.&lt;/p>
+&lt;p>The pyramid structure is indeed a classic and useful one, mastering the pyramid structure can help those who are verbose, without a focus or level in speaking, to basically handle most situations in life.&lt;/p>
+&lt;p>Whether you have to report to the company, or discuss where humans come from and what the meaning of life is, you can use the pyramid structure to describe and express these. Even if you decide what to eat in the morning and what to buy when you go shopping, you can use the pyramid structure to express it.&lt;/p>
+&lt;p>If time is insufficient and the listener is impatient, when you speak, just state what your central thesis is, and then mention the primary argument.&lt;/p>
+&lt;p>If there is enough time and we have to make a detailed report, we may need to clarify the secondary or even tertiary arguments.&lt;/p>
+&lt;p>Expressing in this way ensures that at least you can clearly state what you mean. Therefore, the pyramid principle is definitely a weapon in our communication, dialogue and writing.&lt;/p>
+&lt;p>&lt;strong>Under this principle, we only need to remember two sentences:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Conclusion first, state the central thesis first.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The arguments are independent of each other and do not overlap.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>If you remember these two, we can basically speak more structured, layered and clear when expressing.&lt;/p>
+&lt;p>How important it is to express in a structured way, because speaking is linear, meaning it passes as soon as you finish listening to a word, so if you speak particularly randomly, it is difficult for others to understand.&lt;/p>
+&lt;p>It would be best if you had an expression structure while speaking, which is related to the characteristics of speech.&lt;/p>
+&lt;p>But the second reason I’m sharing today is that when we think about things, for example, when I ask you: Why do people get married?&lt;/p>
+&lt;p>Your brain is actually fragmented in thinking, you may think: marriage is for having children, if you get married, you can find someone to spend your life with.&lt;/p>
+&lt;p>All of these are fragmentary, messy, your thoughts in your brain are strung together.&lt;/p>
+&lt;p>So, you need to have a structured way of thinking, pick out a structure for those thoughts, first state what your main view is, and then discard some of the less important bits, laying out the important arguments one by one.&lt;/p>
+&lt;p>Only by expressing in this way can you clear up your thoughts and let others understand your true thoughts.&lt;/p>
+&lt;p>This is actually related to our way of thinking and the process of our own thinking, so you must have structured thinking, and then you can express in a structured manner.&lt;/p>
+&lt;h2 id="three-steps-to-train-structured-thinking">Three Steps to Train Structured Thinking.
+&lt;/h2>&lt;p>So, how should we train this kind of thinking? There are three steps.&lt;/p>
+&lt;p>&lt;strong>The first step is called Chunking.&lt;/strong>&lt;/p>
+&lt;p>First, you need to have the ability to chunk. This ability of chunking is not only related to your expression, but also related to your reading comprehension and your memory ability. In my opinion, all these three abilities need to use chunking.&lt;/p>
+&lt;p>For example, we just said that the pyramid structure can help you solve small problems in life, such as what to buy when you go to the supermarket today?&lt;/p>
+&lt;p>You might say: I go to the supermarket, I want to buy coriander, I want to buy ginger, I want to buy cooking wine, buy cabbage, buy tomatoes, and buy some oranges.&lt;/p>
+&lt;p>If you say it this way, it’s hard for others to remember, and it doesn’t seem clear.&lt;/p>
+&lt;p>You should say: I am going to buy three things at the supermarket today. Firstly, I need to buy condiments, secondly, I need to buy vegetables, thirdly, I need to buy fruits. So when I get to the supermarket, I need to go around by each area.&lt;/p>
+&lt;p>If you express it this way to me, I will understand more clearly.&lt;/p>
+&lt;p>These are all details of life. We may not notice them usually, but the expression of chunking is indeed clearer.&lt;/p>
+&lt;p>What are the standards for chunking?&lt;/p>
+&lt;p>The standard we just used for chunking is category, which is the first one.&lt;/p>
+&lt;p>Time can also be used as a standard for chunking. For example, if I ask you: what did you eat today?&lt;/p>
+&lt;p>Then you can tell me: I ate steamed buns and porridge this morning, I ate something for lunch, and something for dinner.&lt;/p>
+&lt;p>This way of expression is chunking according to time.&lt;/p>
+&lt;p>Also, when my colleague reports to me about our company’s sales last month, he can report to me in this way. Firstly, the categories of what we did well and what we did not do well last month; and also chunk by time, the sales situation last month could be broken down into three stages.&lt;/p>
+&lt;p>Do you find that expressing it this way is clearer?&lt;/p>
+&lt;p>So, the ability to chunk is the basis of our structured thinking.&lt;/p>
+&lt;p>&lt;strong>This is the first one, called the ability to chunk, and the process of chunking can not only help you express more clearly, but also help you make trade-offs. In fact, there are a lot of unimportant details, and you will find that these can’t be included in your chunks.&lt;/strong>&lt;/p>
+&lt;p>For example, in our last month, there were three good places and four not-so-good places. But some mediocrities were discarded and not worth mentioning.&lt;/p>
+&lt;p>But if you say it all at once from beginning to end, you will say it, and others will find it verbose to listen.&lt;/p>
+&lt;p>So, the process of chunking can help you make trade-offs and sideline some not-so-important content, then categorize the important content through chunks.&lt;/p>
+&lt;p>&lt;strong>The second step is to Refine.&lt;/strong>&lt;/p>
+&lt;p>We have broken down the content into chunks. For example, last month’s sales situation can be divided into three stages: the growth stage, the plateau stage, and the decline stage.&lt;/p>
+&lt;p>The second thing I need to do is summarize a concise sentence or keyword for each chunk, which is what is the main content of this chunk.&lt;/p>
+&lt;p>&lt;strong>Keywords and brief phrases can remind you of what to talk about when you see these keywords and phrases, and they can make clear the topic of this part, so others can know more clearly what the emphasis is in this part.&lt;/strong>&lt;/p>
+&lt;p>So when you express yourself, whether you need to make a PPT or not, many people think that only when I make a PPT, do I need to give each PPT a title to tell others what this chapter is about.&lt;/p>
+&lt;p>But actually, in the process of speaking, your brain can figure out the theme sentence and key words of this chunk through your training, slowly and without you having to write it down.&lt;/p>
+&lt;p>&lt;strong>The third step is to order.&lt;/strong>&lt;/p>
+&lt;p>When you have chunked your content and refined keywords and theme sentences for each chunk, at that point, you need to sort it out in your mind. How should I specifically say it?&lt;/p>
+&lt;p>Through chunking, refining, and ordering, we have completed a very layered and clear expression.&lt;/p>
+&lt;p>How does this ability come about?&lt;/p>
+&lt;p>It is trained through a lot of reading, memorization, and recapitulation.&lt;/p>
+&lt;p>However, if you are in a hurry, like you are about to make a speech or report, and you are a person who speaks without levels and is verbose, what should you do?&lt;/p>
+&lt;p>The first method is called drawing your logic diagram.&lt;/p>
+&lt;p>Think about when we usually argue a topic, for example, this topic is: why I think pigs should be kept as pets.&lt;/p>
+&lt;p>Then I want to list all the ideas under my viewpoint.&lt;/p>
+&lt;p>For example, pigs have fur, rabbits have fur, cats have fur, so they are kept as pets. I think pigs have fur, so pigs should also be kept as pets. Pigs are easy to raise, the cost is low, pigs can also be put in a pen, and they don’t need to be walked every day.&lt;/p>
+&lt;p>&lt;strong>In short, list all your ideas, maybe ten, twenty, a lot. It doesn’t matter, list all you can think of.&lt;/strong>&lt;/p>
+&lt;p>Draw these thoughts into a mind map, you can use mind mapping tools, or you can use Baidu mind mapping. These are some small pieces of software that are easy to start with.&lt;/p>
+&lt;p>The advantage of using them is that when you go to delete and move in the next step, it would be easier. If you do it yourself, it is not easy to move back and forth.&lt;/p>
+&lt;p>So you have to draw all your thoughts into the mind map. After that, the second step is to organize these thoughts and do the chunking.&lt;/p>
+&lt;p>For example, you can say pigs are cheap to buy. If you buy a dog or a cat, it costs over a thousand dollars. But a pig only costs a few tens of dollars and is also easy to raise. The feed is priced low.&lt;/p>
+&lt;p>Actually, these all belong to a category. They all say that the cost of raising pigs is low. You need to categorize them together.&lt;/p>
+&lt;p>So, categorize all your ideas, because while thinking, one thought might encompass another, and it’s also possible that all the ideas are very detailed but they have common points.&lt;/p>
+&lt;p>You need to organize your thoughts by chunking.&lt;/p>
+&lt;p>After the organization, you will find that some of the ideas are not very important and can’t be categorized, so you can delete them.&lt;/p>
+&lt;p>Then the third step is to refine each chunk.&lt;/p>
+&lt;p>For example, we just mentioned that pigs are cheap to buy, cheap to feed, when pigs get sick, veterinarians for pigs are cheaper than vets for cats, etc.&lt;/p>
+&lt;p>You refine these thoughts into a point, called “low cost of raising pigs”.&lt;/p>
+&lt;p>After the “low cost” point is refined, you can think more about whether there are any other cases, any other evidence that you know, or that everyone is familiar with, you can add them as you see fit, depending on the time.&lt;/p>
+&lt;p>At the last step, look at your viewpoint and the summarized arguments, and do a sequence, that is, which should be said first, and which should be said later.&lt;/p>
+&lt;p>This is the process of forming an expression, a speech.&lt;/p>
+&lt;h2 id="logical-thinking-must-be-applied-for-concise-expression">Logical Thinking Must Be Applied for Concise Expression.
+&lt;/h2>&lt;p>But have you noticed that these methods I told you can only ensure that you speak clearly, but they cannot guarantee that what you said makes sense.&lt;/p>
+&lt;p>Taking the pig topic as an example, why should pigs be bred as pets?&lt;/p>
+&lt;p>You gave three reasons, 1. Pigs are cheaper and the cost of raising them is lower; 2. Pigs can be raised in a pen. If you raise a wild horse, it needs a prairie, you certainly can’t keep it as a pet; 3. Pigs are more aesthetically pleasing, some Dutch pigs are very cute and fun.&lt;/p>
+&lt;p>So you believe that these three points are the reasons why pigs can be considered as pets.&lt;/p>
+&lt;p>Indeed, you spoke very clearly, but it is not necessarily convincing. Because pigs are not cheap, and it has little to do with them becoming pets.&lt;/p>
+&lt;p>You can’t say, just because pigs are quite cheap, we should keep them as pets. In fact, there are many cheap animals, can all be kept as pets?&lt;/p>
+&lt;p>There might be another reason that is more convincing, pigs are not aggressive. I believe that a condition that must be met to keep a pet is that the pet can not be attacking. You can’t keep a Northeast tiger at home.&lt;/p>
+&lt;p>&lt;strong>So remember, if you want to achieve concise expression, you must at least ensure that the logic is smooth. Many people speak illogically&lt;/strong>, for example, the other day, I saw a franchise meeting. It was very grand and glorious, but the words spoken by the people on the stage were illogical.&lt;/p>
+&lt;p>He hoped that the people at the scene would take the distribution of this product and join his company, but he kept saying how difficult it was to manage this brand, under the pressure of everyone, and having gone through hardships. Then finally he said to everyone: I hope you can join me.&lt;/p>
+&lt;p>I thought: there is no relationship between your viewpoint and your arguments. Whether you have it hard or not, has no connection with whether others should join.&lt;/p>
+&lt;p>Some of the logical errors when speaking are not so serious, such as appeals to authority. This error is actually a serious logical error.&lt;/p>
+&lt;p>Is what a certain expert says always right? Or seeing some brand endorsed by celebrities, does endorsement by stars mean it’s good?&lt;/p>
+&lt;p>Appealing to authority is a logical error, but it is persuasive. The audience will buy your story.&lt;/p>
+&lt;p>However, if your logical errors are so serious that others find it absurd after listening, or they doubt you and want to challenge you, then you’re done.&lt;/p>
+&lt;p>&lt;strong>Most Common Logical Errors&lt;/strong>&lt;/p>
+&lt;p>There are a few serious logical errors that you absolutely should not make.&lt;/p>
+&lt;p>&lt;strong>The first is irrelevance.&lt;/strong>&lt;/p>
+&lt;p>The example of the franchise meeting I just mentioned is the first type, called irrelevance.&lt;/p>
+&lt;p>That is, your story, or your argument, has nothing to do with your theme.&lt;/p>
+&lt;p>This error may sound childish and foolish, but indeed many people are making it. The story they tell has nothing to do with their ultimate point.&lt;/p>
+&lt;p>So among all the logical errors, I think this is the most important one, called irrelevance.&lt;/p>
+&lt;p>&lt;strong>The second is false attribution.&lt;/strong>&lt;/p>
+&lt;p>The cause and result are mismatched, which can be broken down as follows:&lt;/p>
+&lt;p>&lt;strong>The first situation is a common error, which is attributing multiple causes to a single one.&lt;/strong>&lt;/p>
+&lt;p>I read a book before, it said that Taiwanese painter Tsai Chih Chung sleeps at five or six o’clock when the sun sets, gets up at one in the morning, and works until two in the afternoon. He only eats one meal a day and is in good health. Then my friend came to a conclusion: See, eating one meal a day is good for health.&lt;/p>
+&lt;p>His good health and longevity might have to do with him eating only one meal a day, but there are other reasons.&lt;/p>
+&lt;p>For example, he has a good mentality, and where he lives is relatively good. So we can’t attribute multiple reasons to a single one. In doing so, people will find you arbitrary, unpersuasive, and logically erroneous.&lt;/p>
+&lt;p>This is the first situation of false attribution, attributing multiple causes to one cause.&lt;/p>
+&lt;p>&lt;strong>The second situation is treating the accidental as necessary.&lt;/strong>&lt;/p>
+&lt;p>For example, this morning when I went out, I made a wish and hoped to make a fortune. Then in the afternoon, I found 100 yuan on the street. Did I pick up the 100 yuan because of the wish I made? This is treating the accidental as necessary. The connection between them is just a coincidence. If you speak to others in this way, they will feel that your logic is flawed.&lt;/p>
+&lt;p>&lt;strong>The third situation of false attribution is “broken cause.”&lt;/strong>&lt;/p>
+&lt;p>For example, you say the reason you’re not happy after you grow up is because your parents didn’t treat you well during your childhood. But in fact, you’ve encountered a lot of other things after your childhood. For example, your marriage failed, and your job search didn’t go well — in short, you’ve been out of luck everywhere.&lt;/p>
+&lt;p>If you use a cause from many years ago that has been disrupted as a reason to explain, others will also think there is a problem when they listen.&lt;/p>
+&lt;p>These are the three types of false attribution errors we commonly see: attributing multiple causes to a single one, broken cause, and mistaking the accidental for the necessary.&lt;/p>
+&lt;p>&lt;strong>The fourth is “overgeneralization.”&lt;/strong>&lt;/p>
+&lt;p>Sometimes, we really want to persuade others so much that we will use some extreme words.&lt;/p>
+&lt;p>For example, “No man is good.” When people hear this, they subconsciously want to refute you.&lt;/p>
+&lt;p>And then there is, “Only by following me can you make money.” Can’t you make money following others?&lt;/p>
+&lt;p>So be careful with these extreme words, do not overgeneralize.&lt;/p>
+&lt;p>Because, one bad consequence brought by overgeneralizing is that if there is any counterexample in the mind of the person listening to you, they will think you have a problem with your logic and will not believe what you say.&lt;/p>
+&lt;p>&lt;strong>The fifth is “unclear concept.”&lt;/strong>&lt;/p>
+&lt;p>For example, I think our company should cultivate more management talents, what is “more”? What is “management talent”?&lt;/p>
+&lt;p>If you always use such vague and ambiguous concepts to talk, it is easy to have a dispute during the process of communicating with others.&lt;/p>
+&lt;p>If you are a boss and you speak so ambiguously, in general, your subordinates will not execute and not take responsibility.&lt;/p>
+&lt;p>These are some of the serious logic mistakes we mentioned. There can be over 20 types of common logical errors, but we can’t go over them one by one today. The most important one is the first one we mentioned today, called irrelevance.&lt;/p>
+&lt;p>&lt;strong>In the process of speaking, we are not able to exhaust all the reasons and evidence, as suggested in McKinsey’s Pyramid Principle.&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>However, when we speak, we must ensure that there is a connection between our points and evidence. This is the most basic requirement for us to achieve at the level of logic.&lt;/strong>&lt;/p></description></item><item><title>Why should we read if we’ll eventually forget what we read?</title><link>https://www.skstory.online/p/why-should-we-read-if-well-eventually-forget-what-we-read/</link><pubDate>Tue, 23 Jan 2024 13:53:34 +0800</pubDate><guid>https://www.skstory.online/p/why-should-we-read-if-well-eventually-forget-what-we-read/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*O_ZyAuc_bQOtwh7j" alt="Featured image of post Why should we read if we’ll eventually forget what we read?" />&lt;p>To a certain extent, a person’s understanding ability can determine how broad their path is. Reading comprehension is a fundamental ability of a person, which is very important. It affects your memory, your expression, your thinking, and also your communication skills. Sometimes, you feel like, “Why can’t I always remember things?” Then you blame yourself for your poor memory and want to learn some memory techniques. But it’s not necessarily about memory, it might be that your understanding or reading comprehension is too poor. Because you can’t understand and process the material well or find its logical line, you can’t remember things. I’ve seen that among people who have problems with memory, eight or nine out of ten have problems with reading comprehension.&lt;/p>
+&lt;p>There are also some people who feel that their expressive ability is poor and often don’t know what to say or don’t know how to respond to what others are saying. That’s because they don’t have enough input in their minds. In other words, they have too little information input in their brains, so they can’t think of what to say, and they have nothing to say.&lt;/p>
+&lt;p>And then there’s thinking ability. Many people feel they’re not clear in their thinking, which is because they’re not capable enough to process information. There might be a pile of things in their brains that are not organized or logical, and they get more and more confused as they think. Reading comprehension is essentially about processing information; seeing an object and reading and understanding it is processing the information the object gives me. So if your reading comprehension is not strong, and your information processing ability is relatively weak, your brain will not think clearly.&lt;/p>
+&lt;p>Finally, why is reading comprehension related to the ability to communicate with others? If a person has no problem with reading comprehension, then when he listens to others speaking, he can understand the logical flow of the speech, what the key points in the speech are, and easily understand the speaker’s intention, making it easier to communicate. So reading comprehension is actually the foundation for all of these, including thinking ability, the ability to communicate with others, expressive ability, and memory. It’s very important. This is why we need to read a lot. There are many benefits to reading.&lt;/p>
+&lt;p>Firstly, reading can make a person rational, and if you don’t read, it’s easier to lack rationality. Because once a person doesn’t read, then his judgment on all things will mainly come from his own experience. But how much experience can a person have in his lifetime? Sometimes his strength is quite thin, so when he looks at things, he easily lacks rationality, is biased and lacks the ability to think critically. When a person doesn’t have much idea or concept about something, it’s also easy to be blind.&lt;/p>
+&lt;p>For example, I once heard someone promoting a weight loss tea, saying it’s not only good for weight loss, but also very healthy. You’ll realize your fatty liver has improved and your body fat percentage has risen or fallen after drinking the tea, in any case, your body will get better. There were testimonials on the spot: “I used the weight loss tea and it worked.” Based on experience, wouldn’t most people doubt that this testimonial could be fake? But if you actually tried it and found that it does cure your fatty liver, what would you think? Would you find it reliable?&lt;/p>
+&lt;p>You would feel that it’s safe and healthy, that it’s a good weight loss tea. You buy it right away and recommend it to your friends. But if your reading scope is a little wider, such as when I first learned about weight loss tea, I remembered a book about medicine I had read before that mentioned many medicines can treat one disease, but can cause another.&lt;/p>
+&lt;p>I thought that the tea might improve your fatty liver, but that doesn’t necessarily mean the tea is healthy, because you don’t know how it affects your other bodily functions. So I would be prudent and wouldn’t buy it lightly, which is a display of rationality. This is the source of a person’s ability to judge. When you see a statement, a method, and you think it’s right, you believe it.&lt;/p>
+&lt;p>However, you have seen contrasting statements and actions. Among these two types of statements and actions, you need to decide which one to believe. This process is judgment. So the more you read, the more information you have in your head, the more different perspectives you know about one thing, the stronger your judgment will be.&lt;/p>
+&lt;p>The second benefit of reading is that books themselves are a valuable educational resource, and reading good books is a shortcut. You might say, “I have no money to attend extracurricular tutoring classes from early age, nor to travel.” It doesn’t matter, you can read books. Good education is not necessarily given in schools, especially in today’s exam-oriented education system. Good education is in books.&lt;/p>
+&lt;p>If I could only choose one extracurricular class for my future child, I wouldn’t choose dance or piano, I would definitely choose reading. You can have direct conversations with Bill Gates, learn directly from Buffett by reading. When you want to learn, you read good books. Books can help you break through your reality, and have conversations with the smartest and best people in the world.&lt;/p>
+&lt;p>Many people overlook this resource. They’d rather chat with a friend who can’t tune in or ask a teacher who’s not reliable, but they don’t want to read books, thus completely wasting this resource of good books.&lt;/p>
+&lt;p>The third benefit of reading is that it can make you confident. Here, we divide confidence into conditional and unconditional confidence. Conditional confidence is simple to understand, it means that confidence is conditional. For example, looks-confidence, people who are good-looking can be confident. Why do some beautiful girls lack confidence? Because they don’t realize they’re beautiful. Those girls who realize their beauty often feel a sense of superiority. Another kind of conditional confidence is material confidence. Being rich does make people confident. If you don’t agree with this, it means you’re not rich yet.&lt;/p>
+&lt;p>When a person suddenly makes a lot of money, you’ll find that he speaks louder, he realizes that he has money, which gives him a sense of confidence. In addition to looks-confidence and material-confidence, there’s also a kind of conditional self-confidence, which is called knowledge-confidence. When others don’t know something but I do, when others don’t know why but I do, when others don’t know how to do something but I do. So gradually, every time I am recognized by others, I become confident, I can often guide others, and I become a so-called KOL (Key Opinion Leader).&lt;/p>
+&lt;p>Among my classmates, there was a girl who knew a lot. When we were in the first year of junior high school, kids just realized being fat was not good-looking and they needed to lose weight. But this girl knew the principle of weight loss. She told us at that time: “You shouldn’t eat carbohydrates. They’re the first source of energy. When you’re lacking energy, you’ll first use these carbohydrates. So if you eat too much of this stuff, it’ll turn into fat and be stored in your body, making you fat.”&lt;/p>
+&lt;p>I was amazed when I heard this. I only knew about weight loss at that time and didn’t know these principles because we hadn’t taken any biology classes. The girl knew this, she said: “As long as you don’t give your body too many carbohydrates, your body will burn fat when it needs energy, and in this way, you’ll lose weight.”&lt;/p>
+&lt;p>And then she told us: “You can’t be too hungry because if you’re too hungry, your body will think that you’re lacking food, you’re experiencing famine, and it’ll protect fat and slow down the rate of consumption to let you survive in a famine, so you can’t be hungry.”&lt;/p>
+&lt;p>She was clear, rational, and had grounds for her statements. Everyone believed her, and she became more and more confident. But where did all this confidence come from? It’s from the books she read, so books can make people confident.&lt;/p>
+&lt;p>Lastly, reading can make you smarter. It sounds like a cliché, but it’s not. Reading can indeed make people smarter.&lt;/p>
+&lt;p>Once you’ve read a lot of books and have accumulated many background knowledge, you’ll find your understanding is constantly improving. Gao Xiaosong, who has read a lot of books, and a person who, on a regular basis, doesn’t read books are both reading the same book. Who do you think will understand faster, more deeply, more accurately?&lt;/p>
+&lt;p>Definitely Gao Xiaosong. So Gao Xiaosong seems smarter because the process of reading is actually a continuous input of book information into the brain. Also, you have to keep filling in the gaps while reading.&lt;/p>
+&lt;p>A book cannot possibly list all the theories, knowledge points and all background-related knowledge for you. If it did, the book would never end, so it omits a lot of things. Therefore, people who have a lot of background knowledge can fill in the gaps, and understand quickly and correctly.&lt;/p>
+&lt;p>Also, it’s possible that two people read the same book, one person reads very deeply and gets a lot of new knowledge through the book, while the other person reads superficially. So, reading more books allows you to read faster and understand faster.&lt;/p>
+&lt;p>Reading is an important input for the brain. The more you input, the more you read, the faster you can think, and the smarter you are. This is because your brain is processing this information every day, so the more you use it, the better it gets.&lt;/p>
+&lt;p>Why do rural people, those farmers who face the earth and sky, sometimes look not so smart, and sometimes they seem to react slowly and are a bit blunt? That’s because their life experiences are very single — go home to eat, work during the day, most of the time they’re facing the fields, there is no other information input, so their brains are getting duller.&lt;/p>
+&lt;p>Reading makes people react quickly. For example, if you talk about an economic theory today, you can react quickly, because you have a lot of information stored in your brain. You can quickly call upon related knowledge, information to give feedback, and you won’t appear ignorant. So, reading can make people understand faster, react faster, and appear smarter.&lt;/p>
+&lt;p>Above is the explanation of why reading? I’ve added some small theories. These are not empty talks or clichés, but the real benefits of reading that I have experienced. If you are confused, anxious, inferior, then reading is the right solution.&lt;/p>
+&lt;p>When reading, we often encounter several problems. The first problem is not knowing what books to read. Every day people recommend books to you, 30 must-reads for young people, 20 must-reads, 10 must-reads to boost your EQ, these books will accumulate on your bookshelf, and you don’t know which one you should read first, which one you should read later, which one you should read and which one you shouldn’t.&lt;/p>
+&lt;p>Therefore, this is the first problem we encounter, which is not knowing in what direction to read. The second problem is that reading is difficult to persist in, it’s hard to keep it up.&lt;/p>
+&lt;p>You often make a plan “this year I must read 100 books,” and in the end, you only read one book, and you didn’t even finish it. The third problem is that you often forget what you’ve read. I have a friend who reads a lot of books and takes notes on Goodreads every time he reads a book. The next time I recommend this book to him, he realizes he’s read it and even took notes, but he just forgot it. So, this is the third problem we encounter.&lt;/p>
+&lt;p>How can we solve these problems? Books can be divided into four categories according to their functions.&lt;/p>
+&lt;p>The first category is books that offer experiences. The most typical are romance novels. After reading a romance novel, what specific and useful things can you get? You can’t really say, but the reading process is really enjoyable. You can finish it in one breath because in this process, you can follow the main male and female characters, experiencing joy and sorrow, and you even cry during key plot points. This is called experiencing. So after reading the whole book, the only thing you get, or the most important thing you get, is the experience. These are the books that provide experiences.&lt;/p>
+&lt;p>The second category is books that provide information. Some books can give you some information, like a fashion magazine that gives you some fashion news. Also, every year I buy some industry reports, which are filled with industry information. From these books, the most important thing we get is the information we didn’t know before.&lt;/p>
+&lt;p>The third category is books that offer knowledge. For example, if you read an economics book today, you learn about the term “sunk cost”. The term didn’t exist before and it’s also a knowledge point that you didn’t know previously, which economists discovered and summarized through long-term research. Once you learn it, you obtain this knowledge point. Basically, books in this category like economics, law, and psychology, they all give you some knowledge.&lt;/p>
+&lt;p>The last type of book is one that provides ways of thinking and methods. Such as philosophy books, they help to broaden your way of thinking and provide a method for thinking. These are books that provide methods of thinking.&lt;/p>
+&lt;p>Actually, it doesn’t need to be divided too clearly, as long as you have a general concept of it. I use this classification to emphasize one problem, which is the importance of a balanced reading selection. From the first to the fourth book category, you can see that the reading difficulty is increasing. The experience-oriented books are the easiest to read. Reading novels can be quite enjoyable, and perhaps books that offer knowledge and methods are more difficult to read. Therefore, we tend to prefer reading novels and the first category, which provides experiences, the second category, which offers information. We like these, which leads to an imbalance in our reading structure. In fact, the third and fourth books, which provide knowledge and ways of thinking, actually expand our knowledge.&lt;/p>
+&lt;p>The reading method we are discussing today is mainly for the third and fourth types of books, because the first and second types basically do not need any special methods. For experience-oriented books, you do not need a method, you can read it in one breath, quickly, without procrastination. So, we mainly talk about how to read the third and fourth categories.&lt;/p>
+&lt;p>The third and fourth books are more difficult to persist with, so we suggest: in terms of reading direction, read only useful books, only read those books that can change your life. For example, if you’re a lawyer, then you should first read some psychology books, professional lawyer materials, or if you have a problem recently like “wanting to get a divorce” and you don’t know what to do, then read some books related to divorce. In short, remember this principle “only read useful books”, either out of interest or to solve a problem. As we mentioned in the theory of learning before, only learning for these two purposes is not painful and can be persevered with.&lt;/p>
+&lt;p>So everyone must develop a habit, when you want to learn something, when you want to solve a problem, you must get used to using the internet and reading to solve problems, this can be considered as a basic literacy for modern people.&lt;/p>
+&lt;p>When people often ask me some questions, I always feel that my answers may not necessarily be better than those of the masters. So instead of asking me, you might as well read a book. Sometimes, for some common-sense problems, it might be better to search on Google than to ask me.&lt;/p>
+&lt;p>In summary, when there are problems, and when you want to learn, you should use the internet and read books to solve your problems. This should be a basic literacy for modern people.&lt;/p>
+&lt;p>Let me give you an example, I recently encountered some problems in the company’s strategy, so the first thing I thought of was actively searching for some books related to company strategy. In this way, I don’t bother others and I can ask for advice from some experts whom I wouldn’t otherwise be able to connect with.&lt;/p>
+&lt;p>After I find these books, I am eager to finish them, and the reading efficiency is also very high, and the experience is also good.&lt;/p>
+&lt;p>So everyone must remember this, this is also Li Ka-shing’s reading method, called “only read books that are useful to yourself”.&lt;/p>
+&lt;p>The biggest mistake I made in reading was my belief that one should start reading from classic books. This idea was imbued in me from young by teachers and parents: that one should read good books, read like “Wuthering Heights”, read domestic classics like “Dream of the Red Chamber”. They are all good books and they should be read.&lt;/p>
+&lt;p>But in all honesty, as a kid, I was unable to read these books. They deterred my passion for reading. I would wonder why I can’t understand these books deemed as classics, touted as excellent by others. Why can’t I appreciate their goodness? I would force myself to read them over and over again, ending up unconvinced and disinterested.&lt;/p>
+&lt;p>As a result, these classics, which I would only come to comprehend and take interest in my 20s, were spoiled to me in my teens. Having gone through them at an age too young, the pleasure of reading was significantly diminished when I revisited them later on.&lt;/p>
+&lt;p>So I want to share my experience here, in this world, there’s no such thing as a must-read book. Simply start from your own interests and needs, read whatever you’re interested in and what can be useful to you. Starting from the second perspective would serve you better.&lt;/p>
+&lt;p>Next, I’ll introduce you to a reading method called “thematic reading”. It means when you choose a topic, such as entrepreneurship, you delve into all the good books under this topic.&lt;/p>
+&lt;p>The merits of thematic reading are significant because you’ve done various readings on this topic, naturally you’ll come across different perspectives. Hence, your understanding of the topic will be more nuanced and rational.&lt;/p>
+&lt;p>Additionally, your reading speed will increase along with your reading efficiency. When you’re reading a book on this topic, you probably already have a decent understanding of this field, the background knowledge from the previous book will allow you to read the next book at a quicker pace. As you read more, you’ll find that your speed continues to increase, which is a benefit of thematic reading.&lt;/p>
+&lt;p>Let’s move on to the method now.&lt;/p>
+&lt;p>Step One: First, search for books based on your chosen theme. You will definitely have a keyword for your theme, use the keyword to search on Goodreads. For instance, if you search for “entrepreneurship”, you’ll find many high-rated books under the keyword. So look for books with relatively high ratings, this is just one searching method.&lt;/p>
+&lt;p>Once you’ve found the books on entrepreneurship, you’ll see that there are other recommended books relevant to your first book. For example, if the recommendations include the word “strategy”, that’s a related keyword, you can use this keyword to conduct another search.&lt;/p>
+&lt;p>Another method is that the book you found may be collected in some Goodreads lists, these lists might represent a theme, you can certainly find relevant books from these lists.&lt;/p>
+&lt;p>In conclusion, you should try to locate, by all means, the good books under your selected theme.&lt;/p>
+&lt;p>The second step is to read the introduction and reviews of the books, to get a feel whether or not you want to read them and how you should read them.&lt;/p>
+&lt;p>Many people write book reviews on Goodreads, these reviews basically serve as notes. Most of the time, they provide a framework. By reading other people’s notes, you can have a rough idea of what the book is about and whether it’s good or not. Judge whether you should read the book, and how to read it.&lt;/p>
+&lt;p>Step Three: Through the reviews and notes, evaluate which book is worth reading and select it.&lt;/p>
+&lt;p>Then, check if there are digital versions of the book on Goodreads, or you can search for the Kindle version on Amazon, or look for the PDF version on Google. I advocate reading eBooks here, as much as possible, drop the paper books.&lt;/p>
+&lt;p>Firstly, physical books are not convenient to carry, hence, it could cause procrastination in your reading habit. Second, moving paper books during relocations is quite a hassle. Third, reading physical books is time-consuming.&lt;/p>
+&lt;p>So, unless you have a peculiar penchant for collecting physical books, I would not recommend reading physical books. Try to adapt to reading eBooks, which increases reading efficiency and speed. If you find the book exceptionally good after reading, you may purchase a paperback copy for collection.&lt;/p>
+&lt;p>After picking the books to read, the next step is to read it. Here I want to reiterate two principles.&lt;/p>
+&lt;p>First, you can start reading from chapters you’re interested in. When I read “Dream of the Red Chamber”, I insisted on starting from the first chapter and wasn’t interested no matter how hard I tried. In fact, starting from the middle is also fine, at times, it could even motivate you to continue reading.&lt;/p>
+&lt;p>So, when we read books, we are not obligated to start from the first chapter, or read word by word, page by page. You can select chapters that intrigue you, and if you find parts of it confusing, you’d be more focused and efficient when you revisit the previous chapters with those questions in mind.&lt;/p>
+&lt;p>Second, you don’t have to finish every book you read. Sometimes, after reading chapters you’re interested in, you may find the rest unappealing. There’s absolutely no need to read every single word. Reading a book is like having a meal. Once you absorbed all the nutrients you needed, that suffices.&lt;/p>
+&lt;p>We tend to treat books as some kind of solemn and sacred objects because from a young age, we were taught to respect and take care of books. So, we think we should read every word from the foreword to the author’s concluding remarks. In fact, that’s not the case. There’s no necessity to finish a book because there are too many books out there, and a lot of them are great books.&lt;/p>
+&lt;p>So what exactly are the correct steps to read a book?&lt;/p>
+&lt;p>Here’s what I suggest everyone should do.&lt;/p>
+&lt;p>First, read the table of contents to grasp the general logical framework of the book. This step is extremely important. Many people finish a book without understanding its framework, only remembering bits and pieces, and aren’t sure of the author’s logic.&lt;/p>
+&lt;p>Therefore, the first step is to study the table of contents since most authors arrange them logically.&lt;/p>
+&lt;p>Second, read the preface. A professional author usually explains why they wrote the book and what it covers in the preface. Do not bother with useless commendatory prefaces.&lt;/p>
+&lt;p>Third, begin to read. We used to read chapter by chapter. When setting up a reading plan, we would write “read Chapters 1 to 2 on May 1st, finish the book in a week, two chapters a day”. We would plan like this and then read chapter by chapter, two chapters today, one chapter tomorrow.&lt;/p>
+&lt;p>But when you’re finished reading, you won’t understand the connection between the chapters or the book’s framework. Therefore, you shouldn’t lose sight of the framework and table of contents while reading.&lt;/p>
+&lt;p>You should read based on the table of contents and try to understand each chapter within this logical framework system. This method will make it easier to understand.&lt;/p>
+&lt;p>My best reading experience is on Kindle. Everyone must download Kindle on their computers. When you’re reading on Kindle, you can pull out the table of contents, with the book content on the right. As you read page by page, you know exactly which chapter this page belongs to from the table of contents and its relationship with the previous and following chapters.&lt;/p>
+&lt;p>In this way, the reading experience will be wonderful, more efficient, and have a deeper understanding. When you read, you should read with the mentality of output, that is, if you were to explain this book to someone else, what would you say?&lt;/p>
+&lt;p>So when you are reading, you must read with this mindset. This is an experience I recently shared with a friend. We both enjoy reading a lot. During our recent discussions, this topic came up. I had to host a book reading event, so I had to share this book with others. I found that my reading efficiency increased significantly, and the results were better.&lt;/p>
+&lt;p>We should definitely read with this mindset, and while reading, ask ourselves the following three questions. Firstly, what is this book about? Secondly, how does the book convey its message? Thirdly, what are my thoughts and assessment on it?&lt;/p>
+&lt;p>After finishing every chapter, you can ask yourself these questions and then provide an opportunity for sharing.&lt;/p>
+&lt;p>For example, after finishing a book, you can share what the book mainly talks about in your circle of friends. During the sharing process, you will find that your understanding of this book is deeper and your reading efficiency is also higher.&lt;/p>
+&lt;p>Some people may ask, “Wouldn’t reading in this manner be slow?”&lt;/p>
+&lt;p>Actually, it’s not. In my opinion, there are basically three reasons why someone might read slowly.&lt;/p>
+&lt;p>The first reason is rereading. After reading, they don’t know what this section is about and feel confused. They also don’t understand the connection with other chapters, so they have to read this chapter again to understand it. When we read, we should start with the table of contents to avoid repetitiveness, and this already improves speed.&lt;/p>
+&lt;p>Secondly, some people like to copy while reading, copying each sentence and taking notes, sentence by sentence. This leads to slow reading speed.&lt;/p>
+&lt;p>The third reason is forgetting after reading, which is also indirectly a reason for slow reading. If you forget after reading, you have to read it a second time, so it is also considered low-efficiency, slow speed.&lt;/p>
+&lt;p>Next, let me share a method of note-taking to increase the speed of note-taking.&lt;/p>
+&lt;p>How should we take reading notes? Here, I introduce a tool called “Evernote”, which is a great companion for ebooks. After downloading Evernote, you can see a small “elephant” logo in the top right corner of your Evernote. If you click on it, you have a screenshot function. When you are reading, you can open your ebook on your computer, with the table of contents on the left and the book content on the right. If you read a particularly good paragraph and want to quote it, it’s simple. Just click on the Evernote icon in the top right corner, select a screenshot, and take a screenshot of the place you want to quote.&lt;/p>
+&lt;p>If you want to annotate this image, or if you want to record the framework of the book while reading, you can click on the “elephant” in the top right corner. A box will appear where you can enter the current chapter and section you are reading, then insert the screenshot.&lt;/p>
+&lt;p>When you have taken note of everything you need to record from this book, you can export everything to Evernote with one click. After it is exported, you can further organize it. At this point, you should have a good understanding and memory of the book.&lt;/p>
+&lt;p>There is also a possibility that you can’t remember the specific content of the book, or there’s a certain knowledge point mentioned in it that you can’t recall later.&lt;/p>
+&lt;p>Not at all, Evernote supports you to search. Its search function is very powerful. As long as you remember the general content of the book, you can search for it when you think of it later. You don’t have to, like before, first find the book on the bookshelf, then look at the table of contents, and find out where you highlighted the important parts, or flip through the notebook you wrote in to find which sentence you copied when. This is very inefficient, but Evernote supports search, so just remember roughly, forget the specific knowledge points when needed, and you can search.&lt;/p>
+&lt;p>This is the method I am sharing with you, called Evernote paired with an e-book is a perfect match for reading.&lt;/p>
+&lt;p>At the end of today’s lesson, we’ll introduce two more methods: the first is called “point reading” and the second is “exclusive reading”.&lt;/p>
+&lt;p>Firstly, point reading. If you find it easy to be distracted while reading, you can point to the text with your fingers. This can focus your attention on one hand, and guide your reading speed on the other hand. If you want to read faster, move your fingers a little faster subconsciously.&lt;/p>
+&lt;p>The second is exclusive reading, which is only reading for an hour. When you are setting up a reading plan, don’t be greedy because reading is a gradual process. Honestly, many times it’s not as fun as watching TV or reading novels. So when you are setting your own plans, don’t make them too complicated or too ambitious. Remember the concept of “only reading for an hour”.&lt;/p>
+&lt;p>This concept, used in conjunction with the “Snail Reading” app by NetEase, has a benefit that it only gives you one hour of free reading time per day. Within this hour, you have to pay after you finish reading. Just finish this free hour of reading, it feels like you are getting a bargain, and it’s not a long time so it’s easy to stick to.&lt;/p>
+&lt;p>The NetEase reading app is especially suitable for reading in fragmented time, such as reading for five minutes on the way to work. It will record that you have read for five minutes. When you close your phone to go to work and read for another five minutes after work, it will continue timing for you. After accumulating an hour, you can get a snail reward.&lt;/p>
+&lt;p>If you can just ensure that you get this snail every day, that’s already impressive. An hour of reading a day is a lot. Over long periods of time, you can read many books. That’s why the concept I proposed, “just read for an hour”, can prevent us from delaying reading.&lt;/p>
+&lt;p>That’s about it for today’s lesson. Lastly, here’s a suggestion. Try doing two to three thematic readings during longer holidays in the year, like May Day, National Day, and Dragon Boat Festival. You will find that having a deep understanding of two to three topics in a year already accumulates a great deal of knowledge. If you do this for three or five years, you would have a deep understanding of ten topics.&lt;/p>
+&lt;p>So, I suggest that everyone should dedicate an hour for reading in their fragmented time, and do some in-depth thematic reading when one has a longer period of time. After you have done thematic reading in a particular field, when you see some related information in the future, like news reports or certain views, your reaction will be very quick and your understanding will be very deep. It will be easy to integrate these new pieces of information, comments, and views into your original knowledge system. This way, you won’t feel like every day is either related or unrelated to you and waste your time reading, as others might feel.&lt;/p></description></item><item><title>How can we improve our cognitive abilities?</title><link>https://www.skstory.online/p/how-can-we-improve-our-cognitive-abilities/</link><pubDate>Wed, 17 Jan 2024 13:53:34 +0800</pubDate><guid>https://www.skstory.online/p/how-can-we-improve-our-cognitive-abilities/</guid><description>&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*NAA1Jjcyk42KmRrf" alt="Featured image of post How can we improve our cognitive abilities?" />&lt;h2 id="1-what-level-of-cognitive-ability-do-we-currently-have">1. What level of cognitive ability do we currently have?
+&lt;/h2>&lt;p>The cognitive ability consists of four most important points: essence, system, long-term perspective, and methods.&lt;/p>
+&lt;h3 id="essence">Essence
+&lt;/h3>&lt;p>The logic here is as follows: there are countless specific phenomena, intricate and difficult to grasp. But within them lie common principles. By refining, summarizing, and generalizing these principles, we can elevate our cognition from the level of specific phenomena to the level of abstract laws, and eventually reach the essence through continuous improvement. The essence (the final abstract law) is far fewer compared to the specifics, allowing us to potentially improve our mastery of it and achieve the goal of controlling the many with the few.&lt;/p>
+&lt;p>For instance, I once saw this comment:
+“Our math teacher began introducing the four basic ideas of high school mathematics from the second year of high school: classification, transformation, combination of number and figure, and functions and equations. For each problem discussed, the teacher would analyze the idea behind it, then explain the key points of the problem from a higher level, and finally talk about common errors. These skills of summarizing and connecting ideas are what I learned from my math teacher.”&lt;/p>
+&lt;p>Why did we need to summarize the complicated mathematical solutions into four basic ideas: classification discussion, transformation, combination of number and form, and function and equation?&lt;/p>
+&lt;p>The reason is quite simple: if you are always at the level of the “eye” (specific phenomena), then there will be as many “eyes” as there are problems — it will be a chaotic mess before your eyes and you will not be able to master problem-solving. However, if you rise to the level of the “line” (abstract rules), you can organize the tens of thousands of “eyes” with just four “lines”. At this point, your mastery ability is relatively enhanced.&lt;/p>
+&lt;p>To illustrate, we can imagine the problem-solving process as like finding a specific house in a strange town, where there are tens of thousands of houses. Our task is to find the final house based on the clues (problem statement).&lt;/p>
+&lt;p>Once you are able to classify and categorize most problems with the four mathematical ideas, it’s as if you’ve placed the tens of thousands of houses onto four streets. The ideas of classification discussion, transformation, combination of numbers and figures, and functions and equations, are like the east main street, west main street, south main street, and north main street respectively.&lt;/p>
+&lt;p>The further refinement under the four mathematical ideas is like the different alleys on the main streets. Gradually, you’ll be able to pinpoint the location of the house: “east main street — happy alley — happy community — XXX building — XXX unit — XXX room.”&lt;/p>
+&lt;p>This approach of summarizing and generalizing tens of thousands of different types of problems into these four kinds of mathematical ideas provides you with a clear judgment path. After a period of training, the judgment process will be very quick, and you may be able to directly determine the solution to the problem at a glance. This is the so-called intuition of a math expert.&lt;/p>
+&lt;p>For someone whose cognitive level hasn’t reached this height, it’s as if they are navigating through the town’s tens of thousands of houses with a vague clue, relying mostly on luck, which is significantly less efficient. It’s like other people are using a map, while you know nothing about the area.&lt;/p>
+&lt;p>From here, we can see that cognitive ability, to a large extent, is the level at which you view problems, which in turn depends on your ability to extract and generalize abstract principles from complicated phenomena. The so-called philosophy of “the Dao engenders One; One engenders Two; Two engenders Three; Three engenders all things,” actually reverses the process of cognition, from the many to the three, to the two, to the one, to the Dao.&lt;/p>
+&lt;h3 id="system">System
+&lt;/h3>&lt;p>The logic here is as follows: to a certain degree, the more advanced and effective things usually have more complex structures (just like modern political and financial systems which are extremely intricate systems). Therefore, understanding more complex structures becomes a route for us to greatly enhance our abilities. To meet the demand for comprehending intricate things, we must have cognitive capability for complex systems.&lt;/p>
+&lt;p>The combination of two simple things, if paired properly, tends to create an efficiency that multiplies rather than simply adds. For instance, my major in university was law. When I was about to graduate, a highly successful senior told me this: a person who is good at law may have a combat power of 10. If this person is also good at English, his combat power can immediately be raised to 50. Later, I found out that for a student graduating from a prestigious law school in China who wants to join a large firm in China or abroad, English ability is a very important criterion.&lt;/p>
+&lt;p>Take playing games as another example. If you have watched competitive game matches, especially formal matches of now popular games like League of Legends or Dota, you will find that when people evaluate whether a team is strong, they often say: this team is strong in all positions and has no apparent weak points. What this means is that a team of five people can only be called a strong team if everyone’s level reaches a certain point, and additionally, they have absolute strengths. If there is a noticeably weak position or a time with strong disadvantages, then they can easily be targeted and defeated.&lt;/p>
+&lt;p>A high cognitive level signifies an ability to understand complexity and systems. It doesn’t simply look at one point in isolation, but rather considers issues within certain systems. Viewing things in a broad context, such as past, present, and future; surface, middle and deep layers; trends, rhythms and details; enemies, neutrals, and friends; long, medium and short terms; politics, economy, law, etc.&lt;/p>
+&lt;p>Seeing many things, and seeing them comprehensively, then making comprehensive judgements, because the power of a complex system is far stronger than the power of single points without a system.&lt;/p>
+&lt;p>Isolated, partial and absolute ways of cognition are inefficient and erroneous.&lt;/p>
+&lt;p>Many people lament the unfairness of society after graduation, saying that others had worse academic performance but the job opportunities and development are much better than theirs, which is simply unfair. However, they forgot that once you step into the society, everyone is demonstrating their abilities. Your past good grades is just one aspect. Others might have a good family background, good connections, high insights, abundant resources, be efficient in handling affairs, have emotional intelligence, and good luck… The rule of game has changed. This is already a systematic competition. You are still insisting on the strength and weakness of a certain point, obviously narrowing your field of vision. If this affects your mentality and overall progress, in fact, it’s detrimental to your growth.&lt;/p>
+&lt;h3 id="long-term-perspective">Long-term perspective
+&lt;/h3>&lt;p>The logic here is: the development curve of things is not linear, but a periodic alternation of platform phase (quantitative change) and leap phase (qualitative change) — I believe many people must have seen similar explanations online before. You can only embrace the leap phase if you endure the platform phase. So, no matter what you do, maintaining a long-term perspective and patience is very important. You must be mentally prepared that for a considerable period (the plateau phase) there will be investments but no obvious return. This carries risk, but if you don’t take the risk, you will miss the great rewards of the leap phase.&lt;/p>
+&lt;p>People often overestimate their short-term abilities, yet underestimate what they can achieve in the long term.&lt;/p>
+&lt;p>To put it in simple terms, it’s about learning to fish for big gains with a long line and save money regularly.&lt;/p>
+&lt;p>I will quote another of my responses here, which refers to a change in my understanding over the years: maintain patience.&lt;/p>
+&lt;p>It’s about considering current issues from a longer time range perspective, such as one year, three years, ten years, or even longer.&lt;/p>
+&lt;p>Not wrestling with the immediate success or failure of things, but pondering: what does this thing mean to me from the scale of ten years?&lt;/p>
+&lt;p>I found out that such patience brings a lot of benefits, some expected and some not anticipated.&lt;/p>
+&lt;p>Such as calmness, immediate successes or failures do not determine everything, so even if there’s a failure or the result doesn’t meet expectations, it won’t have too much of an impact.&lt;/p>
+&lt;p>And courage, since this is the case, naturally you would dare to try some things you didn’t dare to try before.&lt;/p>
+&lt;p>Also flexibility, if this path is blocked, just switch to another. If it doesn’t work, switch again — there’s no hurry.&lt;/p>
+&lt;p>And confidence, if not one year, maybe three years is enough. If not, then ten years. I’m not giving up.&lt;/p>
+&lt;p>Accompanying patience are two concepts.&lt;/p>
+&lt;p>One is the degree of completion, as in how much percent. For instance, we still fail at something through hard work, but we have gained experience and improved capabilities. Although the thing is a failure, the degree of completion towards doing this thing has increased. For instance, it has grown from thirty percent to sixty percent.&lt;/p>
+&lt;p>The second is the growth of life (and the iteration of versions) — that is, not treating a thing as a lifeless machine, but a life that can constantly grow. It can derive energy from success or failures to promote its own evolution. It generates a consciousness of version evolution (iteration) from 1.0 to 2.0 to 3.0 to 4.0 and so on. Each version doesn’t have to be perfect, but each is more perfected than the last.&lt;/p>
+&lt;p>Patience, degree of completion, growth, and iteration collectively transform a growth pattern.&lt;/p>
+&lt;p>From experience so far, growth under this pattern compared to previous patterns (anxiety, urgency, one-off dealing, perfectionism) is quicker and more solid.&lt;/p>
+&lt;h3 id="methods">methods
+&lt;/h3>&lt;p>When doing things, the more the methods and tools used conform to its regularity (internal and external rules), the higher the efficiency will be. “If a craftsman wants to do his work well, he must first sharpen his tools.” The methods and tools are directly related to efficiency, which is as important as whether you use an airplane or tank, or just a spear or dart when you go into battle.&lt;/p>
+&lt;p>Before 2009, my method of memorizing words was quite foolish, even for long words I would memorize them letter by letter. In 2009, during my postgraduate entrance examination, I encountered the concept of word roots, which was equivalent to a sudden upgrade from memorizing words letter by letter to memorizing them by their “radicals” or structural components. (The root of a word can be roughly understood as the radical of an English word).&lt;/p>
+&lt;p>Let’s understand it this way: if you’re learning the Chinese language and you want to learn the word ‘好’, if you don’t know radicals, you would have to remember how to write it stroke by stroke, instead of recognizing it as ‘女’ plus ‘子’. The difference in efficiency is huge.&lt;/p>
+&lt;p>This is the significance of method and tool, it can greatly enhance efficiency. Big problems have large solutions, and small problems have small methods. The significance of the method and tool lies in solving the problem in a targeted way. For instance, if you want to eat a walnut, it’s much easier and more efficient to use a nutcracker than trying to crack it with a brick or a door. The key is to find it.&lt;/p>
+&lt;p>To sum up — essence, system, long-term, method.&lt;/p>
+&lt;h2 id="2-how-to-improve-ones-cognitive-level">2. How to improve one’s cognitive level?
+&lt;/h2>&lt;h3 id="maintain-a-consciousness-of-improvement">Maintain a Consciousness of Improvement
+&lt;/h3>&lt;p>This is the first step. We should always maintain a consciousness of improving our cognitive level, from large aspects like life planning to small tasks like cooking and washing dishes. We should constantly ask ourselves: “Could there be a better way to do this better, more efficiently, and at a lower cost?” If you don’t have this consciousness, whether you’re unaware of it or lack the will to improve, your cognitive level will remain at its current state. Because I have been asking myself this question these years, I have managed to achieve some results in certain areas, despite my unexceptional aptitude. As the saying goes, don’t fear slowness, fear stagnation. As long as you hold onto the consciousness of improvement, you can seize fleeting opportunities and make progress.&lt;/p>
+&lt;h3 id="seek-sources-of-stimulation">Seek Sources of Stimulation
+&lt;/h3>&lt;p>This is a crucial point. You need to find the object and direction of learning. In the past, due to the high cost and low efficiency of information dissemination, this was one of the biggest challenges. However, with the advent of the internet era, this has become much easier than before. Thanks to online bookstores and websites like Zhihu, the chances of accessing quality information sources have increased.&lt;/p>
+&lt;h3 id="gradually-digest-and-absorb">Gradually Digest and Absorb
+&lt;/h3>&lt;p>In this step, I want to introduce a concept: downgrading. Sometimes when you come across information sources of a high cognitive level, they may be far beyond your cognitive level and you won’t be able to understand them. To put it simply, they’re too tough for you to chew. So you need to lower the difficulty level, soften it, to help with absorption.&lt;/p>
+&lt;h3 id="strive-for-practice-and-improvement">Strive for Practice and Improvement
+&lt;/h3>&lt;p>There’s a saying, acquiring knowledge by reading tends to be shallow, true knowledge requires practice. All things, only when you start practicing, can you talk about truly gaining a cognition of it. No matter how many things you’ve seen, and how much you feel your cognitive level has improved, you must apply it to actual practice. Practice will give you genuine feedback, making you realize whether your progress is real and valid, or it merely appears so, or you’ve had mistaken learning.&lt;/p>
+&lt;h2 id="3-supplement">3. Supplement
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Learn to summarize and conclude. This issue is very important, but it’s too extensive and profound, it would take a long discussion to cover, so I will hold off discussing it for now. I would suggest everyone read “On Practice” and “On Contradiction” for further understanding.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Pay attention to your experiences, recognize successful cases of cognitive level improvement, understand them fully, apply them widely, and use such points to lead to broader areas and transfer them horizontally. For instance, if one day you find yourself escalating a level in perceiving a certain issue, it often means you have grasped a universal method. You should cherish this experience, even if it comes from playing poker or video games.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Keep an open mind and always accumulate. To put it bluntly, we shouldn’t be defensive or always on the lookout for other people’s flaws. Nobody’s perfect, but we should pay more attention to other people’s strengths, as this can help us locate more sources of stimulation. Additionally, when we have seen or learned something, we must record it immediately, to facilitate future reference, and also to encourage the process of analysis, comprehension, and summarization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Think independently. Lastly, I want to say, you have to judge any matters according to your specific situation, absorb the essence, and discard what is unsuitable. Only by doing this can you achieve true progress. This applies both to studying and examinations, and to life in general.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

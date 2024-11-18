@@ -1,0 +1,328 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Dynamically Binding Multiple Values in Templates 1 2 3 4 5 6 7 8 9 10 11 <template> <div v-bind=&#34;objectOfAttrs&#34;></div> </template> <script setup> const objectOfAttrs = { id: 'container', class: 'wrapper', style: 'background-color:green' } </script> Dynamic Parameters 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 <template> <!-- Dynamic event binding --> <button @[eventName]=&#34;handle&#34;>Dynamic Event Binding</button> <!-- Dynamic attribute binding --> <HelloWorld :[attributeName]=&#34;HelloWorld&#34;/> </template> <script setup> import { ref } from 'vue' const attributeName = ref('msg') const eventName = ref('click') const handle = () => { console.log('Dynamic event triggered') } </script> Iterating Over Objects with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 <template> <ul> <li v-for=&#34;(value, key, index) in myObject&#34;> {{ index }}. {{ key }}: {{ value }} </li> </ul> </template> <script setup> import { reactive } from 'vue' const myObject = reactive({ title: 'How to do lists in Vue', author: 'Jane Doe', publishedAt: '2016-04-10' }) </script> Using a Range with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 <template> <ul> <li v-for=&#34;n in 10&#34;>{{ n }}</li> </ul> </template> /* Output: 1 2 3 4 5 6 7 8 9 10 */ Watching Multiple Data\u00a0Sources 1 2 3 4 5 6 7 8 9 <script setup> import { watch, ref } from 'vue' const x = ref(0) const y = ref(1) watch([x, y], ([newX, newY]) => { console.log(`x is ${newX} and y is ${newY}`) }) </script> Watch Can&rsquo;t Directly Observe Reactive Object Properties When using watch, the first parameter should be a reactive object or a function that returns a reactive object. This restriction ensures Vue&rsquo;s reactivity system can properly track changes using Proxy getters.\n"><title>Vue 3 Knowledge You Might Not Know</title>
+<link rel=canonical href=https://www.skstory.online/p/vue-3-knowledge-you-might-not-know/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Vue 3 Knowledge You Might Not\u00a0Know"><meta property='og:description' content="Dynamically Binding Multiple Values in Templates 1 2 3 4 5 6 7 8 9 10 11 <template> <div v-bind=&#34;objectOfAttrs&#34;></div> </template> <script setup> const objectOfAttrs = { id: 'container', class: 'wrapper', style: 'background-color:green' } </script> Dynamic Parameters 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 <template> <!-- Dynamic event binding --> <button @[eventName]=&#34;handle&#34;>Dynamic Event Binding</button> <!-- Dynamic attribute binding --> <HelloWorld :[attributeName]=&#34;HelloWorld&#34;/> </template> <script setup> import { ref } from 'vue' const attributeName = ref('msg') const eventName = ref('click') const handle = () => { console.log('Dynamic event triggered') } </script> Iterating Over Objects with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 <template> <ul> <li v-for=&#34;(value, key, index) in myObject&#34;> {{ index }}. {{ key }}: {{ value }} </li> </ul> </template> <script setup> import { reactive } from 'vue' const myObject = reactive({ title: 'How to do lists in Vue', author: 'Jane Doe', publishedAt: '2016-04-10' }) </script> Using a Range with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 <template> <ul> <li v-for=&#34;n in 10&#34;>{{ n }}</li> </ul> </template> /* Output: 1 2 3 4 5 6 7 8 9 10 */ Watching Multiple Data\u00a0Sources 1 2 3 4 5 6 7 8 9 <script setup> import { watch, ref } from 'vue' const x = ref(0) const y = ref(1) watch([x, y], ([newX, newY]) => { console.log(`x is ${newX} and y is ${newY}`) }) </script> Watch Can&rsquo;t Directly Observe Reactive Object Properties When using watch, the first parameter should be a reactive object or a function that returns a reactive object. This restriction ensures Vue&rsquo;s reactivity system can properly track changes using Proxy getters.\n"><meta property='og:url' content='https://www.skstory.online/p/vue-3-knowledge-you-might-not-know/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Story'><meta property='article:tag' content='Fiction'><meta property='article:tag' content='Life'><meta property='article:published_time' content='2024-07-12T16:02:05+08:00'><meta property='article:modified_time' content='2024-07-12T16:02:05+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5IsjkNAC17Fx8y68ITbHRA.jpeg'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Vue 3 Knowledge You Might Not\u00a0Know"><meta name=twitter:description content="Dynamically Binding Multiple Values in Templates 1 2 3 4 5 6 7 8 9 10 11 <template> <div v-bind=&#34;objectOfAttrs&#34;></div> </template> <script setup> const objectOfAttrs = { id: 'container', class: 'wrapper', style: 'background-color:green' } </script> Dynamic Parameters 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 <template> <!-- Dynamic event binding --> <button @[eventName]=&#34;handle&#34;>Dynamic Event Binding</button> <!-- Dynamic attribute binding --> <HelloWorld :[attributeName]=&#34;HelloWorld&#34;/> </template> <script setup> import { ref } from 'vue' const attributeName = ref('msg') const eventName = ref('click') const handle = () => { console.log('Dynamic event triggered') } </script> Iterating Over Objects with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 <template> <ul> <li v-for=&#34;(value, key, index) in myObject&#34;> {{ index }}. {{ key }}: {{ value }} </li> </ul> </template> <script setup> import { reactive } from 'vue' const myObject = reactive({ title: 'How to do lists in Vue', author: 'Jane Doe', publishedAt: '2016-04-10' }) </script> Using a Range with\u00a0v-for 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 <template> <ul> <li v-for=&#34;n in 10&#34;>{{ n }}</li> </ul> </template> /* Output: 1 2 3 4 5 6 7 8 9 10 */ Watching Multiple Data\u00a0Sources 1 2 3 4 5 6 7 8 9 <script setup> import { watch, ref } from 'vue' const x = ref(0) const y = ref(1) watch([x, y], ([newX, newY]) => { console.log(`x is ${newX} and y is ${newY}`) }) </script> Watch Can&rsquo;t Directly Observe Reactive Object Properties When using watch, the first parameter should be a reactive object or a function that returns a reactive object. This restriction ensures Vue&rsquo;s reactivity system can properly track changes using Proxy getters.\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5IsjkNAC17Fx8y68ITbHRA.jpeg'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#dynamically-binding-multiple-values-in-templates>Dynamically Binding Multiple Values in Templates</a></li><li><a href=#dynamic-parameters>Dynamic Parameters</a></li><li><a href=#iterating-over-objects-withv-for>Iterating Over Objects with v-for</a></li><li><a href=#using-a-range-withv-for>Using a Range with v-for</a></li><li><a href=#watching-multiple-datasources>Watching Multiple Data Sources</a></li><li><a href=#watch-cant-directly-observe-reactive-object-properties>Watch Can&rsquo;t Directly Observe Reactive Object Properties</a></li><li><a href=#accessing-updated-dom-inwatch>Accessing Updated DOM in watch</a></li><li><a href=#stopping-awatcher>Stopping a Watcher</a></li><li><a href=#function-template-references>Function Template References</a></li><li><a href=#using-ref-withv-for>Using ref with v-for</a></li><li><a href=#component-instance-references>Component Instance References</a></li><li><a href=#withdefaults-helperfunction>withDefaults Helper Function</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/vue-3-knowledge-you-might-not-know/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*5IsjkNAC17Fx8y68ITbHRA.jpeg loading=lazy alt="Featured image of post Vue 3 Knowledge You Might Not Know"></a></div><div class=article-details><header class=article-category><a href=/categories/story/>Story
+</a><a href=/categories/fiction/ style=background-color:#2a849d;color:#fff>Fiction
+</a><a href=/categories/life/>Life</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/vue-3-knowledge-you-might-not-know/>Vue 3 Knowledge You Might Not Know</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jul 12, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>5 minute read</time></div></footer></div></header><section class=article-content><h2 id=dynamically-binding-multiple-values-in-templates>Dynamically Binding Multiple Values in Templates</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>div</span> <span class=n>v</span><span class=o>-</span><span class=n>bind</span><span class=o>=</span><span class=s2>&#34;objectOfAttrs&#34;</span><span class=o>&gt;&lt;/</span><span class=n>div</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=n>objectOfAttrs</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>id</span><span class=p>:</span> <span class=s1>&#39;container&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span><span class=p>:</span> <span class=s1>&#39;wrapper&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>style</span><span class=p>:</span> <span class=s1>&#39;background-color:green&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=dynamic-parameters>Dynamic Parameters</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;!--</span> <span class=n>Dynamic</span> <span class=n>event</span> <span class=n>binding</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>button</span> <span class=err>@</span><span class=p>[</span><span class=n>eventName</span><span class=p>]</span><span class=o>=</span><span class=s2>&#34;handle&#34;</span><span class=o>&gt;</span><span class=n>Dynamic</span> <span class=n>Event</span> <span class=n>Binding</span><span class=o>&lt;/</span><span class=n>button</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;!--</span> <span class=n>Dynamic</span> <span class=n>attribute</span> <span class=n>binding</span> <span class=o>--&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>HelloWorld</span> <span class=p>:[</span><span class=n>attributeName</span><span class=p>]</span><span class=o>=</span><span class=s2>&#34;HelloWorld&#34;</span><span class=o>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>attributeName</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=s1>&#39;msg&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>eventName</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=s1>&#39;click&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>handle</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;Dynamic event triggered&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=iterating-over-objects-withv-for>Iterating Over Objects with v-for</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>ul</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>li</span> <span class=n>v</span><span class=o>-</span><span class=k>for</span><span class=o>=</span><span class=s2>&#34;(value, key, index) in myObject&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{{</span> <span class=n>index</span> <span class=p>}}</span><span class=o>.</span> <span class=p>{{</span> <span class=n>key</span> <span class=p>}}:</span> <span class=p>{{</span> <span class=n>value</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;/</span><span class=n>li</span><span class=o>&gt;</span> 
+</span></span><span class=line><span class=cl>  <span class=o>&lt;/</span><span class=n>ul</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>reactive</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>myObject</span> <span class=o>=</span> <span class=n>reactive</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>title</span><span class=p>:</span> <span class=s1>&#39;How to do lists in Vue&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>author</span><span class=p>:</span> <span class=s1>&#39;Jane Doe&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>publishedAt</span><span class=p>:</span> <span class=s1>&#39;2016-04-10&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>    
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=using-a-range-withv-for>Using a Range with v-for</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;template&gt;
+</span></span><span class=line><span class=cl>  &lt;ul&gt;
+</span></span><span class=line><span class=cl>    &lt;li v-for=&#34;n in 10&#34;&gt;{{ n }}&lt;/li&gt;
+</span></span><span class=line><span class=cl>  &lt;/ul&gt;
+</span></span><span class=line><span class=cl>&lt;/template&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>/*
+</span></span><span class=line><span class=cl>  Output:
+</span></span><span class=line><span class=cl>  1
+</span></span><span class=line><span class=cl>  2
+</span></span><span class=line><span class=cl>  3
+</span></span><span class=line><span class=cl>  4
+</span></span><span class=line><span class=cl>  5
+</span></span><span class=line><span class=cl>  6
+</span></span><span class=line><span class=cl>  7
+</span></span><span class=line><span class=cl>  8
+</span></span><span class=line><span class=cl>  9
+</span></span><span class=line><span class=cl>  10
+</span></span><span class=line><span class=cl>*/
+</span></span></code></pre></td></tr></table></div></div><h2 id=watching-multiple-datasources>Watching Multiple Data Sources</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>watch</span><span class=p>,</span> <span class=n>ref</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>x</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>y</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>([</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>],</span> <span class=p>([</span><span class=n>newX</span><span class=p>,</span> <span class=n>newY</span><span class=p>])</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=err>`</span><span class=n>x</span> <span class=n>is</span> <span class=o>$</span><span class=p>{</span><span class=n>newX</span><span class=p>}</span> <span class=ow>and</span> <span class=n>y</span> <span class=n>is</span> <span class=o>$</span><span class=p>{</span><span class=n>newY</span><span class=p>}</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=watch-cant-directly-observe-reactive-object-properties>Watch Can&rsquo;t Directly Observe Reactive Object Properties</h2><p>When using watch, the first parameter should be a reactive object or a function that returns a reactive object. This restriction ensures Vue&rsquo;s reactivity system can properly track changes using Proxy getters.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>obj</span> <span class=o>=</span> <span class=n>reactive</span><span class=p>({</span> <span class=n>count</span><span class=p>:</span> <span class=mi>0</span> <span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>This</span> <span class=n>won</span><span class=s1>&#39;t work because we are passing a number to watch()</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>(</span><span class=n>obj</span><span class=o>.</span><span class=n>count</span><span class=p>,</span> <span class=p>(</span><span class=n>count</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=err>`</span><span class=n>Count</span> <span class=n>is</span><span class=p>:</span> <span class=o>$</span><span class=p>{</span><span class=n>count</span><span class=p>}</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Instead</span><span class=p>,</span> <span class=n>use</span> <span class=n>a</span> <span class=n>getter</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>obj</span><span class=o>.</span><span class=n>count</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=n>count</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=err>`</span><span class=n>Count</span> <span class=n>is</span><span class=p>:</span> <span class=o>$</span><span class=p>{</span><span class=n>count</span><span class=p>}</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=accessing-updated-dom-inwatch>Accessing Updated DOM in watch</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>watch(source, callback, {
+</span></span><span class=line><span class=cl>  flush: &#39;post&#39;
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>// or
+</span></span><span class=line><span class=cl>watchEffect(callback, {
+</span></span><span class=line><span class=cl>  flush: &#39;post&#39;
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>// or
+</span></span><span class=line><span class=cl>watchPostEffect(() =&gt; {
+</span></span><span class=line><span class=cl>  /* executed after Vue updates */
+</span></span><span class=line><span class=cl>})
+</span></span></code></pre></td></tr></table></div></div><h2 id=stopping-awatcher>Stopping a Watcher</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>unwatch</span> <span class=o>=</span> <span class=n>watchEffect</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=o>...</span><span class=n>later</span><span class=p>,</span> <span class=n>when</span> <span class=n>no</span> <span class=n>longer</span> <span class=n>needed</span>
+</span></span><span class=line><span class=cl><span class=n>unwatch</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>For more details on watch, you can refer to this blog.</p><h2 id=function-template-references>Function Template References</h2><p>The ref attribute can bind to a function, which is called whenever the bound component updates. This method provides more flexibility in obtaining element references. The function receives the element reference as the first argument:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>input</span> <span class=n>type</span><span class=o>=</span><span class=s2>&#34;text&#34;</span> <span class=p>:</span><span class=n>ref</span><span class=o>=</span><span class=s2>&#34;getRef&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>test</span><span class=o>-</span><span class=n>cpn</span> <span class=p>:</span><span class=n>ref</span><span class=o>=</span><span class=s2>&#34;getRef&#34;</span><span class=o>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>getRef</span> <span class=o>=</span> <span class=p>(</span><span class=n>el</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>el</span><span class=p>);</span> <span class=o>//</span> <span class=n>Direct</span> <span class=n>DOM</span> <span class=n>element</span> <span class=k>if</span> <span class=n>it</span><span class=s1>&#39;s an element</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span><span class=p>(</span><span class=n>el</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>el</span><span class=o>.$</span><span class=n>el</span><span class=p>);</span> <span class=o>//</span> <span class=n>Component</span> <span class=n>instance</span> <span class=k>if</span> <span class=n>it</span><span class=s1>&#39;s a component</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Note</strong>: The argument will be null after the element is removed.</p><h2 id=using-ref-withv-for>Using ref with v-for</h2><p>The ref attribute can also be used with v-for to bind multiple elements/component instances generated by v-for. The value of the corresponding ref object will be an array.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>ul</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>li</span> <span class=n>v</span><span class=o>-</span><span class=k>for</span><span class=o>=</span><span class=s2>&#34;item in list&#34;</span> <span class=n>ref</span><span class=o>=</span><span class=s2>&#34;itemRefs&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{{</span> <span class=n>item</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;/</span><span class=n>li</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;/</span><span class=n>ul</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span><span class=p>,</span> <span class=n>onMounted</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>list</span> <span class=o>=</span> <span class=n>ref</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>  <span class=o>/*</span> <span class=o>...</span> <span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>itemRefs</span> <span class=o>=</span> <span class=n>ref</span><span class=p>([])</span>
+</span></span><span class=line><span class=cl><span class=n>onMounted</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>itemRefs</span><span class=o>.</span><span class=n>value</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Note</strong>: The order of elements in the array is not guaranteed to match the iteration order.</p><h2 id=component-instance-references>Component Instance References</h2><p>You can also use template references to get a child component&rsquo;s instance. However, this depends on whether the child component uses the Options API or <code>&lt;script setup></code>.</p><p>If a child component uses the Options API or does not use <code>&lt;script setup></code>, the parent component has full access to all the child component&rsquo;s properties and methods.</p><p>If a child component uses <code>&lt;script setup></code>, it is private by default: the parent component cannot access anything within the child component.</p><p>For the second case, the child component must explicitly expose properties or methods using the defineExpose macro.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>ref</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>b</span> <span class=o>=</span> <span class=n>ref</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Compiler</span> <span class=n>macros</span><span class=p>,</span> <span class=n>such</span> <span class=n>as</span> <span class=n>defineExpose</span><span class=p>,</span> <span class=n>don</span><span class=s1>&#39;t need to be imported</span>
+</span></span><span class=line><span class=cl><span class=n>defineExpose</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>a</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=withdefaults-helperfunction>withDefaults Helper Function</h2><p>The withDefaults helper function is a utility that helps set default values for component props when defining them. This ensures that props have a preset default value if no value is passed. This can simplify the code, avoiding the need to manually set default values for each prop.</p><p>Moreover, since withDefaults can help define the types and default values of props, TypeScript can correctly infer and check the usage of the component&rsquo;s props.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>props</span> <span class=o>=</span> <span class=n>withDefaults</span><span class=p>(</span><span class=n>defineProps</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>message</span><span class=p>:</span> <span class=ne>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>count</span><span class=p>:</span> <span class=p>{</span> <span class=n>type</span><span class=p>:</span> <span class=n>Number</span><span class=p>,</span> <span class=n>default</span><span class=p>:</span> <span class=mi>0</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>}));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=ow>or</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>props</span> <span class=o>=</span> <span class=n>withDefaults</span><span class=p>(</span><span class=n>defineProps</span><span class=o>&lt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>message</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>count</span><span class=p>:</span> <span class=n>number</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>&gt;</span><span class=p>(),</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>message</span><span class=p>:</span> <span class=s1>&#39;hello&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>count</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/story/>Story</a>
+<a href=/tags/fiction/>Fiction</a>
+<a href=/tags/life/>Life</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/recording-my-current-mac-applications/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg></div><div class=article-details><h2 class=article-title>Recording My Current Mac Applications</h2></div></a></article><article class=has-image><a href=/p/jumping-out-of-nested-loops-in-javascript/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3Ie5puTXFNbSKEZ61ibY6A.jpeg></div><div class=article-details><h2 class=article-title>Jumping Out of Nested Loops in JavaScript</h2></div></a></article><article class=has-image><a href=/p/exploring-the-difference-between-width-100-and-width-auto/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png></div><div class=article-details><h2 class=article-title>Exploring the Difference Between width: 100% and width: auto</h2></div></a></article><article class=has-image><a href=/p/understanding-useid-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6aTlWcQeK-86tPxH.png></div><div class=article-details><h2 class=article-title>Understanding useId in Vue3</h2></div></a></article><article class=has-image><a href=/p/12-vue-3-backend-management-templates-to-bookmark-and-learn/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*u483g0dL7NmbtDvGH817bg.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*u483g0dL7NmbtDvGH817bg.png></div><div class=article-details><h2 class=article-title>12 Vue 3 Backend Management Templates to Bookmark and Learn</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

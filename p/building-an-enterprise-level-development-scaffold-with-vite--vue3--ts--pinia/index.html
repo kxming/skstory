@@ -1,0 +1,924 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Preparation for Setup Vscode: A must-have coding tool for frontend developers\nChrome: A browser that is very friendly to developers\nNodejs&amp;npm: Configure the local development environment, installing Node will also install npm\nVue.js devtools: Browser debugging plugin\nVue Language Features (Volar): Essential Vscode plugin for developing with vue3, offering syntax highlighting tips, very useful\nVue 3 Snippets: Quick input shortcuts for vue3\n1. Initializing the Project Follow the prompts for initialization:\n"><title>Building an Enterprise-level development scaffold with Vite + Vue3 + TS + Pinia</title>
+<link rel=canonical href=https://www.skstory.online/p/building-an-enterprise-level-development-scaffold-with-vite--vue3--ts--pinia/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Building an Enterprise-level development scaffold with Vite + Vue3 + TS + Pinia"><meta property='og:description' content="Preparation for Setup Vscode: A must-have coding tool for frontend developers\nChrome: A browser that is very friendly to developers\nNodejs&amp;npm: Configure the local development environment, installing Node will also install npm\nVue.js devtools: Browser debugging plugin\nVue Language Features (Volar): Essential Vscode plugin for developing with vue3, offering syntax highlighting tips, very useful\nVue 3 Snippets: Quick input shortcuts for vue3\n1. Initializing the Project Follow the prompts for initialization:\n"><meta property='og:url' content='https://www.skstory.online/p/building-an-enterprise-level-development-scaffold-with-vite--vue3--ts--pinia/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Code'><meta property='article:tag' content='Javascript'><meta property='article:published_time' content='2024-06-10T16:02:05+08:00'><meta property='article:modified_time' content='2024-06-10T16:02:05+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EtmBfS6zz62l-m9t2bixkg.png'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Building an Enterprise-level development scaffold with Vite + Vue3 + TS + Pinia"><meta name=twitter:description content="Preparation for Setup Vscode: A must-have coding tool for frontend developers\nChrome: A browser that is very friendly to developers\nNodejs&amp;npm: Configure the local development environment, installing Node will also install npm\nVue.js devtools: Browser debugging plugin\nVue Language Features (Volar): Essential Vscode plugin for developing with vue3, offering syntax highlighting tips, very useful\nVue 3 Snippets: Quick input shortcuts for vue3\n1. Initializing the Project Follow the prompts for initialization:\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EtmBfS6zz62l-m9t2bixkg.png'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#preparation-for-setup>Preparation for Setup</a></li><li><a href=#1-initializing-the-project>1. Initializing the Project</a><ol><li><a href=#1-use-the-vite-cli-command>1. Use the <code>vite-cli</code> command</a></li><li><a href=#2-enter-the-project-name>2. Enter the project name</a></li><li><a href=#3-choose-a-framework-vue>3. Choose a Framework (Vue)</a></li><li><a href=#4-use-typescript>4. Use TypeScript</a></li><li><a href=#5-start-the-project>5. Start the project</a></li></ol></li><li><a href=#2-enforce-code-style>2. Enforce Code Style</a><ol><li><a href=#1-eslint-support>1. Eslint Support</a></li><li><a href=#2-create-a-new-eslintrcjs-in-the-project>2. Create a new <code>.eslintrc.js</code> in the project</a></li><li><a href=#3-create-a-new-eslintignore-in-the-project>3. Create a new <code>.eslintignore</code> in the project</a></li><li><a href=#4-prettier-support>4. prettier support</a></li><li><a href=#5-resolve-conflicts-between-eslint-and-prettier>5. Resolve conflicts between eslint and prettier</a></li><li><a href=#6-create-a-new-prettierjs-in-the-project>6. Create a new <code>.prettier.js</code> in the project</a></li><li><a href=#7-create-a-new-prettierignore-in-the-project>7. Create a new <code>.prettierignore</code> in the project</a></li><li><a href=#8-packagejson-configuration>8. package.json configuration:</a></li><li><a href=#9-configuring-husky--lint-staged>9. Configuring <code>husky</code> + <code>lint-staged</code></a><ol><li><a href=#install>Install</a></li><li><a href=#packagejson-configuration><code>package.json</code> configuration</a></li></ol></li><li><a href=#10-configuring-file-reference-aliases-alias>10. Configuring file reference aliases (alias)</a></li></ol></li><li><a href=#3-configuration-of-environment-variables>3. Configuration of Environment Variables</a></li><li><a href=#4-integrating-pinia>4. Integrating Pinia</a><ol><li><a href=#installation>Installation</a></li><li><a href=#usage>Usage</a></li></ol></li><li><a href=#5-integrating-vue-router>5. Integrating Vue-router</a><ol><li><a href=#installation-1>Installation</a></li><li><a href=#usage-1>Usage</a></li></ol></li><li><a href=#6-integrating-vueuse>6. Integrating VueUse</a><ol><li><a href=#installation-2>Installation</a></li><li><a href=#usage-2>Usage</a></li></ol></li><li><a href=#7-integration-of-css>7. Integration of CSS</a><ol><li><a href=#option-1-native-css-variable-new-feature>Option 1: Native css variable new feature:</a></li><li><a href=#option-2-scss-or-less>Option 2: scss or less:</a><ol><li><a href=#installation-3>Installation</a></li></ol></li><li><a href=#option-3-tailwindcss>Option 3: tailwindcss</a><ol><li><a href=#installation-4>Installation</a></li><li><a href=#configuration>Configuration</a></li><li><a href=#usage-3>Usage</a></li><li><a href=#vscode-plugin>VsCode Plugin</a></li></ol></li></ol></li><li><a href=#8-integrating-axios>8. Integrating axios</a><ol><li><a href=#installation-5>Installation</a></li><li><a href=#usage-4>Usage</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/building-an-enterprise-level-development-scaffold-with-vite--vue3--ts--pinia/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EtmBfS6zz62l-m9t2bixkg.png loading=lazy alt="Featured image of post Building an Enterprise-level development scaffold with Vite + Vue3 + TS + Pinia"></a></div><div class=article-details><header class=article-category><a href=/categories/code/>Code
+</a><a href=/categories/javascript/ style=background-color:#d1d419;color:#fff>Javascript</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/building-an-enterprise-level-development-scaffold-with-vite--vue3--ts--pinia/>Building an Enterprise-level development scaffold with Vite + Vue3 + TS + Pinia</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jun 10, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>13 minute read</time></div></footer></div></header><section class=article-content><h2 id=preparation-for-setup>Preparation for Setup</h2><ul><li><p><strong>Vscode</strong>: A must-have coding tool for frontend developers</p></li><li><p><strong>Chrome</strong>: A browser that is very friendly to developers</p></li><li><p><strong>Nodejs&amp;npm</strong>: Configure the local development environment, installing Node will also install npm</p></li><li><p><strong>Vue.js devtools</strong>: Browser debugging plugin</p></li><li><p><strong>Vue Language Features (Volar)</strong>: Essential Vscode plugin for developing with vue3, offering syntax highlighting tips, very useful</p></li><li><p><strong>Vue 3 Snippets</strong>: Quick input shortcuts for vue3</p></li></ul><hr><h2 id=1-initializing-the-project>1. Initializing the Project</h2><p>Follow the prompts for initialization:</p><h3 id=1-use-the-vite-cli-command>1. Use the <code>vite-cli</code> command</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># pnpm
+</span></span><span class=line><span class=cl>pnpm create vite
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># npm
+</span></span><span class=line><span class=cl>npm init vite@latest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># yarn
+</span></span><span class=line><span class=cl>yarn create vite
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-enter-the-project-name>2. Enter the project name</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>? Project name:  vite-vue3-ts-pinia
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-choose-a-framework-vue>3. Choose a Framework (Vue)</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>? Select a framework: » - Use arrow-keys. Return to submit.
+</span></span><span class=line><span class=cl>    vanilla // Vanilla JS
+</span></span><span class=line><span class=cl>❯   vue // Defaults to Vue3
+</span></span><span class=line><span class=cl>    react // React
+</span></span><span class=line><span class=cl>    preact // Lightweight React framework
+</span></span><span class=line><span class=cl>    lit // Lightweight web components
+</span></span><span class=line><span class=cl>    svelte // Svelte framework
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-use-typescript>4. Use TypeScript</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=err>?</span> <span class=n>Select</span> <span class=n>a</span> <span class=n>variant</span><span class=p>:</span> <span class=err>›</span> <span class=o>-</span> <span class=n>Use</span> <span class=n>arrow</span><span class=o>-</span><span class=n>keys</span><span class=o>.</span> <span class=n>Return</span> <span class=n>to</span> <span class=n>submit</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>     <span class=n>vue</span>
+</span></span><span class=line><span class=cl> <span class=err>❯</span>   <span class=n>vue</span><span class=o>-</span><span class=n>ts</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=5-start-the-project>5. Start the project</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cd vite-vue3-ts-pinia &amp;&amp; pnpm install &amp;&amp; pnpm run dev
+</span></span></code></pre></td></tr></table></div></div><p><strong>Quick Initialization (Recommended):</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># pnpm
+</span></span><span class=line><span class=cl>pnpm create vite project-name -- --template vue-ts
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># yarn
+</span></span><span class=line><span class=cl>yarn create vite project-name --template vue-ts
+</span></span></code></pre></td></tr></table></div></div><h2 id=2-enforce-code-style>2. Enforce Code Style</h2><h3 id=1-eslint-support>1. Eslint Support</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># eslint installation
+</span></span><span class=line><span class=cl>yarn add eslint --dev
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># eslint plugin installation
+</span></span><span class=line><span class=cl>yarn add eslint-plugin-vue --dev
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Since ESLint by default uses Espree for syntax parsing, it cannot recognize some syntax of TypeScript. Therefore, we need to install @typescript-eslint/parser to replace the default parser.
+</span></span><span class=line><span class=cl>yarn add @typescript-eslint/parser --save-dev
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Install the corresponding plugin @typescript-eslint/eslint-plugin, which serves as a supplement to the default rules of eslint, providing some additional rules applicable to TypeScript syntax.
+</span></span><span class=line><span class=cl>yarn add @typescript-eslint/eslint-plugin --dev
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># typescript parser
+</span></span><span class=line><span class=cl>yarn add @typescript-eslint/parser --dev
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-create-a-new-eslintrcjs-in-the-project>2. Create a new <code>.eslintrc.js</code> in the project</h3><p>Configure eslint verification rules:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>module</span><span class=o>.</span><span class=n>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>root</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>env</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>browser</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>node</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>es2021</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=n>parser</span><span class=p>:</span> <span class=s1>&#39;vue-eslint-parser&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=k>extends</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;eslint:recommended&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;plugin:vue/vue3-recommended&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;plugin:@typescript-eslint/recommended&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;plugin:prettier/recommended&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=n>parserOptions</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ecmaVersion</span><span class=p>:</span> <span class=mi>12</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>parser</span><span class=p>:</span> <span class=s1>&#39;@typescript-eslint/parser&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>sourceType</span><span class=p>:</span> <span class=s1>&#39;module&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>ecmaFeatures</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>jsx</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=o>//</span> <span class=n>eslint</span><span class=o>-</span><span class=n>plugin</span><span class=o>-</span><span class=n>vue</span> <span class=err>@</span><span class=n>typescript</span><span class=o>-</span><span class=n>eslint</span><span class=o>/</span><span class=n>eslint</span><span class=o>-</span><span class=n>plugin</span> <span class=n>eslint</span><span class=o>-</span><span class=n>plugin</span><span class=o>-</span><span class=n>prettier的缩写</span>
+</span></span><span class=line><span class=cl>  <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span><span class=s1>&#39;vue&#39;</span><span class=p>,</span> <span class=s1>&#39;@typescript-eslint&#39;</span><span class=p>,</span> <span class=s1>&#39;prettier&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=n>rules</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=o>...</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=n>globals</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>defineProps</span><span class=p>:</span> <span class=s1>&#39;readonly&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>defineEmits</span><span class=p>:</span> <span class=s1>&#39;readonly&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>defineExpose</span><span class=p>:</span> <span class=s1>&#39;readonly&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>withDefaults</span><span class=p>:</span> <span class=s1>&#39;readonly&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-create-a-new-eslintignore-in-the-project>3. Create a new <code>.eslintignore</code> in the project</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># eslint ignore list (add according to project needs)
+</span></span><span class=line><span class=cl>node_modules
+</span></span><span class=line><span class=cl>dist
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-prettier-support>4. prettier support</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># Install prettier
+</span></span><span class=line><span class=cl>yarn add prettier --dev
+</span></span></code></pre></td></tr></table></div></div><h3 id=5-resolve-conflicts-between-eslint-and-prettier>5. Resolve conflicts between eslint and prettier</h3><p>Solve the conflict between style specifications in ESLint and prettier, prioritize the style specifications of prettier, making the style specifications in ESLint automatically invalid</p><ul><li><p><strong>eslint-plugin-prettier</strong>: ESLint rules based on Prettier code style, meaning ESLint uses Prettier rules to format code.</p></li><li><p><strong>eslint-config-prettier</strong>: Disables all formatting-related ESLint rules to solve conflicts between Prettier and ESLint rules.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># Install plugin eslint-config-prettier eslint-plugin-prettier
+</span></span><span class=line><span class=cl>yarn add eslint-config-prettier eslint-plugin-prettier --dev
+</span></span></code></pre></td></tr></table></div></div><p>Modify the .eslintrc.js configuration</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>module</span><span class=o>.</span><span class=n>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>extends</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>shorthand</span> <span class=k>for</span> <span class=n>eslint</span><span class=o>-</span><span class=n>config</span><span class=o>-</span><span class=n>prettier</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;prettier&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;plugin:prettier/recommended&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=6-create-a-new-prettierjs-in-the-project>6. Create a new <code>.prettier.js</code> in the project</h3><p>Configure prettier formatting rules:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>module</span><span class=o>.</span><span class=n>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>tabWidth</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>jsxSingleQuote</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>jsxBracketSameLine</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>printWidth</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>singleQuote</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>semi</span><span class=p>:</span> <span class=bp>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>overrides</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>files</span><span class=p>:</span> <span class=s1>&#39;*.json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>options</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>printWidth</span><span class=p>:</span> <span class=mi>200</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=n>arrowParens</span><span class=p>:</span> <span class=s1>&#39;always&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=7-create-a-new-prettierignore-in-the-project>7. Create a new <code>.prettierignore</code> in the project</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># Ignore formatting for files (add according to project needs)
+</span></span><span class=line><span class=cl>node_modules
+</span></span><span class=line><span class=cl>dist
+</span></span></code></pre></td></tr></table></div></div><h3 id=8-packagejson-configuration>8. package.json configuration:</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;script&#34;: {
+</span></span><span class=line><span class=cl>    &#34;lint&#34;: &#34;eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx&#34;,
+</span></span><span class=line><span class=cl>    &#34;prettier&#34;: &#34;prettier --write .&#34;
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>After the above configuration is complete, you can run the following commands to test the code check and formatting effect:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># eslint check
+</span></span><span class=line><span class=cl>yarn lint
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># prettier automatic formatting
+</span></span><span class=line><span class=cl>yarn prettier
+</span></span></code></pre></td></tr></table></div></div><h3 id=9-configuring-husky--lint-staged>9. Configuring <code>husky</code> + <code>lint-staged</code></h3><p>Use <code>husky</code> + <code>lint-staged</code> to assist in team coding standards. It will install and configure <code>husky</code> and <code>lint-staged</code> based on the code quality tools in the package.json dependencies. Therefore, please ensure all code quality tools such as Prettier and ESLint are installed and configured beforehand.</p><p><code>husky</code> is a tool that adds hooks to the <code>git</code> client. After installation, it automatically adds the corresponding hooks in the <code>.git/</code> directory of the repository; for example, the <code>pre-commit</code> hook is triggered when you execute <code>git commit</code>.</p><p>Thus, we can implement operations such as lint checks, unit testing, and code beautification in the <code>pre-commit</code>. Of course, the commands executed during the <code>pre-commit</code> stage should ensure they are not too slow, as waiting a long time for each commit is not a pleasant experience.</p><p><code>lint-staged</code> is a tool that only filters out files in the Git staging area (files that have been <code>git add</code>); this is very practical because if we perform a check on the entire project’s code, it may take a long time, especially if it’s an old project, to check and modify the code according to coding standards for previous code, which could be troublesome and potentially lead to significant changes in the project.</p><p>Therefore, <code>lint-staged</code> is a very useful tool for team and open-source projects, as it provides a standard and constraint for the code that an individual intends to submit.</p><h4 id=install>Install</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pnpm i husky lint-staged -D
+</span></span></code></pre></td></tr></table></div></div><h4 id=packagejson-configuration><code>package.json</code> configuration</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&#34;husky&#34;: {
+</span></span><span class=line><span class=cl>    &#34;hooks&#34;: {
+</span></span><span class=line><span class=cl>      &#34;pre-commit&#34;: &#34;lint-staged&#34;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  &#34;lint-staged&#34;: {
+</span></span><span class=line><span class=cl>    &#34;*.{js,jsx,vue,ts,tsx}&#34;: [
+</span></span><span class=line><span class=cl>      &#34;yarn lint&#34;,
+</span></span><span class=line><span class=cl>      &#34;prettier --write&#34;,
+</span></span><span class=line><span class=cl>      &#34;git add&#34;
+</span></span><span class=line><span class=cl>    ]
+</span></span><span class=line><span class=cl>  }
+</span></span></code></pre></td></tr></table></div></div><h3 id=10-configuring-file-reference-aliases-alias>10. Configuring file reference aliases (alias)</h3><p>Directly modify the configuration in the <code>vite.config.ts</code> file:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>defineConfig</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vite&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>vue</span> <span class=n>from</span> <span class=s1>&#39;@vitejs/plugin-vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>path</span> <span class=n>from</span> <span class=s1>&#39;path&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>https</span><span class=p>:</span><span class=o>//</span><span class=n>vitejs</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>config</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span><span class=n>vue</span><span class=p>()],</span>
+</span></span><span class=line><span class=cl>  <span class=n>resolve</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>alias</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;@&#39;</span><span class=p>:</span> <span class=n>path</span><span class=o>.</span><span class=n>resolve</span><span class=p>(</span><span class=n>__dirname</span><span class=p>,</span> <span class=s1>&#39;src&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>Modify <code>tsconfig.json</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;compilerOptions&#34;: {
+</span></span><span class=line><span class=cl>    &#34;target&#34;: &#34;esnext&#34;,
+</span></span><span class=line><span class=cl>    &#34;module&#34;: &#34;esnext&#34;,
+</span></span><span class=line><span class=cl>    &#34;moduleResolution&#34;: &#34;node&#34;,
+</span></span><span class=line><span class=cl>    &#34;strict&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;jsx&#34;: &#34;preserve&#34;,
+</span></span><span class=line><span class=cl>    &#34;sourceMap&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;resolveJsonModule&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;esModuleInterop&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;lib&#34;: [&#34;esnext&#34;, &#34;dom&#34;],
+</span></span><span class=line><span class=cl>    &#34;baseUrl&#34;: &#34;.&#34;,
+</span></span><span class=line><span class=cl>    &#34;paths&#34;: {
+</span></span><span class=line><span class=cl>      &#34;@/*&#34;:[&#34;src/*&#34;]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  &#34;include&#34;: [&#34;src/**/*.ts&#34;, &#34;src/**/*.d.ts&#34;, &#34;src/**/*.tsx&#34;, &#34;src/**/*.vue&#34;]
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=3-configuration-of-environment-variables>3. Configuration of Environment Variables</h2><p>Vite offers two modes: a development mode with a development server (development) and a production mode (production).</p><p>Create in the project root directory: <code>.env.development</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>NODE_ENV=development
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>VITE_APP_WEB_URL= &#39;YOUR WEB URL&#39;
+</span></span></code></pre></td></tr></table></div></div><p>Create in the project root directory: <code>.env.production</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>NODE_ENV=production
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>VITE_APP_WEB_URL= &#39;YOUR WEB URL&#39;
+</span></span></code></pre></td></tr></table></div></div><p>Usage in components:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>console.log(import.meta.env.VITE_APP_WEB_URL)
+</span></span></code></pre></td></tr></table></div></div><p>Configuration in <code>package.json</code>:</p><p>Differentiate between development and production environments for building</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&#34;build:dev&#34;: &#34;vite build --mode development&#34;,
+</span></span><span class=line><span class=cl>&#34;build:pro&#34;: &#34;vite build --mode production&#34;,
+</span></span></code></pre></td></tr></table></div></div><h2 id=4-integrating-pinia>4. Integrating Pinia</h2><p><code>Pinia</code>, is a lightweight state management library recommended by the Vue official team as a replacement for <code>Vuex</code>.</p><p><code>Pinia</code> has the following features:</p><ul><li><p>Complete TypeScript support;</p></li><li><p>Sufficiently lightweight, with a compressed size of only 1.6kb;</p></li><li><p>Removes mutations, leaving only state, getters, and actions (this is my favorite feature);</p></li><li><p>Actions support both synchronous and asynchronous operations;</p></li><li><p>No module nesting, only the concept of store, which can be freely used between stores for better code splitting;</p></li><li><p>No need to manually add stores, stores are automatically added once created;</p></li></ul><h3 id=installation>Installation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add pinia
+</span></span></code></pre></td></tr></table></div></div><h3 id=usage>Usage</h3><ol><li>Create a directory <code>src/store</code> and under it create <code>index.ts</code>, exporting store</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createPinia</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;pinia&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>store</span> <span class=o>=</span> <span class=n>createPinia</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>store</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>Incorporate and use it in <code>main.ts</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createApp</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>App</span> <span class=n>from</span> <span class=s1>&#39;./App.vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>store</span> <span class=n>from</span> <span class=s1>&#39;./store&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Creating</span> <span class=n>the</span> <span class=n>vue</span> <span class=n>instance</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>app</span> <span class=o>=</span> <span class=n>createApp</span><span class=p>(</span><span class=n>App</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Mounting</span> <span class=n>pinia</span>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>use</span><span class=p>(</span><span class=n>store</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Mounting</span> <span class=n>the</span> <span class=n>instance</span>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>mount</span><span class=p>(</span><span class=s1>&#39;#app&#39;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>Defining State: Create a <code>user.ts</code> under <code>src/store</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>defineStore</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;pinia&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=k>const</span> <span class=n>useUserStore</span> <span class=o>=</span> <span class=n>defineStore</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span><span class=p>:</span> <span class=s1>&#39;user&#39;</span><span class=p>,</span> <span class=o>//</span> <span class=n>id</span> <span class=n>is</span> <span class=n>required</span> <span class=ow>and</span> <span class=n>needs</span> <span class=n>to</span> <span class=n>be</span> <span class=n>unique</span>
+</span></span><span class=line><span class=cl>  <span class=n>state</span><span class=p>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;Zhang San&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=n>actions</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>updateName</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>this</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>Getting State: Use it in <code>src/components/usePinia.vue</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>div</span><span class=o>&gt;</span><span class=p>{{</span> <span class=n>userStore</span><span class=o>.</span><span class=n>name</span> <span class=p>}}</span><span class=o>&lt;/</span><span class=n>div</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;ts&#34;</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>useUserStore</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;@/store/user&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>userStore</span> <span class=o>=</span> <span class=n>useUserStore</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>Modifying State:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=mf>1.</span> <span class=n>Directly</span> <span class=n>modify</span> <span class=n>the</span> <span class=n>state</span> <span class=p>(</span><span class=ow>not</span> <span class=n>recommended</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>userStore</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=s1>&#39;Li Si&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mf>2.</span> <span class=n>Modify</span> <span class=n>through</span> <span class=n>actions</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;ts&#34;</span> <span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>useUserStore</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;@/store/user&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>userStore</span> <span class=o>=</span> <span class=n>useUserStore</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>userStore</span><span class=o>.</span><span class=n>updateName</span><span class=p>(</span><span class=s1>&#39;Li Si&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=5-integrating-vue-router>5. Integrating Vue-router</h2><h3 id=installation-1>Installation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add vue-router
+</span></span></code></pre></td></tr></table></div></div><h3 id=usage-1>Usage</h3><p>Create directory <code>src/router</code> and create <code>index.ts</code> under it, export router</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createRouter</span><span class=p>,</span> <span class=n>createWebHistory</span><span class=p>,</span> <span class=n>RouteRecordRaw</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue-router&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>routes</span><span class=p>:</span> <span class=ne>Array</span><span class=o>&lt;</span><span class=n>RouteRecordRaw</span><span class=o>&gt;</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>path</span><span class=p>:</span> <span class=s1>&#39;/login&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;Login&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>meta</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>title</span><span class=p>:</span> <span class=s1>&#39;Login&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>keepAlive</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>requireAuth</span><span class=p>:</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=n>component</span><span class=p>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>import</span><span class=p>(</span><span class=s1>&#39;@/pages/login.vue&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>path</span><span class=p>:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;Index&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>meta</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=n>title</span><span class=p>:</span> <span class=s1>&#39;Home&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=n>keepAlive</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=n>requireAuth</span><span class=p>:</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=n>component</span><span class=p>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>import</span><span class=p>(</span><span class=s1>&#39;@/pages/index.vue&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>router</span> <span class=o>=</span> <span class=n>createRouter</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>history</span><span class=p>:</span> <span class=n>createWebHistory</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>  <span class=n>routes</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>router</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Incorporate and use it in <code>main.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>createApp</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>App</span> <span class=n>from</span> <span class=s1>&#39;./App.vue&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>store</span> <span class=n>from</span> <span class=s1>&#39;./store&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>router</span> <span class=n>from</span> <span class=s1>&#39;@/router&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Creating</span> <span class=n>the</span> <span class=n>vue</span> <span class=n>instance</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>app</span> <span class=o>=</span> <span class=n>createApp</span><span class=p>(</span><span class=n>App</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>use</span><span class=p>(</span><span class=n>router</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Mounting</span> <span class=n>the</span> <span class=n>instance</span>
+</span></span><span class=line><span class=cl><span class=n>app</span><span class=o>.</span><span class=n>mount</span><span class=p>(</span><span class=s1>&#39;#app&#39;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>Modify <code>App.vue</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> &lt;template&gt;
+</span></span><span class=line><span class=cl>   &lt;RouterView/&gt;
+</span></span><span class=line><span class=cl> &lt;/template&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=6-integrating-vueuse>6. Integrating VueUse</h2><p>VueUse is a collection of utility functions based on the Composition API.</p><h3 id=installation-2>Installation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add @vueuse/core
+</span></span></code></pre></td></tr></table></div></div><h3 id=usage-2>Usage</h3><p>Create a new <code>src/page/vueUse.vue</code> page for a simple demo</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>h1</span><span class=o>&gt;</span> <span class=n>Testing</span> <span class=n>vueUse</span> <span class=n>mouse</span> <span class=n>coordinates</span> <span class=o>&lt;/</span><span class=n>h1</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>h3</span><span class=o>&gt;</span><span class=n>Mouse</span><span class=p>:</span> <span class=p>{{</span><span class=n>x</span><span class=p>}}</span> <span class=n>x</span> <span class=p>{{</span><span class=n>y</span><span class=p>}}</span><span class=o>&lt;/</span><span class=n>h3</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;ts&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=n>import</span> <span class=p>{</span> <span class=n>defineComponent</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>import</span> <span class=p>{</span> <span class=n>useMouse</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;@vueuse/core&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>export</span> <span class=n>default</span> <span class=n>defineComponent</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;VueUse&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>setup</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>const</span> <span class=p>{</span> <span class=n>x</span><span class=p>,</span> <span class=n>y</span> <span class=p>}</span> <span class=o>=</span> <span class=n>useMouse</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>x</span><span class=p>,</span> <span class=n>y</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>useMouse</code> is just one of the most basic libraries in <code>vueuse</code>, and there are many others, there is always one that suits you.</p><p>For more functions official documentation: <a class=link href="https://link.juejin.cn/?target=https%3A%2F%2Fvueuse.org%2F" target=_blank rel=noopener>link</a></p><h2 id=7-integration-of-css>7. Integration of CSS</h2><h3 id=option-1-native-css-variable-new-feature>Option 1: Native css variable new feature:</h3><p>Natively supported, no third-party plugins required, for detailed usage documentation see</p><p>Create a file <code>src/styles/index.css</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=p>:</span><span class=n>root</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>main</span><span class=o>-</span><span class=n>bg</span><span class=o>-</span><span class=n>color</span><span class=p>:</span> <span class=n>pink</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=err>​</span>
+</span></span><span class=line><span class=cl><span class=n>body</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>background</span><span class=o>-</span><span class=n>color</span><span class=p>:</span> <span class=k>var</span><span class=p>(</span><span class=o>--</span><span class=n>main</span><span class=o>-</span><span class=n>bg</span><span class=o>-</span><span class=n>color</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Note</strong>: You can also add PostCSS configuration, (any format supported by <code>postcss-load-config</code>, such as <code>postcss.config.js</code>), it will automatically apply to all imported CSS.</p><h3 id=option-2-scss-or-less>Option 2: scss or less:</h3><h4 id=installation-3>Installation</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># .scss and .sass
+</span></span><span class=line><span class=cl>pnpm add -D sass
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># .less
+</span></span><span class=line><span class=cl>pnpm add -D less
+</span></span></code></pre></td></tr></table></div></div><h3 id=option-3-tailwindcss>Option 3: tailwindcss</h3><h4 id=installation-4>Installation</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add -D tailwindcss postcss autoprefixer
+</span></span></code></pre></td></tr></table></div></div><h4 id=configuration>Configuration</h4><h5 id=1-initialize>1. Initialize</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>npx tailwindcss init -p
+</span></span></code></pre></td></tr></table></div></div><p>It will generate two files, <code>postcss.config.js</code> and <code>tailwind.config.js</code> in the root directory.</p><h5 id=2-add-tailwindcss-and-autoprefixer-to-your-postcssconfigjs-file>2. Add tailwindcss and autoprefixer to your <code>postcss.config.js</code> file</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=n>plugins</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>tailwindcss</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>      <span class=n>autoprefixer</span><span class=p>:</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=3-add-the-paths-to-all-of-your-template-files-in-your-tailwindconfigjs-file>3. Add the paths to all of your template files in your <code>tailwind.config.js</code> file.</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>/**</span> <span class=err>@</span><span class=n>type</span> <span class=p>{</span><span class=n>import</span><span class=p>(</span><span class=s1>&#39;tailwindcss&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>Config</span><span class=p>}</span> <span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=n>module</span><span class=o>.</span><span class=n>exports</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>darkMode</span><span class=p>:</span> <span class=s2>&#34;class&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>corePlugins</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>preflight</span><span class=p>:</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=n>content</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;./index.html&#34;</span><span class=p>,</span> <span class=s2>&#34;./src/**/*.{vue,js,ts,jsx,tsx}&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=n>theme</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>extend</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>colors</span><span class=p>:</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=4-configure-viteconfigts-options>4. Configure <code>vite.config.ts</code> options</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>css</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>postcss</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>require</span><span class=p>(</span><span class=s1>&#39;tailwindcss&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>require</span><span class=p>(</span><span class=s1>&#39;autoprefixer&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>Using the configuration above to import <code>tailwindcss</code>, you might encounter the error <code>Dynamic require of ‘tailwindcss’ is not supported</code>, which is usually because Vite does not support the dynamic require of <code>CommonJS</code> when trying to import modules. Vite uses the <code>ES module</code> system and expects all dependencies to be in ESM format. Therefore, I used the following method.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=n>postcssImport</span> <span class=n>from</span> <span class=s2>&#34;postcss-import&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>tailwindcss</span> <span class=n>from</span> <span class=s2>&#34;tailwindcss&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>autoprefixer</span> <span class=n>from</span> <span class=s2>&#34;autoprefixer&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>css</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>postcss</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>First</span> <span class=n>run</span> <span class=n>the</span> <span class=n>postcss</span><span class=o>-</span><span class=n>import</span> <span class=n>plugin</span> <span class=n>to</span> <span class=n>ensure</span> <span class=err>@</span><span class=n>import</span> <span class=n>statements</span> <span class=n>are</span> <span class=n>correctly</span> <span class=n>resolved</span>
+</span></span><span class=line><span class=cl>        <span class=n>postcssImport</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>Then</span> <span class=n>apply</span> <span class=n>TailwindCSS</span>
+</span></span><span class=line><span class=cl>        <span class=n>tailwindcss</span><span class=p>(</span><span class=s2>&#34;./tailwind.config.js&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>Finally</span><span class=p>,</span> <span class=n>add</span> <span class=n>autoprefixer</span> <span class=k>for</span> <span class=n>compatibility</span> <span class=n>processing</span>
+</span></span><span class=line><span class=cl>        <span class=n>autoprefixer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>      <span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>If the <code>postcss-import</code> module cannot be found, execute the following command</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add -D @types/postcss-import
+</span></span></code></pre></td></tr></table></div></div><h5 id=5-create-a-new-tailwindcss-file-in-srcstyle>5. Create a new <code>tailwind.css</code> file in <code>src/style</code>.</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>@tailwind base;
+</span></span><span class=line><span class=cl>@tailwind components;
+</span></span><span class=line><span class=cl>@tailwind utilities;
+</span></span></code></pre></td></tr></table></div></div><h5 id=6-import-in-maints>6. Import in <code>main.ts</code></h5><p><strong>Note</strong>: It’s essential to import tailwind.css in main.ts to prevent vite from requesting the whole css file from <code>src/style/index.scss</code> on every HMR, which causes slow hot updates.</p><h4 id=usage-3>Usage</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;template&gt;
+</span></span><span class=line><span class=cl>  &lt;div class=&#34;h-[200px] w-[200px] bg-[#ccc]&#34;&gt;
+</span></span><span class=line><span class=cl>    &lt;span&gt;123 &lt;/span&gt;
+</span></span><span class=line><span class=cl>    &lt;span class=&#34;ml-[100px] text-[#999]&#34;&gt;456 &lt;/span&gt;
+</span></span><span class=line><span class=cl>  &lt;/div&gt;
+</span></span><span class=line><span class=cl>&lt;/template&gt;
+</span></span></code></pre></td></tr></table></div></div><h4 id=vscode-plugin>VsCode Plugin</h4><p>Install <code>Tailwind CSS IntelliSense</code></p><h2 id=8-integrating-axios>8. Integrating axios</h2><p><code>axios</code> is a promise-based HTTP library that can be used in both browser and node.js.</p><h3 id=installation-5>Installation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add axios
+</span></span></code></pre></td></tr></table></div></div><h3 id=usage-4>Usage</h3><p>Create a new <code>src/utils/axios.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=n>axios</span><span class=p>,</span> <span class=p>{</span> <span class=n>AxiosResponse</span><span class=p>,</span> <span class=n>AxiosRequestConfig</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>service</span> <span class=o>=</span> <span class=n>axios</span><span class=o>.</span><span class=n>create</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Request</span> <span class=n>interceptors</span>
+</span></span><span class=line><span class=cl><span class=n>service</span><span class=o>.</span><span class=n>interceptors</span><span class=o>.</span><span class=n>request</span><span class=o>.</span><span class=n>use</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=n>config</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=k>do</span> <span class=n>something</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>config</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=n>error</span><span class=p>:</span> <span class=n>any</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Promise</span><span class=o>.</span><span class=n>reject</span><span class=p>(</span><span class=n>error</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Response</span> <span class=n>interceptors</span>
+</span></span><span class=line><span class=cl><span class=n>service</span><span class=o>.</span><span class=n>interceptors</span><span class=o>.</span><span class=n>response</span><span class=o>.</span><span class=n>use</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>async</span> <span class=p>(</span><span class=n>response</span><span class=p>:</span> <span class=n>AxiosResponse</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=k>do</span> <span class=n>something</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=n>error</span><span class=p>:</span> <span class=n>any</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=k>do</span> <span class=n>something</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Promise</span><span class=o>.</span><span class=n>reject</span><span class=p>(</span><span class=n>error</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>service</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>You can use it on the page.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span> <span class=n>lang</span><span class=o>=</span><span class=s2>&#34;ts&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=n>import</span> <span class=n>request</span> <span class=n>from</span> <span class=s1>&#39;@/utils/axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>const</span> <span class=n>requestRes</span> <span class=o>=</span> <span class=n>async</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>let</span> <span class=n>result</span> <span class=o>=</span> <span class=n>await</span> <span class=n>request</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>                    <span class=n>url</span><span class=p>:</span> <span class=s1>&#39;/api/xxx&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=n>method</span><span class=p>:</span> <span class=s1>&#39;get&#39;</span>
+</span></span><span class=line><span class=cl>                  <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Encapsulate all APIs for request parameters and response data (optional)</strong></p><p>Create a new <code>src/api/index.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=o>*</span> <span class=n>as</span> <span class=n>login</span> <span class=n>from</span> <span class=s1>&#39;./module/login&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=o>*</span> <span class=n>as</span> <span class=n>index</span> <span class=n>from</span> <span class=s1>&#39;./module/index&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=ne>Object</span><span class=o>.</span><span class=n>assign</span><span class=p>({},</span> <span class=n>login</span><span class=p>,</span> <span class=n>index</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>Create new <code>src/api/module/login.ts</code> and <code>src/api/module/index.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=n>request</span> <span class=n>from</span> <span class=s1>&#39;@/utils/axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>/**</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=n>Login</span>
+</span></span><span class=line><span class=cl> <span class=o>*/</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=n>interface</span> <span class=n>IResponseType</span><span class=o>&lt;</span><span class=n>P</span> <span class=o>=</span> <span class=p>{}</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>code</span><span class=err>?</span><span class=p>:</span> <span class=n>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>status</span><span class=p>:</span> <span class=n>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>msg</span><span class=p>:</span> <span class=n>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span><span class=p>:</span> <span class=n>P</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>interface</span> <span class=n>ILogin</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>token</span><span class=p>:</span> <span class=n>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>expires</span><span class=p>:</span> <span class=n>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=k>const</span> <span class=n>login</span> <span class=o>=</span> <span class=p>(</span><span class=n>username</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>password</span><span class=p>:</span> <span class=n>string</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>request</span><span class=o>&lt;</span><span class=n>IResponseType</span><span class=o>&lt;</span><span class=n>ILogin</span><span class=o>&gt;&gt;</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=n>url</span><span class=p>:</span> <span class=s1>&#39;/api/auth/login&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>method</span><span class=p>:</span> <span class=s1>&#39;post&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>data</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>username</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=n>password</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>Since TypeScript is used, you need to add a new <code>src/types/shims-axios.d.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>AxiosRequestConfig</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;axios&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>/**</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=n>Custom</span> <span class=n>extension</span> <span class=n>of</span> <span class=n>the</span> <span class=n>axios</span> <span class=n>module</span>
+</span></span><span class=line><span class=cl> <span class=o>*</span> <span class=err>@</span><span class=n>author</span> <span class=n>Maybe</span>
+</span></span><span class=line><span class=cl> <span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=n>declare</span> <span class=n>module</span> <span class=s1>&#39;axios&#39;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>export</span> <span class=n>interface</span> <span class=n>AxiosInstance</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>config</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>request</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>config</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>get</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>delete</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>head</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>post</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>data</span><span class=err>?</span><span class=p>:</span> <span class=n>any</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>put</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>data</span><span class=err>?</span><span class=p>:</span> <span class=n>any</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>patch</span><span class=o>&lt;</span><span class=n>T</span> <span class=o>=</span> <span class=n>any</span><span class=o>&gt;</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=n>string</span><span class=p>,</span> <span class=n>data</span><span class=err>?</span><span class=p>:</span> <span class=n>any</span><span class=p>,</span> <span class=n>config</span><span class=err>?</span><span class=p>:</span> <span class=n>AxiosRequestConfig</span><span class=p>):</span> <span class=n>Promise</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/code/>Code</a>
+<a href=/tags/javascript/>Javascript</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/advanced-usage-of-reduce-you-might-not-know/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg></div><div class=article-details><h2 class=article-title>Advanced Usage of Reduce You Might Not Know</h2></div></a></article><article class=has-image><a href=/p/vue3-performance-optimization-code-level-optimization/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png></div><div class=article-details><h2 class=article-title>Vue3 Performance Optimization — Code-Level Optimization</h2></div></a></article><article class=has-image><a href=/p/vue3-performance-optimization-bundle-optimization/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png></div><div class=article-details><h2 class=article-title>Vue3 Performance Optimization — Bundle Optimization</h2></div></a></article><article class=has-image><a href=/p/how-much-do-you-know-about-29-javascript-object-methods/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg></div><div class=article-details><h2 class=article-title>How Much Do You Know About 29 JavaScript Object Methods?</h2></div></a></article><article class=has-image><a href=/p/most-of-the-books-youve-read-are-mostly-forgotten-so-why-keep-reading/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg></div><div class=article-details><h2 class=article-title>Most of the books you’ve read are mostly forgotten, so why keep reading?</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,472 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Through its data two-way binding and virtual DOM technologies, the Vue framework takes care of the most tedious and dirtiest part of front-end development ..."><title>Vue3 Performance Optimization — Bundle Optimization</title>
+<link rel=canonical href=https://www.skstory.online/p/vue3-performance-optimization-bundle-optimization/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Vue3 Performance Optimization — Bundle Optimization"><meta property='og:description' content="Through its data two-way binding and virtual DOM technologies, the Vue framework takes care of the most tedious and dirtiest part of front-end development ..."><meta property='og:url' content='https://www.skstory.online/p/vue3-performance-optimization-bundle-optimization/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Code'><meta property='article:tag' content='Javascript'><meta property='article:published_time' content='2024-06-21T16:02:05+08:00'><meta property='article:modified_time' content='2024-06-21T16:02:05+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Vue3 Performance Optimization — Bundle Optimization"><meta name=twitter:description content="Through its data two-way binding and virtual DOM technologies, the Vue framework takes care of the most tedious and dirtiest part of front-end development ..."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#gzip-compression>Gzip Compression</a><ol><li><a href=#install-plugin>Install Plugin</a></li><li><a href=#vite-configuration>Vite Configuration</a></li><li><a href=#server-configuration>Server Configuration</a></li></ol></li><li><a href=#package-splitting>Package Splitting</a></li><li><a href=#static-resource-categorized-packaging>Static Resource Categorized Packaging</a></li><li><a href=#remove-debugger-in-production-environment>Remove Debugger in Production Environment</a></li><li><a href=#packaging-analysis-plugin>Packaging Analysis Plugin</a></li><li><a href=#image-resource-compression>Image Resource Compression</a></li><li><a href=#svg-compression>SVG Compression</a></li><li><a href=#cdn-acceleration>CDN Acceleration</a></li><li><a href=#import-components-on-demand>Import Components On Demand</a></li><li><a href=#browser-caching>Browser Caching</a><ol><li><a href=#client-side-cache-control>Client-Side Cache-Control</a></li><li><a href=#server-side-cache-control>Server-Side Cache-Control</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/vue3-performance-optimization-bundle-optimization/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy alt="Featured image of post Vue3 Performance Optimization — Bundle Optimization"></a></div><div class=article-details><header class=article-category><a href=/categories/code/>Code
+</a><a href=/categories/javascript/ style=background-color:#d1d419;color:#fff>Javascript</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/vue3-performance-optimization-bundle-optimization/>Vue3 Performance Optimization — Bundle Optimization</a></h2><h3 class=article-subtitle>Through its data two-way binding and virtual DOM technologies, the Vue framework takes care of the most tedious and dirtiest part of front-end development ...</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jun 21, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><p>Through its data two-way binding and virtual DOM technologies, the Vue framework takes care of the most tedious and dirtiest part of front-end development — DOM manipulations. We no longer need to concern ourselves with how to manipulate the DOM or how to do it most efficiently. However, issues like first-screen optimization and compilation configuration optimization still exist in Vue projects. Therefore, we still need to focus on performance optimization for Vue projects to achieve more efficient performance and a better user experience.</p><p><a class=link href>Vue3 Performance Optimization — Code-Level Optimization</a></p><h2 id=gzip-compression>Gzip Compression</h2><p>When front-end resources are too large, server resource requests can be slow. The front-end can reduce the file size by approximately 60% through Gzip compression. The compressed files, after simple processing by the backend, can be normally decoded by browsers.</p><h3 id=install-plugin>Install Plugin</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add vite-plugin-compression -D
+</span></span></code></pre></td></tr></table></div></div><h3 id=vite-configuration>Vite Configuration</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>vite</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>ts</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>viteCompression</span> <span class=n>from</span> <span class=s1>&#39;vite-plugin-compression&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=o>....</span>
+</span></span><span class=line><span class=cl>        <span class=n>viteCompression</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>            <span class=n>algorithm</span><span class=p>:</span> <span class=s1>&#39;gzip&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=n>deleteOriginFile</span><span class=p>:</span> <span class=bp>false</span><span class=p>,</span> <span class=o>//</span> <span class=n>Whether</span> <span class=n>to</span> <span class=n>delete</span> <span class=n>source</span> <span class=n>files</span> <span class=n>after</span> <span class=n>compression</span>
+</span></span><span class=line><span class=cl>        <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>For more configurations, please refer to the <a class=link href="https://github.com/vbenjs/vite-plugin-compression?tab=readme-ov-file" target=_blank rel=noopener>official documentation</a>.</p><h3 id=server-configuration>Server Configuration</h3><p>After configuring the Vue part, deploying directly to nginx will not take effect immediately, it is also necessary to enable nginx’s gzip function. First, you need to confirm if the current nginx installation includes the gzip module, which generally installs the <code>ngx_http_gzip_static_module</code> by default. Before configuring, you can run the <code>nginx -V</code> command to check if the — <code>with-http_gzip_static_module</code> is included.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>nginx</span><span class=o>.</span><span class=n>conf</span> <span class=n>file</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>http</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#......other configurations</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1># server modularization</span>
+</span></span><span class=line><span class=cl>  <span class=n>include</span> <span class=n>xxx</span><span class=o>/*.</span><span class=n>conf</span><span class=p>;</span> <span class=c1># Create a folder named xxx in the same directory as nginx.conf</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># Enable gzip</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1># Static compression</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_static</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1># The minimum file size for gzip compression, files smaller than this value will not be compressed</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_min_length</span> <span class=mi>1</span><span class=n>k</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># gzip compression level, 1-10, the higher the number, the better the compression and the more CPU time it consumes</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_comp_level</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># File types to be compressed. There are various forms of javascript. The values can be found in the mime.types file.</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_types</span> <span class=n>text</span><span class=o>/</span><span class=n>plain</span> <span class=n>application</span><span class=o>/</span><span class=n>javascript</span> <span class=n>application</span><span class=o>/</span><span class=n>x</span><span class=o>-</span><span class=n>javascript</span> <span class=n>text</span><span class=o>/</span><span class=n>css</span> <span class=n>application</span><span class=o>/</span><span class=n>xml</span> <span class=n>text</span><span class=o>/</span><span class=n>javascript</span> <span class=n>application</span><span class=o>/</span><span class=n>x</span><span class=o>-</span><span class=n>httpd</span><span class=o>-</span><span class=n>php</span> <span class=n>image</span><span class=o>/</span><span class=n>jpeg</span> <span class=n>image</span><span class=o>/</span><span class=n>gif</span> <span class=n>image</span><span class=o>/</span><span class=n>png</span> <span class=n>image</span><span class=o>/</span><span class=n>jpg</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># Whether to add Vary: Accept-Encoding in the http header, recommended to enable</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_vary</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># Disable IE 6 gzip</span>
+</span></span><span class=line><span class=cl>  <span class=n>gzip_disable</span> <span class=s2>&#34;MSIE [1-6].&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>server</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#......other configurations</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Then restart the nginx server, under normal circumstances, it should then be accessible.</p><h2 id=package-splitting>Package Splitting</h2><p>Here’s a personal insight: If different modules use largely the same plugins, then it’s best to package them in the same file whenever possible to reduce HTTP requests. If different modules use different plugins noticeably, then they should be packaged into different modules. This presents a contradiction.</p><p>Here, minimal package splitting is used. If it’s the former scenario, one can directly opt to return ‘vendor’.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>rollupOptions: {
+</span></span><span class=line><span class=cl>  output: {
+</span></span><span class=line><span class=cl>    manualChunks(id) {
+</span></span><span class=line><span class=cl>      if (id.includes(&#34;node_modules&#34;)) {
+</span></span><span class=line><span class=cl>        // Package each plugin into an independent file
+</span></span><span class=line><span class=cl>        return id .toString() .split(&#34;node_modules/&#34;)[1] .split(&#34;/&#34;)[0] .toString(); 
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=static-resource-categorized-packaging>Static Resource Categorized Packaging</h2><p>Vite is built on esbuild and rollup. When packaging, if the output is not configured, all files will be mixed together.</p><p>After configuring the output, all files are categorized and stored, making it easier for us to find files.</p><p>In the <code>vite.config.js</code> file, we configure the output as follows:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>build</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>sourcemap</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Eliminate warning for package size exceeding 500kb
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>chunkSizeWarningLimit</span><span class=p>:</span> <span class=mi>4000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>rollupOptions</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>input</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>index</span><span class=p>:</span> <span class=nf>pathResolve</span><span class=p>(</span><span class=s>&#34;index.html&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Static resource categorized packaging
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>output</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>chunkFileNames</span><span class=p>:</span> <span class=s>&#34;static/js/[name]-[hash].js&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>entryFileNames</span><span class=p>:</span> <span class=s>&#34;static/js/[name]-[hash].js&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>assetFileNames</span><span class=p>:</span> <span class=s>&#34;static/[ext]/[name]-[hash].[ext]&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Vite Code Splitting Plugin — <a class=link href=https://github.com/sanyuan0704/vite-plugin-chunk-split target=_blank rel=noopener>vite-plugin-chunk-split</a>. Supports multiple code splitting strategies, can avoid potential cyclic dependency issues with manualChunks operations.</p><h2 id=remove-debugger-in-production-environment>Remove Debugger in Production Environment</h2><p>Use the <a class=link href="https://github.com/xiaoxian521/vite-plugin-remove-console?tab=readme-ov-file" target=_blank rel=noopener>vite-plugin-remove-console</a> plugin developed by the platform to remove all <code>console.log</code> from the platform during the packaging and building process.</p><h2 id=packaging-analysis-plugin>Packaging Analysis Plugin</h2><p>Rollup Plugin Visualizer is a dependency analysis plugin that provides various modes of dependency analysis, including intuitive view analysis, sunburst (circular hierarchy chart, like a spectrum), treemap (rectangular hierarchy chart, which is more intuitive and also the default parameter), network (grid chart, to view inclusion relationships), raw-data (raw data mode, in JSON format), and list (list mode). You can choose any observation mode you like.</p><p>Install the <a class=link href=https://github.com/btd/rollup-plugin-visualizer target=_blank rel=noopener>rollup-plugin-visualizer</a> plugin</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add rollup-plugin-visualizer -D
+</span></span></code></pre></td></tr></table></div></div><p>In <code>vite.config.js</code>, import and configure</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Import
+</span></span><span class=line><span class=cl>import { visualizer } from &#39;rollup-plugin-visualizer&#39;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>plugins: [
+</span></span><span class=line><span class=cl>  // Add in the plugins configuration array
+</span></span><span class=line><span class=cl>  visualizer({
+</span></span><span class=line><span class=cl>    open:true, // Note that this needs to be set to true, otherwise it will not work. If there is a local server port, it will automatically display after packaging.
+</span></span><span class=line><span class=cl>    gzipSize:true,
+</span></span><span class=line><span class=cl>    file: &#34;stats.html&#34;, // The file name of the generated analysis chart
+</span></span><span class=line><span class=cl>    brotliSize:true
+</span></span><span class=line><span class=cl>  }),
+</span></span><span class=line><span class=cl>]
+</span></span></code></pre></td></tr></table></div></div><p>It will automatically display after packaging, with an effect chart:</p><p><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*NJI01ThTkA5biJ9J0mUtwA.png loading=lazy></p><h2 id=image-resource-compression>Image Resource Compression</h2><p>Install the <a class=link href=https://github.com/unplugin/unplugin-imagemin target=_blank rel=noopener>unplugin-imagemin</a> plugin</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pnpm add unplugin-imagemin@latest -D
+</span></span></code></pre></td></tr></table></div></div><p>Configure in <code>vite.config.js</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// Import
+</span></span><span class=line><span class=cl>import imagemin from &#39;unplugin-imagemin/vite&#39;;
+</span></span><span class=line><span class=cl>import path from &#39;path&#39;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Add in the plugins configuration array
+</span></span><span class=line><span class=cl>plugin: [
+</span></span><span class=line><span class=cl>    imagemin({
+</span></span><span class=line><span class=cl>        // Default mode sharp. support squoosh and sharp
+</span></span><span class=line><span class=cl>        mode: &#39;squoosh&#39;,
+</span></span><span class=line><span class=cl>        beforeBundle: true,
+</span></span><span class=line><span class=cl>        // Default configuration options for compressing different pictures
+</span></span><span class=line><span class=cl>        compress: {
+</span></span><span class=line><span class=cl>          jpg: {
+</span></span><span class=line><span class=cl>            quality: 10,
+</span></span><span class=line><span class=cl>          },
+</span></span><span class=line><span class=cl>          jpeg: {
+</span></span><span class=line><span class=cl>            quality: 10,
+</span></span><span class=line><span class=cl>          },
+</span></span><span class=line><span class=cl>          png: {
+</span></span><span class=line><span class=cl>            quality: 10,
+</span></span><span class=line><span class=cl>          },
+</span></span><span class=line><span class=cl>          webp: {
+</span></span><span class=line><span class=cl>            quality: 10,
+</span></span><span class=line><span class=cl>          },
+</span></span><span class=line><span class=cl>        },
+</span></span><span class=line><span class=cl>        conversion: [
+</span></span><span class=line><span class=cl>          { from: &#39;jpeg&#39;, to: &#39;webp&#39; },
+</span></span><span class=line><span class=cl>          { from: &#39;png&#39;, to: &#39;webp&#39; },
+</span></span><span class=line><span class=cl>          { from: &#39;JPG&#39;, to: &#39;jpeg&#39; },
+</span></span><span class=line><span class=cl>        ],
+</span></span><span class=line><span class=cl>      }),
+</span></span><span class=line><span class=cl>]
+</span></span></code></pre></td></tr></table></div></div><h2 id=svg-compression>SVG Compression</h2><p>Generally, SVGs that are downloaded or SVG codes that are copied contain some irrelevant elements. These can be removed to reduce the SVG size without any impact.</p><p>Install the <a class=link href=https://github.com/vbenjs/vite-plugin-svg-icons target=_blank rel=noopener>vite-plugin-svg-icons</a> plugin</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add vite-plugin-svg-icons -D
+</span></span></code></pre></td></tr></table></div></div><p>Configure in <code>vite.config.js</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>import { createSvgIconsPlugin } from &#39;vite-plugin-svg-icons&#39;
+</span></span><span class=line><span class=cl>import path from &#39;path&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>plugins: [
+</span></span><span class=line><span class=cl>  createSvgIconsPlugin({
+</span></span><span class=line><span class=cl>    // Specify the icon folder to be cached
+</span></span><span class=line><span class=cl>    iconDirs: [path.resolve(process.cwd(), &#39;src/icons&#39;)],
+</span></span><span class=line><span class=cl>    // Specify symbolId format
+</span></span><span class=line><span class=cl>    symbolId: &#39;icon-[dir]-[name]&#39;,
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    /**
+</span></span><span class=line><span class=cl>     * custom insert position
+</span></span><span class=line><span class=cl>     * @default: body-last
+</span></span><span class=line><span class=cl>     */
+</span></span><span class=line><span class=cl>    inject?: &#39;body-last&#39; | &#39;body-first&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    /**
+</span></span><span class=line><span class=cl>     * custom dom id
+</span></span><span class=line><span class=cl>     * @default: __svg__icons__dom__
+</span></span><span class=line><span class=cl>     */
+</span></span><span class=line><span class=cl>    customDomId: &#39;__svg__icons__dom__&#39;,
+</span></span><span class=line><span class=cl>  }),
+</span></span><span class=line><span class=cl>],
+</span></span></code></pre></td></tr></table></div></div><p>Introduce the registration script in <code>src/main.ts</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>import &#39;virtual:svg-icons-register&#39;
+</span></span></code></pre></td></tr></table></div></div><p><strong>Notes</strong>:</p><p>If you encounter an error stating that <code>fast-glob</code> is not found, please execute the following command to install it:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>npm install fast-glob -D
+</span></span></code></pre></td></tr></table></div></div><p>Usage</p><p><code>/src/components/SvgIcon.vue</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>&lt;</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;</span><span class=n>svg</span> <span class=n>aria</span><span class=o>-</span><span class=n>hidden</span><span class=o>=</span><span class=s2>&#34;true&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>use</span> <span class=p>:</span><span class=n>href</span><span class=o>=</span><span class=s2>&#34;symbolId&#34;</span> <span class=p>:</span><span class=n>fill</span><span class=o>=</span><span class=s2>&#34;color&#34;</span> <span class=o>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=o>&lt;/</span><span class=n>svg</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>template</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>defineComponent</span><span class=p>,</span> <span class=n>computed</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineComponent</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;SvgIcon&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>props</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>prefix</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>type</span><span class=p>:</span> <span class=ne>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>default</span><span class=p>:</span> <span class=s1>&#39;icon&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>type</span><span class=p>:</span> <span class=ne>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>required</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=n>color</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>type</span><span class=p>:</span> <span class=ne>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>default</span><span class=p>:</span> <span class=s1>&#39;#333&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=n>setup</span><span class=p>(</span><span class=n>props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>const</span> <span class=n>symbolId</span> <span class=o>=</span> <span class=n>computed</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=err>`</span><span class=c1>#${props.prefix}-${props.name}`)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=n>symbolId</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>script</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>/src/component-a.vue</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;template&gt;
+</span></span><span class=line><span class=cl>  &lt;div&gt;
+</span></span><span class=line><span class=cl>    &lt;SvgIcon name=&#34;icon1&#34;&gt;&lt;/SvgIcon&gt;
+</span></span><span class=line><span class=cl>    &lt;SvgIcon name=&#34;icon2&#34;&gt;&lt;/SvgIcon&gt;
+</span></span><span class=line><span class=cl>    &lt;SvgIcon name=&#34;icon3&#34;&gt;&lt;/SvgIcon&gt;
+</span></span><span class=line><span class=cl>    &lt;SvgIcon name=&#34;dir-icon1&#34;&gt;&lt;/SvgIcon&gt;
+</span></span><span class=line><span class=cl>  &lt;/div&gt;
+</span></span><span class=line><span class=cl>&lt;/template&gt;
+</span></span></code></pre></td></tr></table></div></div><p><strong>Note</strong>:</p><p>The svg of the plug-in will not generate hash to distinguish, but distinguish it by folder.</p><p>If the folder corresponding to <code>iconDirs</code> contains this other folder</p><p>example:</p><p>Then the generated SymbolId is written in the comment</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># src/icons
+</span></span><span class=line><span class=cl>- icon1.svg # icon-icon1
+</span></span><span class=line><span class=cl>- icon2.svg # icon-icon2
+</span></span><span class=line><span class=cl>- icon3.svg # icon-icon3
+</span></span><span class=line><span class=cl>- dir/icon1.svg # icon-dir-icon1
+</span></span><span class=line><span class=cl>- dir/dir2/icon1.svg # icon-dir-dir2-icon1
+</span></span></code></pre></td></tr></table></div></div><h2 id=cdn-acceleration>CDN Acceleration</h2><p>Install <a class=link href=https://github.com/MMF-FE/vite-plugin-cdn-import target=_blank rel=noopener>vite-plugin-cdn-import</a> plugin</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pnpm add vite-plugin-cdn-import -D
+</span></span></code></pre></td></tr></table></div></div><p>Configure in vite.config.js</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl>    <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>cdn</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>            <span class=n>modules</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=o>//</span> <span class=n>The</span> <span class=n>package</span> <span class=n>name</span> <span class=n>when</span> <span class=n>importing</span>
+</span></span><span class=line><span class=cl>                  <span class=s2>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;...&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=o>//</span> <span class=n>The</span> <span class=n>variable</span> <span class=n>assigned</span> <span class=n>to</span> <span class=n>the</span> <span class=n>module</span> <span class=n>when</span> <span class=n>registering</span> <span class=n>globally</span> <span class=n>with</span> <span class=n>app</span><span class=o>.</span><span class=n>use</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                  <span class=s2>&#34;var&#34;</span><span class=p>:</span> <span class=s2>&#34;...&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=o>//</span> <span class=n>Find</span> <span class=n>the</span> <span class=n>corresponding</span> <span class=n>CDN</span> <span class=n>URL</span> <span class=n>according</span> <span class=n>to</span> <span class=n>your</span> <span class=n>own</span> <span class=n>version</span> <span class=n>number</span>
+</span></span><span class=line><span class=cl>                  <span class=s2>&#34;path&#34;</span><span class=p>:</span> <span class=s2>&#34;...&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=o>//</span> <span class=n>Find</span> <span class=n>the</span> <span class=n>corresponding</span> <span class=n>CDN</span> <span class=n>URL</span> <span class=k>for</span> <span class=n>the</span> <span class=n>CSS</span> <span class=n>according</span> <span class=n>to</span> <span class=n>your</span> <span class=n>own</span> <span class=n>version</span> <span class=n>number</span>
+</span></span><span class=line><span class=cl>                  <span class=s2>&#34;css&#34;</span><span class=p>:</span> <span class=s2>&#34;...&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=import-components-on-demand>Import Components On Demand</h2><p>Install <a class=link href=https://github.com/unplugin/unplugin-vue-components target=_blank rel=noopener>unplugin-vue-components</a> plugin</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>yarn add unplugin-vue-components -D
+</span></span></code></pre></td></tr></table></div></div><p>Configure in <code>vite.config.js</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>import</span> <span class=n>Components</span> <span class=n>from</span> <span class=s1>&#39;unplugin-vue-components/vite&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=n>defineConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=n>plugins</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=n>Components</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=o>//</span> <span class=n>Configure</span> <span class=n>Automatically</span> <span class=n>Registered</span> <span class=n>Components</span>
+</span></span><span class=line><span class=cl>      <span class=n>dts</span><span class=p>:</span> <span class=bp>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>resolvers</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>name</span><span class=o>.</span><span class=n>startsWith</span><span class=p>(</span><span class=s1>&#39;Base&#39;</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=p>{</span> <span class=n>importName</span><span class=p>:</span> <span class=n>name</span><span class=o>.</span><span class=n>slice</span><span class=p>(</span><span class=mi>4</span><span class=p>),</span> <span class=n>path</span><span class=p>:</span> <span class=err>`@</span><span class=o>/</span><span class=n>components</span><span class=o>/$</span><span class=p>{</span><span class=n>name</span><span class=p>}</span><span class=o>.</span><span class=n>vue</span><span class=err>`</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=browser-caching>Browser Caching</h2><p>To improve the speed at which pages load for users, caching static resources is essential. Based on whether there is a need to re-initiate requests to the server, HTTP caching rules are divided into two main categories (<strong>strong caching</strong> and <strong>validation cachin</strong>g).</p><p>If <strong>strong caching</strong> is effective, there is no need to interact with the server, while <strong>validation caching</strong> requires interaction with the server regardless of its effectiveness. Both types of caching rules can coexist, with <strong>strong caching</strong> having a higher priority than <strong>validation caching</strong>. This means that when the rules of <strong>strong caching</strong> are executed, if the cache is effective, it is used directly without executing the <strong>validation caching</strong> rules.</p><h3 id=client-side-cache-control>Client-Side Cache-Control</h3><p>The caching strategy on the client side mainly relies on the following implementations:</p><ul><li><p>The browser’s Refresh or Reload button;</p></li><li><p>The browser’s incognito mode (private mode);</p></li><li><p>The browser’s forward and back navigation;</p></li><li><p>The browser developer tool’s Disable cache option.</p></li></ul><p>The implementation is relatively simple, usually involving appending <code>Pragma: no-cache</code> and <code>Cache-Control</code> headers in the request. This forces re-validation or unconditionally fetches the document from the server.</p><h3 id=server-side-cache-control>Server-Side Cache-Control</h3><p>The server-side caching strategies are the relevant fields in the HTTP response headers:</p><ul><li><p>Expires</p></li><li><p>Cache-Control</p></li><li><p>Last-Modified</p></li><li><p>Etag</p></li></ul><p>For detailed information, you can refer to the <a class=link href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching target=_blank rel=noopener>MDN documentation</a>.</p></section><footer class=article-footer><section class=article-tags><a href=/tags/code/>Code</a>
+<a href=/tags/javascript/>Javascript</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/advanced-usage-of-reduce-you-might-not-know/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg></div><div class=article-details><h2 class=article-title>Advanced Usage of Reduce You Might Not Know</h2></div></a></article><article class=has-image><a href=/p/vue3-performance-optimization-code-level-optimization/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png></div><div class=article-details><h2 class=article-title>Vue3 Performance Optimization — Code-Level Optimization</h2></div></a></article><article class=has-image><a href=/p/how-much-do-you-know-about-29-javascript-object-methods/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg></div><div class=article-details><h2 class=article-title>How Much Do You Know About 29 JavaScript Object Methods?</h2></div></a></article><article class=has-image><a href=/p/most-of-the-books-youve-read-are-mostly-forgotten-so-why-keep-reading/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg></div><div class=article-details><h2 class=article-title>Most of the books you’ve read are mostly forgotten, so why keep reading?</h2></div></a></article><article class=has-image><a href=/p/understanding-nexttick-in-vue3/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*bw3XTqb8qDgc4xdJ0DR75g.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*bw3XTqb8qDgc4xdJ0DR75g.png></div><div class=article-details><h2 class=article-title>Understanding nextTick in Vue3</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

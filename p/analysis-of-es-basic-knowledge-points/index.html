@@ -1,0 +1,773 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="JavaScript is an implementation of the ECMAScript specification. This section focuses on sorting out commonly tested knowledge points in ECMAScript..."><title>Analysis of ES basic knowledge points</title>
+<link rel=canonical href=https://www.skstory.online/p/analysis-of-es-basic-knowledge-points/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Analysis of ES basic knowledge points"><meta property='og:description' content="JavaScript is an implementation of the ECMAScript specification. This section focuses on sorting out commonly tested knowledge points in ECMAScript..."><meta property='og:url' content='https://www.skstory.online/p/analysis-of-es-basic-knowledge-points/'><meta property='og:site_name' content='SK Story'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Javascript'><meta property='article:published_time' content='2024-01-26T16:22:38+08:00'><meta property='article:modified_time' content='2024-01-26T16:22:38+08:00'><meta property='og:image' content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv'><meta name=twitter:site content="@https://twitter.com/ShawnKxming"><meta name=twitter:creator content="@https://twitter.com/ShawnKxming"><meta name=twitter:title content="Analysis of ES basic knowledge points"><meta name=twitter:description content="JavaScript is an implementation of the ECMAScript specification. This section focuses on sorting out commonly tested knowledge points in ECMAScript..."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv'><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu1157332405703967761.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>SK Story</a></h1><h2 class=site-description>Shawn King's Stories Website</h2></div></header><ol class=menu-social><li><a href=mailto:kxming0229@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://www.facebook.com/p/King-Shawn-100092679065959/ target=_blank title=Facebook rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3V3h-3a5 5 0 00-5 5v2H7"/></svg></a></li><li><a href=https://twitter.com/ShawnKxming target=_blank title=Twitter rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li><li><a href=https://t.me/shawnkxming target=_blank title=Telegram rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg></a></li><li><a href=https://medium.com/@kxming target=_blank title=Medium rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-medium"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 9h1l3 3 3-3h1"/><path d="M8 15h2"/><path d="M14 15h2"/><path d="M9 9v6"/><path d="M15 9v6"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#variable-types>Variable Types</a><ol><li><a href=#ecmascript-defines-six-primitive-types>ECMAScript defines six primitive types:</a></li><li><a href=#value-type-vs-reference-type>Value type vs Reference type</a></li></ol></li><li><a href=#prototype-and-prototype-chain>Prototype and prototype chain</a><ol><li><a href=#prototypes>Prototypes</a></li><li><a href=#prototype-chain>Prototype Chain</a></li></ol></li><li><a href=#scope-and-closure>Scope and Closure</a><ol><li><a href=#execution-context>Execution Context</a></li><li><a href=#this>this</a></li><li><a href=#scope>Scope</a></li><li><a href=#scope-chain>Scope Chain</a></li><li><a href=#closure>Closure</a></li></ol></li><li><a href=#asynchronous>Asynchronous</a><ol><li><a href=#synchronous-vs-asynchronous>Synchronous vs Asynchronous</a></li><li><a href=#asynchronicity-and-single-threaded>Asynchronicity and Single Threaded</a></li><li><a href=#front-end-asynchronous-scenarios>Front-end asynchronous scenarios</a></li></ol></li><li><a href=#examination-of-es67-new-standards>Examination of ES6/7 new standards</a><ol><li><a href=#arrow-functions>Arrow functions</a></li><li><a href=#module>Module</a></li><li><a href=#class>Class</a></li><li><a href=#set-and-map>Set and Map</a><ol><li><a href=#set>Set</a></li><li><a href=#map>Map</a></li></ol></li><li><a href=#promise>Promise</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/analysis-of-es-basic-knowledge-points/><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/0*OZL33xhjFl0XFUmv loading=lazy alt="Featured image of post Analysis of ES basic knowledge points"></a></div><div class=article-details><header class=article-category><a href=/categories/javascript/ style=background-color:#d1d419;color:#fff>Javascript</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/analysis-of-es-basic-knowledge-points/>Analysis of ES basic knowledge points</a></h2><h3 class=article-subtitle>JavaScript is an implementation of the ECMAScript specification. This section focuses on sorting out commonly tested knowledge points in ECMAScript...</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 26, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>24 minute read</time></div></footer></div></header><section class=article-content><p>JavaScript is an implementation of the ECMAScript specification. This section focuses on sorting out commonly tested knowledge points in ECMAScript, and then analyzing some easily arising questions.</p><h1 id=knowledge-points>Knowledge Points</h1><ul><li><p>Variable Types</p><ul><li><p>Classification and judgment of JS data types</p></li><li><p>Value types and reference types</p></li></ul></li><li><p>Prototype and prototype chain (inheritance)</p><ul><li><p>Definition of prototype and prototype chain</p></li><li><p>Inheritance Syntax</p></li></ul></li><li><p>Scope and Closure</p><ul><li><p>Execution Context</p></li><li><p>this</p></li><li><p>What is a closure?</p></li></ul></li><li><p>Asynchronous</p><ul><li><p>Synchronous vs Asynchronous</p></li><li><p>synchrony and single-threaded</p></li><li><p>Front-end asynchronous scenarios</p></li></ul></li><li><p>Examination of ES6/7 new standards</p><ul><li><p>Arrow functions</p></li><li><p>Module</p></li><li><p>Class</p></li><li><p>Set and Map</p></li><li><p>Promise</p></li></ul></li></ul><hr><h2 id=variable-types>Variable Types</h2><p>JavaScript is a weakly-typed scripting language, that is, it doesn’t require specifying the type when you define a variable; the type will be automatically determined during program execution.</p><h3 id=ecmascript-defines-six-primitive-types>ECMAScript defines six primitive types:</h3><ul><li><p>Boolean</p></li><li><p>String</p></li><li><p>Number</p></li><li><p>Null</p></li><li><p>Undefined</p></li><li><p>Symbol (newly defined in ES6)</p></li></ul><p>Note: The primitive types do not include Object.</p><blockquote><p>Topic: What methods are used for type judgment?</p></blockquote><p><strong>typeof</strong></p><p>The values obtained by <code>typeof xxx</code> are of the following types: <code>undefined</code>, <code>boolean</code>, <code>number</code>, <code>string</code>, <code>object</code>, <code>function</code>, <code>symbol</code>. It’s pretty straightforward, so no need for individual demonstrations. There are three points to note here:</p><ul><li><p>The result of <code>typeof null</code> is o`bject; actually, this is a bug of typeof, null is primitive value, not a reference type.</p></li><li><p>The result <code>of typeof [1, 2]</code> is <code>object</code>, there is no <code>array</code> in the result. Reference types are all objects except functions.</p></li><li><p>The value obtained by using <code>typeof Symbol()</code> for the <code>symbol</code> type is <code>symbol</code>, which is a new knowledge point added in ES6.</p></li></ul><p><strong>instanceof</strong></p><p>It is used for correspondence between instances and constructors. For example, to determine if a variable is an array, <code>typeof</code> cannot be used, but you can use <code>[1, 2] instanceof Array</code> to judge. Because <code>[1, 2]</code> is an <code>array</code>, its constructor is <code>Array</code>. Similarly:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>Foo</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>foo</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Foo</span><span class=p>(</span><span class=s1>&#39;bar&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>foo</span> <span class=n>instanceof</span> <span class=n>Foo</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Topic: Difference between value types and reference types</p></blockquote><h3 id=value-type-vs-reference-type>Value type vs Reference type</h3><p>In addition to primitive types, ES also has reference types. Among the types identified by <code>typeof</code> mentioned above, only <code>object</code> and <code>function</code> are reference types, others are value types.</p><p>Based on the way variable types are passed in JavaScript, it is divided into <code>value</code> types and <code>reference</code> types. Value types include <code>Boolean</code>, <code>String</code>, <code>Number</code>, <code>Undefined</code>, <code>Null</code>, and <code>reference</code> types include all classes of the <code>Object</code> category, such as <code>Date</code>, <code>Array</code>, <code>Function</code>, etc. In terms of parameter passing, value types are passed by value and reference types are passed by sharing.</p><p>Let’s look at the main differences between the two and what needs to be noticed in practical development through a small question below.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>value</span> <span class=n>types</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=n>a</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>20</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>//</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>)</span> <span class=o>//</span> <span class=mi>20</span>
+</span></span></code></pre></td></tr></table></div></div><p>In the above code, both a and b are value types. They are assigned and modified separately, and there is no influence on each other. Now let’s look at an example of reference type:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>reference</span> <span class=n>types</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=p>{</span><span class=n>x</span><span class=p>:</span> <span class=mi>10</span><span class=p>,</span> <span class=n>y</span><span class=p>:</span> <span class=mi>20</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=n>a</span> <span class=n>b</span><span class=o>.</span><span class=n>x</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>b</span><span class=o>.</span><span class=n>y</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>//</span> <span class=p>{</span><span class=n>x</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span> <span class=n>y</span><span class=p>:</span> <span class=mi>200</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>)</span> <span class=o>//</span> <span class=p>{</span><span class=n>x</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span> <span class=n>y</span><span class=p>:</span> <span class=mi>200</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>In the above code, both <code>a</code> and <code>b</code> are reference types. After executing <code>b = a</code>, when the property value of <code>b</code> is modified, the value of <code>a</code> also changes. This is because both a and <code>b</code> are reference types, pointing to the same memory address, i.e., they both reference the same value. Therefore, when <code>b</code> modifies the property, the value of <code>a</code> changes accordingly.</p><p>Let’s further explain this with the help of the question below.</p><p><strong>State the execution result of the following code and analyze the reason.</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>foo</span><span class=p>(</span><span class=n>a</span><span class=p>){</span>
+</span></span><span class=line><span class=cl> <span class=n>a</span> <span class=o>=</span> <span class=n>a</span> <span class=o>*</span> <span class=mi>10</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>bar</span><span class=p>(</span><span class=n>b</span><span class=p>){</span>
+</span></span><span class=line><span class=cl> <span class=n>b</span><span class=o>.</span><span class=n>value</span> <span class=o>=</span> <span class=s1>&#39;new&#39;</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=p>{</span><span class=n>value</span><span class=p>:</span> <span class=s1>&#39;old&#39;</span><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=n>foo</span><span class=p>(</span><span class=n>a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>bar</span><span class=p>(</span><span class=n>b</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>);</span> <span class=o>//</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>);</span> <span class=o>//</span> <span class=n>value</span><span class=p>:</span> <span class=n>new</span>
+</span></span></code></pre></td></tr></table></div></div><p>Through the execution of the code, you will find that:</p><ul><li><p>The value of a does not change</p></li><li><p>But the value of b has changed</p></li></ul><p>This is because the <code>Number</code> type <code>a</code> is passed by value, while the <code>Object</code> type <code>b</code> is passed by sharing.</p><p>The reason for this design in JS is: for types that are passed by value, <code>a</code> copy is stored in stack memory. This type of type generally does not occupy too much memory, and passing by value ensures its access speed. The types that are passed by sharing are copying its reference, not copying its value (pointer in C language), which ensures that oversized objects and others will not cause memory waste due to constant copying of content.</p><p>Reference types are often used in code in the following way, or they are prone to unnoticed errors!</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>obj</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>a</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> <span class=n>b</span><span class=p>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=n>obj</span><span class=o>.</span><span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=n>obj</span><span class=o>.</span><span class=n>b</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>2</span> <span class=n>b</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>obj</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Although obj itself is a variable of reference type (object), both <code>a</code> and <code>b</code> inside it are value types and reference types respectively. Assigning <code>a</code> value to a will not change <code>obj.a</code>, but operations on <code>b</code> will be reflected on the obj object.</p><h2 id=prototype-and-prototype-chain>Prototype and prototype chain</h2><p>JavaScript is a language based on prototypes, understanding prototypes is quite simple, but extremely important. Let’s understand the concept of prototypes in JavaScript through questions.</p><blockquote><p>Topic: How to understand the prototypes in JavaScript</p></blockquote><p>To answer this question, you can remember and understand several key points:</p><ul><li><p>All reference types (<code>arrays</code>, <code>objects</code>, <code>functions</code>) have object characteristics, that is, they can freely extend properties (except <code>null</code>).</p></li><li><p>All reference types (<code>arrays</code>, <code>objects</code>, <code>functions</code>) have a <code>__proto__</code> property, the value of which is a normal object.</p></li><li><p>All functions have a prototype property, the value of which is also a normal object.</p></li><li><p>All reference types (arrays, objects, functions), the value of the <code>__proto__</code> property points to the prototype property value of its constructor.</p></li></ul><p>Let’s explain this with code, and you can run the following code to see the results:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Key</span> <span class=n>point</span> <span class=n>one</span><span class=p>:</span> <span class=n>Freely</span> <span class=n>extend</span> <span class=n>properties</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>obj</span> <span class=o>=</span> <span class=p>{};</span> <span class=n>obj</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>arr</span> <span class=o>=</span> <span class=p>[];</span> <span class=n>arr</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>fn</span> <span class=p>()</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>fn</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Key</span> <span class=n>point</span> <span class=n>two</span><span class=p>:</span> <span class=n>__proto__</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>obj</span><span class=o>.</span><span class=n>__proto__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>arr</span><span class=o>.</span><span class=n>__proto__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>fn</span><span class=o>.</span><span class=n>__proto__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Key</span> <span class=n>point</span> <span class=n>three</span><span class=p>:</span> <span class=n>Functions</span> <span class=n>have</span> <span class=n>prototypes</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>fn</span><span class=o>.</span><span class=n>prototype</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Key</span> <span class=n>point</span> <span class=n>four</span><span class=p>:</span> <span class=n>The</span> <span class=n>value</span> <span class=n>of</span> <span class=n>the</span> <span class=n>__proto__</span> <span class=n>property</span> <span class=n>of</span> <span class=n>a</span> <span class=n>reference</span> <span class=n>type</span> <span class=n>points</span> <span class=n>to</span> <span class=n>the</span> <span class=n>prototype</span> <span class=n>property</span> <span class=n>value</span> <span class=n>of</span> <span class=n>its</span> <span class=n>constructor</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>obj</span><span class=o>.</span><span class=n>__proto__</span> <span class=o>===</span> <span class=ne>Object</span><span class=o>.</span><span class=n>prototype</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=prototypes>Prototypes</h3><p>Let’s start with a simple example code.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Constructor</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>Foo</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>age</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>Foo</span><span class=o>.</span><span class=n>prototype</span><span class=o>.</span><span class=n>alertName</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>alert</span><span class=p>(</span><span class=n>this</span><span class=o>.</span><span class=n>name</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Creating</span> <span class=n>an</span> <span class=n>instance</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>f</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Foo</span><span class=p>(</span><span class=s1>&#39;zhangsan&#39;</span><span class=p>)</span> <span class=n>f</span><span class=o>.</span><span class=n>printName</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>this</span><span class=o>.</span><span class=n>name</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Testing</span>
+</span></span><span class=line><span class=cl><span class=n>f</span><span class=o>.</span><span class=n>printName</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>f</span><span class=o>.</span><span class=n>alertName</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>Executing <code>printName</code> is easy to understand, but what happened when executing <code>alertName</code>? Remember another key point here. When trying to get a certain property of an object, if the object itself does not have this property, it will go to its <code>__proto__</code> (that is, its constructor’s prototype) to find it, so <code>f.alertName</code> will find <code>Foo.prototype.alertName</code>.</p><p>So how do you determine whether this property is the object’s own property? Use <code>hasOwnProperty</code>, a common place is when traversing an object.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>item</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>item</span> <span class=ow>in</span> <span class=n>f</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=o>//</span> <span class=n>Use</span> <span class=n>hasOwnProperty</span><span class=p>,</span> <span class=n>a</span> <span class=n>common</span> <span class=n>place</span> <span class=n>is</span> <span class=n>when</span> <span class=n>traversing</span> <span class=n>an</span> <span class=n>object</span><span class=o>.</span>
+</span></span><span class=line><span class=cl> <span class=o>//</span> <span class=n>Advanced</span> <span class=n>browsers</span> <span class=n>have</span> <span class=n>already</span> <span class=n>shielded</span> <span class=n>p</span> <span class=n>roperties</span> <span class=n>from</span> <span class=n>prototypes</span> <span class=ow>in</span> <span class=k>for</span> <span class=ow>in</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl> <span class=o>//</span> <span class=n>but</span> <span class=n>it</span> <span class=n>is</span> <span class=n>suggested</span> <span class=n>here</span> <span class=n>that</span> <span class=n>you</span> <span class=n>should</span> <span class=n>add</span> <span class=n>this</span> <span class=n>judgment</span> <span class=n>to</span> <span class=n>ensure</span> <span class=n>the</span> <span class=n>robustness</span> <span class=n>of</span> <span class=n>the</span> <span class=n>program</span><span class=o>.</span>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=p>(</span><span class=n>f</span><span class=o>.</span><span class=n>hasOwnProperty</span><span class=p>(</span><span class=n>item</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Topic: How to understand the prototype chain in JS</p></blockquote><h3 id=prototype-chain>Prototype Chain</h3><p>Continuing with the above example, what happens when f.toString() is executed?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>// Testing
+</span></span><span class=line><span class=cl>f.printName()
+</span></span><span class=line><span class=cl>f.alertName()
+</span></span><span class=line><span class=cl>f.toString()
+</span></span></code></pre></td></tr></table></div></div><p>Because f itself does not have toString(), and there is no toString in <code>f.__proto__</code>(that is, <code>Foo.prototype</code>). Recall the sentence just now — when trying to get a certain property of an object, if the object itself doesn’t have this property, it will look for it in its <code>__proto__</code> (that is, its constructor’s prototype).</p><p>If toString is not found in <code>f.__proto__</code>, continue to look for it in <code>f.__proto__.__proto__</code>, because <code>f.__proto__</code> is just an ordinary object!</p><p><code>f.__proto__</code> is <code>Foo.prototype</code>, which does not find toString, keep looking up.
+<code>f.__proto__.__proto__</code> is <code>Foo.prototype.__proto__</code>. As <code>Foo.prototype</code> is just an ordinary object, so <code>Foo.prototype.__proto__</code> is <code>Object.prototype</code>, where toString can be found.
+Therefore, f.toString ultimately corresponds to <code>Object.prototype.toString</code>.
+If you keep looking up like this, you’ll find it’s a chain-like structure, so it’s called a “prototype chain”. If it cannot be found all the way to the top level, it declares failure and returns undefined. What is the top level — <code>Object.prototype.proto === null</code>.</p><p><strong>this in the Prototype Chain</strong></p><p>All the methods obtained and executed from the prototype or higher levels of prototypes, the <code>this</code> within them when executing, points to the object that triggers the event. Thus, the this in both <code>printName</code> and <code>alertName</code> is <code>f</code>.</p><h2 id=scope-and-closure>Scope and Closure</h2><p>Scope and closure are the most likely knowledge points to be tested in front-end interviews. For example, the following question:</p><blockquote><p>Topic: Now there is a piece of HTML code. The requirement is to write code. When you click on a link with a certain number, an alert pops up with its number.</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;ul&gt;
+</span></span><span class=line><span class=cl> &lt;li&gt;number 1，Click me please pop up 1&lt;/li&gt;
+</span></span><span class=line><span class=cl> &lt;li&gt;2&lt;/li&gt;
+</span></span><span class=line><span class=cl> &lt;li&gt;3&lt;/li&gt;
+</span></span><span class=line><span class=cl> &lt;li&gt;4&lt;/li&gt;
+</span></span><span class=line><span class=cl> &lt;li&gt;5&lt;/li&gt;
+</span></span><span class=line><span class=cl>&lt;/ul&gt;
+</span></span></code></pre></td></tr></table></div></div><p>If you don’t know that this question involves closure, you might write the following code:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>list</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>getElementsByTagName</span><span class=p>(</span><span class=s1>&#39;li&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=k>var</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>list</span><span class=o>.</span><span class=n>length</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>list</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>.</span><span class=n>addEventListener</span><span class=p>(</span><span class=s1>&#39;click&#39;</span><span class=p>,</span> <span class=n>function</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl> <span class=n>alert</span><span class=p>(</span><span class=n>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>},</span> <span class=bp>true</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>In fact, you will find that it always pops up 6 when executed. At this point, you should solve it through closures:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>list</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>getElementsByTagName</span><span class=p>(</span><span class=s1>&#39;li&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=k>var</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>list</span><span class=o>.</span><span class=n>length</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>list</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>.</span><span class=n>addEventListener</span><span class=p>(</span><span class=s1>&#39;click&#39;</span><span class=p>,</span> <span class=n>function</span><span class=p>(</span><span class=n>i</span><span class=p>){</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>function</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl> <span class=n>alert</span><span class=p>(</span><span class=n>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=p>}(</span><span class=n>i</span><span class=p>),</span> <span class=bp>true</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>To understand closures, we need to start with the “execution context”.</p><h3 id=execution-context>Execution Context</h3><p>Let’s talk about a knowledge point about variable hoisting. In the interview, you may encounter the following question, where many candidates give wrong answers:</p><blockquote><p>Topic: Tell the result of the following execution (the author here directly commented the output)</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>//</span> <span class=n>undefined</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>fn</span><span class=p>(</span><span class=s1>&#39;zhangsan&#39;</span><span class=p>)</span> <span class=o>//</span> <span class=s1>&#39;zhangsan&#39;</span> <span class=mi>20</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>fn</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>age</span> <span class=o>=</span> <span class=mi>20</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>age</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>age</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>);</span> <span class=o>//</span> <span class=n>throw</span> <span class=n>error</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Uncaught</span> <span class=n>ReferenceError</span><span class=p>:</span> <span class=n>b</span> <span class=n>is</span> <span class=ow>not</span> <span class=n>defined</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Before a piece of JS script (i.e., within a <code>&lt;script></code> tag) is executed, it needs to be parsed first (hence, JS is an interpreted script language). During parsing, a <strong>global execution context environment</strong> is created first, taking all the variables and function declarations that are about to be executed in the code (internal function is not included because you don’t know when the function will be executed). Variables are temporarily assigned to <code>undefined</code>, and functions are declared to be available. After this step is done, the program is officially executed. Emphasize again, this is the work that starts before the code execution.</p><p>Let’s look at the small test question above. Why is <code>a</code> <code>undefined</code>, but <code>b</code> throws an error. In fact, JS will “parse the entire document” before the code is executed. It finds <code>var a</code>, knows there is a variable <code>a</code>, and stores it in the execution context. But <code>b</code> didn’t find the var keyword, so it didn’t “reserve space” in the execution context in advance. So when the code is executed, the early-present <code>a</code> has a record, but the value hasn’t been assigned yet, which is <code>undefined</code>. While <code>b</code> is not found in the execution context and naturally throws an error (<code>b</code> reference not found).</p><p>In addition, before a function is executed, a <strong>function execution context environment</strong> is also created, which is similar to the <strong>global context</strong>, but the <strong>function execution context</strong> adds <code>this</code>, arguments, and function parameters. It’s easy to understand parameters and <code>arguments</code>, but we need to specifically explain <code>this</code>.</p><p>To sum up:</p><ul><li><p><strong>Range</strong>: a <code>&lt;script></code> tag, a JS file, or a function</p></li><li><p><strong>Global context</strong>: variable definition, function declaration</p></li><li><p><strong>Function context</strong>: variable definition, function declaration, this, arguments</p></li></ul><h3 id=this>this</h3><p>Firstly, understand a very important concept — the value of <code>this</code> can only be confirmed during execution, not during definition! Why? — Because <code>this</code> is part of the execution context, and the execution context needs to be determined before the code is executed, not when it is defined. As shown in the following example.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>name</span><span class=p>:</span> <span class=s1>&#39;A&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> <span class=n>fn</span><span class=p>:</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>this</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=n>a</span><span class=o>.</span><span class=n>fn</span><span class=p>()</span> <span class=o>//</span> <span class=n>this</span> <span class=o>===</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=n>a</span><span class=o>.</span><span class=n>fn</span><span class=o>.</span><span class=n>call</span><span class=p>({</span><span class=n>name</span><span class=p>:</span> <span class=s1>&#39;B&#39;</span><span class=p>})</span> <span class=o>//</span> <span class=n>this</span> <span class=o>===</span> <span class=p>{</span><span class=n>name</span><span class=p>:</span> <span class=s1>&#39;B&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>fn1</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=n>fn</span>
+</span></span><span class=line><span class=cl><span class=n>fn1</span><span class=p>()</span> <span class=o>//</span> <span class=n>this</span> <span class=o>===</span> <span class=n>window</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>this</code> will have different execution results, mainly focused on the following scenarios:</p><ul><li><p>As a constructor, within the constructor.</p></li><li><p>As an object property, as in the above code <code>a.fn()</code>.</p></li><li><p>As a regular function, as in the above code <code>fn1()</code>.</p></li><li><p>Used for call, apply, bind, like in the above code <code>a.fn.call({name: ‘B’})</code>.</p></li></ul><p>Now let’s explain what is the scope and scope chain, scope chain and scope are also frequently asked questions.</p><blockquote><p>Topic: How to understand the scope and scope chain in JS</p></blockquote><h3 id=scope>Scope</h3><p>Before ES6, JS didn’t have block-level scopes. For example:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=bp>true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>name</span> <span class=o>=</span> <span class=s1>&#39;zhangsan&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>From the above example, we can understand the concept of scope, which is an independent territory, so that variables will not leak out and be exposed.
+The name above has been exposed, so <strong>JS doesn’t have block-level scopes, only global scope and function scope</strong>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>fn</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;fn&#39;</span><span class=p>,</span> <span class=n>a</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;global&#39;</span><span class=p>,</span> <span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>fn</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>Global scope is the outermost scope. If we write many lines of JS code and the variable definitions are not enclosed within functions, then they are all in the global scope. The drawback of this is that it is very prone to collisions and conflicts.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Code</span> <span class=n>written</span> <span class=n>by</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=n>a</span><span class=p>:</span> <span class=mi>100</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Code</span> <span class=n>written</span> <span class=n>by</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=n>x</span><span class=p>:</span> <span class=bp>true</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This is why all the code in jQuery, Zepto, and other libraries are placed in <code>(function() {…})()</code>. Because all the variables inside will not be leaked and exposed, they won’t pollute the outside, and they won’t affect other libraries or JS scripts. This is a manifestation of function scope.</p><p><em>Note: ES6 started to introduce block-level scope, which can be defined by using let, as follows:</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if (true) {
+</span></span><span class=line><span class=cl> let name = &#39;zhangsan&#39;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>console.log(name) // Error, because the name defined by let is in this block level scope (if).
+</span></span></code></pre></td></tr></table></div></div><h3 id=scope-chain>Scope Chain</h3><p>First, let’s understand what is called a “free variable”. In the following code, <code>console.log(a)</code> needs to get the variable <code>a</code>, but <code>a</code> is not defined in the current scope (compare with <code>b</code>). A variable that is not defined in the current scope is called a “free variable”. How to get <code>a</code> “free variable”? — Look for it in the parent scope.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>fn</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>fn</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>What if the parent scope doesn’t have it either? It continues to look up step by step until it reaches the global scope. If it still hasn’t found it, it gives up. This step-by-step relationship is called the “scope chain”.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>F1</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl> <span class=n>function</span> <span class=n>F2</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>c</span> <span class=o>=</span> <span class=mi>300</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>//</span> <span class=n>Free</span> <span class=n>variable</span><span class=p>,</span> <span class=n>look</span> <span class=k>for</span> <span class=n>it</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>parent</span> <span class=n>scope</span> <span class=n>along</span> <span class=n>the</span> <span class=n>scope</span> <span class=n>chain</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>b</span><span class=p>)</span> <span class=o>//</span> <span class=n>Free</span> <span class=n>variable</span><span class=p>,</span> <span class=n>look</span> <span class=k>for</span> <span class=n>it</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>parent</span> <span class=n>scope</span> <span class=n>along</span> <span class=n>the</span> <span class=n>scope</span> <span class=n>chain</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>c</span><span class=p>)</span> <span class=o>//</span> <span class=n>Variable</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>current</span> <span class=n>scope</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=n>F2</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>F1</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=closure>Closure</h3><p>I’ve explained these concepts, let’s look at an example to understand closures.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>F1</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>f1</span> <span class=o>=</span> <span class=n>F1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl><span class=n>f1</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>Free variables will be located from the scope chain, but they rely on the scope chain at the time of function definition, not the execution of the function, the above example is a closure. Closures mainly have two use cases:</p><ul><li><p>The function is returned as a value, as in the previous example.</p></li><li><p>The function is passed as a parameter, as shown in the example below.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>F1</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>F2</span><span class=p>(</span><span class=n>f1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>f1</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>f1</span> <span class=o>=</span> <span class=n>F1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>F2</span><span class=p>(</span><span class=n>f1</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>At this point, looking back at the beginning — “Scope and Closure” which is a part of click and pop up alert code viewing closures, it will be easy to understand.</p><h2 id=asynchronous>Asynchronous</h2><p>Asynchronous and Synchronous are also commonly tested topics in interviews, the author will explain the difference between synchronous and asynchronous below.</p><h3 id=synchronous-vs-asynchronous>Synchronous vs Asynchronous</h3><p>Consider the following demo; according to the program’s expressed intent, it should first print 100, print 200 after a second, and finally print 300. But in actual operation, that’s not the case at all.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>console.log(100)
+</span></span><span class=line><span class=cl>setTimeout(function () {
+</span></span><span class=line><span class=cl> console.log(200)
+</span></span><span class=line><span class=cl>}, 1000)
+</span></span><span class=line><span class=cl>console.log(300)
+</span></span></code></pre></td></tr></table></div></div><p>Comparatively, the following program first prints 100, then displays 200 (wait for user confirmation), and finally prints 300. This execution effect meets the expected requirements.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>console.log(100)
+</span></span><span class=line><span class=cl>alert(200) //confirm after 1 second
+</span></span><span class=line><span class=cl>console.log(300)
+</span></span></code></pre></td></tr></table></div></div><p>What’s the difference between these two? — The first example’s intermediate steps do not block the subsequent program’s operations at all, while the second example does block the subsequent operations. The former behavior is known as Asynchronous (the latter is called Synchronous), which does not block the subsequent program execution.</p><h3 id=asynchronicity-and-single-threaded>Asynchronicity and Single Threaded</h3><p>The fundamental reason that JS requires asynchronicity is because JS is single-threaded, which means it can only do one thing at a time and can’t lie in two boats ~ do two things at once.</p><p>An Ajax request takes 5 seconds due to slow network speed. If it is synchronous, the page will be stuck here for those 5 seconds and nothing can be done. If it’s asynchronous, it’s much better as the 5 seconds waiting won’t delay anything else. That 5-second waiting period is due to a slow network speed, not because of JS.</p><p>Speaking of single-threaded, let’s look at a real exam question:</p><blockquote><p>Topic: Explain the execution process and result of the following code.</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>var</span> <span class=n>a</span> <span class=o>=</span> <span class=bp>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>setTimeout</span><span class=p>(</span><span class=n>function</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl> <span class=n>a</span> <span class=o>=</span> <span class=bp>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>},</span> <span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>while</span><span class=p>(</span><span class=n>a</span><span class=p>){</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;while execut&#39;</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>This is a very puzzling question, numerous candidates assumed that 100ms later, since a becomes false, the while loop will stop. However, this is not the case. Because JavaScript is single-threaded, once it enters the while loop, it doesn’t have the ‘time’ (or thread) to run the timer. Thus, running this code results in an infinite loop!</p><h3 id=front-end-asynchronous-scenarios>Front-end asynchronous scenarios</h3><ul><li><p>Timing functions: setTimeout, setInterval</p></li><li><p>Network request, like Ajax, <code>&lt;img></code> loading</p></li></ul><p>Ajax code example</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>console.log(&#39;start&#39;) $.get(&#39;./data1.json&#39;, function (data1) {
+</span></span><span class=line><span class=cl> console.log(data1)
+</span></span><span class=line><span class=cl>})
+</span></span><span class=line><span class=cl>console.log(&#39;end&#39;)
+</span></span></code></pre></td></tr></table></div></div><p>img code example (commonly used for dot statistics)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;start&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>img</span> <span class=o>=</span> <span class=n>document</span><span class=o>.</span><span class=n>createElement</span><span class=p>(</span><span class=s1>&#39;img&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=ow>or</span> <span class=n>img</span> <span class=o>=</span> <span class=n>new</span> <span class=ne>Image</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>img</span><span class=o>.</span><span class=n>onload</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;loaded&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=n>img</span><span class=o>.</span><span class=n>onload</span> <span class=o>=</span> <span class=n>null</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>img</span><span class=o>.</span><span class=n>src</span> <span class=o>=</span> <span class=s1>&#39;/xxx.png&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;end&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=examination-of-es67-new-standards>Examination of ES6/7 new standards</h2><blockquote><p>Topic: What’s the difference between <code>this</code> in ES6 arrow functions and in regular functions?</p></blockquote><h3 id=arrow-functions>Arrow functions</h3><p>Arrow functions are a new way of defining functions in ES6. A function like <code>function name(arg1, arg2) {…}</code> can be defined using <code>(arg1, arg2) => {…}</code>. Examples are as follows:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>JS</span> <span class=n>regular</span> <span class=n>function</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>arr</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>arr</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=n>function</span> <span class=p>(</span><span class=n>item</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>index</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>item</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>ES6</span> <span class=n>arrow</span> <span class=n>function</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>arr</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>arr</span><span class=o>.</span><span class=n>map</span><span class=p>((</span><span class=n>item</span><span class=p>,</span> <span class=n>index</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>index</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>item</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>The purpose of arrow functions is twofold. Firstly, it’s more concise to write. Secondly, it can solve the problem that this is a global variable when functions are executed before ES6. See the following code:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>fn</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;real&#39;</span><span class=p>,</span> <span class=n>this</span><span class=p>)</span> <span class=o>//</span> <span class=p>{</span><span class=n>a</span><span class=p>:</span> <span class=mi>100</span><span class=p>}</span> <span class=err>，</span><span class=n>The</span> <span class=n>real</span> <span class=n>value</span> <span class=n>of</span> <span class=s1>&#39;this&#39;</span> <span class=n>under</span> <span class=n>this</span> <span class=n>scope</span><span class=o>.</span>
+</span></span><span class=line><span class=cl> <span class=k>var</span> <span class=n>arr</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl> <span class=o>//</span> <span class=n>JS</span> <span class=n>regular</span> <span class=n>function</span>
+</span></span><span class=line><span class=cl> <span class=n>arr</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=n>function</span> <span class=p>(</span><span class=n>item</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;js&#39;</span><span class=p>,</span> <span class=n>this</span><span class=p>)</span> <span class=o>//</span> <span class=n>window</span> <span class=err>。</span><span class=n>The</span> <span class=n>second</span> <span class=n>argument</span> <span class=n>of</span> <span class=n>the</span> <span class=n>map</span> <span class=n>function</span> <span class=n>is</span> <span class=n>undefined</span><span class=o>.</span> <span class=n>If</span> <span class=s1>&#39;this&#39;</span> <span class=n>is</span> <span class=ow>not</span> <span class=n>set</span><span class=p>,</span> <span class=n>it</span> <span class=n>is</span> <span class=n>defaulted</span> <span class=n>to</span> <span class=n>the</span> <span class=n>top</span><span class=o>-</span><span class=n>level</span> <span class=n>object</span><span class=p>,</span> <span class=n>which</span> <span class=n>is</span> <span class=s1>&#39;window&#39;</span> <span class=ow>in</span> <span class=n>the</span> <span class=n>browser</span><span class=o>.</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>item</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl> <span class=p>})</span>
+</span></span><span class=line><span class=cl> <span class=o>//</span> <span class=n>ES6</span> <span class=n>arrow</span> <span class=n>function</span>
+</span></span><span class=line><span class=cl> <span class=n>arr</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=n>item</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;es6&#39;</span><span class=p>,</span> <span class=n>this</span><span class=p>)</span> <span class=o>//</span> <span class=p>{</span><span class=n>a</span><span class=p>:</span> <span class=mi>100</span><span class=p>}</span> <span class=err>。</span><span class=n>For</span> <span class=n>the</span> <span class=n>arrow</span> <span class=n>function</span><span class=p>,</span> <span class=n>the</span> <span class=n>printed</span> <span class=n>value</span> <span class=n>is</span> <span class=n>the</span> <span class=s1>&#39;this&#39;</span> <span class=n>of</span> <span class=n>the</span> <span class=n>parent</span> <span class=n>scope</span><span class=o>.</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>item</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl> <span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>fn</span><span class=o>.</span><span class=n>call</span><span class=p>({</span><span class=n>a</span><span class=p>:</span> <span class=mi>100</span><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Topic: How to use ES6 modules?</p></blockquote><h3 id=module>Module</h3><p>The syntax of module in ES6 is simpler, directly see examples.
+If you only output a unique object, use export default. The code is as follows：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Create</span> <span class=n>a</span> <span class=n>file</span> <span class=s1>&#39;util1.js&#39;</span><span class=p>,</span> <span class=n>the</span> <span class=n>content</span> <span class=n>is</span> <span class=n>as</span> <span class=n>follows</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>default</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>a</span><span class=p>:</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Create</span> <span class=n>a</span> <span class=n>file</span> <span class=s1>&#39;index.js&#39;</span><span class=p>,</span> <span class=n>the</span> <span class=n>content</span> <span class=n>is</span> <span class=n>as</span> <span class=n>follows</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>obj</span> <span class=n>from</span> <span class=s1>&#39;./util1.js&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>If you want to output multiple objects, you can’t use <code>default</code>, and you need to add <code>{…}</code> when you <code>import</code>. The code is as follows:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>Create</span> <span class=n>a</span> <span class=n>file</span> <span class=s1>&#39;util2.js&#39;</span><span class=p>,</span> <span class=n>the</span> <span class=n>content</span> <span class=n>is</span> <span class=n>as</span> <span class=n>follows</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>function</span> <span class=n>fn1</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>alert</span><span class=p>(</span><span class=s1>&#39;fn1&#39;</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>function</span> <span class=n>fn2</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>alert</span><span class=p>(</span><span class=s1>&#39;fn2&#39;</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>Create</span> <span class=n>a</span> <span class=n>file</span> <span class=s1>&#39;index.js&#39;</span><span class=p>,</span> <span class=n>the</span> <span class=n>content</span> <span class=n>is</span> <span class=n>as</span> <span class=n>follows</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=p>{</span> <span class=n>fn1</span><span class=p>,</span> <span class=n>fn2</span> <span class=p>}</span> <span class=n>from</span> <span class=s1>&#39;./util2.js&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>fn1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>fn2</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Topic: What’s the difference between ES6 ‘class’ and regular constructor functions?</p></blockquote><h3 id=class>Class</h3><p>class has always been a keyword (reserved word) in JS, but it has not been formally used until ES6. The ‘class’ in ES6 is to replace the previous method of initializing objects with constructor functions, which is more object-oriented in syntax. For example:</p><p>JS constructor function syntax:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>function</span> <span class=n>MathHandle</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>y</span> <span class=o>=</span> <span class=n>y</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>MathHandle</span><span class=o>.</span><span class=n>prototype</span><span class=o>.</span><span class=n>add</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>this</span><span class=o>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>this</span><span class=o>.</span><span class=n>y</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>m</span> <span class=o>=</span> <span class=n>new</span> <span class=n>MathHandle</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>add</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>ES6 class syntax:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>class</span> <span class=n>MathHandle</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>constructor</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>y</span> <span class=o>=</span> <span class=n>y</span><span class=p>;</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=n>add</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=k>return</span> <span class=n>this</span><span class=o>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>this</span><span class=o>.</span><span class=n>y</span><span class=p>;</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>m</span> <span class=o>=</span> <span class=n>new</span> <span class=n>MathHandle</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>add</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>Consider the following points, all about class syntax:</p><ul><li><p>class is a new syntax form, it’s <code>class Name {…}</code>, which is completely different from function syntax</p></li><li><p>Comparing the two, the content of the constructor function body should be placed in the <code>constructor</code> function in the class, <code>constructor</code> is the constructor, it is executed by default when initializing the instance.</p></li><li><p>The way to write functions in class is <code>add() {…}</code>, without the function keyword.</p></li></ul><p>Using class to implement inheritance is much simpler, at least simpler than implementing inheritance with constructor functions. See the following examples:</p><p>JS constructor function implements inheritance</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>animal</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>Animal</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>eat</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;animal eat&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>dog</span>
+</span></span><span class=line><span class=cl><span class=n>function</span> <span class=n>Dog</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>bark</span> <span class=o>=</span> <span class=n>function</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;dog bark&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>Dog</span><span class=o>.</span><span class=n>prototype</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Animal</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>husky</span>
+</span></span><span class=line><span class=cl><span class=k>var</span> <span class=n>husky</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Dog</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>The way class is used in ES6 to implement inheritance</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>class</span> <span class=n>Animal</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>constructor</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=n>eat</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=err>`</span><span class=o>$</span><span class=p>{</span><span class=n>this</span><span class=o>.</span><span class=n>name</span><span class=p>}</span> <span class=n>eat</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>Dog</span> <span class=k>extends</span> <span class=n>Animal</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>constructor</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>super</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=n>this</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=n>say</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=err>`</span><span class=o>$</span><span class=p>{</span><span class=n>this</span><span class=o>.</span><span class=n>name</span><span class=p>}</span> <span class=n>say</span><span class=err>`</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>dog</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Dog</span><span class=p>(</span><span class=s1>&#39;husky&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>dog</span><span class=o>.</span><span class=n>say</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>dog</span><span class=o>.</span><span class=n>eat</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>Notice the following two points:</p><ul><li><p>Using <code>extends</code> can implement inheritance, which is more in line with the syntax of classical object-oriented languages, like Java.</p></li><li><p>The <code>constructor</code> of the subclass must execute <code>super()</code> to call the <code>constructor</code> of the superclass.</p></li></ul><blockquote><p>Topic: What new data types have been added in ES6?</p></blockquote><h3 id=set-and-map>Set and Map</h3><p>Set and Map are new data structures added in ES6. They extend the current JS array and object, the two important data structures. As they are newly added data structures, they are not widely used currently, but as a front-end programmer, it is necessary to understand them in advance. Let’s summarize the key points of both:</p><ul><li><p>Set is similar to an array, but arrays allow elements to be duplicated, whereas Set does not allow duplicate elements.</p></li><li><p>Map is similar to an object, but regular object’s keys must be strings or numbers, whereas keys of a Map can be of any data type.</p></li></ul><h4 id=set>Set</h4><p>A Set instance does not allow duplicate elements, which can be demonstrated in the following example. A Set instance can be initialized from an array or by adding elements using add. Duplicate elements will be ignored.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>example</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>set</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Set</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>4</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>set</span><span class=p>)</span> <span class=o>//</span> <span class=n>Set</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span> <span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>example</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>set</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Set</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>8</span><span class=p>]</span><span class=o>.</span><span class=n>forEach</span><span class=p>(</span><span class=n>item</span> <span class=o>=&gt;</span> <span class=n>set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>item</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>let</span> <span class=n>item</span> <span class=n>of</span> <span class=n>set</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>item</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>5</span> <span class=mi>4</span> <span class=mi>8</span>
+</span></span></code></pre></td></tr></table></div></div><p>Attributes and methods of a Set instance include:</p><ul><li><p><strong>size</strong>: Get the number of elements.</p></li><li><p><strong>add(value)</strong>: Adds an element and returns the Set instance itself.</p></li><li><p><strong>delete(value)</strong>: Deletes an element and returns a boolean indicating whether the deletion was successful.</p></li><li><p><strong>has(value)</strong>: Returns a boolean indicating whether the value is an element of the Set instance.</p></li><li><p><strong>clear()</strong>: Clears all elements without a return value.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>s</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Set</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span> <span class=o>//</span> <span class=n>Add</span> <span class=n>element</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>size</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span> <span class=o>//</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span> <span class=o>//</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>clear</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>s</span><span class=p>);</span> <span class=o>//</span> <span class=n>Set</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>There are various methods to iterate over a Set instance:</p><ul><li><p><strong>keys()</strong>: Returns an iterator of key names.</p></li><li><p><strong>alues()</strong>: Returns an iterator of key values. However, as Set structures do not have key names, only key values (or say key names and key values are the same), keys() and values() result in the same values.</p></li><li><p><strong>entries()</strong>: Returns an iterator of key-value pairs.</p></li><li><p><strong>forEach()</strong>: Iterates over each member using a callback function.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>let set = new Set([&#39;aaa&#39;, &#39;bbb&#39;, &#39;ccc&#39;]);
+</span></span><span class=line><span class=cl>for (let item of set.keys()) {
+</span></span><span class=line><span class=cl> console.log(item);
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>// aaa
+</span></span><span class=line><span class=cl>// bbb
+</span></span><span class=line><span class=cl>// ccc
+</span></span><span class=line><span class=cl>for (let item of set.values()) {
+</span></span><span class=line><span class=cl> console.log(item);
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>// aaa
+</span></span><span class=line><span class=cl>// bbb
+</span></span><span class=line><span class=cl>// ccc
+</span></span><span class=line><span class=cl>for (let item of set.entries()) {
+</span></span><span class=line><span class=cl> console.log(item);
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>// [&#34;aaa&#34;, &#34;aaa&#34;]
+</span></span><span class=line><span class=cl>// [&#34;bbb&#34;, &#34;bbb&#34;]
+</span></span><span class=line><span class=cl>// [&#34;ccc&#34;, &#34;ccc&#34;]
+</span></span><span class=line><span class=cl>set.forEach((value, key) =&gt; console.log(key + &#39; : &#39; + value))
+</span></span><span class=line><span class=cl>// aaa : aaa
+</span></span><span class=line><span class=cl>// bbb : bbb
+</span></span><span class=line><span class=cl>// ccc : ccc
+</span></span></code></pre></td></tr></table></div></div><h4 id=map>Map</h4><p>The usage of Map is basically the same as an ordinary object. Let’s first look at its feature of using non-string or non-number as a key.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>map</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Map</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>obj</span> <span class=o>=</span> <span class=p>{</span><span class=n>p</span><span class=p>:</span> <span class=s1>&#39;Hello World&#39;</span><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=n>obj</span><span class=p>,</span> <span class=s1>&#39;OK&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>//</span> <span class=s2>&#34;OK&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=o>//</span> <span class=bp>false</span>
+</span></span></code></pre></td></tr></table></div></div><p>You need to use <code>new Map()</code> to initialize an instance. In the following code, set, get, has, and delete are self-explanatory (this will also be demonstrated later). map.set(obj, ‘OK’) here is using object as the key (not only can it be an object, but any data type is allowed), and map.get(obj) correctly retrieves it later.</p><p>The attributes and methods of a Map instance are as follows:</p><ul><li><p><strong>size</strong>：Gets the number of members.</p></li><li><p><strong>set</strong>：Sets member’s key and value.</p></li><li><p><strong>get</strong>：Gets the member’s attribute value.</p></li><li><p><strong>has</strong>：Checks whether the member exists.</p></li><li><p><strong>delete</strong>：Deletes a member.</p></li><li><p><strong>clear</strong>：Clears all.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>map</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Map</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>,</span> <span class=mi>100</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=s1>&#39;bbb&#39;</span><span class=p>,</span> <span class=mi>200</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>size</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span> <span class=o>//</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span> <span class=o>//</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>has</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span> <span class=o>//</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>The methods to iterate over a Map instance are:</p><ul><li><p><strong>keys()</strong>: Returns an iterator of key names.</p></li><li><p><strong>values()</strong>: Returns an iterator of key values.</p></li><li><p><strong>entries()</strong>: Returns an iterator of all members.</p></li><li><p><strong>forEach()</strong>: Iterates over all members of the Map.</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>map</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Map</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>,</span> <span class=mi>100</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>map</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=s1>&#39;bbb&#39;</span><span class=p>,</span> <span class=mi>200</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>let</span> <span class=n>key</span> <span class=n>of</span> <span class=n>map</span><span class=o>.</span><span class=n>keys</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>key</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=s2>&#34;aaa&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=s2>&#34;bbb&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>let</span> <span class=n>value</span> <span class=n>of</span> <span class=n>map</span><span class=o>.</span><span class=n>values</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>let</span> <span class=n>item</span> <span class=n>of</span> <span class=n>map</span><span class=o>.</span><span class=n>entries</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>item</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>item</span><span class=p>[</span><span class=mi>1</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>aaa</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>bbb</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=ow>or</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>let</span> <span class=p>[</span><span class=n>key</span><span class=p>,</span> <span class=n>value</span><span class=p>]</span> <span class=n>of</span> <span class=n>map</span><span class=o>.</span><span class=n>entries</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>aaa</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>bbb</span> <span class=mi>200</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=promise>Promise</h3><p>Promise is a specification proposed by CommonJS. It has multiple versions and it has been included in the ES6 standard. ES6 natively supports Promise objects, and libraries like Bluebird and Q can be used for support in non-ES6 environments.</p><p>Promise can make callback calls appear as chained calls, making the process more clear and the code more elegant.</p><p>In short, promise can be summarized as <strong>three statuses, two processes</strong>, and one method. A quick way to remember is “3–2–1”:</p><p>Three statuses: <strong>pending</strong>, <strong>fulfilled</strong>, <strong>rejected</strong></p><p>Two processes:</p><ul><li><p>pending to fulfilled (resolve)</p></li><li><p>pending to rejected (reject)</p></li><li><p>One method: then</p></li></ul><p>Of course, there are other concepts like catch, <strong>Promise.all/race</strong>, but we will not expand on them here.</p></section><footer class=article-footer><section class=article-tags><a href=/tags/javascript/>Javascript</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/advanced-usage-of-reduce-you-might-not-know/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*h7QTz6KqyeYG_ausGQjj5g.jpeg></div><div class=article-details><h2 class=article-title>Advanced Usage of Reduce You Might Not Know</h2></div></a></article><article class=has-image><a href=/p/vue3-performance-optimization-code-level-optimization/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png></div><div class=article-details><h2 class=article-title>Vue3 Performance Optimization — Code-Level Optimization</h2></div></a></article><article class=has-image><a href=/p/vue3-performance-optimization-bundle-optimization/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KZsES-HkGUvu6TkmfmNMBA.png></div><div class=article-details><h2 class=article-title>Vue3 Performance Optimization — Bundle Optimization</h2></div></a></article><article class=has-image><a href=/p/how-much-do-you-know-about-29-javascript-object-methods/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*l_w8hkehf25Nx3H_AzEVbQ.jpeg></div><div class=article-details><h2 class=article-title>How Much Do You Know About 29 JavaScript Object Methods?</h2></div></a></article><article class=has-image><a href=/p/most-of-the-books-youve-read-are-mostly-forgotten-so-why-keep-reading/><div class=article-image><img src=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg loading=lazy data-key data-hash=https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Zm-09l_F3UwVf2IneHGHew.jpeg></div><div class=article-details><h2 class=article-title>Most of the books you’ve read are mostly forgotten, so why keep reading?</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=kxming/skstory data-repo-id=R_kgDOLehX4A data-category=Announcements data-category-id=DIC_kwDOLehX4M4Cd4Vx data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en-us data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 SK Story</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
